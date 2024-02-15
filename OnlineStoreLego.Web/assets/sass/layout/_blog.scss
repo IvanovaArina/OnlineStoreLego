@@ -1,0 +1,166 @@
+.blog{
+    .blog-card{
+        border-radius: 30px;
+        box-shadow: $shadow;
+        overflow: hidden;
+        .content{
+            background-color: $white;
+            padding: 16px 24px  23px 24px;
+            .name-btn{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .name{
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+            }
+        }
+    }
+}
+.blog-detail{
+    .tag{
+        background: $white;
+        border-radius: 30px;
+        padding: 24px;
+        box-shadow: $dark-shadow;
+
+        ul{
+            display: flex;
+            align-items: flex-start;
+            align-content: flex-start;
+            gap: 16px;
+            flex-wrap: wrap;
+            li{
+                a{
+                    color: #54575C;
+                    font-family: $font-primary;
+                    font-size: 21px;
+                    font-weight: 400;
+                    line-height: 140%;
+                    &:hover{
+                        color: $light-black;
+                    }
+                    @media(max-width: 1399px) {
+                        font-size: 18px;
+                    }
+                    @media(max-width: 992px) {
+                        font-size: 20px;
+                    }
+                    @media(max-width: 767px) {
+                        font-size: 18px;
+                    }
+                    @media(max-width: 575px) {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+    .author-detail{
+        background: $white;
+        padding: 24px;
+        border-radius: 30px;
+        box-shadow: $dark-shadow;
+        .author{
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            @media(max-width: 575px) {
+                flex-wrap: wrap;
+            }
+
+            .frame{
+                &.w-196{
+                    width: 196px;
+                    margin-left: 11px;
+                    @media(max-width: 767px) {
+                        width: auto;
+                        margin: 0;
+                    }
+                    @media(max-width: 490px) {
+                        width: 50%;
+                    }
+
+                }
+                &.sec{
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+                .text{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    h5{
+                        color: #54575C;
+                        font-family: $font-primary;
+                        font-size: 21px;
+                        font-weight: 500;
+                        line-height: 140%;
+                        @media(max-width: 1399px) {
+                            font-size: 18px;
+                        }
+                        @media(max-width: 992px) {
+                            font-size: 20px;
+                        }
+                        @media(max-width: 767px) {
+                            font-size: 18px;
+                        }
+                        @media(max-width: 575px) {
+                            font-size: 16px;
+                        }
+                    }
+                    p{
+                        color: #B6B1AF;
+                    }
+                }
+            }
+        }
+    }
+    .detail{
+        background: $white;
+        border-radius: 30px;
+        padding: 24px;
+        padding: 24px;
+        .inner-text{
+            padding: 10px 87px 35px 87px;
+            position: relative;
+            @media(max-width: 575px) {
+                padding: 10px 40px 18px 40px;
+            }
+            p{
+                text-align: center;
+            }
+            .left-svg{
+                position: absolute;
+                left: 0;
+                top: 0;
+                svg{
+                    @media(max-width: 575px) {
+                        width: 32px;
+                        height: 32px;
+                    }
+                }
+            }
+            .right-svg{
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                svg{
+                    @media(max-width: 575px) {
+                        width: 32px;
+                        height: 32px;
+                    }
+                }
+            }
+        }
+        p{
+            @media(max-width: 575px) {
+             text-align: center;
+            }
+        }
+    }
+}
+

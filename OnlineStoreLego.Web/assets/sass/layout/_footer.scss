@@ -1,0 +1,168 @@
+footer {
+    padding-bottom: 24px;
+
+    .footer-main {
+
+        .footer-info {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 48px;
+            @include short-query(992px , 1199px) {
+                margin-bottom: 42px;
+            }
+            @include short-query(768px , 991px) {
+                margin-bottom: 36px;
+            }
+            @include media-query(767px) {
+                margin-bottom: 32px;
+            }
+
+            @media(max-width: 992px) {
+                gap: 16px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+
+            .footer-about {
+                @media(max-width: 992px) {
+                    text-align: center;
+                }
+
+                .contact {
+                    .contact-list {
+                        li {
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+
+                            @media(max-width: 992px) {
+                                justify-content: center;
+                            }
+
+                            a {
+                                color: $white;
+                                display: flex;
+                                align-items: center;
+                                gap: 8px;
+
+                                span {
+                                    font-family: $font-primary;
+                                    font-size: 21px;
+                                    font-weight: 800;
+                                    line-height: 140%;
+                                    transition: $transition;
+                                }
+
+                                i {
+                                    color: $white;
+                                    font-size: 32px;
+                                    transform: $transition;
+                                }
+
+                                &:hover {
+
+                                    span,
+                                    i {
+                                        transform: $transition;
+                                        color: $accent-1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            h3 {
+                font-size: 36px;
+                font-weight: 700;
+                line-height: 120%;
+                letter-spacing: -1.08px;
+                color: $white;
+
+                @media(max-width: 1199px) {
+                    font-size: 28px;
+                }
+
+                @media(max-width: 490px) {
+                    font-size: 21px;
+                }
+            }
+
+            .newsletter {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+
+                .cus-btn,
+                .form-control {
+                    width: 416px;
+                    @media(max-width: 1199px) {
+                        width: 350px;
+                    }
+                    @media(max-width: 992px) {
+                        width: 500px;
+                        margin: 0 auto 16px 0;
+                    }
+                    @media(max-width: 575px) {
+                        width: 400px;
+                        padding: 14px 24px;
+                    }
+                    @media(max-width: 490px) {
+                        width: 350px;
+                        padding: 14px 24px;
+                    }
+
+                }
+
+                .cus-btn {
+                    margin-bottom: 50px;
+                }
+            }
+
+            .menu {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+
+                @media(max-width: 992px) {
+                    width: 100%;
+                    align-items: center;
+                }
+
+                .link {
+                    li {
+                        @media(max-width: 992px) {
+                            text-align: center;
+                        }
+
+                        a {
+                            font-family: $font-primary;
+                            font-size: 21px;
+                            font-weight: 800;
+                            line-height: 150%;
+                            color: $white;
+                            transition: $transition;
+            
+                            @media(max-width: 767px) {
+                                font-size: 19px;
+                            }
+                            @media(max-width: 575px) {
+                                font-size: 18px;
+                            }
+
+                            &:hover {
+                                color: $accent-1;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}

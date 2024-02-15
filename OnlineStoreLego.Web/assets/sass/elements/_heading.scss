@@ -1,0 +1,41 @@
+.heading {
+    margin-bottom: 48px;
+
+    @include short-query(992px, 1199px) {
+        margin-bottom: 42px;
+    }
+
+    @include short-query(768px, 991px) {
+        margin-bottom: 36px;
+    }
+
+    @include media-query(767px) {
+        margin-bottom: 32px;
+    }
+
+    h2 {
+        text-align: center;
+        text-shadow: $text-shadow;
+        color: $white;
+        font-family: $font-primary;
+        font-size: 80px;
+        font-weight: 700;
+        line-height: 120%;
+        /* 96px */
+        letter-spacing: -1.6px;
+
+        @media(max-width: 992px) {
+            font-size: 62px;
+        }
+
+        @media(max-width: 767px) {
+            font-size: 48px;
+        }
+
+        @media(max-width: 575px) {
+            font-size: 32px;
+            letter-spacing: 0px;
+        }
+    }
+
+}

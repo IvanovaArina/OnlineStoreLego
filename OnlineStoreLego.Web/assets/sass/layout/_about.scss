@@ -1,0 +1,16 @@
+.about{
+    .content{
+        padding: 24px;
+        @media(max-width: 490px) { 
+            padding: 16px;
+        }
+
+        .categorie{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 16px;
+            padding: 37px 0;
+        }
+    }
+}

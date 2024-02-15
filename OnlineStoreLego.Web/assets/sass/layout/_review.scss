@@ -1,0 +1,56 @@
+.review{
+    .review-slider{
+        margin: 0;
+        .reviews{
+            padding: 24px;
+            border-radius: 25px;
+            background: $gradient;
+            box-shadow: $shadow;
+            margin: 0 12px;
+            margin-bottom: 56px;
+            &.slick-slide{
+                // &.slick-cloned{
+                //     &.slick-active{
+                        
+                //         background: linear-gradient(0deg, #BFF9FF 0%, #BFF9FF 100%), #FAFAFA;
+                //     }
+                // }
+                &.slick-current{
+                    &.slick-active{
+                        &.slick-center{
+    
+                            background: $gradient-sec;
+                        }
+                    } 
+                }
+                // &.slick-active{
+                //     background: #C1E5FF;
+                // }
+            }
+        }
+        .slick-dots{
+            bottom: 0;
+            li{
+                width: auto;
+                height: auto;
+                button{
+                    width: 8px;
+                    height: 8px;
+                    background: $white;
+                    border-radius: 50px;
+                    &::before{
+                        display: none;
+                    }
+                    &:hover{
+                        background: $accent-1;
+                    }
+                }
+                &.slick-active{
+                    button{
+                        background: $accent-1;
+                    }
+                }
+            }
+        }
+    }
+}

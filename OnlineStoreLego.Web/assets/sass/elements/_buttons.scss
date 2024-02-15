@@ -1,0 +1,143 @@
+.back-to-top {
+    position: fixed;
+    bottom: 0px;
+    right: 12px;
+    display: block;
+    width: 120px;
+    height: 120px;
+    font-size: 100px;
+    padding: 11px 0;
+    background: $accent-1;
+    color: $white;
+    text-align: center;
+    opacity: 0;
+    text-decoration: none;
+    -webkit-transform: scale(0.3);
+    -ms-transform: scale(0.3);
+    transform: scale(0.3);
+    z-index: 999;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    box-shadow: $shadow;
+    &:hover{
+        background: $light-black;
+        color: $white;       
+    }
+    &.show {
+        opacity: 1;
+    }
+    @include media-query(490px) {
+        right: -20px;
+        bottom: -20px;
+    }
+}
+
+.cus-btn{
+    font-family: $font-primary;
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 140%;
+    padding: 12px 32px;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    align-items: center;
+    gap: 8px;
+    transition: $transition;
+    border-radius: 15px;
+    border: none;
+    @include media-query(492px) {
+        font-size: 16px;
+        padding: 12px 24px;
+        border-radius: 12px;
+    } 
+    &.primary{
+        background-color: $accent-1;
+        color: $white;
+        
+        &:hover {
+            background-color: $blue;
+            color: $white;
+        }
+    }
+    &.sec{
+        background-color: $blue;
+        color: $white;
+        
+        &:hover {
+            background-color: $accent-1;
+            color: $white;
+        }
+    }
+    &.light{
+        &.st-2{
+            padding: 10px 32px;
+            border: 2px solid $light-black;
+            
+        }
+        background-color: $white;
+        color: $light-black;
+        &:hover {
+            background-color: $light-black;
+            color: $white;
+            svg{
+                stroke: $white;
+                transition: $transition;
+            }
+            
+        }
+    }
+    &.grey{
+        background-color: $medium-gray;
+        color: $white;
+        transition: $transition;
+        &:hover {
+            background: $accent-1;
+        } 
+    }
+    &.dark{
+        background-color: $light-black;
+        color: $white;
+        transition: $transition;
+        &:hover {
+            background-color: $white;
+            color: $light-black;
+        } 
+    }
+}
+.light-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-family: $font-sec;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 150%; /* 24px */
+    letter-spacing: 0.32px;
+    transition: $transition;
+    &.primary{
+        color: $accent-1;
+        &:hover{
+            color: $blue;
+        }
+    }
+}
+.modal{
+    width: 100%;
+    .modal-dialog{
+        max-width: 50%;
+        @include media-query(580px) {
+            max-width: 100%;
+
+        }
+
+        .modal-body{
+            width: 100%;
+            text-align: end;
+            .btn-close{
+                margin-bottom: 12px;
+            }
+        }
+    }
+}

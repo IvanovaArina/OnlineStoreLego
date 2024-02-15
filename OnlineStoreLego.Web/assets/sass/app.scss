@@ -1,0 +1,128 @@
+/*---------------------------------------------"
+// Template Name: Toy Store
+// Template URL: https://techpedia.co.uk/template/toy-store
+// Description:  Toy Store Html Template
+// Version: 1.0.0
+
+===============================================   
+STYLE SHEET INDEXING
+|
+|___ Fonts
+|___ Variables
+|___ Responsive
+|___ Reset Styles
+|___ Spacing
+|___ Helper Classes
+|___ Buttons
+|___ Headings
+|___ Layout Styles
+|___ END STYLE SHEET INDEXING
+
+--------------------------------------------*/
+
+/*-------------------------
+    Fonts
+-------------------------*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lato:wght@300;400;700;900&family=Nunito:wght@300;400;500;600;700;800&display=swap');
+/*-------------------------
+    Variables
+-------------------------*/
+/* Fonts */
+$font-primary: 'Nunito', sans-serif;
+$font-sec: 'Inter', sans-serif;
+$font-sec-2: 'Lato', sans-serif;
+$font-awesome: "Font Awesome 5 Pro";
+
+/* Colors */
+$accent-1: #FBC270;
+$light-blue: #67D4E0;
+$blue: #28C4BC;
+$every: #FEEEC1;
+$sky: #BFF9FF;
+$light-dark-blue: #C1E5FF;
+$brown: #FDCDC5;
+$white: #FAFAFA;
+
+$black: #1B1C1E;
+$light-black: #2C2D2F;
+$medium-black: #212627;
+$dark-black: #0D0D0D;
+
+$lightest-gray: #F4F2F0;
+$light-gray: #DBD8D6;
+$medium-gray: #B6B1AF;
+$dark-gray: #54575C;
+
+
+
+/* Transitions */
+$transition: all 0.5s ease;
+
+/* Gradients */
+    $gradient: linear-gradient(0deg, #BFF9FF 0%, #BFF9FF 100%), #FAFAFA;
+    $gradient-sec: linear-gradient(0deg, #FEEEC1 0%, #FEEEC1 100%), #FAFAFA;
+
+/* Shadows */
+$shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+$light-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.10), 0px 0px 10px 0px rgba(0, 0, 0, 0.05), 0px 0px 30px 0px rgba(0, 0, 0, 0.05);
+$dark-shadow: -4px -4px 15px 0px rgba(1, 59, 63, 0.15) inset, 0px 4px 10px 0px rgba(1, 59, 63, 0.15), 0px 17px 17px 0px rgba(1, 59, 63, 0.13), 0px 39px 24px 0px rgba(1, 59, 63, 0.08), 0px 70px 28px 0px rgba(1, 59, 63, 0.02), 0px 109px 31px 0px rgba(1, 59, 63, 0.00), 0px 4px 4px 0px rgba(1, 59, 63, 0.03);
+$text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15), 0px 4px 10px rgba(0, 0, 0, 0.15), 0px 17px 17px rgba(0, 0, 0, 0.13), 0px 39px 24px rgba(0, 0, 0, 0.08), 0px 70px 28px rgba(0, 0, 0, 0.02), 0px 109px 31px rgba(0, 0, 0, 0.00);
+
+.img{
+    background: url(../media/banner/bg.png)
+}
+
+/*-------------------------
+    Reset Styles
+-------------------------*/
+@import "basic/basic";
+
+/*-------------------------
+Helpers
+-------------------------*/
+@import "helpers/classes";
+
+@import "helpers/mixin";
+
+@import "helpers/spacing";
+
+/*-------------------------
+Elements
+-------------------------*/
+@import "elements/preloader";
+
+@import "elements/buttons";
+
+@import "elements/form";
+
+@import "elements/heading";
+
+/*-------------------------
+  layouts
+-------------------------*/
+@import "layout/header";
+
+ @import "layout/footer";
+
+@import "layout/hero-banner";
+
+@import "layout/page-title-banner";
+
+@import "layout/about";
+
+@import "layout/product";
+
+@import "layout/review";
+
+@import "layout/blog";
+
+@import "layout/comming-soon";
+
+@import "layout/wishlist";
+
+@import "layout/cart";
+
+@import "layout/contact";
+
+
