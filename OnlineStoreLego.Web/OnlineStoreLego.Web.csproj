@@ -115,6 +115,12 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\Interfaces\IAllItems.cs" />
+    <Compile Include="Data\Interfaces\ILegosCategory.cs" />
+    <Compile Include="Data\Mocks\MockAllItems.cs" />
+    <Compile Include="Data\Mocks\MockCategory.cs" />
+    <Compile Include="Data\Models\Category.cs" />
+    <Compile Include="Data\Models\LegoItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
