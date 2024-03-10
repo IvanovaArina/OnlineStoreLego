@@ -7,7 +7,7 @@ using OnlineStoreLego.Web.Data.Models;
 
 namespace OnlineStoreLego.Web.Data.Interfaces
 {
-    internal interface IAllItems
+    public interface IAllItems
     {
         IEnumerable<LegoItem> Items { get; set; }
         IEnumerable<LegoItem> favoriteItems { get; set; }
