@@ -19,7 +19,7 @@ namespace DataAccess
 
         public CustomBO addUser(UserBO objUserBO)
         {
-            throw new CustomBO();
+            return new CustomBO();
         }
 
         /*public CustomBO AddUser(UserBO objUserBO)
