@@ -150,16 +150,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="assets\css\img\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
-      <Project>{178bf89a-eebd-4575-86d3-4cbaf5577935}</Project>
-      <Name>BusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BusinessObjects\BusinessObjects.csproj">
-      <Project>{1eca5b96-0e2c-44cb-b323-d83c50e3e7ea}</Project>
-      <Name>BusinessObjects</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
