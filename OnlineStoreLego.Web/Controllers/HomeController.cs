@@ -10,6 +10,7 @@ namespace OnlineStoreLego.Web.Controllers
     {
         // GET: Home
         public ActionResult Index()
+            //add UserBO in argument
         {
             return View();
 

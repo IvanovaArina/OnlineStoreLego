@@ -1,0 +1,11 @@
+Business Logic
+
+Presentation Layer (OnlineStoreLego.Web) - no logic, no code. For interaction BL & Data Access Layer
+->
+Business Layer (BusinessLogic) - logic, code
+->
+Data Model Layer (BusinessObjects (BO)) - contains Business Objects (objects with data and API)
+->
+Data Access Layer (DataAccess) - models for interaction with DB (lab 4)
+->
+DataBase (lab 4)
