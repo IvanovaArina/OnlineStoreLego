@@ -29,6 +29,10 @@ namespace OnlineStoreLego.Web.Controllers
             return View();
 
         }
+        public ActionResult LogIn()
+        {
+            return View();
+        }
 
 
 

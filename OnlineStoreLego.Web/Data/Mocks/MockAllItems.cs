@@ -16,10 +16,10 @@ namespace OnlineStoreLego.Web.Data.Mocks
             get {
                 return new List<LegoItem>{
                     new LegoItem("Lego London", "", "", "", 300, true, 5, _categoryLegos.AllCategories.First())
-                }
-            };
+                };
+            }
             set {
-            };
+            }
         }
 
         public IEnumerable<LegoItem> favoriteItems { get; set; }
