@@ -288,6 +288,16 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApplication.BL\WebApplication.BL.csproj">
+      <Project>{de9f2af7-f324-400c-88b4-93855836fb59}</Project>
+      <Name>WebApplication.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApplication.Domain\WebApplication.Domain.csproj">
+      <Project>{d3c1d04a-0e45-4e25-a421-4eb369f7ff3d}</Project>
+      <Name>WebApplication.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

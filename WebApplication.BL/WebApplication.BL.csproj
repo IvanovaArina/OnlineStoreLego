@@ -43,5 +43,15 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApplication.Domain\WebApplication.Domain.csproj">
+      <Project>{d3c1d04a-0e45-4e25-a421-4eb369f7ff3d}</Project>
+      <Name>WebApplication.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApplication.Helper\WebApplication.Helper.csproj">
+      <Project>{22a5163a-9926-4d30-8117-8c52e4d5db86}</Project>
+      <Name>WebApplication.Helper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
