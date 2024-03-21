@@ -35,7 +35,33 @@ namespace OnlineStoreLego.Web.Controllers
             return View();
         }
 
+        public ActionResult Blog()
+        {
+            return View();
+        }
 
+        public ActionResult BlogDetail()
+        {
+            return View();
+        }
+
+        public ActionResult Cart()
+        {
+            return View();
+        }
+        public ActionResult Wishlist()
+        {
+            return View();
+        }
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+
+        public ActionResult ProductDetail()
+        {
+            return View();
+        }
 
     }
 }
