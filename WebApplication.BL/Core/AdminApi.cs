@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApplication.Helper
+namespace WebApplication.BL.Core
 {
-    public class Class1
+    public class AdminApi
     {
     }
 }
