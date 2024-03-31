@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApplication.BL.DBModel
+namespace WebApplication.Domain.Entities.Enums
 {
-    public class UserContext
+    public enum URole
     {
+        User,
+        Admin
     }
 }
