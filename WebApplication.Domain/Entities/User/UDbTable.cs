@@ -9,7 +9,7 @@ using WebApplication.Domain.Entities.Enums;
 
 namespace WebApplication.Domain.Entities.User
 {
-    public class UDbTable
+    public class UDbTable //POCO (Plain Old CLR Object), который Entity Framework использует для представления записи в таблице базы данных 
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,15 +26,49 @@ namespace WebApplication.Domain.Entities.User
         public string Password { get; set; }
 
         [Required]
+        [Display(Name = "Confirm Password")]
+        [NotMapped]
+        [StringLength(50, MinimumLength = 8, ErrorMessage = "Password cannot be shorter than 8 characters.")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
         [Display(Name = "Email Address")]
         [StringLength(30)]
         public string Email { get; set; }
 
-        [DataType (DataType.Date)]
-        public DateTime LastLogin { get; set; }
+        [Required]
+        [Display(Name = "Phone Number")]
+        [StringLength(50)]
+        public string Phone { get; set; }
 
-        public URole Level { get; set; }
 
 
+        //[Display(Name = "Date of Birth")]
+
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        //public DateTime DateOfBirth { get; set; }
+
+        [Required]
+        [Display(Name = "Country")]
+        [StringLength(30)]
+        public string Country { get; set; }
+
+        [Required]
+        [Display(Name = "City")]
+        [StringLength(30)]
+        public string City { get; set; }
+
+        //[DataType (DataType.Date)]
+        //public DateTime LastLogin { get; set; }
+
+        //public URole Level { get; set; }
+        [Required]
+        [StringLength(30)]
+        public string UserIp { get; set; }
+
+        [Required]
+        //[StringLength(30)]
+        public URole Role{  get; set; }
     }
 }

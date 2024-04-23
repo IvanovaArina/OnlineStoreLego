@@ -8,7 +8,9 @@ namespace WebApplication.Domain.Entities.Enums
 {
     public enum URole
     {
-        User,
-        Admin
+        //None = 0,
+        User=0,
+        Admin=1
+        
     }
 }

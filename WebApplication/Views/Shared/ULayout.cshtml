@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -34,7 +36,7 @@
                         <a href="@Url.Action("Index", "Home")" class="navbar-brand m-0 p-0"><img alt src="~/assets/media/logo.png"></a>
                         <ul class="navbar-nav m-0">
                             <li class="has-children">
-                               
+
 
                             </li>
                             <li class="menu-item">
@@ -42,8 +44,8 @@
                                 @Html.ActionLink("Home", "Index", "Home", new { @class = "menu-link" })
                             </li>
 
-                            
-                          
+
+
 
 
                             <li class="menu-item">
@@ -59,14 +61,16 @@
                                    required>
                             <button class="search" type="submit">
                                 <i class="far fa-search search-icon"></i>
-                </button>
+                            </button>
                         </form>
-            </div>
+                    </div>
                     <div class="right-nav">
                         <ul class="navbar-nav m-0">
-                           
+                             <li class="menu-item">
+                                    @Html.ActionLink("AccountUser", "UserAccount", "Login", new { area = "" }, new { @class = "menu-link" })
+                                </li>
                                 <li class="menu-item">
-                                    @Html.ActionLink("Login", "LogIn", "Login", new { area = "" }, new { @class = "menu-link" })
+                                    @Html.ActionLink("Logout", "LogOut", "Login", new { area = "" }, new { @class = "menu-link" })
                                 </li>
                             
 
@@ -106,8 +110,8 @@
                                     </svg>
                                 </a>
                             </li>
-                </ul>
-            </div>
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -123,8 +127,8 @@
                 </div>
                 <div class="hamburger-menu">
                     <div class="bar"></div>
-        </div>
-    </div>
+                </div>
+            </div>
             <nav class="mobile-navar d-xl-none">
                 <ul>
                     <li class="has-children">
@@ -246,7 +250,7 @@
             </div>
             <p class="color-white text-center">©2023 Cricket Pulse All Rights Reserved.</p>
         </div>
-        </footer>
+    </footer>
     <!-- Footer Area End  -->
     </div>
 

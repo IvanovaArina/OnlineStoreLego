@@ -881,6 +881,27 @@ Helpers
   }
 }
 
+
+/* Добавьте этот код в ваш файл стилей */
+.custom-white-button {
+    background-color: #ffffff; /* Белый фон для кнопок */
+    color: #333; /* Темный текст для контраста */
+    border: 1px solid #ccc; /* Граница для кнопок */
+}
+
+    .custom-white-button:hover {
+        background-color: #f8f8f8; /* Слегка серый фон для эффекта при наведении */
+        color: #333;
+        border-color: #bbb; /* Темная граница при наведении */
+    }
+
+/* Обновите стили для боковой панели, если это необходимо */
+.user-actions ul {
+    background-color: #ffffff; /* Белый фон */
+    /* Дополнительные стили для боковой панели */
+}
+
+
 .pt-80 {
   padding-top: 80px;
 }
