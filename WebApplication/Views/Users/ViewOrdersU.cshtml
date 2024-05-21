@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "ViewOrdersU";
+    Layout = "~/Views/Shared/LayoutUsers.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Orders</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Your Orders</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2023-05-21</td>
+                    <td>$100.00</td>
+                    <td>Pending</td>
+                    <td>
+                        <button class="btn btn-info btn-sm view-btn" data-id="1">View</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2023-05-20</td>
+                    <td>$200.00</td>
+                    <td>Shipped</td>
+                    <td>
+                        <button class="btn btn-info btn-sm view-btn" data-id="2">View</button>
+                    </td>
+                </tr>
+                <!-- Add more orders here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal for viewing order details -->
+    <div class="modal fade" id="viewOrderModal" tabindex="-1" role="dialog" aria-labelledby="viewOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewOrderModalLabel">Order Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Order ID:</strong> <span id="orderId"></span></p>
+                    <p><strong>Date:</strong> <span id="orderDate"></span></p>
+                    <p><strong>Total:</strong> <span id="orderTotal"></span></p>
+                    <p><strong>Status:</strong> <span id="orderStatus"></span></p>
+                    <p><strong>Items:</strong></p>
+                    <ul id="orderItems">
+                        <!-- Order items will be populated here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    @*<script>
+        $(document).ready(function () {
+            $('.view-btn').on('click', function () {
+                var orderId = $(this).data('id');
+                // Use AJAX to fetch order details and populate the modal
+                $.ajax({
+                    url: '/User/GetOrderDetails', // URL для получения данных заказа
+                    data: { id: orderId },
+                    success: function (order) {
+                        $('#orderId').text(order.Id);
+                        $('#orderDate').text(order.Date);
+                        $('#orderTotal').text(order.Total);
+                        $('#orderStatus').text(order.Status);
+                        var itemsHtml = '';
+                        $.each(order.Items, function (index, item) {
+                            itemsHtml += '<li>' + item + '</li>';
+                        });
+                        $('#orderItems').html(itemsHtml);
+                        $('#viewOrderModal').modal('show');
+                    }
+                });
+            });
+        });
+    </script>*@
+</body>
+</html>

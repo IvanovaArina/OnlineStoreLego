@@ -59,7 +59,7 @@ namespace WebApplication.Controllers
                 {
                     case URole.Admin:
                         // Если пользователь - админ, перенаправляем на страницу админа
-                        return RedirectToAction("AdminAccount", "Login");
+                        return RedirectToAction("AdminAccount", "Admin");
                     case URole.User:
                         // Если пользователь не админ, перенаправляем на обычную страницу пользователя
                         return RedirectToAction("UAccountHome", "Login");
@@ -123,14 +123,11 @@ namespace WebApplication.Controllers
             return View();
 
         }
-        public ActionResult UserAccount() //панель пользователя 
-        {
-            return View();
-        }
 
-        public ActionResult AdminAccount() //панель админа
+        public ActionResult AdminAccountHome()
         {
             return View();
+
         }
     }
 }

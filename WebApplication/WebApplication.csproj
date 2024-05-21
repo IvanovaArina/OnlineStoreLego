@@ -224,9 +224,11 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AutoMapperProfile.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -317,11 +319,22 @@
     <Content Include="Views\Home\Checkout.cshtml" />
     <Content Include="Views\Home\ProductDetail.cshtml" />
     <Content Include="Views\Login\SignIn.cshtml" />
-    <Content Include="Views\Login\UserAccount.cshtml" />
-    <Content Include="Views\Login\AdminAccount.cshtml" />
     <Content Include="Views\Home\LogOut.cshtml" />
     <Content Include="Views\Shared\ULayout.cshtml" />
     <Content Include="Views\Login\UAccountHome.cshtml" />
+    <Content Include="Views\Shared\LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\AdminAccount.cshtml" />
+    <Content Include="Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Views\Admin\ManageProducts.cshtml" />
+    <Content Include="Views\Admin\ManageReview.cshtml" />
+    <Content Include="Views\Admin\ManageContent.cshtml" />
+    <Content Include="Views\Admin\ViewOrders.cshtml" />
+    <Content Include="Views\Shared\LayoutUsers.cshtml" />
+    <Content Include="Views\Users\UserAccount.cshtml" />
+    <Content Include="Views\Users\ViewOrdersU.cshtml" />
+    <Content Include="Views\Users\EditInfo.cshtml" />
+    <Content Include="Views\Shared\ALayout.cshtml" />
+    <Content Include="Views\Login\AdminAccountHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "ViewOrders";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Order Management</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Order Management</h2>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <input type="text" id="search" class="form-control" placeholder="Search for orders...">
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="orderTable">
+                <tr>
+                    <td>1</td>
+                    <td>Customer 1</td>
+                    <td>2023-05-21</td>
+                    <td>$100.00</td>
+                    <td>Pending</td>
+                    <td>
+                        <button class="btn btn-info btn-sm view-btn">View</button>
+                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Customer 2</td>
+                    <td>2023-05-20</td>
+                    <td>$200.00</td>
+                    <td>Shipped</td>
+                    <td>
+                        <button class="btn btn-info btn-sm view-btn">View</button>
+                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                    </td>
+                </tr>
+                <!-- Add more orders here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal for viewing order details -->
+    <div class="modal fade" id="viewOrderModal" tabindex="-1" role="dialog" aria-labelledby="viewOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewOrderModalLabel">Order Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Order ID:</strong> <span id="orderId"></span></p>
+                    <p><strong>Customer:</strong> <span id="orderCustomer"></span></p>
+                    <p><strong>Date:</strong> <span id="orderDate"></span></p>
+                    <p><strong>Total:</strong> <span id="orderTotal"></span></p>
+                    <p><strong>Status:</strong> <span id="orderStatus"></span></p>
+                    <p><strong>Items:</strong></p>
+                    <ul id="orderItems">
+                        <!-- Order items will be populated here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#search').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                $('#orderTable tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $('.view-btn').on('click', function() {
+                // View button functionality
+                var row = $(this).closest('tr');
+                var id = row.find('td:eq(0)').text();
+                var customer = row.find('td:eq(1)').text();
+                var date = row.find('td:eq(2)').text();
+                var total = row.find('td:eq(3)').text();
+                var status = row.find('td:eq(4)').text();
+                var items = "Sample items for order " + id; // Replace with actual items
+
+                $('#orderId').text(id);
+                $('#orderCustomer').text(customer);
+                $('#orderDate').text(date);
+                $('#orderTotal').text(total);
+                $('#orderStatus').text(status);
+                $('#orderItems').html('<li>' + items + '</li>');
+
+                $('#viewOrderModal').modal('show');
+            });
+
+            $('.delete-btn').on('click', function() {
+                // Delete button functionality
+                if(confirm('Are you sure you want to delete this order?')) {
+                    $(this).closest('tr').remove();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
