@@ -9,7 +9,7 @@ namespace WebApplication.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+        ArticleDataModel currentArticleDataModel = new ArticleDataModel();
         public ActionResult AdminAccount()
         {
             return View();
@@ -28,18 +28,11 @@ namespace WebApplication.Controllers
         {
             return View();
         }
-        public ActionResult ManageContent()
-        {
-            ArticleDataModel articleDataModel = new ArticleDataModel();
-            return View(articleDataModel);
-        }
 
-        public ActionResult ManageContentShow(ArticleDataModel articleDataModel)
+        public ActionResult ManageContent(ArticleDataModel articleDataModel)
         {
             return View(articleDataModel);
         }
-
-
 
         public ActionResult ViewOrders()
         {

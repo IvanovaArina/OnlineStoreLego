@@ -12,10 +12,26 @@ namespace WebApplication.Models
         public ArticleApi articleApi;
         public int countArticles;
 
+
+
+        public int ArticleId { get; set; }
+
+        public int ArticleNumber { get; set; }
+
+        public string ArticleName { get; set; }
+
+        public DateTime PublishedDate { get; set; }
+
+        public string Category { get; set; }
+        public string AuthorName { get; set; }
+
+        public string TextOfArticle { get; set; }
+
+
         public ArticleDataModel()
         {
             articleApi = new ArticleApi();
-            countArticles = 5;
+            countArticles = 100;
         }
 
         public List<ArticleDTO> dataForTable(int count)

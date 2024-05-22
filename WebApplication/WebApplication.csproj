@@ -239,6 +239,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManageContentController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -339,7 +340,7 @@
     <Content Include="Views\Admin\ManageUsers.cshtml" />
     <Content Include="Views\Admin\ManageProducts.cshtml" />
     <Content Include="Views\Admin\ManageReview.cshtml" />
-    <Content Include="Views\Admin\ManageContent.cshtml" />
+    <Content Include="Views\ManageContent\ManageContent.cshtml" />
     <Content Include="Views\Admin\ViewOrders.cshtml" />
     <Content Include="Views\Shared\LayoutUsers.cshtml" />
     <Content Include="Views\Users\UserAccount.cshtml" />
@@ -347,6 +348,9 @@
     <Content Include="Views\Users\EditInfo.cshtml" />
     <Content Include="Views\Shared\ALayout.cshtml" />
     <Content Include="Views\Login\AdminAccountHome.cshtml" />
+    <Content Include="Views\ManageContent\EditArticle.cshtml" />
+    <Content Include="Views\ManageContent\DeleteArticle.cshtml" />
+    <Content Include="Views\ManageContent\AddArticle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
