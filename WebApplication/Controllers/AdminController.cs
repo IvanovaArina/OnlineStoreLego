@@ -35,5 +35,10 @@ namespace WebApplication.Controllers
         {
             return View();
         }
+
+        public ActionResult CreateProduct()
+        {
+            return View();
+        }
     }
 }

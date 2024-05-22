@@ -108,15 +108,12 @@
         <div class="logo">
             <h3>Hi, Admin</h3>
         </div>
-
-
         @Html.ActionLink("Dashboard", "AdminAccount", "Admin", new { @class = "btn btn-link text-white d-block text-left" })
         @Html.ActionLink("Manage users", "ManageUsers", "Admin", new { @class = "btn btn-link text-white d-block text-left" })
         @Html.ActionLink("Manage products", "Manageproducts", "Admin", new { @class = "btn btn-link text-white d-block text-left" })
         @Html.ActionLink("Manage reviews", "ManageReview", "Admin", new { @class = "btn btn-link text-white d-block text-left" })
         @Html.ActionLink("Manage Content", "ManageContent", "Admin", new { @class = "btn btn-link text-white d-block text-left" })
         @Html.ActionLink("View orders", "ViewOrders", "Admin", new { @class = "btn btn-link text-white d-block text-left" })
-
     </div>
     <div class="main-content">
         <div class="navbar">
@@ -130,10 +127,13 @@
                     </div>
                 </div>
             </div>
-        
-            <div class="container-fluid">
-                @RenderBody()
-            </div>
-    </script>
+        </div>
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    @Html.Raw("<script src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js\"></script>")
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
