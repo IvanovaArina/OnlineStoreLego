@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
+@model WebApplication.Models.ArticleDataModel
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +15,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+
     <div class="container mt-5">
         <h2 class="mb-4">Article Management</h2>
         <div class="row mb-3">
@@ -20,6 +23,7 @@
                 <input type="text" id="search" class="form-control" placeholder="Search for articles...">
             </div>
         </div>
+
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -30,18 +34,33 @@
                     <th>Actions</th>
                 </tr>
             </thead>
+
             <tbody id="articleTable">
-                <tr>
-                    <td>1</td>
-                    <td>Article 1</td>
-                    <td>Author 1</td>
-                    <td>Category 1</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
-                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
-                    </td>
-                </tr>
-                <tr>
+
+                @{
+                    var dataArticlesTable = Model.dataForTable();
+
+                    /*int number = 0;*/
+
+                    foreach (var item in dataArticlesTable)
+                    {
+                        <tr>
+                            <td>@item.Item1</td>
+                            <td>@item.Item2</td>
+                            <td>@item.Item3</td>
+                            <td>@item.Item4</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm edit-btn">Edit</button>
+                                <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                    }
+
+                }
+
+
+
+                <!--<tr>
                     <td>2</td>
                     <td>Article 2</td>
                     <td>Author 2</td>
@@ -50,8 +69,12 @@
                         <button class="btn btn-primary btn-sm edit-btn">Edit</button>
                         <button class="btn btn-danger btn-sm delete-btn">Delete</button>
                     </td>
-                </tr>
+                </tr>-->
                 <!-- Add more articles here -->
+
+
+
+
             </tbody>
         </table>
         <div class="text-left">
