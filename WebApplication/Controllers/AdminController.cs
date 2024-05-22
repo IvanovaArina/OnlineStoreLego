@@ -33,6 +33,14 @@ namespace WebApplication.Controllers
             ArticleDataModel articleDataModel = new ArticleDataModel();
             return View(articleDataModel);
         }
+
+        public ActionResult ManageContentShow(ArticleDataModel articleDataModel)
+        {
+            return View(articleDataModel);
+        }
+
+
+
         public ActionResult ViewOrders()
         {
             return View();

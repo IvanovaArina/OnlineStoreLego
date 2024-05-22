@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WebApplication.BL.Models;
+using WebApplication.BL.Core;
+/*using WebApplication.BL.Models;*/
 
 namespace WebApplication.Models
 {
     public class ArticleDataModel
     {
-        public ArticleDataModelWithActions articleDataModelWithActions;
+        public ArticleApi articleApi;
+        public int countArticles;
 
         public ArticleDataModel()
         {
-            articleDataModelWithActions = new ArticleDataModelWithActions();
+            articleApi = new ArticleApi();
+            countArticles = 5;
         }
 
-        public List<Tuple<int, string, string, string>> dataForTable()
+        public List<ArticleDTO> dataForTable(int count)
         {
-            return articleDataModelWithActions.dataForTable();
+            return articleApi.getArticlesFromDatabase(count);
         }
 
 

@@ -5,6 +5,9 @@
 }
 
 @model WebApplication.Models.ArticleDataModel
+    
+
+@*@using System.Web.Mvc.HtmlHelper;*@
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,10 +27,20 @@
             </div>
         </div>
 
+
+@*        @using (Html.BeginForms("ManageContentShow", "Admin", FormMethod.Post, new {id = "countArticlesForm"}))
+        {
+
+            <input type="text" id="countArticles" name="countArticles" value="@Model.countArticles" class="form-control" />
+            <button type="submit" class="btn btn-primary text-white ms-2">Show</button>
+        }*@
+
+
+
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>ID</th>
+                    <th>#</th>
                     <th>Title</th>
                     <th>Author</th>
                     <th>Category</th>
@@ -38,22 +51,30 @@
             <tbody id="articleTable">
 
                 @{
-                    var dataArticlesTable = Model.dataForTable();
+                    int countArticles = 100;
+                    var dataArticlesTable = Model.dataForTable(countArticles);
 
                     /*int number = 0;*/
 
                     foreach (var item in dataArticlesTable)
                     {
-                        <tr>
-                            <td>@item.Item1</td>
-                            <td>@item.Item2</td>
-                            <td>@item.Item3</td>
-                            <td>@item.Item4</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm edit-btn">Edit</button>
-                                <button class="btn btn-danger btn-sm delete-btn">Delete</button>
-                            </td>
-                        </tr>
+                        if (item != null)
+                        {
+                                <tr>
+                                
+                                    <td>@item.ArticleNumber</td>
+                                    <td>@item.ArticleName</td>
+                                    <td>@item.AuthorName</td>
+                                    <td>@item.Category</td>
+                                  
+
+                                    <td>
+                                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
+                                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                                    </td>
+                                </tr>
+
+                        }
                     }
 
                 }

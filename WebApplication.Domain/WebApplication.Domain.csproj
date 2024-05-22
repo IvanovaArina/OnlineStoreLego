@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Admin\ArticleTable.cs" />
     <Compile Include="Entities\Enums\URole.cs" />
     <Compile Include="Entities\Responces\BaseResponces.cs" />
     <Compile Include="Entities\User\Session.cs" />
