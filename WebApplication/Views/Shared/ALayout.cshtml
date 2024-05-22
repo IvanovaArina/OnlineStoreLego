@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Web.Optimization
 
 <!DOCTYPE html>
 
@@ -18,12 +18,16 @@
           href="~/assets/media/favicon.png">
 
     <!-- All CSS files -->
-    <link rel="stylesheet" href="~/assets/css/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="~/assets/css/vendor/font-awesome.css">
-    <link rel="stylesheet" href="~/assets/css/vendor/slick.css">
-    <link rel="stylesheet" href="~/assets/css/vendor/slick-theme.css">
-    <link rel="stylesheet" href="~/assets/css/vendor/aksVideoPlayer.css">
+    @Styles.Render("~/bundles/bootstrap/assets/css")
+    @Styles.Render("~/bundles/font-awesome/assets/css")
+    @Styles.Render("~/bundles/slick/css")
+    @Styles.Render("~/bundles/slick-theme/css")
+    @Styles.Render("~/bundles/aksVideoPlayer/css")
     <link rel="stylesheet" href="~/assets/css/app.css">
+    @Styles.Render("~/bundles/app")  <!-- Бандл не работает, потому оставлю ссылку. Причину, почему конкретно он не работает, не нашла -->
+
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
 </head>
 <body>
 
