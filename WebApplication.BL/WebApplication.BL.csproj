@@ -88,8 +88,11 @@
   <ItemGroup>
     <Compile Include="AutoMapperProfile.cs" />
     <Compile Include="BusinessLogic.cs" />
+    <Compile Include="Core\ProductApi.cs" />
+    <Compile Include="Core\ProductDTO.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Core\UserDTO.cs" />
+    <Compile Include="DBModel\ProductContext.cs" />
     <Compile Include="DBModel\SessionContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="Interfaces\ISession.cs" />
