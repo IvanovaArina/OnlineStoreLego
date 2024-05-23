@@ -14,7 +14,7 @@ namespace WebApplication.BL.Core
             ProductDTO local = null;
             using (var db = new ProductContext())
             {
-                var dbProduct = db.Articles.FirstOrDefault(x => x.ProductNumber == number);
+                var dbProduct = db.Products.FirstOrDefault(x => x.ProductNumber == number);
                 if (dbProduct != null)
                 {
                     local = new ProductDTO

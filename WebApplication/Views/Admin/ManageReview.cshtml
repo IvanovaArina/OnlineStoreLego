@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ManageReview";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
@@ -14,10 +13,10 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="mb-4">Review Management</h2>
+        <h2 class="mb-4">Reviews Pending Approval</h2>
         <div class="row mb-3">
             <div class="col-md-4">
-                <input type="text" id="search" class="form-control" placeholder="Search for reviews...">
+                <input type="text" id="searchPending" class="form-control" placeholder="Search for reviews...">
             </div>
         </div>
         <table class="table table-bordered">
@@ -25,6 +24,7 @@
                 <tr>
                     <th>ID</th>
                     <th>User</th>
+                    <th>Product</th>
                     <th>Review</th>
                     <th>Rating</th>
                     <th>Actions</th>
@@ -34,28 +34,71 @@
                 <tr>
                     <td>1</td>
                     <td>User 1</td>
+                    <td>Product A</td>
                     <td>This product is amazing!</td>
                     <td>5</td>
                     <td>
                         <button class="btn btn-success btn-sm accept-btn">Accept</button>
                         <button class="btn btn-warning btn-sm deny-btn">Deny</button>
-                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
                     </td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>User 2</td>
+                    <td>Product B</td>
                     <td>Not satisfied with the quality.</td>
                     <td>2</td>
                     <td>
                         <button class="btn btn-success btn-sm accept-btn">Accept</button>
                         <button class="btn btn-warning btn-sm deny-btn">Deny</button>
+                    </td>
+                </tr>
+                <!-- Add more reviews here -->
+            </tbody>
+        </table>
+
+        <h2 class="mb-4">Approved Reviews</h2>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <input type="text" id="searchApproved" class="form-control" placeholder="Search for reviews...">
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Product</th>
+                    <th>Review</th>
+                    <th>Rating</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="deleteReviewTable">
+                <tr>
+                    <td>3</td>
+                    <td>User 3</td>
+                    <td>Product C</td>
+                    <td>Decent product.</td>
+                    <td>3</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>User 4</td>
+                    <td>Product D</td>
+                    <td>Excellent value for money.</td>
+                    <td>4</td>
+                    <td>
                         <button class="btn btn-danger btn-sm delete-btn">Delete</button>
                     </td>
                 </tr>
                 <!-- Add more reviews here -->
             </tbody>
         </table>
+
         <div class="text-left">
             <button class="btn btn-danger btn-lg" id="addReviewBtn">Add Review</button>
         </div>
@@ -65,34 +108,41 @@
     <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $('#search').on('keyup', function() {
+        $(document).ready(function () {
+            $('#searchPending').on('keyup', function () {
                 var value = $(this).val().toLowerCase();
-                $('#reviewTable tr').filter(function() {
+                $('#reviewTable tr').filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
 
-            $('.accept-btn').on('click', function() {
+            $('#searchApproved').on('keyup', function () {
+                var value = $(this).val().toLowerCase();
+                $('#deleteReviewTable tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $('.accept-btn').on('click', function () {
                 // Accept button functionality
                 alert('Review accepted');
                 // Here you can add an AJAX call to update the review status in the database
             });
 
-            $('.deny-btn').on('click', function() {
+            $('.deny-btn').on('click', function () {
                 // Deny button functionality
                 alert('Review denied');
                 // Here you can add an AJAX call to update the review status in the database
             });
 
-            $('.delete-btn').on('click', function() {
+            $('.delete-btn').on('click', function () {
                 // Delete button functionality
-                if(confirm('Are you sure you want to delete this review?')) {
+                if (confirm('Are you sure you want to delete this review?')) {
                     $(this).closest('tr').remove();
                 }
             });
 
-            $('#addReviewBtn').on('click', function() {
+            $('#addReviewBtn').on('click', function () {
                 // Add review button functionality
                 alert('Add Review button clicked');
                 // Here you can add code to show a modal or redirect to a review creation page
@@ -101,5 +151,3 @@
     </script>
 </body>
 </html>
-
-

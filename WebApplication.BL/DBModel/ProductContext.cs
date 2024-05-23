@@ -13,6 +13,6 @@ namespace WebApplication.BL.DBModel
         public ProductContext() : base("WebApp")
         { }
 
-        public virtual DbSet<ProductTable> Articles { get; set; }
+        public virtual DbSet<ProductTable> Products { get; set; }
     }
 }
