@@ -39,6 +39,19 @@ namespace WebApplication.Models
             return articleApi.getArticlesFromDatabase(count);
         }
 
+        public ArticleDTO moveDataFromModelToDTO()
+        {
+            ArticleDTO articleDTO = new ArticleDTO();
+            articleDTO.ArticleId = this.ArticleId;
+            articleDTO.ArticleNumber = this.ArticleNumber;
+            articleDTO.AuthorName = this.AuthorName;
+            articleDTO.ArticleName = this.ArticleName;
+            articleDTO.TextOfArticle = this.TextOfArticle;
+            //articleDTO.PublishedDate = this.PublishedDate;
+            articleDTO.Category = this.Category;
+
+            return articleDTO;
+        }
 
     }
 }

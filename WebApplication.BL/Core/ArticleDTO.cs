@@ -15,12 +15,14 @@ namespace WebApplication.BL.Core
 
         public string ArticleName { get; set; }
  
-        public DateTime PublishedDate { get; set; }
+        //public DateTime PublishedDate { get; set; }
   
         public string Category { get; set; }
         public string AuthorName { get; set; }
 
         public string TextOfArticle { get; set; }
+
+
 
 
     }

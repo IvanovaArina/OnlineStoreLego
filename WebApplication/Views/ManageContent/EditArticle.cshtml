@@ -7,7 +7,12 @@
 
 <h3>Edit Article @Model.ArticleNumber</h3>
 
-<form asp-action="EditArticle" method="post">
+
+    <div class="form-group">
+        <label for="articleTitle">Number</label>
+        <input type="text" class="form-control" id="articleNumber" @*name="Title"*@ value="@Model.ArticleNumber" required>
+    </div>
+
     <div class="form-group">
         <label for="articleTitle">Title</label>
         <input type="text" class="form-control" id="articleTitle" name="Title" value="@Model.ArticleName" required>
@@ -29,4 +34,4 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Save changes</button>
-</form>
+

@@ -29,9 +29,10 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult ManageContent(ArticleDataModel articleDataModel)
         {
-            return View(articleDataModel);
+            return RedirectToAction("Index", "ManageContent");
         }
 
         public ActionResult ViewOrders()
