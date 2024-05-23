@@ -12,5 +12,6 @@ namespace WebApplication.Domain.Entities.Responces
         public bool Status { get; set; }
         public string StatusMessage { get; set; }
         public URole Role { get; set; }
+        public string ErrorCode { get; set; } 
     }
 }

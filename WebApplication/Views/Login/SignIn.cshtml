@@ -172,11 +172,7 @@
                                     @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
-                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "Phone number" })
-                                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
-                                </div>
+                                
 
                                 <!-- ... остальные поля модели ... -->
 
@@ -193,19 +189,8 @@
                                 </div>
 
                               
-                                <!-- Country select list -->
-                        <div class="form-group mb-3">
-                            @Html.LabelFor(m => m.Country, new { @class = "control-label" })
-                            @Html.DropDownListFor(m => m.Country, new SelectList(new List<string> { "USA", "Canada", "Mexico", "UK", "France", "Germany","Moldova" }), "Select Country", new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Country, "", new { @class = "text-danger" })
-                        </div>
+                     
 
-                                <!-- City field -->
-                                <div class="form-group mb-3">
-                                    @Html.LabelFor(m => m.City, new { @class = "control-label" })
-                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", placeholder = "City" })
-                                    @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
-                                </div>
 
 
                                 <div class="form-group mb-0 text-center">

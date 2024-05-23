@@ -17,28 +17,62 @@ using WebApplication.Domain.Entities.User;
 using WebApplication.Helper;
 using System.Security.Policy;
 using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace WebApplication.BL.Core
 {
     public class UserApi
     {
-       internal BaseResponces CheckUserCredential(ULoginData ulData)
+
+       
+        internal BaseResponces CheckUserCredential(ULoginData ulData)
         {
             UserDTO local=null;
 
             using(var db =new UserContext())
             {
+                
                 var dbUser = db.Users.FirstOrDefault(x => x.Email == ulData.Email);
+
                 if (dbUser != null)
                 {
-                    local = new UserDTO
+                    // Если роль администратора, не хешировать пароль
+                    if (dbUser.Role == URole.Admin)
                     {
-                        UserId = dbUser.Id,   
-                        Email = dbUser.Email,
-                        Password = dbUser.Password,
-                        Level = dbUser.Role,
-                       
-                    };
+                        if (dbUser.Password == ulData.Password)
+                        {
+                            local = new UserDTO
+                            {
+                                UserId = dbUser.Id,
+                                Email = dbUser.Email,
+                                Password = dbUser.Password,
+                                Level = dbUser.Role,
+                            };
+                        }
+                    }
+                    else
+                    {
+                        // Хэширование пароля для других пользователей
+                        string hashedPassword = HashPassword(ulData.Password);
+                        if (dbUser.Password == hashedPassword)
+                        {
+                            local = new UserDTO
+                            {
+                                UserId = dbUser.Id,
+                                Email = dbUser.Email,
+                                Password = dbUser.Password,
+                                Level = dbUser.Role,
+                            };
+                        }
+                        else
+                        {
+                            return new BaseResponces { Status = false, StatusMessage = "Incorrect password." };
+                        }
+                    }
+                }
+                else
+                {
+                    return new BaseResponces { Status = false, StatusMessage = "No user with this email exists." };
                 }
             }
 
@@ -82,15 +116,24 @@ namespace WebApplication.BL.Core
         }
 
 
-
+        
 
         internal BaseResponces RegisterNewUserAccaunt(USignInData ulData) 
         {
+            if (ulData.Password != ulData.ConfirmPassword)
+            {
+                return new BaseResponces { Status = false, StatusMessage = "Пароль и подтверждение пароля не совпадают." };
+            }
 
             UserDTO local = null ;
             using (var db = new UserContext())
             {
+                
                 var dbUser = db.Users.FirstOrDefault(x => x.Email == ulData.Email);
+                if (dbUser != null)
+                {
+                    return new BaseResponces { Status = false, StatusMessage = "Этот адрес электронной почты уже зарегистрирован." };
+                }
                 if (dbUser != null)
                 {
                     local = new UserDTO
@@ -108,17 +151,18 @@ namespace WebApplication.BL.Core
             {
                 return new BaseResponces { Status=false,StatusMessage="This UserName already redistered"};
             }
+            string hashedPassword = HashPassword(ulData.Password);
 
             var user = new UserDTO
             {
-                Password = ulData.Password,//зашифровать 
+                Password = hashedPassword,
                 Email = ulData.Email,
                 Name = ulData.FullName,
                 UserIp = ulData.UserIp,
-                Country = ulData.Country,
-                ConfirmPassword = ulData.ConfirmPassword,
-                City = ulData.City,
-                Phone = ulData.PhoneNumber,
+                
+                ConfirmPassword = hashedPassword,
+
+
 
                 Level = URole.User
 
@@ -159,7 +203,19 @@ namespace WebApplication.BL.Core
         }
 
 
-
+        private static string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                var builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
 
         internal HttpCookie Cookie(string loginCredential)
         {
@@ -221,9 +277,7 @@ namespace WebApplication.BL.Core
                         Username = "Admin",
                         Email = "admin@example.com",
                         Password = "cisco1234",
-                        Phone="061234567",
-                        Country ="USA",
-                        City ="London",
+                        
                         Role = URole.Admin
                     };
 

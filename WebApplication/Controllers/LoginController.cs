@@ -71,8 +71,20 @@ namespace WebApplication.Controllers
             }
             else
             {
-                // Обработка ошибки входа
-                ViewBag.ErrorMessage = "Invalid login attempt";
+                // Handle invalid login attempt
+                if (resp.ErrorCode == "EmailNotExist")
+                {
+                    ModelState.AddModelError("Email", "This email address does not exist.");
+                }
+                else if (resp.ErrorCode == "IncorrectPassword")
+                {
+                    ModelState.AddModelError("Password", "The password is incorrect.");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Invalid login attempt";
+                }
+                //return View(userModel);
                 return View();
             }
 
@@ -89,10 +101,10 @@ namespace WebApplication.Controllers
             var adress = base.Request.UserHostAddress;
             var udata = new USignInData()
             {
-                Country = userModel.Country,
+                
                 ConfirmPassword = userModel.ConfirmPassword,
-                City = userModel.City,
-                PhoneNumber = userModel.PhoneNumber,
+                
+                
                 Password = userModel.Password,
                 Email = userModel.Email,
                 Level = userModel.Level,
@@ -102,6 +114,12 @@ namespace WebApplication.Controllers
 
             var userSI = Mapper.Map<USignInData>(udata);
             BaseResponces resp = _session.RegisterUserActionFlow(userSI);
+
+            if (!resp.Status)
+            {
+                ModelState.AddModelError("", resp.StatusMessage);
+                return View(userModel);
+            }
 
             return RedirectToAction("LogIn", "Login");
         }

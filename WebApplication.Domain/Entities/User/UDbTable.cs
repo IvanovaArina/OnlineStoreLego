@@ -17,18 +17,18 @@ namespace WebApplication.Domain.Entities.User
 
         [Required]
         [Display (Name = "Username")]
-        [StringLength (30, MinimumLength = 5, ErrorMessage = "Username cannot be longer than 30 characters.")]
+        [StringLength (30, MinimumLength = 3, ErrorMessage = "Username cannot be longer than 30 characters.")]
         public string Username { get; set; }
 
         [Required]
         [Display(Name = "Password")]
-        [StringLength(50, MinimumLength = 8, ErrorMessage = "Password cannot be shorter than 8 characters.")]
+        [StringLength(100, MinimumLength = 7, ErrorMessage = "Password cannot be shorter than 7 characters.")]
         public string Password { get; set; }
 
         [Required]
         [Display(Name = "Confirm Password")]
         [NotMapped]
-        [StringLength(50, MinimumLength = 8, ErrorMessage = "Password cannot be shorter than 8 characters.")]
+        [StringLength(100, MinimumLength = 7, ErrorMessage = "Password cannot be shorter than 7 characters.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -36,31 +36,9 @@ namespace WebApplication.Domain.Entities.User
         [StringLength(30)]
         public string Email { get; set; }
 
-        [Required]
-        [Display(Name = "Phone Number")]
-        [StringLength(50)]
-        public string Phone { get; set; }
+        
 
 
-
-        //[Display(Name = "Date of Birth")]
-
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        //public DateTime DateOfBirth { get; set; }
-
-        [Required]
-        [Display(Name = "Country")]
-        [StringLength(30)]
-        public string Country { get; set; }
-
-        [Required]
-        [Display(Name = "City")]
-        [StringLength(30)]
-        public string City { get; set; }
-
-        //[DataType (DataType.Date)]
-        //public DateTime LastLogin { get; set; }
 
         //public URole Level { get; set; }
         [Required]
