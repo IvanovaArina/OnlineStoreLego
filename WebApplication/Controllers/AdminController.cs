@@ -24,9 +24,9 @@ namespace WebApplication.Controllers
         {
             return View(productModel);
         }
-        public ActionResult ManageReview()
+        public ActionResult ManageReview(ReviewModel reviewModel)
         {
-            return View();
+            return View(reviewModel);
         }
         public ActionResult ManageContent()
         {
