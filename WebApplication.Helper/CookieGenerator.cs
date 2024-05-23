@@ -31,7 +31,7 @@ namespace WebApplication.Helper
 		/// </summary>
 		/// <param name="plainText">The text to encrypt.</param>
 		/// <param name="sharedSecret">A password used to generate a key for encryption.</param>
-        private static string EncryptStringAes(string plainText, string sharedSecret)
+        public static string EncryptStringAes(string plainText, string sharedSecret)
         {
             if (string.IsNullOrEmpty(plainText))
                 throw new ArgumentNullException(nameof(plainText));
@@ -78,7 +78,7 @@ namespace WebApplication.Helper
             // Return the encrypted bytes from the memory stream.
             return outStr;
         }
-        private static string DecryptStringAes(string cipherText, string sharedSecret)
+        public static string DecryptStringAes(string cipherText, string sharedSecret)
         {
             if (string.IsNullOrEmpty(cipherText))
                 throw new ArgumentNullException(nameof(cipherText));

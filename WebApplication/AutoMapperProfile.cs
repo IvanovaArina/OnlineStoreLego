@@ -19,9 +19,7 @@ namespace WebApplication
             CreateMap<UserSignIn, USignInData>()
         .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
     .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
-    .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
-    .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country))
-    .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.City))
+    
     .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
     .ForMember(dest => dest.ConfirmPassword, opt => opt.MapFrom(src => src.ConfirmPassword))
     .ForMember(dest => dest.Level, opt => opt.MapFrom(src => src.Level))

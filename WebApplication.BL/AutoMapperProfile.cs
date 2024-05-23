@@ -23,9 +23,7 @@ namespace WebApplication.BL
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
             .ForMember(dest => dest.ConfirmPassword, opt => opt.MapFrom(src => src.ConfirmPassword))
-            .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone))
-            .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country))
-            .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.City))
+            
             .ForMember(dest => dest.UserIp, opt => opt.MapFrom(src => src.UserIp))
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.UserId));
 

@@ -17,19 +17,9 @@ namespace WebApplication.Domain.Entities.User
         [Required]
         public string FullName { get; set; }
 
-        [Required]
-        [Phone]
-        public string PhoneNumber { get; set; }
 
-        //[Required]
-        //[DataType(DataType.Date)]
-        //public DateTime DateOfBirth { get; set; }
+        public string hashedPassword { get; set; }
 
-        [Required]
-        public string Country { get; set; }
-
-        [Required]
-        public string City { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

@@ -237,7 +237,14 @@
                                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                 </div>
 
-                               
+                                <!-- Сообщения об ошибках авторизации -->
+                                <!-- General Error Message -->
+                                if (ViewBag.ErrorMessage != null)
+                                {
+                                    <div class="alert alert-danger">
+                                        @ViewBag.ErrorMessage
+                                    </div>
+                                }
 
                                 <!-- Submit Button -->
                                 <div class="form-group">

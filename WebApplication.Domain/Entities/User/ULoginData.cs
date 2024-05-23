@@ -16,5 +16,6 @@ namespace WebApplication.Domain.Entities.User
         //public string LogibIp { get; set; }
         //public DateTime LoginDateTime { get; set; }
         //public URole Level { get; set; }
+        public string hashedPassword { get; set; }
     }
 }

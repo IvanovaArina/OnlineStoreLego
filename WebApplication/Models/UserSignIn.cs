@@ -11,33 +11,23 @@ namespace WebApplication.Models
     public class UserSignIn
     {
         [Required]
-        [EmailAddress]
+
+        [ContainsAtSign(ErrorMessage = "Email должен содержать символ '@'.")]
+        
         public string Email { get; set; }
 
         [Required]
         public string FullName { get; set; }
 
+       
         [Required]
-        [Phone]
-        public string PhoneNumber { get; set; }
-
-        //[Required]
-        //[DataType(DataType.Date)]
-        //public DateTime DateOfBirth { get; set; }
-
-        [Required]
-        public string Country { get; set; }
-
-        [Required]
-        public string City { get; set; }
-
-        [Required]
+        [StringLength(100, MinimumLength = 7, ErrorMessage = "Пароль должен быть не менее 7 символов.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare("Password")]
+        [Compare("Password", ErrorMessage = "Пароль и подтверждение пароля не совпадают.")]
         public string ConfirmPassword { get; set; }
 
         public URole Level { get; set; }
