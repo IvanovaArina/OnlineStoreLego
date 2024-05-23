@@ -15,6 +15,8 @@ namespace WebApplication.BL.Core
 
         public int ProductNumber { get; set; }
 
+        public string ProductName { get; set; }
+
         public double Price { get; set; }
 
         public string CategoryByAge { get; set; }
@@ -26,5 +28,6 @@ namespace WebApplication.BL.Core
         public int Quantity { get; set; }
 
         public string ProductDetail { get; set; }
+        public bool IsActive { get; set; }
     }
 }

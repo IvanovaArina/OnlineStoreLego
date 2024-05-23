@@ -18,6 +18,9 @@ namespace WebApplication.Domain.Entities.Admin
         public int ProductNumber { get; set; }
 
         [Required]
+        public string ProductName { get; set; }
+
+        [Required]
         public double Price { get; set; }
 
         [Required]
@@ -33,7 +36,10 @@ namespace WebApplication.Domain.Entities.Admin
         [Required]
         public int Quantity { get; set; }
 
-        
+        [Required]
+        public bool isActive { get; set; }
+
+
         public string ProductDetail { get; set; }
 
     }

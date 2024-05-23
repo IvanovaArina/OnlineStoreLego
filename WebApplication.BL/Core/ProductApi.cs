@@ -21,12 +21,15 @@ namespace WebApplication.BL.Core
                     {
                         ProductId = dbProduct.ProductId,
                         ProductNumber = dbProduct.ProductNumber,
+                        ProductName = dbProduct.ProductName,
                         Price = dbProduct.Price,
                         CategoryByAge = dbProduct.CategoryByAge,
                         Category = dbProduct.Category,
                         SellCategory = dbProduct.SellCategory,
                         Quantity = dbProduct.Quantity,
-                        ProductDetail = dbProduct.ProductDetail
+                        ProductDetail = dbProduct.ProductDetail,
+                        IsActive = dbProduct.isActive
+                        
                     };
                 }
             }

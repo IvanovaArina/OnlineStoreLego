@@ -15,6 +15,7 @@ namespace WebApplication.Models
         public int ProductId { get; set; }
 
         public int ProductNumber { get; set; }
+        public string ProductName { get; set; }
 
         public double Price { get; set; }
 
@@ -27,6 +28,7 @@ namespace WebApplication.Models
         public int Quantity { get; set; }
 
         public string ProductDetail { get; set; }
+        public bool isActive { get; set; }
 
         public ProductModel()
         {
