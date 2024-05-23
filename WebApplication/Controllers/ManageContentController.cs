@@ -76,14 +76,14 @@ namespace WebApplication.Controllers
             ArticleApi articleApi = new ArticleApi();
             articleApi.deleteArticle(articleDataModel.ArticleNumber);
 
-            return View(articleDataModel);
+            return View("ManageContent", articleDataModel);
         } 
         
-        [HttpPost]
-        public ActionResult CancelAdd (ArticleDataModel articleDataModel)
-        {
-            return View("ManageContent", articleDataModel);
-        }
+        //[HttpPost]
+        //public ActionResult CancelAdd (ArticleDataModel articleDataModel)
+        //{
+        //    return View("ManageContent", articleDataModel);
+        //}
 
 
         

@@ -180,12 +180,12 @@ namespace WebApplication.BL.Core
         {
             using (var context = new NewArticleContext())
             {
+                              
+               
+                    // Найти продукт по его идентификатору 
+                    var articleDb = context.Articles.FirstOrDefault(p => p.ArticleNumber == number);
 
-                ArticleDTO articleDTO = getArticleDTObyNumber(number);
-
-                var articleDb = Mapper.Map<ArticleTable>(articleDTO);
-
-                if (articleDTO != null)
+                if (articleDb != null)
                 {
                     // Удаляем продукт из контекста данных
                     context.Articles.Remove(articleDb);
