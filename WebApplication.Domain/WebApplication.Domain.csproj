@@ -85,6 +85,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Admin\ProductTable.cs" />
+    <Compile Include="Entities\Admin\ReviewTable.cs" />
     <Compile Include="Entities\Admin\ArticleTable.cs" />
     <Compile Include="Entities\Enums\URole.cs" />
     <Compile Include="Entities\Responces\BaseResponces.cs" />

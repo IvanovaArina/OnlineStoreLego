@@ -240,11 +240,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManageProductController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ManageContentController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\ArticleDataModel.cs" />
     <Compile Include="Models\UserData.cs" />
     <Compile Include="Models\UserLogin.cs" />
@@ -349,6 +353,7 @@
     <Content Include="Views\Users\EditInfo.cshtml" />
     <Content Include="Views\Shared\ALayout.cshtml" />
     <Content Include="Views\Login\AdminAccountHome.cshtml" />
+    <Content Include="Views\Admin\CreateProduct.cshtml" />
     <Content Include="Views\ManageContent\EditArticle.cshtml" />
     <Content Include="Views\ManageContent\AddArticle.cshtml" />
     <None Include="Web.Debug.config">
@@ -360,6 +365,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ManageProduct\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebApplication.BL\WebApplication.BL.csproj">

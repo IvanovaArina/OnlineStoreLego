@@ -20,13 +20,13 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public ActionResult ManageProducts()
+        public ActionResult ManageProducts(ProductModel productModel)
         {
-            return View();
+            return View(productModel);
         }
-        public ActionResult ManageReview()
+        public ActionResult ManageReview(ReviewModel reviewModel)
         {
-            return View();
+            return View(reviewModel);
         }
 
         [HttpGet]
@@ -36,6 +36,11 @@ namespace WebApplication.Controllers
         }
 
         public ActionResult ViewOrders()
+        {
+            return View();
+        }
+
+        public ActionResult CreateProduct()
         {
             return View();
         }

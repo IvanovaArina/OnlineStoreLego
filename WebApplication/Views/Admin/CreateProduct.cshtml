@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Create Product"; // Убедитесь, что Title установлен
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<div class="container mt-5">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label">Price</label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="AgeCategory" class="control-label">Age Category</label>
+                    <select asp-for="AgeCategory" class="form-control">
+                        <option value="0-3">0-3</option>
+                        <option value="3-10">3-10</option>
+                        <option value="10-16">10-16</option>
+                        <option value="16-21">16-21</option>
+                    </select>
+                    <span asp-validation-for="AgeCategory" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Category" class="control-label">Category</label>
+                    <select asp-for="Category" class="form-control">
+                        <option value="Toy Sets">Toy Sets</option>
+                        <option value="Plush Toy">Plush Toy</option>
+                        <option value="Lego Bricks">Lego Bricks</option>
+                        <option value="Remote Control">Remote Control</option>
+                    </select>
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SellCategory" class="control-label">Sell Category</label>
+                    <select asp-for="SellCategory" class="form-control">
+                        <option value="On Sales">On Sales</option>
+                        <option value="Top Sales">Top Sales</option>
+                        <option value="Boys">Boys</option>
+                        <option value="Girls">Girls</option>
+                    </select>
+                    <span asp-validation-for="SellCategory" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Description</label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ImageFile" class="control-label">Image File</label>
+                    <input asp-for="ImageFile" class="form-control-file" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index", "Products")'">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+@Html.Raw("<script src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js\"></script>")
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
