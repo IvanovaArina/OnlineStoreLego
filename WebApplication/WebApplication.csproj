@@ -349,7 +349,6 @@
     <Content Include="Views\Shared\ALayout.cshtml" />
     <Content Include="Views\Login\AdminAccountHome.cshtml" />
     <Content Include="Views\ManageContent\EditArticle.cshtml" />
-    <Content Include="Views\ManageContent\DeleteArticle.cshtml" />
     <Content Include="Views\ManageContent\AddArticle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
