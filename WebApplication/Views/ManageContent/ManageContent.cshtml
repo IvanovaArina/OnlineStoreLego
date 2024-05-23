@@ -67,7 +67,7 @@
 
 
         <div class="text-left mb-3">
-            @using (Html.BeginForm("AddArticle", "ManageContent", FormMethod.Post, new { id = "addArticleForm" }))
+            @using (Html.BeginForm("AddArticle", "ManageContent", FormMethod.Get, new { id = "addArticleForm" }))
             {
                 <button type="submit" class="btn btn-danger btn-lg" id="addArticleBtn">Add Article</button>
             }

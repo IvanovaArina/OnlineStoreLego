@@ -11,7 +11,9 @@
 {
     <div class="form-group">
         <label for="articleTitle">Number</label>
-        <input type="text" class="form-control" id="articleNumber" name="ArticleNumber" required>
+        @*<input type="text" class="form-control" id="articleNumber" name="ArticleNumber" required>*@
+
+        <textarea class="form-control" id="articleNumber" name="ArticleNumber" rows="5" required>@Model.ArticleNumber</textarea>
     </div>
 
     <div class="form-group">

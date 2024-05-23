@@ -72,11 +72,11 @@ namespace WebApplication.BL.Core
         }
 
 
-        private bool checkIfArticleNumberExists(ArticleDTO articleDTO)
+        public bool checkIfArticleNumberExistsByNumber(int number)
         {
             using (var db = new NewArticleContext())
             {
-                var dbArticle = db.Articles.FirstOrDefault(x => x.ArticleNumber == articleDTO.ArticleNumber);
+                var dbArticle = db.Articles.FirstOrDefault(x => x.ArticleNumber == number);
 
                 if (dbArticle != null)
                 {
@@ -121,7 +121,7 @@ namespace WebApplication.BL.Core
 
         public BaseResponces addArticleToDb(ArticleDTO articleDTO)
         {
-            if (checkIfArticleNumberExists(articleDTO))
+            if (checkIfArticleNumberExistsByNumber(articleDTO.ArticleNumber))
             {
                 return new BaseResponces { Status = false, StatusMessage = "This Article Number already exists" };
             }
@@ -158,16 +158,16 @@ namespace WebApplication.BL.Core
 
             }
         }
-        
-        public void editArticleInDb (ArticleDTO articleDTO)
+
+        public void editArticleInDb(ArticleDTO articleDTO)
         {
-            if (!checkIfArticleNumberExists(articleDTO))
+            if (!checkIfArticleNumberExistsByNumber(articleDTO.ArticleNumber))
             {
-                addArticleToDb (articleDTO);
+                addArticleToDb(articleDTO);
             }
             else
             {
-                editItemInDb (articleDTO);  
+                editItemInDb(articleDTO);
             }
 
             //var articleDb = Mapper.Map<ArticleTable>(articleDTO);
@@ -176,6 +176,25 @@ namespace WebApplication.BL.Core
         }
 
 
+        public void deleteArticle(int number)
+        {
+            using (var context = new NewArticleContext())
+            {
 
+                ArticleDTO articleDTO = getArticleDTObyNumber(number);
+
+                var articleDb = Mapper.Map<ArticleTable>(articleDTO);
+
+                if (articleDTO != null)
+                {
+                    // Удаляем продукт из контекста данных
+                    context.Articles.Remove(articleDb);
+
+                    // Сохраняем изменения в базе данных
+                    context.SaveChanges();
+                }
+            }
+
+        }
     }
 }

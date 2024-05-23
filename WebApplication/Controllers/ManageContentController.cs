@@ -18,7 +18,7 @@ namespace WebApplication.Controllers
         }
 
       
-        [HttpPost]
+        [HttpGet]
         public ActionResult AddArticle(ArticleDataModel articleDataModel)
         {
             return View(articleDataModel);
@@ -40,7 +40,20 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult EditArticle(ArticleDataModel articleDataModel)
         {
-            return View(articleDataModel);
+            ArticleApi articleApi = new ArticleApi();
+
+            if (articleApi.checkIfArticleNumberExistsByNumber(articleDataModel.ArticleNumber))
+            {
+                ArticleDTO articleDTO = articleApi.getArticleDTObyNumber(articleDataModel.ArticleNumber);
+               
+
+                return View(articleDataModel.moveDataFromDTOToModel(articleDTO));
+            }
+            else
+            {
+                return RedirectToAction("AddArticle", "ManageContent", articleDataModel);
+            }
+
         }
 
         [HttpPost]
@@ -60,6 +73,9 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult DeleteArticle (ArticleDataModel articleDataModel)
         {
+            ArticleApi articleApi = new ArticleApi();
+            articleApi.deleteArticle(articleDataModel.ArticleNumber);
+
             return View(articleDataModel);
         } 
         

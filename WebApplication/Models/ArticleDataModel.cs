@@ -47,11 +47,25 @@ namespace WebApplication.Models
             articleDTO.AuthorName = this.AuthorName;
             articleDTO.ArticleName = this.ArticleName;
             articleDTO.TextOfArticle = this.TextOfArticle;
-            //articleDTO.PublishedDate = this.PublishedDate;
             articleDTO.Category = this.Category;
 
             return articleDTO;
         }
+
+        public ArticleDataModel moveDataFromDTOToModel(ArticleDTO articleDTO)
+        {
+            ArticleDataModel articleDataModel = new ArticleDataModel();
+            articleDataModel.ArticleId = articleDTO.ArticleId;
+            articleDataModel.ArticleNumber = articleDTO.ArticleNumber;
+            articleDataModel.AuthorName = articleDTO.AuthorName;
+            articleDataModel.ArticleName = articleDTO.ArticleName;
+            articleDataModel.TextOfArticle = articleDTO.TextOfArticle;
+            articleDataModel.Category = articleDTO.Category;
+
+            return articleDataModel;
+        }
+
+
 
     }
 }
