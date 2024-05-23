@@ -20,9 +20,6 @@ namespace WebApplication.Domain.Entities.Admin
         [Required]
         public string ArticleName { get; set; }
 
-        //[Required]
-        //public DateTime PublishedDate { get; set; }
-
         [Required]
         public string Category { get; set; }
 
