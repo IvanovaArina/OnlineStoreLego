@@ -5,33 +5,35 @@
 
 @model WebApplication.Models.ArticleDataModel
 
-<h3>Edit Article @Model.ArticleNumber</h3>
+<h3>Edit Article # @Model.ArticleNumber</h3>
 
 
-    <div class="form-group">
-        <label for="articleTitle">Number</label>
-        <input type="text" class="form-control" id="articleNumber" @*name="Title"*@ value="@Model.ArticleNumber" required>
-    </div>
+@using (Html.BeginForm("EditArticleAction", "ManageContent", FormMethod.Post))
+{
+
+    <input type="hidden" name="ArticleNumber" value="@Model.ArticleNumber">
 
     <div class="form-group">
         <label for="articleTitle">Title</label>
-        <input type="text" class="form-control" id="articleTitle" name="Title" value="@Model.ArticleName" required>
+        <textarea class="form-control" id="articleTitle" name="ArticleName" required>@Model.ArticleName</textarea>
+
     </div>
 
     <div class="form-group">
         <label for="articleAuthor">Author</label>
-        <input type="text" class="form-control" id="articleAuthor" name="Author" value="@Model.AuthorName" required>
+        <input type="text" class="form-control" id="articleAuthor" name="AuthorName" required>
     </div>
 
     <div class="form-group">
         <label for="articleCategory">Category</label>
-        <input type="text" class="form-control" id="articleCategory" name="Category" value="@Model.Category" required>
+        <input type="text" class="form-control" id="articleCategory" name="Category" required>
     </div>
 
     <div class="form-group">
         <label for="articleContent">Content</label>
-        <textarea class="form-control" id="articleContent" name="Content" rows="5" required>@Model.TextOfArticle</textarea>
+        <textarea class="form-control" id="articleContent" name="TextOfArticle" rows="5" required>@Model.TextOfArticle</textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Save changes</button>
 
+}

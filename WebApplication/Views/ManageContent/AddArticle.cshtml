@@ -9,27 +9,24 @@
 
 @using (Html.BeginForm("AddArticleAction", "ManageContent", FormMethod.Post))
 {
-
-    @*<form asp-action="AddArticle" method="post">*@
-
     <div class="form-group">
         <label for="articleTitle">Number</label>
-        <input type="text" class="form-control" id="articleNumber" name="ArticleNumber" @*value="@Model.ArticleNumber"*@ required>
+        <input type="text" class="form-control" id="articleNumber" name="ArticleNumber" required>
     </div>
 
     <div class="form-group">
         <label for="articleTitle">Title</label>
-        <input type="text" class="form-control" id="articleTitle" name="ArticleName" @*value="@Model.ArticleName"*@ required>
+        <input type="text" class="form-control" id="articleTitle" name="ArticleName" required>
     </div>
 
     <div class="form-group">
         <label for="articleAuthor">Author</label>
-        <input type="text" class="form-control" id="articleAuthor" name="AuthorName" @*value="@Model.AuthorName"*@ required>
+        <input type="text" class="form-control" id="articleAuthor" name="AuthorName" required>
     </div>
 
     <div class="form-group">
         <label for="articleCategory">Category</label>
-        <input type="text" class="form-control" id="articleCategory" name="Category" @*value="@Model.Category"*@ required>
+        <input type="text" class="form-control" id="articleCategory" name="Category" required>
     </div>
 
     <div class="form-group">
@@ -39,6 +36,4 @@
 
     <button type="submit" class="btn btn-primary">Save changes</button>
 
-
-    @*</form>*@
 }

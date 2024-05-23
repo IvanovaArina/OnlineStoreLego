@@ -17,6 +17,13 @@ namespace WebApplication.Controllers
             return View(articleDataModel);
         }
 
+      
+        [HttpPost]
+        public ActionResult AddArticle(ArticleDataModel articleDataModel)
+        {
+            return View(articleDataModel);
+        }
+
         [HttpPost]
         public ActionResult AddArticleAction(ArticleDataModel articleDataModel)
         {
@@ -31,15 +38,23 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddArticle(ArticleDataModel articleDataModel)
+        public ActionResult EditArticle(ArticleDataModel articleDataModel)
         {
             return View(articleDataModel);
         }
 
         [HttpPost]
-        public ActionResult EditArticle(ArticleDataModel articleDataModel)
+        public ActionResult EditArticleAction(ArticleDataModel articleDataModel)
         {
-            return View(articleDataModel);
+
+            ArticleDTO articleDTO = articleDataModel.moveDataFromModelToDTO();
+            ArticleApi articleApi = new ArticleApi();
+
+            //обработать Base Answer
+            articleApi.editArticleInDb(articleDTO);
+
+
+            return View("ManageContent", articleDataModel);
         }
 
         [HttpPost]
@@ -55,6 +70,7 @@ namespace WebApplication.Controllers
         }
 
 
+        
 
 
 

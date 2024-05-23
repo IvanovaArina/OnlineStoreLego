@@ -42,10 +42,10 @@ namespace WebApplication.BL.Core
         }
 
 
-      /*  public Tuple<int, string, string, string> getDataFromDatabase()
-        {
+        /*  public Tuple<int, string, string, string> getDataFromDatabase()
+          {
 
-        }*/
+          }*/
 
 
         //public Tuple<int, string, string, string> fromArticleDTOtoTuple(ArticleDTO articleDTO)
@@ -58,9 +58,9 @@ namespace WebApplication.BL.Core
 
         public List<ArticleDTO> getArticlesFromDatabase(int articlesCount)
         {
-            List <ArticleDTO> listOfArticleDTO = new List <ArticleDTO>();
+            List<ArticleDTO> listOfArticleDTO = new List<ArticleDTO>();
 
-            for (int i=0; i< articlesCount; i++)
+            for (int i = 0; i < articlesCount; i++)
             {
 
                 listOfArticleDTO.Add(getArticleDTObyNumber(i));
@@ -87,7 +87,7 @@ namespace WebApplication.BL.Core
                     return false;
                 }
             }
-        } 
+        }
 
         private void saveChanges(ArticleTable articleDb)
         {
@@ -125,12 +125,54 @@ namespace WebApplication.BL.Core
             {
                 return new BaseResponces { Status = false, StatusMessage = "This Article Number already exists" };
             }
-                    
+
             var articleDb = Mapper.Map<ArticleTable>(articleDTO);
 
             saveChanges(articleDb);
 
             return new BaseResponces { Status = true };
+        }
+
+
+
+        private void editItemInDb(ArticleDTO articleDTO)
+        {
+            using (var context = new NewArticleContext())
+            {
+                // Находим продукт по его идентификатору (ID)
+                var articleDb = context.Articles.FirstOrDefault(p => p.ArticleNumber == articleDTO.ArticleNumber);
+
+                if (articleDb != null)
+                {
+                    // Меняем свойства продукта
+                    articleDb.ArticleNumber = articleDTO.ArticleNumber;
+                    articleDb.ArticleName = articleDTO.ArticleName;
+                    articleDb.Category = articleDTO.Category;
+                    articleDb.AuthorName = articleDTO.AuthorName;
+                    articleDb.TextOfArticle = articleDTO.TextOfArticle;
+
+
+                    // Сохраняем изменения в базе данных
+                    context.SaveChanges();
+                }
+
+            }
+        }
+        
+        public void editArticleInDb (ArticleDTO articleDTO)
+        {
+            if (!checkIfArticleNumberExists(articleDTO))
+            {
+                addArticleToDb (articleDTO);
+            }
+            else
+            {
+                editItemInDb (articleDTO);  
+            }
+
+            //var articleDb = Mapper.Map<ArticleTable>(articleDTO);
+
+            //saveChanges(articleDb);
         }
 
 
