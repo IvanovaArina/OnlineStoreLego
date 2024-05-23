@@ -20,7 +20,6 @@ namespace WebApplication.Domain.Entities.Admin
         [Required]
         public int ReviewNumber { get; set; }
 
-
         [Required]
         public int ProductID { get; set; }
 
