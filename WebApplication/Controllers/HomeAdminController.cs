@@ -3,26 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebApplication.BL;
-using WebApplication.BL.DBModel;
-using WebApplication.BL.Interfaces;
-using WebApplication.Domain.Entities.User;
-using WebApplication.Domain.Entities.Responces;
-using WebApplication.Models;
-using AutoMapper;
-using System.Web.Security;
-using System.Web.UI.WebControls;
 
-using System.Threading.Tasks;
-using WebApplication.Domain.Entities.Enums;
-
-namespace OnlineStoreLego.Web.Controllers
+namespace WebApplication.Controllers
 {
-    public class HomeController : Controller
+    public class HomeAdminController : Controller
     {
-
-        
-        public ActionResult Index()
+        // GET: HomeAdmin
+        public ActionResult HomeAdmin2()
         {
             return View();
 
@@ -33,7 +20,7 @@ namespace OnlineStoreLego.Web.Controllers
 
         }
 
-       
+
         public ActionResult Contact()
         {
             return View();
@@ -44,7 +31,7 @@ namespace OnlineStoreLego.Web.Controllers
             return View();
 
         }
-    
+
 
         public ActionResult Blog()
         {
@@ -56,23 +43,19 @@ namespace OnlineStoreLego.Web.Controllers
             return View();
         }
 
-        public ActionResult Cart()
-        {
-            return View();
-        }
+      
         public ActionResult Wishlist()
         {
             return View();
         }
-        public ActionResult Checkout()
-        {
-            return View();
-        }
+       
 
         public ActionResult ProductDetail()
         {
             return View();
         }
+
+        
 
        
     }

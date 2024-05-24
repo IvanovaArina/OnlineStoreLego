@@ -24,7 +24,13 @@ namespace WebApplication.BL.Core
     public class UserApi
     {
 
-       
+        public bool UsersExist()
+        {
+            using (var db = new UserContext())
+            {
+                return db.Users.Any();
+            }
+        }
         internal BaseResponces CheckUserCredential(ULoginData ulData)
         {
             UserDTO local=null;

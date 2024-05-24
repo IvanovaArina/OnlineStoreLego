@@ -102,13 +102,9 @@
     <Compile Include="DBModel\SessionContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="Interfaces\ISession.cs" />
-    <Compile Include="Migrations\202405220752046_InitialCreate.cs" />
-    <Compile Include="Migrations\202405220752046_InitialCreate.Designer.cs">
-      <DependentUpon>202405220752046_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405221140371_UpdateUserTable.cs" />
-    <Compile Include="Migrations\202405221140371_UpdateUserTable.Designer.cs">
-      <DependentUpon>202405221140371_UpdateUserTable.cs</DependentUpon>
+    <Compile Include="Migrations\202405240938250_CreateUDbTables.cs" />
+    <Compile Include="Migrations\202405240938250_CreateUDbTables.Designer.cs">
+      <DependentUpon>202405240938250_CreateUDbTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,11 +128,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202405220752046_InitialCreate.resx">
-      <DependentUpon>202405220752046_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405221140371_UpdateUserTable.resx">
-      <DependentUpon>202405221140371_UpdateUserTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202405240938250_CreateUDbTables.resx">
+      <DependentUpon>202405240938250_CreateUDbTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

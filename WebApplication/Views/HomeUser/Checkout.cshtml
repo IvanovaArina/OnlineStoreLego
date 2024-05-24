@@ -1,0 +1,263 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/ULayout.cshtml";
+}
+
+
+
+<!-- Hero Banner start -->
+<div class="page-title-banner">
+    <div class="container">
+        <div class="left-right-image">
+            <img src="~/assets/media/page-title-banner/img-1.png"
+                 class="left-img" alt>
+            <img src="~/assets/media/page-title-banner/img-2.png"
+                 class="right-img" alt>
+        </div>
+        <div class="content">
+            <div class="title">
+                <h2>Checkout</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content Start -->
+<div class="page-content">
+
+    <!-- Blog Detail Start -->
+    <section class="checkout p-96">
+        <div class="container">
+            <div class="shipping p-96 pt-0">
+                <h2 class="h-47 bold color-white mb-48">Shipping Detail</h2>
+                <form action="./checkout.html">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input type="text" id="name" placeholder="First Name" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="last-name" placeholder="Last Name" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="email" id="email" placeholder="Email" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="tel" id="number" placeholder="Phone Number" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="country" placeholder="Country" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="state" placeholder="State" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="adress" placeholder="House no and street name" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="suit" placeholder="Apartment , suit, (optional)" class="form-control mb-48" required>
+                        </div>
+                        <div class="col-12">
+                            <div class="checkBox">
+                                <input type="checkbox" id="shipping">
+                                <label for="shipping">Billing address same as shipping address?</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="billing">
+                <h2 class="h-47 bold color-white mb-48">Billing Detail</h2>
+                <form action="./checkout.html">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input type="text" id="f-name" placeholder="First Name" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="l-email" placeholder="Last Name" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="email" id="email-2" placeholder="Email" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="tel" id="num" placeholder="Phone Number" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="country-2" placeholder="Country" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="state-2" placeholder="State" class="form-control mb-16" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="adress-2" placeholder="House no and street name" class="form-control mb-16 mb-lg-0" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="suit-2" placeholder="Apartment , suit, (optional)" class="form-control mb-0" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="cart p-96 pb-0">
+                <h2 class="h-47 bold color-white mb-48">Cart Items</h2>
+                <div class="row">
+                    <div class="col-xl-8 mb-xl-0 mb-32">
+                        <div class="list-product mb-32">
+                            <img src="~/assets/media/product/p-27.png" alt="">
+                            <div class="content">
+                                <div class="frame">
+                                    <div class="name">
+                                        <h5 class="h-21 sec-2 light-black">Item:</h5>
+                                        <h5 class="h-21 sec light-black">Buzz Lightyear</h5>
+                                    </div>
+                                    <div class="name">
+                                        <h5 class="h-21 sec-2 light-black">SKU</h5>
+                                        <h5 class="h-21 sec light-black">12 323 43</h5>
+                                    </div>
+                                </div>
+                                <div class="frame end">
+                                    <h5 class="h-21 sec-2 light-black">Price</h5>
+                                    <h5 class="h-21 sec light-black">$32.00</h5>
+                                </div>
+                                <div class="frame center">
+                                    <h5 class="h-21 sec-2 light-black">Quantity</h5>
+                                    <div class="quantity quantity-wrap">
+                                        <input class="decrement" type="button" value="-">
+                                        <input type="text" name="quantity" value="2" maxlength="2" size="1" class="number">
+                                        <input class="increment" type="button" value="+">
+                                    </div>
+                                </div>
+                                <div class="frame center">
+                                    <h5 class="h-21 sec-2 light-black">Sub Total</h5>
+                                    <h5 class="h-21 sec light-black">$64 .00</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="list-product mb-32">
+                            <img src="~/assets/media/product/p-28.png" alt="">
+                            <div class="content">
+                                <div class="frame">
+                                    <div class="name">
+                                        <h5 class="h-21 sec-2 light-black">Item:</h5>
+                                        <h5 class="h-21 sec light-black">Bullseye Plush</h5>
+                                    </div>
+                                    <div class="name">
+                                        <h5 class="h-21 sec-2 light-black">SKU</h5>
+                                        <h5 class="h-21 sec light-black">02 486 98</h5>
+                                    </div>
+                                </div>
+                                <div class="frame end">
+                                    <h5 class="h-21 sec-2 light-black">Price</h5>
+                                    <h5 class="h-21 sec light-black">$58.00</h5>
+                                </div>
+                                <div class="frame center">
+                                    <h5 class="h-21 sec-2 light-black">Quantity</h5>
+                                    <div class="quantity quantity-wrap">
+                                        <input class="decrement" type="button" value="-">
+                                        <input type="text" name="quantity" value="1" maxlength="2" size="1" class="number">
+                                        <input class="increment" type="button" value="+">
+                                    </div>
+                                </div>
+                                <div class="frame center">
+                                    <h5 class="h-21 sec-2 light-black">Sub Total</h5>
+                                    <h5 class="h-21 sec light-black">$58.00</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="list-product mb-0">
+                            <img src="~/assets/media/product/p-29.png" alt="">
+                            <div class="content">
+                                <div class="frame">
+                                    <div class="name">
+                                        <h5 class="h-21 sec-2 light-black">Item:</h5>
+                                        <h5 class="h-21 sec light-black">Melody Plush</h5>
+                                    </div>
+                                    <div class="name">
+                                        <h5 class="h-21 sec-2 light-black">SKU</h5>
+                                        <h5 class="h-21 sec light-black">23 648 63</h5>
+                                    </div>
+                                </div>
+                                <div class="frame end">
+                                    <h5 class="h-21 sec-2 light-black">Price</h5>
+                                    <h5 class="h-21 sec light-black">$50.00</h5>
+                                </div>
+                                <div class="frame center">
+                                    <h5 class="h-21 sec-2 light-black">Quantity</h5>
+                                    <div class="quantity quantity-wrap">
+                                        <input class="decrement" type="button" value="-">
+                                        <input type="text" name="quantity" value="3" maxlength="2" size="1" class="number">
+                                        <input class="increment" type="button" value="+">
+                                    </div>
+                                </div>
+                                <div class="frame center">
+                                    <h5 class="h-21 sec-2 light-black">Sub Total</h5>
+                                    <h5 class="h-21 sec light-black">$150.00</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-6">
+                                <div class="cart-detail mb-32">
+                                    <h4 class="h-36 bold mb-16 light-black">Cart Detail</h4>
+                                    <ul class="unstyled">
+                                        <li>
+                                            <h6 class="h-21 light-black">Items Total</h6>
+                                            <h5 class="h-21 light-black sec"> $272.00</h5>
+                                        </li>
+                                        <li>
+                                            <h6 class="h-21 light-black">Shipping Fee</h6>
+                                            <h5 class="h-21 light-black sec"> $05.00</h5>
+                                        </li>
+                                        <li>
+                                            <h6 class="h-21 light-black">Tax</h6>
+                                            <h5 class="h-21 light-black sec"> $02.90</h5>
+                                        </li>
+                                        <li class="m-0">
+                                            <h6 class="h-21 light-black">Discount</h6>
+                                            <h5 class="h-21 light-black sec"> $20.00</h5>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-6">
+                                <div class="payment mb-32">
+                                    <h4 class="h-36 bold light-black mb-32">Payment Method</h4>
+                                    <div class="radio-button mb-16">
+                                        <input type="radio" name="payment" id="cash">
+                                        <label for="cash">Cash on Delivery</label>
+                                    </div>
+                                    <div class="radio-button mb-16">
+                                        <input type="radio" name="payment" id="cheque">
+                                        <label for="cheque">Cheque Payment</label>
+                                    </div>
+                                    <div class="radio-button mb-0">
+                                        <input type="radio" name="payment" id="bank">
+                                        <label for="bank">Bank Transfer</label>
+                                    </div>
+                                </div>
+                                <div class="total">
+                                    <ul class="unstyled mb-32">
+                                        <li class="m-0">
+                                            <h4 class="h-36 bold light-black">Grand Total</h4>
+                                            <h4 class="h-36 bold light-black">$259.90</h4>
+                                        </li>
+                                    </ul>
+                                    <a href="checkout.html" class="cus-btn primary w-100">To Checkout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Detail End -->
+</div>
+
+
+
+<!-- Main Content End -->
