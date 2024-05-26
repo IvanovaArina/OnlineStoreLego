@@ -109,7 +109,9 @@ namespace WebApplication.Controllers
                 Email = userModel.Email,
                 Level = userModel.Level,
                 UserIp = adress,
-                FullName = userModel.FullName
+                FullName = userModel.FullName,
+
+                //Wishlist = new WishlistEntity()
             };
 
             var userSI = Mapper.Map<USignInData>(udata);

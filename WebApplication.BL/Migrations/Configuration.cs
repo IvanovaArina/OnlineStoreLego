@@ -13,6 +13,13 @@
             ContextKey = "WebApplication.BL.DBModel.UserContext";
         }
 
+
+        //public Configuration()
+        //{
+        //    AutomaticMigrationsEnabled = true;
+        //    AutomaticMigrationDataLossAllowed = true; // Будьте осторожны с этим параметром в production
+        //}
+
         protected override void Seed(WebApplication.BL.DBModel.UserContext context)
         {
             //  This method will be called after migrating to the latest version.

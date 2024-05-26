@@ -32,5 +32,9 @@ namespace WebApplication.Domain.Entities.User
 
         public URole Level { get; set; }
         public string UserIp { get; set; }
+
+
+
+        public WishlistTable Wishlist { get; set; }
     }
 }

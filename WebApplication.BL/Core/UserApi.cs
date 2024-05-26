@@ -18,6 +18,7 @@ using WebApplication.Helper;
 using System.Security.Policy;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using WebApplication.BL.Migrations;
 
 namespace WebApplication.BL.Core
 {
@@ -53,6 +54,7 @@ namespace WebApplication.BL.Core
                                 Email = dbUser.Email,
                                 Password = dbUser.Password,
                                 Level = dbUser.Role,
+                                Wishlist = dbUser.Wishlist
                             };
                         }
                     }
@@ -68,6 +70,7 @@ namespace WebApplication.BL.Core
                                 Email = dbUser.Email,
                                 Password = dbUser.Password,
                                 Level = dbUser.Role,
+                                Wishlist = dbUser.Wishlist
                             };
                         }
                         else
@@ -107,7 +110,8 @@ namespace WebApplication.BL.Core
                         Name = dbUser.Username,
                         Email = dbUser.Email,
                         Password = dbUser.Password,
-                        Level = dbUser.Role
+                        Level = dbUser.Role,
+                        Wishlist = dbUser.Wishlist
                         // Map other properties as necessary
                     };
                 }
@@ -148,6 +152,7 @@ namespace WebApplication.BL.Core
                         Name = dbUser.Username,
                         Email = dbUser.Email,
                         Password = dbUser.Password,
+                        Wishlist = dbUser.Wishlist
                         // Map other properties as necessary
                     };
                 }
@@ -165,15 +170,21 @@ namespace WebApplication.BL.Core
                 Email = ulData.Email,
                 Name = ulData.FullName,
                 UserIp = ulData.UserIp,
-                
+
                 ConfirmPassword = hashedPassword,
 
 
 
-                Level = URole.User
+                Level = URole.User,
+                Wishlist = new WishlistTable
+                {
+                    test = 2,
+                    wishlistEntity = new List<int>()
+                }
 
 
             };
+
 
 
             var userDb = Mapper.Map<UDbTable>(user); // Используем AutoMapper для преобразования
@@ -284,7 +295,8 @@ namespace WebApplication.BL.Core
                         Email = "admin@example.com",
                         Password = "cisco1234",
                         
-                        Role = URole.Admin
+                        Role = URole.Admin,
+                        Wishlist = new WishlistTable()
                     };
 
                     db.Users.Add(adminUser);

@@ -48,5 +48,27 @@ namespace WebApplication.Domain.Entities.User
         [Required]
         //[StringLength(30)]
         public URole Role{  get; set; }
+
+
+        ////foreign key to wishlist
+
+        //[Required]
+        //public WishlistTable wishlistLink { get; set; }
+
+
+        ////foreign key to cart 
+        //[Required]
+        //public CartTable cartLink { get; set; }
+
+
+
+
+        // Внешний ключ
+        public int wishlistId { get; set; }
+
+        // Навигационное свойство
+        [ForeignKey("wishlistId")]
+        public WishlistTable Wishlist { get; set; }
+
     }
 }
