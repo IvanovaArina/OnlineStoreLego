@@ -77,18 +77,33 @@ namespace WebApplication.Controllers
             articleApi.deleteArticle(articleDataModel.ArticleNumber);
 
             return View("ManageContent", articleDataModel);
-        } 
-        
-        //[HttpPost]
-        //public ActionResult CancelAdd (ArticleDataModel articleDataModel)
-        //{
-        //    return View("ManageContent", articleDataModel);
-        //}
+        }
 
 
-        
 
+        public ActionResult AdminAccount()
+        {
+            return RedirectToAction("AdminAccount", "Admin");
+        }
 
+        public ActionResult ManageUsers()
+        {
+            return RedirectToAction("ManageUsers", "Admin");
+        }
+
+        public ActionResult ManageProducts(ProductModel productModel)
+        {
+            return RedirectToAction("ManageProducts", "Admin", productModel);
+        }
+        public ActionResult ManageReview(ReviewModel reviewModel)
+        {
+            return RedirectToAction("ManageReview", "Admin", reviewModel);
+        }
+
+        public ActionResult ViewOrders()
+        {
+            return RedirectToAction("ViewOrders", "Admin");
+        }
 
     }
 }
