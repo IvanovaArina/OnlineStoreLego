@@ -243,6 +243,7 @@
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageProductController.cs" />
+    <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ManageContentController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -253,6 +254,7 @@
     <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\ArticleDataModel.cs" />
     <Compile Include="Models\UserData.cs" />
+    <Compile Include="Models\UserDataModel.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Models\UserSignIn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -343,7 +345,7 @@
     <Content Include="Views\Shared\ULayout.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\AdminAccount.cshtml" />
-    <Content Include="Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Views\ManageUsers\ManageUsers.cshtml" />
     <Content Include="Views\Admin\ManageProducts.cshtml" />
     <Content Include="Views\Admin\ManageReview.cshtml" />
     <Content Include="Views\ManageContent\ManageContent.cshtml" />
@@ -374,6 +376,9 @@
     <Content Include="Views\HomeUser\Wishlist.cshtml" />
     <Content Include="Views\HomeUser\Checkout.cshtml" />
     <Content Include="Views\HomeUser\ProductDetail.cshtml" />
+    <Content Include="Views\ManageUsers\AddUser.cshtml" />
+    <Content Include="Views\ManageUsers\EditUser.cshtml" />
+    <Content Include="Views\ManageUsers\DeleteUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

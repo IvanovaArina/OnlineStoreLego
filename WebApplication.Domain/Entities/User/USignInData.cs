@@ -30,7 +30,14 @@ namespace WebApplication.Domain.Entities.User
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
+        public string KeyCredential { get; set; }
+
+
         public URole Level { get; set; }
         public string UserIp { get; set; }
+
+        
+
+        public WishlistTable Wishlist { get; set; }
     }
 }

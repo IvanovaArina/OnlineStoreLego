@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using WebApplication.Domain.Entities.Enums;
 using WebApplication.BL;
+using WebApplication.Domain.Entities.User;
 
 namespace WebApplication.Models
 {
@@ -32,6 +33,12 @@ namespace WebApplication.Models
 
         public URole Level { get; set; }
         public string UserIp { get; set; }
-        
+
+
+        public string KeyCredential { get; set; }
+
+
+        public WishlistEntity Wishlist { get; set; }
+
     }
 }

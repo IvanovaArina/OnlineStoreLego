@@ -12,6 +12,7 @@ using WebApplication.Domain.Entities.User;
 using WebApplication.Models;
 using AutoMapper;
 using System.Web.Security;
+using WebApplication.BL.Core;
 
 namespace WebApplication.Controllers
 {
@@ -38,11 +39,11 @@ namespace WebApplication.Controllers
         public ActionResult LogIn(UserData userModel)
         {
             var adress = base.Request.UserHostAddress;
-            var ulData = new ULoginData
+            var ulData = new UserDTO
             {
                 Email = userModel.Email,
                 UserIp = adress,
-                UserName = userModel.FullName,
+                Username = userModel.FullName,
                 Password = userModel.Password,
 
             };
@@ -99,21 +100,34 @@ namespace WebApplication.Controllers
         public ActionResult SignIn(UserSignIn userModel)
         {
             var adress = base.Request.UserHostAddress;
-            var udata = new USignInData()
+
+            URole role = new URole();
+
+            if (userModel.KeyCredential == "cisco1234")
+            {
+                role = URole.Admin;
+            }
+            else
+            {
+                role = URole.User;
+            }
+
+            var udata = new UserDTO()
             {
                 
                 ConfirmPassword = userModel.ConfirmPassword,
                 
-                
                 Password = userModel.Password,
                 Email = userModel.Email,
-                Level = userModel.Level,
+                Role = role,
                 UserIp = adress,
-                FullName = userModel.FullName
+                Username = userModel.FullName,
+
+                //Wishlist = new WishlistEntity()
             };
 
-            var userSI = Mapper.Map<USignInData>(udata);
-            BaseResponces resp = _session.RegisterUserActionFlow(userSI);
+
+            BaseResponces resp = _session.RegisterUserActionFlow(udata);
 
             if (!resp.Status)
             {
@@ -130,11 +144,6 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //public ActionResult UAccountHome()
-        //{
-        //    return View();
-
-        //}
 
         public ActionResult UAccountHome()
         {

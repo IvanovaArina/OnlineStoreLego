@@ -13,22 +13,20 @@ namespace WebApplication.BL
 {
     public class SessionBL : UserApi, ISession
     {
-        public BaseResponces ValidateUserCredentialAction(ULoginData ulData)
+        public BaseResponces ValidateUserCredentialAction(UserDTO userDTO)
         {
-            return CheckUserCredential(ulData);
-
-
+            return CheckUserCredential(userDTO);
         }
 
-        public BaseResponces RegisterUserActionFlow(USignInData userModel)
+        public BaseResponces RegisterUserActionFlow(UserDTO userDTO)
         {
-            return RegisterNewUserAccaunt(userModel);
+            return RegisterNewUserAccount(userDTO);
         }
 
-        public BaseResponces GenerateUserSessionActionFlow(ULoginData ulData)
+        public BaseResponces GenerateUserSessionActionFlow(UserDTO userDTO)
         {
 
-            return GenerateUserSession(ulData);
+            return GenerateUserSession(userDTO);
         }
 
         public HttpCookie GenCookie(string loginCredential)

@@ -18,197 +18,14 @@ using WebApplication.Helper;
 using System.Security.Policy;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using WebApplication.Domain.Entities.Admin;
+//using WebApplication.BL.Migrations;
 
 namespace WebApplication.BL.Core
 {
     public class UserApi
     {
-
-        public bool UsersExist()
-        {
-            using (var db = new UserContext())
-            {
-                return db.Users.Any();
-            }
-        }
-        internal BaseResponces CheckUserCredential(ULoginData ulData)
-        {
-            UserDTO local=null;
-
-            using(var db =new UserContext())
-            {
-                
-                var dbUser = db.Users.FirstOrDefault(x => x.Email == ulData.Email);
-
-                if (dbUser != null)
-                {
-                    // Если роль администратора, не хешировать пароль
-                    if (dbUser.Role == URole.Admin)
-                    {
-                        if (dbUser.Password == ulData.Password)
-                        {
-                            local = new UserDTO
-                            {
-                                UserId = dbUser.Id,
-                                Email = dbUser.Email,
-                                Password = dbUser.Password,
-                                Level = dbUser.Role,
-                            };
-                        }
-                    }
-                    else
-                    {
-                        // Хэширование пароля для других пользователей
-                        string hashedPassword = HashPassword(ulData.Password);
-                        if (dbUser.Password == hashedPassword)
-                        {
-                            local = new UserDTO
-                            {
-                                UserId = dbUser.Id,
-                                Email = dbUser.Email,
-                                Password = dbUser.Password,
-                                Level = dbUser.Role,
-                            };
-                        }
-                        else
-                        {
-                            return new BaseResponces { Status = false, StatusMessage = "Incorrect password." };
-                        }
-                    }
-                }
-                else
-                {
-                    return new BaseResponces { Status = false, StatusMessage = "No user with this email exists." };
-                }
-            }
-
-            if (local!=null)
-            {
-                
-
-                return new BaseResponces { Status = true, Role = local.Level };
-            }
-            return new BaseResponces { Status = false ,StatusMessage="No user with this credential types"};
-        }
-
-
-        internal BaseResponces GenerateUserSession(ULoginData ulData)
-        {
-            UserDTO local = null;
-
-            using (var db = new UserContext())
-            {
-                var dbUser = db.Users.FirstOrDefault(x => x.Email == ulData.Email);
-                if (dbUser != null)
-                {
-                    local = new UserDTO
-                    {
-                        UserIp = dbUser.UserIp,   // Assuming you want to map 'Id' from UDbTable to 'UserId' in UserDTO
-                        Name = dbUser.Username,
-                        Email = dbUser.Email,
-                        Password = dbUser.Password,
-                        Level = dbUser.Role
-                        // Map other properties as necessary
-                    };
-                }
-            }
-
-
-            if(local==null)
-            {
-                return new BaseResponces { Status = false, StatusMessage ="WRONG USERNAME OR PASSWORD"};
-            }
-            return new BaseResponces { Status=true};
-        }
-
-
-        
-
-        internal BaseResponces RegisterNewUserAccaunt(USignInData ulData) 
-        {
-            if (ulData.Password != ulData.ConfirmPassword)
-            {
-                return new BaseResponces { Status = false, StatusMessage = "Пароль и подтверждение пароля не совпадают." };
-            }
-
-            UserDTO local = null ;
-            using (var db = new UserContext())
-            {
-                
-                var dbUser = db.Users.FirstOrDefault(x => x.Email == ulData.Email);
-                if (dbUser != null)
-                {
-                    return new BaseResponces { Status = false, StatusMessage = "Этот адрес электронной почты уже зарегистрирован." };
-                }
-                if (dbUser != null)
-                {
-                    local = new UserDTO
-                    {
-                        UserId = dbUser.Id,   // Assuming you want to map 'Id' from UDbTable to 'UserId' in UserDTO
-                        Name = dbUser.Username,
-                        Email = dbUser.Email,
-                        Password = dbUser.Password,
-                        // Map other properties as necessary
-                    };
-                }
-            }
-
-            if (local!=null)
-            {
-                return new BaseResponces { Status=false,StatusMessage="This UserName already redistered"};
-            }
-            string hashedPassword = HashPassword(ulData.Password);
-
-            var user = new UserDTO
-            {
-                Password = hashedPassword,
-                Email = ulData.Email,
-                Name = ulData.FullName,
-                UserIp = ulData.UserIp,
-                
-                ConfirmPassword = hashedPassword,
-
-
-
-                Level = URole.User
-
-
-            };
-
-
-            var userDb = Mapper.Map<UDbTable>(user); // Используем AutoMapper для преобразования
-
-            using (var db = new UserContext())
-            {
-                db.Users.Add(userDb);
-                //db.SaveChanges();
-                try
-                {
-                    // Попытка сохранить изменения в базе данных
-                    db.SaveChanges();
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-                {
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            Trace.TraceInformation("Property: {0} Error: {1}",
-                                                    validationError.PropertyName,
-                                                    validationError.ErrorMessage);
-                        }
-                    }
-                    // Здесь можно выбросить более общее исключение или обработать ошибку
-                    throw; // Перебрасывает исключение дальше
-                }
-            }
-
-
-
-            return new BaseResponces {Status=true };
-        }
-
-
+        //----------------------
         private static string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())
@@ -268,44 +85,290 @@ namespace WebApplication.BL.Core
             return apiCookie;
         }
 
+        internal BaseResponces GenerateUserSession(UserDTO userDTO)
+        {
+            UserDTO local = null;
 
-        public BaseResponces CreateAdminAccount()
+            using (var db = new UserContext())
+            {
+                var dbUser = db.Users.FirstOrDefault(x => x.Email == userDTO.Email);
+                if (dbUser != null)
+                {
+                    local = new UserDTO
+                    {
+                        UserIp = dbUser.UserIp,   // Assuming you want to map 'Id' from UDbTable to 'UserId' in UserDTO
+                        Username = dbUser.Username,
+                        Email = dbUser.Email,
+                        Password = dbUser.Password,
+                        Role = dbUser.Role,
+                        Wishlist = dbUser.Wishlist
+                        // Map other properties as necessary
+                    };
+                }
+            }
+
+
+            if (local == null)
+            {
+                return new BaseResponces { Status = false, StatusMessage = "WRONG USERNAME OR PASSWORD" };
+            }
+            return new BaseResponces { Status = true };
+        }
+
+        public URole defineRole(UDbTable DbUser)
+        {
+            URole role = new URole();
+            if (DbUser.Role == 0)
+            {
+                role = URole.User;
+            }
+            else
+            {
+                role = URole.Admin;
+            }
+
+            return role;
+        }
+
+        public URole defineRoleByKeyCredential(string KeyCredential)
+        {
+            URole role = new URole();
+            if (KeyCredential == "cisco1234")
+            {
+                role = URole.Admin;
+            }
+            else
+            {
+                role = URole.User;
+            }
+
+            return role;
+        }
+
+        public List<UserDTO> getUsersFromDatabase()
+        {
+            List<UserDTO> listOfUserDTO = new List<UserDTO>();
+
+            List<int> usersIds = new List<int>();
+
+            using (var db = new UserContext())
+            {
+                usersIds = db.Users.Select(w => w.UserId).ToList();
+            }
+
+            foreach (var i in usersIds)
+            {
+
+                listOfUserDTO.Add(getUserDTObyId(i));
+
+            }
+            return listOfUserDTO;
+        }
+
+        public UserDTO getUserDTObyId(int id)
+        {
+            UserDTO local = null;
+            using (var db = new UserContext())
+            {
+                var dbUser = db.Users.FirstOrDefault(x => x.UserId == id);
+                if (dbUser != null)
+                {
+                    local = new UserDTO
+                    {
+                        UserId = dbUser.UserId,
+                        Username = dbUser.Username,
+                        Email = dbUser.Email,
+                        Password = dbUser.Password,
+                        ConfirmPassword = dbUser.ConfirmPassword,
+                        //KeyCredential
+                        Role = defineRole(dbUser),
+                        UserIp = dbUser.UserIp,
+                        //Wishlist 
+                    };
+                }
+            }
+            return local;
+        }
+
+        public bool checkIfEmailExists(string email)
         {
             using (var db = new UserContext())
             {
-                // Проверяем, существует ли уже администратор
-                var adminExists = db.Users.Any(u => u.Email == "admin@example.com");
-                if (!adminExists)
-                {
-                    // Создаем учетную запись администратора
-                    var adminUser = new UDbTable
-                    {
-                        Username = "Admin",
-                        Email = "admin@example.com",
-                        Password = "cisco1234",
-                        
-                        Role = URole.Admin
-                    };
+                var dbArticle = db.Users.FirstOrDefault(x => x.Email == email);
 
-                    db.Users.Add(adminUser);
-                    try
-                    {
-                        db.SaveChanges();
-                        return new BaseResponces { Status = true, StatusMessage = "Admin account created successfully" };
-                    }
-                    catch (Exception ex)
-                    {
-                        // Обработка ошибок
-                        return new BaseResponces { Status = false, StatusMessage = ex.Message };
-                    }
+                if (dbArticle != null)
+                {
+                    return true;
                 }
                 else
                 {
-                    // Администратор уже существует
-                    return new BaseResponces { Status = false, StatusMessage = "Admin account already exists" };
+                    return false;
                 }
             }
         }
+
+        private void saveChanges(UDbTable userDb)
+        {
+            using (var db = new UserContext())
+            {
+                db.Users.Add(userDb);
+                try
+                {
+                    // Попытка сохранить изменения в базе данных
+                    db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}",
+                                                    validationError.PropertyName,
+                                                    validationError.ErrorMessage);
+                        }
+                    }
+                    // Здесь можно выбросить более общее исключение или обработать ошибку
+                    throw; // Перебрасывает исключение дальше
+                }
+            }
+        }
+
+        public BaseResponces addUserToDb(UDbTable userDb)
+        {
+            using (var db = new UserContext())
+            {
+                db.Users.Add(userDb);
+                //db.SaveChanges();
+                try
+                {
+                    // Попытка сохранить изменения в базе данных
+                    db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}",
+                                                    validationError.PropertyName,
+                                                    validationError.ErrorMessage);
+                        }
+                    }
+                    // Здесь можно выбросить более общее исключение или обработать ошибку
+                    throw; // Перебрасывает исключение дальше
+                }
+            }
+
+            return new BaseResponces { Status = true };
+        }
+
+        public UserDTO createNewUserWithHash(UserDTO userDTO)
+        {
+            string hashedPassword = HashPassword(userDTO.Password);
+
+            var user = new UserDTO
+            {
+                Username = userDTO.Username,
+                Email = userDTO.Email,
+                Password = hashedPassword,
+                ConfirmPassword = hashedPassword,
+                UserIp = userDTO.UserIp,
+                KeyCredential = userDTO.KeyCredential,
+                Role = defineRoleByKeyCredential(userDTO.KeyCredential),
+
+                Wishlist = new WishlistTable
+                {
+                    test = 2,
+                    wishlistEntity = new List<int>()
+                }
+            };
+
+            return user;
+        }
+
+        
+        //----------------------
+
+
+        //public bool UsersExist()
+        //{
+        //    using (var db = new UserContext())
+        //    {
+        //        return db.Users.Any();
+        //    }
+        //}
+
+        internal BaseResponces CheckUserCredential(UserDTO userDTO)
+        {
+            UserDTO local = null;
+
+            using (var db = new UserContext())
+            {
+                var dbUser = db.Users.FirstOrDefault(x => x.Email == userDTO.Email);
+
+                if (dbUser != null)
+                {
+                    string hashedPassword = HashPassword(userDTO.Password);
+                    if (dbUser.Password == hashedPassword)
+                    {
+                        local = new UserDTO
+                        {
+                            UserId = dbUser.UserId,
+                            Email = dbUser.Email,
+                            Password = dbUser.Password,
+                            Role = dbUser.Role,
+                            Wishlist = dbUser.Wishlist
+                        };
+                    }
+                    else
+                    {
+                        return new BaseResponces { Status = false, StatusMessage = "Incorrect password." };
+                    }
+                }
+
+                else
+                {
+                    return new BaseResponces { Status = false, StatusMessage = "No user with this email exists." };
+                }
+            }
+
+            if (local != null)
+            {
+
+
+                return new BaseResponces { Status = true, Role = local.Role };
+            }
+            return new BaseResponces { Status = false, StatusMessage = "No user with this credential types" };
+        }
+
+
+       
+
+
+        public BaseResponces RegisterNewUserAccount(UserDTO userDTO)
+        {
+            if (userDTO.Password != userDTO.ConfirmPassword)
+            {
+                return new BaseResponces { Status = false, StatusMessage = "Пароль и подтверждение пароля не совпадают." };
+            }
+
+            if (checkIfEmailExists(userDTO.Email))
+            {
+                return new BaseResponces { Status = false, StatusMessage = "This UserName already registered" };
+            }
+
+            var user = createNewUserWithHash(userDTO);
+            var userDb = Mapper.Map<UDbTable>(user); // Используем AutoMapper для преобразования
+
+            return addUserToDb(userDb);
+        }
+
+
+
+
+
 
     }
 }

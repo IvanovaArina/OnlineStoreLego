@@ -39,10 +39,7 @@
             <tbody id="articleTable">
 
                 @{
-                    int countArticles = 100;
-                    var dataArticlesTable = Model.dataForTable(countArticles);
-
-                    /*int number = 0;*/
+                    var dataArticlesTable = Model.dataForTable();
                                         
                     foreach (var item in dataArticlesTable)
                     {

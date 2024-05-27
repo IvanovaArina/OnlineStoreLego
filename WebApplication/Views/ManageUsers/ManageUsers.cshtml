@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "ManageUsers";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@model WebApplication.Models.UserDataModel
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Article Management</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Users Management</h2>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <input type="text" id="search" class="form-control" placeholder="Search for articles...">
+            </div>
+        </div>
+
+
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>UserIp</th>
+                    <th>UserRole</th>
+                    @*<th>Wishlist</th>
+                    <th>Cart</th>*@
+                </tr>
+            </thead>
+
+            <tbody id="userTable">
+
+                @{
+                    var dataUsersTable = Model.dataForTable();
+
+                    foreach (var item in dataUsersTable)
+                    {
+                        if (item != null)
+                        {
+                            <tr>
+
+                                <td>@item.UserId</td>
+                                <td>@item.Username</td>
+                                <td>@item.Email</td>
+                                <td>@item.UserIp</td>
+                                <td>@item.Role</td>
+
+                            </tr>
+
+                        }
+                    }
+
+                }
+
+            </tbody>
+        </table>
+
+
+        <div class="text-left mb-3">
+            @using (Html.BeginForm("AddUser", "ManageUsers", FormMethod.Get, new { id = "addUserForm" }))
+            {
+                <button type="submit" class="btn btn-danger btn-lg" id="addUserBtn">Add User</button>
+            }
+        </div>
+
+        <div class="text-left mb-3">
+            @using (Html.BeginForm("EditUser", "ManageUsers", FormMethod.Post, new { id = "editUserForm" }))
+            {
+                <div class="form-group">
+                    <input type="text" id="EditUser" name="UserId" class="form-control mb-2" placeholder="Enter the id of user...">
+                    <button type="submit" class="btn btn-primary btn-sm edit-btn">Edit</button>
+                </div>
+            }
+        </div>
+
+        <div class="text-left mb-3">
+            @using (Html.BeginForm("DeleteUser", "ManageUsers", FormMethod.Post, new { id = "deleteUserForm" }))
+            {
+                <div class="form-group">
+                    <input type="text" id="DeleteUser" name="UserId" class="form-control mb-2" placeholder="Enter the id of user...">
+                    <button type="submit" class="btn btn-danger btn-sm delete-btn">Delete</button>
+                </div>
+            }
+        </div>
+
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#search').on('keyup', function () {
+                var value = $(this).val().toLowerCase();
+                $('#userTable tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
