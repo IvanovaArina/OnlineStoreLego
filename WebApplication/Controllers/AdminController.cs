@@ -10,12 +10,14 @@ namespace WebApplication.Controllers
     public class AdminController : Controller
     {
         ArticleDataModel currentArticleDataModel = new ArticleDataModel();
+        UserDataModel currentUserDataModel = new UserDataModel();
+
         public ActionResult AdminAccount()
         {
             return View();
         }
 
-        public ActionResult ManageUsers()
+        public ActionResult ManageUsers(UserDataModel userDataModel)
         {
             return RedirectToAction("ManageUsers", "ManageUsers");
         }

@@ -10,9 +10,6 @@ namespace WebApplication.Models
     public class ArticleDataModel
     {
         public ArticleApi articleApi;
-        public int countArticles;
-
-
 
         public int ArticleId { get; set; }
 
@@ -31,7 +28,6 @@ namespace WebApplication.Models
         public ArticleDataModel()
         {
             articleApi = new ArticleApi();
-            countArticles = 100;
         }
 
         public List<ArticleDTO> dataForTable()

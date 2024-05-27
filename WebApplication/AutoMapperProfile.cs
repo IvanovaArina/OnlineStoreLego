@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Web;
 using AutoMapper;
 using WebApplication.BL.Core;
+using WebApplication.Domain.Entities.Admin;
 using WebApplication.Domain.Entities.User;
 using WebApplication.Models;
 
@@ -26,6 +27,7 @@ namespace WebApplication
     .ForMember(dest => dest.UserIp, opt => opt.MapFrom(src => src.UserIp));
 
 
+            CreateMap<UserDataModel, UserDTO>().ReverseMap();
         }
     }
 

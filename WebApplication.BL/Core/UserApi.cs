@@ -301,7 +301,7 @@ namespace WebApplication.BL.Core
         //                Username = "Admin",
         //                Email = "admin@example.com",
         //                Password = "cisco1234",
-                        
+
         //                Role = URole.Admin,
         //                Wishlist = new WishlistTable()
         //            };
@@ -325,6 +325,70 @@ namespace WebApplication.BL.Core
         //        }
         //    }
         //}
+
+        public URole defineRole(UDbTable DbUser)
+        {
+            URole role = new URole();
+            if (DbUser.Role == 0)
+            {
+                role = URole.User;
+            }
+            else
+            {
+                role = URole.Admin;
+            }
+
+            return role;
+        }
+
+        public UserDTO getUserDTObyId(int id)
+        {
+            UserDTO local = null;
+            using (var db = new UserContext())
+            {
+                var dbUser = db.Users.FirstOrDefault(x => x.Id == id);
+                if (dbUser != null)
+                {
+                    local = new UserDTO
+                    {
+                        UserId = dbUser.Id,
+                        Name = dbUser.Username,
+                        Email = dbUser.Email,
+                        Password = dbUser.Password,
+                        ConfirmPassword = dbUser.ConfirmPassword,
+                        //KeyCredential
+                        Level = defineRole(dbUser),
+                        UserIp = dbUser.UserIp,
+                        //Wishlist 
+                    };
+                }
+            }
+            return local;
+        }
+
+
+        public List<UserDTO> getUsersFromDatabase()
+        {
+            List<UserDTO> listOfUserDTO = new List<UserDTO>();
+
+            List<int> usersIds = new List<int>();
+
+            using (var db = new UserContext())
+            {
+                usersIds = db.Users.Select(w => w.Id).ToList();
+            }
+
+            foreach (var i in usersIds)
+            {
+
+                listOfUserDTO.Add(getUserDTObyId(i));
+
+            }
+
+            return listOfUserDTO;
+
+        }
+
 
     }
 }

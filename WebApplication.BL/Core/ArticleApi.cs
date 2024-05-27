@@ -69,14 +69,6 @@ namespace WebApplication.BL.Core
 
         public List<ArticleDTO> getArticlesFromDatabase()
         {
-            //int articlesCount;
-
-            //using (var db = new NewArticleContext())
-            //{
-            //    articlesCount = db.Articles.Count();
-            //}
-
-
             List<ArticleDTO> listOfArticleDTO = new List<ArticleDTO>();
 
             List <int> articleIds = new List<int>();
@@ -94,8 +86,6 @@ namespace WebApplication.BL.Core
             }
 
             return listOfArticleDTO;
-
-
 
         }
 

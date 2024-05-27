@@ -10,14 +10,10 @@ namespace WebApplication.Controllers
     public class ManageUsersController : Controller
     {
         [HttpGet]
-        public ActionResult ManageUsers ()
+        public ActionResult ManageUsers (UserDataModel userDataModel)
         {
-            return View();
+            return View(userDataModel);
         }
-
-
-
-
 
         public ActionResult AdminAccount()
         {
@@ -42,5 +38,43 @@ namespace WebApplication.Controllers
         {
             return RedirectToAction("ViewOrders", "Admin");
         }
+
+        [HttpGet]
+        public ActionResult AddUser(UserDataModel userDataModel)
+        {
+            return View(userDataModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(UserDataModel userDataModel)
+        {
+            return View(userDataModel);
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteUser(UserDataModel userDataModel)
+        {
+            return View(userDataModel);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
