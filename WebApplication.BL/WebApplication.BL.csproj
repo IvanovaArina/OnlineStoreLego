@@ -102,39 +102,6 @@
     <Compile Include="DBModel\SessionContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="Interfaces\ISession.cs" />
-    <Compile Include="Migrations\202405240938250_CreateUDbTables.cs" />
-    <Compile Include="Migrations\202405240938250_CreateUDbTables.Designer.cs">
-      <DependentUpon>202405240938250_CreateUDbTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405261620490_addTest.cs" />
-    <Compile Include="Migrations\202405261620490_addTest.Designer.cs">
-      <DependentUpon>202405261620490_addTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405261627202_addTest2.cs" />
-    <Compile Include="Migrations\202405261627202_addTest2.Designer.cs">
-      <DependentUpon>202405261627202_addTest2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405261631389_addDefaultValue.cs" />
-    <Compile Include="Migrations\202405261631389_addDefaultValue.Designer.cs">
-      <DependentUpon>202405261631389_addDefaultValue.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405261815114_wishlist.cs" />
-    <Compile Include="Migrations\202405261815114_wishlist.Designer.cs">
-      <DependentUpon>202405261815114_wishlist.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405261826472_wishlist2.cs" />
-    <Compile Include="Migrations\202405261826472_wishlist2.Designer.cs">
-      <DependentUpon>202405261826472_wishlist2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405261840082_wishlistEntity.cs" />
-    <Compile Include="Migrations\202405261840082_wishlistEntity.Designer.cs">
-      <DependentUpon>202405261840082_wishlistEntity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405261856037_wishlistList.cs" />
-    <Compile Include="Migrations\202405261856037_wishlistList.Designer.cs">
-      <DependentUpon>202405261856037_wishlistList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionBL.cs" />
   </ItemGroup>
@@ -154,32 +121,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202405240938250_CreateUDbTables.resx">
-      <DependentUpon>202405240938250_CreateUDbTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405261620490_addTest.resx">
-      <DependentUpon>202405261620490_addTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405261627202_addTest2.resx">
-      <DependentUpon>202405261627202_addTest2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405261631389_addDefaultValue.resx">
-      <DependentUpon>202405261631389_addDefaultValue.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405261815114_wishlist.resx">
-      <DependentUpon>202405261815114_wishlist.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405261826472_wishlist2.resx">
-      <DependentUpon>202405261826472_wishlist2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405261840082_wishlistEntity.resx">
-      <DependentUpon>202405261840082_wishlistEntity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405261856037_wishlistList.resx">
-      <DependentUpon>202405261856037_wishlistList.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

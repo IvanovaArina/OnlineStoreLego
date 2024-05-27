@@ -5,5 +5,36 @@
 
 @model WebApplication.Models.UserDataModel
 
-<h2>AddUser</h2>
 
+<h2>Add User</h2>
+
+@using (Html.BeginForm("AddUserAction", "ManageUsers", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="Username" required>
+    </div>
+
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="text" class="form-control" id="Email" name="Email" required>
+    </div>
+
+    <div class="form-group">
+        <label for="Password">Password</label>
+        <input type="text" class="form-control" id="Password" name="Password" required>
+    </div>
+
+    <div class="form-group">
+        <label for="ConfirmPassword">Confirm Password</label>
+        <input type="text" class="form-control" id="ConfirmPassword" name="ConfirmPassword" required>
+    </div>
+
+    <div class="form-group">
+        <label for="KeyCredential">Key Credential</label>
+        <input type="text" class="form-control" id="KeyCredential" name="KeyCredential">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save new user</button>
+
+}

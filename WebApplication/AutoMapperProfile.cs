@@ -28,7 +28,15 @@ namespace WebApplication
 
 
             CreateMap<UserDataModel, UserDTO>().ReverseMap();
+            CreateMap<UserDataModel, UDbTable>().ReverseMap();
+
+
+
+
         }
+
+
+
     }
 
 }

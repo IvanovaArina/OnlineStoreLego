@@ -80,13 +80,10 @@ namespace WebApplication.BL.Core
 
             foreach (var i in articleIds)
             {
-
                 listOfArticleDTO.Add(getArticleDTObyId(i));
-
             }
 
             return listOfArticleDTO;
-
         }
 
 
