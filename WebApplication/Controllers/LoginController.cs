@@ -99,15 +99,26 @@ namespace WebApplication.Controllers
         public ActionResult SignIn(UserSignIn userModel)
         {
             var adress = base.Request.UserHostAddress;
+
+            URole role = new URole();
+
+            if (userModel.KeyCredential == "cisco1234")
+            {
+                role = URole.Admin;
+            }
+            else
+            {
+                role = URole.User;
+            }
+
             var udata = new USignInData()
             {
                 
                 ConfirmPassword = userModel.ConfirmPassword,
                 
-                
                 Password = userModel.Password,
                 Email = userModel.Email,
-                Level = userModel.Level,
+                Level = role,
                 UserIp = adress,
                 FullName = userModel.FullName,
 

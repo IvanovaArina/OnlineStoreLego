@@ -23,6 +23,12 @@ namespace WebApplication.Domain.Entities.User
         [Required]
         public List<int> wishlistEntity { get; set; }
 
+        //[Required]
+        //public WishlistEntity wishlistEntity { get; set; }
+
+        //коллекция из ключей на товары - пользовательский тип данных?
+        //List <pruductId> - Arina
+
 
         //[Required]
         //// Навигационное свойство 

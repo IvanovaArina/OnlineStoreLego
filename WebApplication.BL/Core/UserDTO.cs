@@ -13,7 +13,9 @@ namespace WebApplication.BL.Core
         public string Password { get; set; }
         
         public string ConfirmPassword { get; set; }
-        
+
+        public string KeyCredential { get; set; }
+
         public URole Level { get; set; }
         public string UserIp { get; set;}
 

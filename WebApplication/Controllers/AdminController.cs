@@ -17,7 +17,7 @@ namespace WebApplication.Controllers
 
         public ActionResult ManageUsers()
         {
-            return View();
+            return RedirectToAction("ManageUsers", "ManageUsers");
         }
 
         public ActionResult ManageProducts(ProductModel productModel)

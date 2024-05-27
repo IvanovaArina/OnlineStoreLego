@@ -92,6 +92,7 @@
     <Compile Include="Entities\Responces\BaseResponces.cs" />
     <Compile Include="Entities\User\CartEntity.cs" />
     <Compile Include="Entities\User\CartTable.cs" />
+    <Compile Include="Entities\User\ProductTable.cs" />
     <Compile Include="Entities\User\Session.cs" />
     <Compile Include="Entities\User\UDbTable.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />

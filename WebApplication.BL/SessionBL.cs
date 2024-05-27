@@ -22,7 +22,7 @@ namespace WebApplication.BL
 
         public BaseResponces RegisterUserActionFlow(USignInData userModel)
         {
-            return RegisterNewUserAccaunt(userModel);
+            return RegisterNewUserAccount(userModel);
         }
 
         public BaseResponces GenerateUserSessionActionFlow(ULoginData ulData)

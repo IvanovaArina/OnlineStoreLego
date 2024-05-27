@@ -43,24 +43,25 @@ namespace WebApplication.BL.Core
 
                 if (dbUser != null)
                 {
-                    // Если роль администратора, не хешировать пароль
-                    if (dbUser.Role == URole.Admin)
-                    {
-                        if (dbUser.Password == ulData.Password)
-                        {
-                            local = new UserDTO
-                            {
-                                UserId = dbUser.Id,
-                                Email = dbUser.Email,
-                                Password = dbUser.Password,
-                                Level = dbUser.Role,
-                                Wishlist = dbUser.Wishlist
-                            };
-                        }
-                    }
-                    else
-                    {
-                        // Хэширование пароля для других пользователей
+                    //// Если роль администратора, не хешировать пароль
+                    //if (dbUser.Role == URole.Admin)
+                    //{
+                    //    if (dbUser.Password == ulData.Password)
+                    //    {
+                    //        local = new UserDTO
+                    //        {
+                    //            UserId = dbUser.Id,
+                    //            Email = dbUser.Email,
+                    //            Password = dbUser.Password,
+                    //            Level = dbUser.Role,
+                    //            Wishlist = dbUser.Wishlist
+                    //        };
+                    //    }
+                    //}
+                    //else
+                    //{
+
+                        // Хэширование пароля для других (all) пользователей
                         string hashedPassword = HashPassword(ulData.Password);
                         if (dbUser.Password == hashedPassword)
                         {
@@ -77,8 +78,8 @@ namespace WebApplication.BL.Core
                         {
                             return new BaseResponces { Status = false, StatusMessage = "Incorrect password." };
                         }
-                    }
                 }
+                
                 else
                 {
                     return new BaseResponces { Status = false, StatusMessage = "No user with this email exists." };
@@ -128,7 +129,7 @@ namespace WebApplication.BL.Core
 
         
 
-        internal BaseResponces RegisterNewUserAccaunt(USignInData ulData) 
+        internal BaseResponces RegisterNewUserAccount(USignInData ulData) 
         {
             if (ulData.Password != ulData.ConfirmPassword)
             {
@@ -146,22 +147,28 @@ namespace WebApplication.BL.Core
                 }
                 if (dbUser != null)
                 {
-                    local = new UserDTO
-                    {
-                        UserId = dbUser.Id,   // Assuming you want to map 'Id' from UDbTable to 'UserId' in UserDTO
-                        Name = dbUser.Username,
-                        Email = dbUser.Email,
-                        Password = dbUser.Password,
-                        Wishlist = dbUser.Wishlist
-                        // Map other properties as necessary
-                    };
+                    //local = new UserDTO
+                    //{
+                    //    UserId = dbUser.Id,   // Assuming you want to map 'Id' from UDbTable to 'UserId' in UserDTO
+                    //    Name = dbUser.Username,
+                    //    Email = dbUser.Email,
+                    //    Password = dbUser.Password,
+                    //    Level = dbUser.Role
+                    //    //Wishlist = dbUser.Wishlist
+                    //    // Map other properties as necessary
+                    //};
+
+
+                    return new BaseResponces { Status = false, StatusMessage = "This UserName already redistered" };
+
                 }
             }
 
-            if (local!=null)
-            {
-                return new BaseResponces { Status=false,StatusMessage="This UserName already redistered"};
-            }
+            //if (local!=null)
+            //{
+            //    return new BaseResponces { Status=false,StatusMessage="This UserName already redistered"};
+            //}
+
             string hashedPassword = HashPassword(ulData.Password);
 
             var user = new UserDTO
@@ -173,9 +180,9 @@ namespace WebApplication.BL.Core
 
                 ConfirmPassword = hashedPassword,
 
-
-
-                Level = URole.User,
+                Level = ulData.Level,
+                
+                
                 Wishlist = new WishlistTable
                 {
                     test = 2,
@@ -280,44 +287,44 @@ namespace WebApplication.BL.Core
         }
 
 
-        public BaseResponces CreateAdminAccount()
-        {
-            using (var db = new UserContext())
-            {
-                // Проверяем, существует ли уже администратор
-                var adminExists = db.Users.Any(u => u.Email == "admin@example.com");
-                if (!adminExists)
-                {
-                    // Создаем учетную запись администратора
-                    var adminUser = new UDbTable
-                    {
-                        Username = "Admin",
-                        Email = "admin@example.com",
-                        Password = "cisco1234",
+        //public BaseResponces CreateAdminAccount()
+        //{
+        //    using (var db = new UserContext())
+        //    {
+        //        // Проверяем, существует ли уже администратор
+        //        var adminExists = db.Users.Any(u => u.Email == "admin@example.com");
+        //        if (!adminExists)
+        //        {
+        //            // Создаем учетную запись администратора
+        //            var adminUser = new UDbTable
+        //            {
+        //                Username = "Admin",
+        //                Email = "admin@example.com",
+        //                Password = "cisco1234",
                         
-                        Role = URole.Admin,
-                        Wishlist = new WishlistTable()
-                    };
+        //                Role = URole.Admin,
+        //                Wishlist = new WishlistTable()
+        //            };
 
-                    db.Users.Add(adminUser);
-                    try
-                    {
-                        db.SaveChanges();
-                        return new BaseResponces { Status = true, StatusMessage = "Admin account created successfully" };
-                    }
-                    catch (Exception ex)
-                    {
-                        // Обработка ошибок
-                        return new BaseResponces { Status = false, StatusMessage = ex.Message };
-                    }
-                }
-                else
-                {
-                    // Администратор уже существует
-                    return new BaseResponces { Status = false, StatusMessage = "Admin account already exists" };
-                }
-            }
-        }
+        //            db.Users.Add(adminUser);
+        //            try
+        //            {
+        //                db.SaveChanges();
+        //                return new BaseResponces { Status = true, StatusMessage = "Admin account created successfully" };
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                // Обработка ошибок
+        //                return new BaseResponces { Status = false, StatusMessage = ex.Message };
+        //            }
+        //        }
+        //        else
+        //        {
+        //            // Администратор уже существует
+        //            return new BaseResponces { Status = false, StatusMessage = "Admin account already exists" };
+        //        }
+        //    }
+        //}
 
     }
 }

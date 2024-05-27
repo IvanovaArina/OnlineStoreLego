@@ -243,6 +243,7 @@
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageProductController.cs" />
+    <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ManageContentController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -343,7 +344,7 @@
     <Content Include="Views\Shared\ULayout.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\AdminAccount.cshtml" />
-    <Content Include="Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Views\ManageUsers\ManageUsers.cshtml" />
     <Content Include="Views\Admin\ManageProducts.cshtml" />
     <Content Include="Views\Admin\ManageReview.cshtml" />
     <Content Include="Views\ManageContent\ManageContent.cshtml" />

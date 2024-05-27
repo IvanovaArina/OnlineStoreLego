@@ -35,6 +35,9 @@ namespace WebApplication.Models
         public string UserIp { get; set; }
 
 
+        public string KeyCredential { get; set; }
+
+
         public WishlistEntity Wishlist { get; set; }
 
     }
