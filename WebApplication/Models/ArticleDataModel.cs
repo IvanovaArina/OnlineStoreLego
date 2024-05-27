@@ -34,9 +34,9 @@ namespace WebApplication.Models
             countArticles = 100;
         }
 
-        public List<ArticleDTO> dataForTable(int count)
+        public List<ArticleDTO> dataForTable()
         {
-            return articleApi.getArticlesFromDatabase(count);
+            return articleApi.getArticlesFromDatabase();
         }
 
         public ArticleDTO moveDataFromModelToDTO()

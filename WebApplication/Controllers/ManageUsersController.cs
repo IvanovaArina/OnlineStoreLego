@@ -14,5 +14,33 @@ namespace WebApplication.Controllers
         {
             return View();
         }
+
+
+
+
+
+        public ActionResult AdminAccount()
+        {
+            return RedirectToAction("AdminAccount", "Admin");
+        }
+
+        public ActionResult ManageContent()
+        {
+            return RedirectToAction("ManageContent", "Admin");
+        }
+
+        public ActionResult ManageProducts(ProductModel productModel)
+        {
+            return RedirectToAction("ManageProducts", "Admin", productModel);
+        }
+        public ActionResult ManageReview(ReviewModel reviewModel)
+        {
+            return RedirectToAction("ManageReview", "Admin", reviewModel);
+        }
+
+        public ActionResult ViewOrders()
+        {
+            return RedirectToAction("ViewOrders", "Admin");
+        }
     }
 }
