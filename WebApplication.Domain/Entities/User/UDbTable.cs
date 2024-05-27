@@ -64,6 +64,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WebApplication.Domain.Entities.Enums;
@@ -98,7 +99,8 @@ namespace WebApplication.Domain.Entities.User
 
         [Required]
         [StringLength(30)]
-        public string UserIp { get; set; }
+        [DefaultValue("testIp")]
+        public string UserIp { get; set; } 
 
         // Внешний ключ
         public int WishlistId { get; set; }

@@ -66,15 +66,11 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult AddUserAction(UserDataModel userDataModel)
         {
-            //sign up
 
-
-
-            //var userDTO = Mapper.Map<UserDTO>(userDataModel);
-            //UserApi userApi = new UserApi();
-
-            ////обработать Base Answer
-            //userApi.addUserToDb(userDTO);
+            UserDTO userDTO = userDataModel.moveDataFromModelToDTO();
+            
+            UserApi userApi = new UserApi();
+            userApi.RegisterNewUserAccount(userDTO);
 
             return RedirectToAction("ManageUsers", userDataModel);
 

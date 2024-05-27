@@ -34,15 +34,23 @@ namespace WebApplication.Models
             return userApi.getUsersFromDatabase();
         }
 
-        //public UserDTO moveDataFromModelToDTO()
-        //{
-        //    UserDTO userDTO = new UserDTO
-        //    {
+        public UserDTO moveDataFromModelToDTO()
+        {
+            UserDTO userDTO = new UserDTO
+            {
+                UserId = this.UserId,
+                Username = this.Username,
+                Email = this.Email,
+                Password = this.Password,
+                ConfirmPassword = this.ConfirmPassword,
+                KeyCredential = this.KeyCredential,
+                Role = this.Role,
+                UserIp = this.UserIp,
+                Wishlist = this.Wishlist
+            };
 
-        //    }
-
-        //    return userDTO;
-        //}
+            return userDTO;
+        }
 
         //public UserDataModel moveDataFromDTOToModel()
         //{

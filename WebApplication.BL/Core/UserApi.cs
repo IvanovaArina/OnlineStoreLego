@@ -130,6 +130,21 @@ namespace WebApplication.BL.Core
             return role;
         }
 
+        public URole defineRoleByKeyCredential(string KeyCredential)
+        {
+            URole role = new URole();
+            if (KeyCredential == "cisco1234")
+            {
+                role = URole.Admin;
+            }
+            else
+            {
+                role = URole.User;
+            }
+
+            return role;
+        }
+
         public List<UserDTO> getUsersFromDatabase()
         {
             List<UserDTO> listOfUserDTO = new List<UserDTO>();
@@ -219,29 +234,6 @@ namespace WebApplication.BL.Core
             }
         }
 
-        public UserDTO createNewUserWithHash(UserDTO userDTO)
-        {
-            string hashedPassword = HashPassword(userDTO.Password);
-
-            var user = new UserDTO
-            {
-                Username = userDTO.Username,
-                Email = userDTO.Email,
-                Password = hashedPassword,
-                ConfirmPassword = hashedPassword,
-                UserIp = userDTO.UserIp,
-                Role = userDTO.Role,
-
-                Wishlist = new WishlistTable
-                {
-                    test = 2,
-                    wishlistEntity = new List<int>()
-                }
-            };
-
-            return user;
-        }
-
         public BaseResponces addUserToDb(UDbTable userDb)
         {
             using (var db = new UserContext())
@@ -271,6 +263,32 @@ namespace WebApplication.BL.Core
 
             return new BaseResponces { Status = true };
         }
+
+        public UserDTO createNewUserWithHash(UserDTO userDTO)
+        {
+            string hashedPassword = HashPassword(userDTO.Password);
+
+            var user = new UserDTO
+            {
+                Username = userDTO.Username,
+                Email = userDTO.Email,
+                Password = hashedPassword,
+                ConfirmPassword = hashedPassword,
+                UserIp = userDTO.UserIp,
+                KeyCredential = userDTO.KeyCredential,
+                Role = defineRoleByKeyCredential(userDTO.KeyCredential),
+
+                Wishlist = new WishlistTable
+                {
+                    test = 2,
+                    wishlistEntity = new List<int>()
+                }
+            };
+
+            return user;
+        }
+
+        
         //----------------------
 
 
@@ -329,7 +347,7 @@ namespace WebApplication.BL.Core
        
 
 
-        internal BaseResponces RegisterNewUserAccount(UserDTO userDTO)
+        public BaseResponces RegisterNewUserAccount(UserDTO userDTO)
         {
             if (userDTO.Password != userDTO.ConfirmPassword)
             {

@@ -27,7 +27,6 @@ namespace WebApplication
     .ForMember(dest => dest.UserIp, opt => opt.MapFrom(src => src.UserIp));
 
 
-            CreateMap<UserDataModel, UserDTO>().ReverseMap();
             CreateMap<UserDataModel, UDbTable>().ReverseMap();
 
 
