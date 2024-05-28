@@ -17,14 +17,14 @@ namespace WebApplication
 
             public AutoMapperProfile()
         {
-            CreateMap<UserSignIn, USignInData>()
-        .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
-    .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
+    //        CreateMap<UserSignIn, USignInData>()
+    //    .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+    //.ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
     
-    .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
-    .ForMember(dest => dest.ConfirmPassword, opt => opt.MapFrom(src => src.ConfirmPassword))
-    .ForMember(dest => dest.Level, opt => opt.MapFrom(src => src.Level))
-    .ForMember(dest => dest.UserIp, opt => opt.MapFrom(src => src.UserIp));
+    //.ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
+    //.ForMember(dest => dest.ConfirmPassword, opt => opt.MapFrom(src => src.ConfirmPassword))
+    //.ForMember(dest => dest.Level, opt => opt.MapFrom(src => src.Level))
+    //.ForMember(dest => dest.UserIp, opt => opt.MapFrom(src => src.UserIp));
 
 
             CreateMap<UserDataModel, UDbTable>().ReverseMap();

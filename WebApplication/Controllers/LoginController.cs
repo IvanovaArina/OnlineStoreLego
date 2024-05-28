@@ -36,14 +36,14 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogIn(UserData userModel)
+        public ActionResult LogIn(UserDataModel userModel)
         {
             var adress = base.Request.UserHostAddress;
             var ulData = new UserDTO
             {
                 Email = userModel.Email,
-                UserIp = adress,
-                Username = userModel.FullName,
+                //UserIp = adress,
+                Username = userModel.Username,
                 Password = userModel.Password,
 
             };
@@ -93,11 +93,11 @@ namespace WebApplication.Controllers
         }
         public ActionResult SignIn()
         {
-            return View(new UserSignIn());
+            return View(new UserDataModel());
         }
 
         [HttpPost]
-        public ActionResult SignIn(UserSignIn userModel)
+        public ActionResult SignIn(UserDataModel userModel)
         {
             var adress = base.Request.UserHostAddress;
 
@@ -114,14 +114,14 @@ namespace WebApplication.Controllers
 
             var udata = new UserDTO()
             {
-                
+
                 ConfirmPassword = userModel.ConfirmPassword,
-                
+
                 Password = userModel.Password,
                 Email = userModel.Email,
                 Role = role,
-                UserIp = adress,
-                Username = userModel.FullName,
+                //UserIp = adress,
+                Username = userModel.Username,
 
                 //Wishlist = new WishlistEntity()
             };

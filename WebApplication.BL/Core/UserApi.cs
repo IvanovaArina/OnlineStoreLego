@@ -96,7 +96,7 @@ namespace WebApplication.BL.Core
                 {
                     local = new UserDTO
                     {
-                        UserIp = dbUser.UserIp,   // Assuming you want to map 'Id' from UDbTable to 'UserId' in UserDTO
+                        //UserIp = dbUser.UserIp,   // Assuming you want to map 'Id' from UDbTable to 'UserId' in UserDTO
                         Username = dbUser.Username,
                         Email = dbUser.Email,
                         Password = dbUser.Password,
@@ -130,20 +130,20 @@ namespace WebApplication.BL.Core
             return role;
         }
 
-        public URole defineRoleByKeyCredential(string KeyCredential)
-        {
-            URole role = new URole();
-            if (KeyCredential == "cisco1234")
-            {
-                role = URole.Admin;
-            }
-            else
-            {
-                role = URole.User;
-            }
+        //public URole defineRoleByKeyCredential(string KeyCredential)
+        //{
+        //    URole role = new URole();
+        //    if (KeyCredential == "cisco1234")
+        //    {
+        //        role = URole.Admin;
+        //    }
+        //    else
+        //    {
+        //        role = URole.User;
+        //    }
 
-            return role;
-        }
+        //    return role;
+        //}
 
         public List<UserDTO> getUsersFromDatabase()
         {
@@ -182,7 +182,7 @@ namespace WebApplication.BL.Core
                         ConfirmPassword = dbUser.ConfirmPassword,
                         //KeyCredential
                         Role = defineRole(dbUser),
-                        UserIp = dbUser.UserIp,
+                        //UserIp = dbUser.UserIp,
                         //Wishlist 
                     };
                 }
@@ -207,39 +207,38 @@ namespace WebApplication.BL.Core
             }
         }
 
-        private void saveChanges(UDbTable userDb)
-        {
-            using (var db = new UserContext())
-            {
-                db.Users.Add(userDb);
-                try
-                {
-                    // Попытка сохранить изменения в базе данных
-                    db.SaveChanges();
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-                {
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            Trace.TraceInformation("Property: {0} Error: {1}",
-                                                    validationError.PropertyName,
-                                                    validationError.ErrorMessage);
-                        }
-                    }
-                    // Здесь можно выбросить более общее исключение или обработать ошибку
-                    throw; // Перебрасывает исключение дальше
-                }
-            }
-        }
+        //private void saveChanges(UDbTable userDb)
+        //{
+        //    using (var db = new UserContext())
+        //    {
+        //        db.Users.Add(userDb);
+        //        try
+        //        {
+        //            // Попытка сохранить изменения в базе данных
+        //            db.SaveChanges();
+        //        }
+        //        catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+        //        {
+        //            foreach (var validationErrors in dbEx.EntityValidationErrors)
+        //            {
+        //                foreach (var validationError in validationErrors.ValidationErrors)
+        //                {
+        //                    Trace.TraceInformation("Property: {0} Error: {1}",
+        //                                            validationError.PropertyName,
+        //                                            validationError.ErrorMessage);
+        //                }
+        //            }
+        //            // Здесь можно выбросить более общее исключение или обработать ошибку
+        //            throw; // Перебрасывает исключение дальше
+        //        }
+        //    }
+        //}
 
         public BaseResponces addUserToDb(UDbTable userDb)
         {
             using (var db = new UserContext())
             {
                 db.Users.Add(userDb);
-                //db.SaveChanges();
                 try
                 {
                     // Попытка сохранить изменения в базе данных
@@ -274,9 +273,9 @@ namespace WebApplication.BL.Core
                 Email = userDTO.Email,
                 Password = hashedPassword,
                 ConfirmPassword = hashedPassword,
-                UserIp = userDTO.UserIp,
+                //UserIp = userDTO.UserIp,
                 KeyCredential = userDTO.KeyCredential,
-                Role = defineRoleByKeyCredential(userDTO.KeyCredential),
+                Role = userDTO.Role,
 
                 Wishlist = new WishlistTable
                 {
@@ -366,6 +365,52 @@ namespace WebApplication.BL.Core
         }
 
 
+
+
+
+        private void saveChanges(UDbTable userDb)
+        {
+            using (var db = new UserContext())
+            {
+                db.Users.Add(userDb);
+                try
+                {
+                    // Попытка сохранить изменения в базе данных
+                    db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}",
+                                                    validationError.PropertyName,
+                                                    validationError.ErrorMessage);
+                        }
+                    }
+                    // Здесь можно выбросить более общее исключение или обработать ошибку
+                    throw; // Перебрасывает исключение дальше
+                }
+            }
+        }
+
+
+
+
+        public BaseResponces addUserToDb(UserDTO userDTO)
+        {
+            if (checkIfEmailExists(userDTO.Email))
+            {
+                return new BaseResponces { Status = false, StatusMessage = "This Article Number already exists" };
+            }
+
+            var userDb = Mapper.Map<UDbTable>(userDTO);
+
+            saveChanges(userDb);
+
+            return new BaseResponces { Status = true };
+        }
 
 
 

@@ -20,7 +20,7 @@ namespace WebApplication.Models
         public string KeyCredential { get; set; }
 
         public URole Role { get; set; }
-        public string UserIp { get; set; }
+        //public string UserIp { get; set; }
 
         public WishlistTable Wishlist { get; set; }
 
@@ -45,7 +45,7 @@ namespace WebApplication.Models
                 ConfirmPassword = this.ConfirmPassword,
                 KeyCredential = this.KeyCredential,
                 Role = this.Role,
-                UserIp = this.UserIp,
+                //UserIp = this.UserIp,
                 Wishlist = this.Wishlist
             };
 
