@@ -19,6 +19,8 @@ using System.Security.Policy;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using WebApplication.Domain.Entities.Admin;
+using ProductTable = WebApplication.Domain.Entities.Admin.ProductTable;
+using System.Web.UI.WebControls.WebParts;
 //using WebApplication.BL.Migrations;
 
 namespace WebApplication.BL.Core
@@ -263,6 +265,78 @@ namespace WebApplication.BL.Core
             return new BaseResponces { Status = true };
         }
 
+        public CartTable createCartTable()
+        {
+            var prod1 = new ProductTable
+            {
+                ProductNumber = 33,
+                ProductName = "ProductName",
+                Price = 20,
+                CategoryByAge = "CategoryByAge",
+                Category = "Category",
+                SellCategory = "SellCategory",
+                Quantity = 500,
+                isActive = true
+            };
+
+            var prod2 = new ProductTable
+            {
+                ProductNumber = 44,
+                ProductName = "ProductName2",
+                Price = 202,
+                CategoryByAge = "CategoryByAge2",
+                Category = "Category2",
+                SellCategory = "SellCategory2",
+                Quantity = 5002,
+                isActive = false
+            };
+
+            CartTable Cart = new CartTable
+            {
+                testCart = 55,
+
+                Products = new Dictionary<ProductTable, int>
+                    {
+                        { prod1 , 35 },
+                        {prod2 , 85 },
+                }
+            };
+
+            return Cart;
+        }
+
+        public WishlistTable createWishlistTable()
+        {
+            WishlistTable Wishlist = new WishlistTable
+            {
+                test = 2,
+                //wishlistEntity = new List<int>()
+                Products = new List<ProductTable>
+                    {
+                        new ProductTable { ProductNumber = 1,
+                        ProductName = "ProductName",
+                        Price = 20,
+                        CategoryByAge = "CategoryByAge",
+                        Category = "Category",
+                        SellCategory = "SellCategory",
+                        Quantity = 500,
+                        isActive = true
+                        },
+                        new ProductTable { ProductNumber = 2,
+                        ProductName = "ProductName2",
+                        Price = 202,
+                        CategoryByAge = "CategoryByAge2",
+                        Category = "Category2",
+                        SellCategory = "SellCategory2",
+                        Quantity = 5002,
+                        isActive = false
+                        },
+
+                    }
+            };
+            return Wishlist;    
+        }
+
         public UserDTO createNewUserWithHash(UserDTO userDTO)
         {
             string hashedPassword = HashPassword(userDTO.Password);
@@ -277,12 +351,12 @@ namespace WebApplication.BL.Core
                 KeyCredential = userDTO.KeyCredential,
                 Role = userDTO.Role,
 
-                Wishlist = new WishlistTable
-                {
-                    test = 2,
-                    wishlistEntity = new List<int>()
-                }
+                Wishlist = createWishlistTable(),
+
+                Cart = createCartTable()
+
             };
+        
 
             return user;
         }

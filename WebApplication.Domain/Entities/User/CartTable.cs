@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication.Domain.Entities.Admin;
 
 namespace WebApplication.Domain.Entities.User
 {
@@ -12,10 +13,14 @@ namespace WebApplication.Domain.Entities.User
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int cartId { get; set; }
+
+        public int testCart { get; set; }
 
 
-        [Required]
-        public CartEntity cartEntity { get; set; }
+        // Навигационное свойство
+        public Dictionary <ProductTable, int> Products { get; set; }
+
+
     }
 }

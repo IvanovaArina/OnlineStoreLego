@@ -44,5 +44,15 @@ namespace WebApplication.Domain.Entities.User
         // Навигационное свойство
         [ForeignKey("WishlistId")]
         public WishlistTable Wishlist { get; set; }
+
+        // Внешний ключ
+        public int CartId { get; set; }
+
+        // Навигационное свойство
+        [ForeignKey("CartId")]
+        public CartTable Cart { get; set; }
+
+
+
     }
 }
