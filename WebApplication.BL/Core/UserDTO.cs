@@ -17,7 +17,7 @@ namespace WebApplication.BL.Core
         public string KeyCredential { get; set; }
 
         public URole Role { get; set; }
-        public string UserIp { get; set;}
+        //public string UserIp { get; set;}
 
         public WishlistTable Wishlist { get; set; }
 

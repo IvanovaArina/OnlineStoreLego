@@ -68,9 +68,9 @@ namespace WebApplication.Controllers
         {
 
             UserDTO userDTO = userDataModel.moveDataFromModelToDTO();
-            
+
             UserApi userApi = new UserApi();
-            userApi.RegisterNewUserAccount(userDTO);
+            userApi.addUserToDb(userDTO);
 
             return RedirectToAction("ManageUsers", userDataModel);
 
