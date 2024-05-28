@@ -253,7 +253,6 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\ArticleDataModel.cs" />
-    <Compile Include="Models\UserData.cs" />
     <Compile Include="Models\UserDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ItemsListViewModel.cs" />
