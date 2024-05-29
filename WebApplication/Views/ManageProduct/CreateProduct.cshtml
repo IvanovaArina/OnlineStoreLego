@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "CreateProduct";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@model WebApplication.Models.ProductModel
+
+<h2>Create Product</h2>
+
+@using (Html.BeginForm("CreateProductAction", "ManageProduct", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="productNumber">Number</label>
+        <textarea class="form-control" id="productNumber" name="ProductNumber" rows="5" required>@Model.ProductNumber</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="productName">Name</label>
+        <input type="text" class="form-control" id="productName" name="ProductName" required>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" class="form-control" id="price" name="Price" required>
+    </div>
+
+    <div class="form-group">
+        <label for="categoryByAge">Age Category</label>
+        <select class="form-control" id="categoryByAge" name="CategoryByAge" required>
+            <option value="0-3">0-3</option>
+            <option value="3-10">3-10</option>
+            <option value="10-16">10-16</option>
+            <option value="16-21">16-21</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category</label>
+        <select class="form-control" id="category" name="Category" required>
+            <option value="Toy Sets">Toy Sets</option>
+            <option value="Plush Toy">Plush Toy</option>
+            <option value="Lego Bricks">Lego Bricks</option>
+            <option value="Remote Control">Remote Control</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="sellCategory">Sell Category</label>
+        <select class="form-control" id="sellCategory" name="SellCategory" required>
+            <option value="On Sales">On Sales</option>
+            <option value="Top Sales">Top Sales</option>
+            <option value="Boys">Boys</option>
+            <option value="Girls">Girls</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" class="form-control" id="quantity" name="Quantity" required>
+    </div>
+
+    <div class="form-group">
+        <label for="productDetail">Product Detail</label>
+        <textarea class="form-control" id="productDetail" name="ProductDetail" rows="5">@Model.ProductDetail</textarea>
+    </div>
+
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="isActive" name="IsActive" value="true" />
+        <label class="form-check-label" for="isActive">Is Active</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index", "Products")'">Cancel</button>
+}
+
+

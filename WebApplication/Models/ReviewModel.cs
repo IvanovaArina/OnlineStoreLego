@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebApplication.BL.Core;
+using WebApplication.Domain.Entities.Admin;
+using WebApplication.Domain.Entities.User;
 
 namespace WebApplication.Models
 {
     public class ReviewModel
     {
-        public ReviewApi productApi;
-        public int countReviews;
+        public ReviewApi reviewApi;
+
 
         public int ReviewId { get; set; }
 
-        public int ProductID { get; set; }
+        public ProductTable Product { get; set; }
 
         public bool Approved { get; set; }
-        public int ReviewNumber { get; set; }
-
-        public int UserID { get; set; }
+        public UDbTable User { get; set; }
 
         public int Rating { get; set; }
 
@@ -26,13 +26,23 @@ namespace WebApplication.Models
 
         public ReviewModel()
         {
-            productApi = new ReviewApi();
-            countReviews = 100;
+            reviewApi = new ReviewApi();
+
         }
 
-        public List<ReviewDTO> dataForTable(int count)
+        public List<ReviewDTO> approvedReviewForTable()
         {
-            return productApi.getReviewsFromDatabase(count);
+            return reviewApi.getApprovedReviewsFromDatabase();
+        }
+
+        public List<ReviewDTO> pendingReviewForTable()
+        {
+            return reviewApi.getPendingReviewsFromDatabase();
+        }
+
+        public List<ReviewDTO> reviewForTable()
+        {
+            return reviewApi.getAllReviewsFromDatabase();
         }
     }
 }

@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "EditProduct";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+@{
+    ViewBag.Title = "EditProductView";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@model WebApplication.Models.ProductModel
+
+<h3>Edit Product # @Model.ProductNumber</h3>
+
+
+@using (Html.BeginForm("EditProductAction", "ManageProduct", FormMethod.Post))
+{
+
+    <input type="hidden" name="ProductNumber" value="@Model.ProductNumber">
+
+    <div class="form-group">
+        <label for="ProductName">Name</label>
+
+        <textarea class="form-control" id="ProductName" name="ProductName" required>@Model.ProductName</textarea>
+
+    </div>
+
+    <div class="form-group">
+        <label for="Price">Price</label>
+        <textarea class="form-control" id="Price" name="Price" required>@Model.Price</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="CategoryByAge">Category By Age</label>
+        <textarea class="form-control" id="CategoryByAge" name="CategoryByAge" required>@Model.CategoryByAge</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Category">Category</label>
+        <textarea class="form-control" id="Category" name="Category" required>@Model.Category</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="SellCategory">Sell Category</label>
+        <textarea class="form-control" id="SellCategory" name="SellCategory" required>@Model.SellCategory</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Quantity">Quantity</label>
+        <textarea class="form-control" id="Quantity" name="Quantity" rows="5" required>@Model.Quantity</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Quantity">ProductDetail</label>
+        <textarea class="form-control" id="ProductDetail" name="ProductDetail" rows="5" required>@Model.ProductDetail</textarea>
+    </div>
+
+    <div class="form-group">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input active-checkbox" id="IsActive" name="IsActive" @(Model.IsActive ? "checked" : "")>
+            <label class="form-check-label" for="IsActive">Active</label>
+        </div>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Save changes</button>
+}
+
+
+

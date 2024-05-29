@@ -293,7 +293,7 @@ namespace WebApplication.BL.Core
                 Category = "Category",
                 SellCategory = "SellCategory",
                 Quantity = 500,
-                isActive = true
+                IsActive = true
             };
 
             var prod2 = new ProductTable
@@ -305,7 +305,7 @@ namespace WebApplication.BL.Core
                 Category = "Category2",
                 SellCategory = "SellCategory2",
                 Quantity = 5002,
-                isActive = false
+                IsActive = false
             };
 
             CartTable Cart = new CartTable
@@ -337,7 +337,7 @@ namespace WebApplication.BL.Core
                         Category = "Category",
                         SellCategory = "SellCategory",
                         Quantity = 500,
-                        isActive = true
+                        IsActive = true
                         },
                         new ProductTable { ProductNumber = 2,
                         ProductName = "ProductName2",
@@ -346,7 +346,7 @@ namespace WebApplication.BL.Core
                         Category = "Category2",
                         SellCategory = "SellCategory2",
                         Quantity = 5002,
-                        isActive = false
+                        IsActive = false
                         },
 
                     }

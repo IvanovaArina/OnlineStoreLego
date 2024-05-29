@@ -246,6 +246,7 @@
     <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ManageContentController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -344,7 +345,6 @@
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\AdminAccount.cshtml" />
     <Content Include="Views\ManageUsers\ManageUsers.cshtml" />
-    <Content Include="Views\Admin\ManageProducts.cshtml" />
     <Content Include="Views\Admin\ManageReview.cshtml" />
     <Content Include="Views\ManageContent\ManageContent.cshtml" />
     <Content Include="Views\Admin\ViewOrders.cshtml" />
@@ -377,6 +377,10 @@
     <Content Include="Views\ManageUsers\AddUser.cshtml" />
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
     <Content Include="Views\ManageUsers\DeleteUser.cshtml" />
+    <Content Include="Views\ManageProduct\Index.cshtml" />
+    <Content Include="Views\ManageProduct\EditProduct.cshtml" />
+    <Content Include="Views\ManageProduct\CreateProduct.cshtml" />
+    <Content Include="Views\Review\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

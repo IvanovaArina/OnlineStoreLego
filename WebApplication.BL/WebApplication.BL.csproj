@@ -88,14 +88,18 @@
   <ItemGroup>
     <Compile Include="AutoMapperProfile.cs" />
     <Compile Include="BusinessLogic.cs" />
-    <Compile Include="Core\ProductApi.cs" />
-    <Compile Include="Core\ProductDTO.cs" />
-    <Compile Include="Core\ReviewApi.cs" />
-    <Compile Include="Core\ReviewDTO.cs" />
-    <Compile Include="Core\ArticleApi.cs" />
-    <Compile Include="Core\ArticleDTO.cs" />
-    <Compile Include="Core\UserApi.cs" />
-    <Compile Include="Core\UserDTO.cs" />
+    <Compile Include="Core\APIs\CartAPI.cs" />
+    <Compile Include="Core\APIs\ProductApi.cs" />
+    <Compile Include="Core\DTOs\CartDTO.cs" />
+    <Compile Include="Core\DTOs\ProductDTO.cs" />
+    <Compile Include="Core\APIs\ReviewApi.cs" />
+    <Compile Include="Core\DTOs\ReviewDTO.cs" />
+    <Compile Include="Core\APIs\ArticleApi.cs" />
+    <Compile Include="Core\DTOs\ArticleDTO.cs" />
+    <Compile Include="Core\APIs\UserApi.cs" />
+    <Compile Include="Core\DTOs\UserDTO.cs" />
+    <Compile Include="Core\APIs\WishlistApi.cs" />
+    <Compile Include="Core\DTOs\WishlistDTO.cs" />
     <Compile Include="DBModel\CartContext.cs" />
     <Compile Include="DBModel\ProductContext.cs" />
     <Compile Include="DBModel\ReviewContext.cs" />

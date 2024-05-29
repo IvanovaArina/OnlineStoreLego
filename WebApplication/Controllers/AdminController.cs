@@ -24,11 +24,11 @@ namespace WebApplication.Controllers
 
         public ActionResult ManageProducts(ProductModel productModel)
         {
-            return View(productModel);
+            return RedirectToAction("Index", "ManageProduct"); ;
         }
         public ActionResult ManageReview(ReviewModel reviewModel)
         {
-            return View(reviewModel);
+            return RedirectToAction("Index", "Review");
         }
 
         [HttpGet]
@@ -46,5 +46,7 @@ namespace WebApplication.Controllers
         {
             return View();
         }
+
+
     }
 }

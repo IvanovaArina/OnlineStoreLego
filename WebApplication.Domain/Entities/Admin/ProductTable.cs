@@ -38,27 +38,27 @@ namespace WebApplication.Domain.Entities.Admin
         public int Quantity { get; set; }
 
         [Required]
-        public bool isActive { get; set; }
+        public bool IsActive { get; set; }
 
 
         public string ProductDetail { get; set; }
 
 
 
-        // Внешний ключ
-        public int WishlistId { get; set; }
+        //// Внешний ключ
+        //public int WishlistId { get; set; }
 
-        // Навигационное свойство
-        [ForeignKey("WishlistId")]
-        public virtual WishlistTable wishlist { get; set; }
+        //// Навигационное свойство
+        //[ForeignKey("WishlistId")]
+        //public virtual WishlistTable wishlist { get; set; }
 
 
-        // Внешний ключ
-        public int CartId { get; set; }
+        //// Внешний ключ
+        //public int CartId { get; set; }
 
-        // Навигационное свойство
-        [ForeignKey("CartId")]
-        public virtual CartTable cart { get; set; }
+        //// Навигационное свойство
+        //[ForeignKey("CartId")]
+        //public virtual CartTable cart { get; set; }
 
 
     }
