@@ -209,7 +209,7 @@ namespace WebApplication.BL.Core
             }
         }
 
-        public bool checkIfUserIdExists (int id)
+        public bool checkIfUserIdExists(int id)
         {
             using (var db = new UserContext())
             {
@@ -351,7 +351,7 @@ namespace WebApplication.BL.Core
 
                     }
             };
-            return Wishlist;    
+            return Wishlist;
         }
 
         public UserDTO createNewUserWithHash(UserDTO userDTO)
@@ -375,12 +375,12 @@ namespace WebApplication.BL.Core
             };
 
 
-        
+
 
             return user;
         }
 
-        
+
         //----------------------
 
 
@@ -436,7 +436,7 @@ namespace WebApplication.BL.Core
         }
 
 
-       
+
 
 
         public BaseResponces RegisterNewUserAccount(UserDTO userDTO)
@@ -508,11 +508,11 @@ namespace WebApplication.BL.Core
         }
 
 
-        public void editUserInDb (UserDTO userDTO)
+        public void editUserInDb(UserDTO userDTO)
         {
             using (var context = new UserContext())
             {
-                 //var userDb = Mapper.Map<UDbTable>(userDTO);
+                //var userDb = Mapper.Map<UDbTable>(userDTO);
 
 
                 // Находим продукт по его идентификатору (ID)
@@ -544,21 +544,63 @@ namespace WebApplication.BL.Core
             }
         }
 
+        public void deleteWishlist(int wishlistId)
+        {
+            using (var context = new WishlistContext())
+            {
+                var wishlistDb = context.Wishlists.FirstOrDefault(p => p.wishlistId == wishlistId);
+
+                if (wishlistDb != null)
+                {
+                    context.Wishlists.Remove(wishlistDb);
+
+                    // Сохраняем изменения в базе данных
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void deleteCart(int cartId)
+        {
+            using (var context = new CartContext())
+            {
+                var cartDb = context.Carts.FirstOrDefault(p => p.cartId == cartId);
+
+                if (cartDb != null)
+                {
+                    context.Carts.Remove(cartDb);
+
+                    // Сохраняем изменения в базе данных
+                    context.SaveChanges();
+                }
+            }
+        }
+
+
 
         public void deleteUser(int id)
         {
             using (var context = new UserContext())
             {
                 // Найти продукт по его идентификатору 
-                var articleDb = context.Users.FirstOrDefault(p => p.UserId == id);
+                var userDb = context.Users.FirstOrDefault(p => p.UserId == id);
 
-                if (articleDb != null)
+                if (userDb != null)
                 {
+                    int wishlistId = userDb.WishlistId;
+                    int cartId = userDb.CartId;
+
+
                     // Удаляем продукт из контекста данных
-                    context.Users.Remove(articleDb);
+                    context.Users.Remove(userDb);
 
                     // Сохраняем изменения в базе данных
                     context.SaveChanges();
+
+                    deleteWishlist(wishlistId);
+                    deleteCart(cartId);
+
+                    
                 }
             }
         }

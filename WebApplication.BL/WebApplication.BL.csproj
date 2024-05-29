@@ -96,11 +96,13 @@
     <Compile Include="Core\ArticleDTO.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Core\UserDTO.cs" />
+    <Compile Include="DBModel\CartContext.cs" />
     <Compile Include="DBModel\ProductContext.cs" />
     <Compile Include="DBModel\ReviewContext.cs" />
     <Compile Include="DBModel\NewArticleContext.cs" />
     <Compile Include="DBModel\SessionContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
+    <Compile Include="DBModel\WishlistContext.cs" />
     <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="Migrations\202405281417343_listOfProducts29.cs" />
     <Compile Include="Migrations\202405281417343_listOfProducts29.Designer.cs">
