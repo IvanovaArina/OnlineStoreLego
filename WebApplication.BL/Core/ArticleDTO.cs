@@ -21,6 +21,7 @@ namespace WebApplication.BL.Core
         public string AuthorName { get; set; }
 
         public string TextOfArticle { get; set; }
+        public string ImagePath { get; set; }
 
 
 

@@ -1,13 +1,13 @@
 ﻿@{
-    ViewBag.Title = "Edit Article";
+    ViewBag.Title = "Add Article";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
 @model WebApplication.Models.ArticleDataModel
 
-<h2>AddArticle</h2>
+<h3>Add New Article</h3>
 
-@using (Html.BeginForm("AddArticleAction", "ManageContent", FormMethod.Post))
+@using (Html.BeginForm("AddArticleAction", "ManageContent", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="form-group">
         <label for="articleTitle">Number</label>
@@ -15,20 +15,19 @@
 
         <textarea class="form-control" id="articleNumber" name="ArticleNumber" rows="5" required>@Model.ArticleNumber</textarea>
     </div>
-
     <div class="form-group">
         <label for="articleTitle">Title</label>
-        <input type="text" class="form-control" id="articleTitle" name="ArticleName" required>
+        <textarea class="form-control" id="ArticleName" name="ArticleName" required>@Model.ArticleName</textarea>
     </div>
 
     <div class="form-group">
         <label for="articleAuthor">Author</label>
-        <input type="text" class="form-control" id="articleAuthor" name="AuthorName" required>
+        <textarea class="form-control" id="articleAuthor" name="AuthorName" required>@Model.AuthorName</textarea>
     </div>
 
     <div class="form-group">
         <label for="articleCategory">Category</label>
-        <input type="text" class="form-control" id="articleCategory" name="Category" required>
+        <textarea class="form-control" id="Category" name="Category" required>@Model.Category</textarea>
     </div>
 
     <div class="form-group">
@@ -36,6 +35,13 @@
         <textarea class="form-control" id="articleContent" name="TextOfArticle" rows="5" required>@Model.TextOfArticle</textarea>
     </div>
 
+    <div class="form-group">
+        <label for="articleImage">Image</label>
+        <input type="file" class="form-control-file" id="articleImage" name="ArticleImage">
+        @Html.ValidationMessage("ArticleImage", "", new { @class = "text-danger" })
+    </div>
+
     <button type="submit" class="btn btn-primary">Save changes</button>
 
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 }

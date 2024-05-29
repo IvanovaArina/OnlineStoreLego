@@ -33,7 +33,9 @@ namespace WebApplication.BL.Core
                         //PublishedDate = dbArticle.PublishedDate,
                         Category = dbArticle.Category,
                         AuthorName = dbArticle.AuthorName,
-                        TextOfArticle = dbArticle.TextOfArticle
+                        TextOfArticle = dbArticle.TextOfArticle,
+                        ImagePath = dbArticle.ImagePath
+
                     };
                 }
             }
@@ -133,31 +135,63 @@ namespace WebApplication.BL.Core
             return new BaseResponces { Status = true };
         }
 
-
-
-        private void editItemInDb(ArticleDTO articleDTO)
+        public bool editItemInDb(ArticleDTO articleDTO)
         {
-            using (var context = new NewArticleContext())
+            try
             {
-                // Находим продукт по его идентификатору (ID)
-                var articleDb = context.Articles.FirstOrDefault(p => p.ArticleNumber == articleDTO.ArticleNumber);
-
-                if (articleDb != null)
+                using (var context = new NewArticleContext())
                 {
-                    // Меняем свойства продукта
-                    articleDb.ArticleNumber = articleDTO.ArticleNumber;
-                    articleDb.ArticleName = articleDTO.ArticleName;
-                    articleDb.Category = articleDTO.Category;
-                    articleDb.AuthorName = articleDTO.AuthorName;
-                    articleDb.TextOfArticle = articleDTO.TextOfArticle;
+                    var article = context.Articles.FirstOrDefault(a => a.ArticleNumber == articleDTO.ArticleNumber);
+                    if (article != null)
+                    {
+                        // Обновление полей статьи
+                        article.ArticleName = articleDTO.ArticleName;
+                        article.Category = articleDTO.Category;
+                        article.AuthorName = articleDTO.AuthorName;
+                        article.TextOfArticle = articleDTO.TextOfArticle;
+                        article.ImagePath = articleDTO.ImagePath;
 
-
-                    // Сохраняем изменения в базе данных
-                    context.SaveChanges();
+                        context.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false; // Статья не найдена
+                    }
                 }
-
+            }
+            catch (Exception ex)
+            {
+                // Логирование ошибки
+                Console.WriteLine($"Error updating article: {ex.Message}");
+                return false;
             }
         }
+
+        //private void editItemInDb(ArticleDTO articleDTO)
+        //{
+        //    using (var context = new NewArticleContext())
+        //    {
+        //        // Находим продукт по его идентификатору (ID)
+        //        var articleDb = context.Articles.FirstOrDefault(p => p.ArticleNumber == articleDTO.ArticleNumber);
+
+        //        if (articleDb != null)
+        //        {
+        //            // Меняем свойства продукта
+        //            articleDb.ArticleNumber = articleDTO.ArticleNumber;
+        //            articleDb.ArticleName = articleDTO.ArticleName;
+        //            articleDb.Category = articleDTO.Category;
+        //            articleDb.AuthorName = articleDTO.AuthorName;
+        //            articleDb.TextOfArticle = articleDTO.TextOfArticle;
+        //            articleDb.ImagePath = articleDTO.ImagePath;
+
+
+        //            // Сохраняем изменения в базе данных
+        //            context.SaveChanges();
+        //        }
+
+        //    }
+        //}
 
         public void editArticleInDb(ArticleDTO articleDTO)
         {

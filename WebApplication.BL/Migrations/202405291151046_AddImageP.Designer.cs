@@ -7,13 +7,13 @@ namespace WebApplication.BL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class CreateUDbTables : IMigrationMetadata
+    public sealed partial class AddImageP : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateUDbTables));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddImageP));
         
         string IMigrationMetadata.Id
         {
-            get { return "202405240938250_CreateUDbTables"; }
+            get { return "202405291151046_AddImageP"; }
         }
         
         string IMigrationMetadata.Source

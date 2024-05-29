@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,17 +26,56 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddArticleAction(ArticleDataModel articleDataModel)
+        public ActionResult AddArticleAction(ArticleDataModel articleDataModel, HttpPostedFileBase ArticleImage)
         {
-            ArticleDTO articleDTO = articleDataModel.moveDataFromModelToDTO();
-            ArticleApi articleApi = new ArticleApi();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (ArticleImage != null && ArticleImage.ContentLength > 0)
+                    {
+                        // Проверка типа файла
+                        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                        var extension = Path.GetExtension(ArticleImage.FileName).ToLower();
+                        if (!allowedExtensions.Contains(extension))
+                        {
+                            ModelState.AddModelError("ArticleImage", "Недопустимый формат файла. Разрешены только .jpg, .jpeg, .png и .gif.");
+                            return View(articleDataModel);
+                        }
 
-            //обработать Base Answer
-            articleApi.addArticleToDb(articleDTO);
+                        // Генерация уникального имени файла
+                        var fileName = Path.GetFileNameWithoutExtension(ArticleImage.FileName);
+                        fileName = fileName + "_" + Guid.NewGuid() + extension;
+                        var path = Path.Combine(Server.MapPath("~/Uploads/"), fileName);
 
-            return RedirectToAction("ManageContent", articleDataModel);
+                        // Сохранение файла
+                        ArticleImage.SaveAs(path);
+
+                        // Сохранение пути к изображению в модели
+                        articleDataModel.ImagePath = "/Uploads/" + fileName;
+                    }
+
+                    // Перемещение данных из модели в DTO
+                    ArticleDTO articleDTO = articleDataModel.moveDataFromModelToDTO();
+                    ArticleApi articleApi = new ArticleApi();
+
+                    // Обработка запроса к API для сохранения данных в БД
+                    articleApi.addArticleToDb(articleDTO);
+
+                    // Перенаправление к методу "ManageContent"
+                    return RedirectToAction("ManageContent", articleDataModel);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Произошла ошибка при загрузке изображения: " + ex.Message);
+                    return View(articleDataModel);
+                }
+            }
+
+            return View(articleDataModel);
 
         }
+      
 
         [HttpPost]
         public ActionResult EditArticle(ArticleDataModel articleDataModel)
@@ -56,18 +96,97 @@ namespace WebApplication.Controllers
 
         }
 
+        
+
         [HttpPost]
-        public ActionResult EditArticleAction(ArticleDataModel articleDataModel)
+        public ActionResult EditArticleAction(ArticleDataModel articleDataModel, HttpPostedFileBase ArticleImage)
         {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var articleApi = new ArticleApi();
 
-            ArticleDTO articleDTO = articleDataModel.moveDataFromModelToDTO();
-            ArticleApi articleApi = new ArticleApi();
+                    if (ArticleImage != null && ArticleImage.ContentLength > 0)
+                    {
+                        // Проверка типа файла
+                        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                        var extension = Path.GetExtension(ArticleImage.FileName).ToLower();
+                        if (!allowedExtensions.Contains(extension))
+                        {
+                            ModelState.AddModelError("ArticleImage", "Недопустимый формат файла. Разрешены только .jpg, .jpeg, .png и .gif.");
+                            return View("EditArticle", articleDataModel);
+                        }
 
-            //обработать Base Answer
-            articleApi.editArticleInDb(articleDTO);
+                        // Генерация уникального имени файла
+                        var fileName = Path.GetFileNameWithoutExtension(ArticleImage.FileName);
+                        fileName = fileName + "_" + Guid.NewGuid() + extension;
+                        var uploadPath = Server.MapPath("~/Uploads/");
 
+                        // Создание директории, если она не существует
+                        if (!Directory.Exists(uploadPath))
+                        {
+                            Directory.CreateDirectory(uploadPath);
+                        }
 
-            return View("ManageContent", articleDataModel);
+                        var path = Path.Combine(uploadPath, fileName);
+
+                        // Сохранение файла
+                        ArticleImage.SaveAs(path);
+
+                        // Сохранение пути к изображению в модели
+                        articleDataModel.ImagePath = "/Uploads/" + fileName;
+                    }
+                    else
+                    {
+                        // Если новое изображение не загружено, сохраняем путь к текущему изображению
+                        ArticleDTO currentArticleDTO = articleApi.getArticleDTObyNumber(articleDataModel.ArticleNumber);
+                        if (currentArticleDTO != null)
+                        {
+                            articleDataModel.ImagePath = currentArticleDTO.ImagePath;
+                        }
+                    }
+
+                    // Перемещение данных из модели в DTO
+                    ArticleDTO articleDTO = articleDataModel.moveDataFromModelToDTO();
+
+                    // Логирование перед вызовом API
+                    Console.WriteLine($"Calling editItemInDb with: {articleDTO.ArticleNumber}, {articleDTO.ArticleName}, {articleDTO.Category}, {articleDTO.AuthorName}, {articleDTO.TextOfArticle}, {articleDTO.ImagePath}");
+
+                    // Обработка запроса к API для сохранения данных в БД
+                    var updateResult = articleApi.editItemInDb(articleDTO);
+
+                    // Проверка результата обновления
+                    if (updateResult)
+                    {
+                        Console.WriteLine("Article updated successfully in the database.");
+                        return RedirectToAction("ManageContent");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Не удалось обновить статью. Проверьте данные и попробуйте еще раз.");
+                        return View("EditArticle", articleDataModel);
+                    }
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            ModelState.AddModelError(validationError.PropertyName, validationError.ErrorMessage);
+                        }
+                    }
+                    return View("EditArticle", articleDataModel);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Произошла ошибка при загрузке изображения: " + ex.Message);
+                    return View("EditArticle", articleDataModel);
+                }
+            }
+
+            return View("EditArticle", articleDataModel);
         }
 
         [HttpPost]

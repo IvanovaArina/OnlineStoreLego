@@ -11,28 +11,31 @@
 @using (Html.BeginForm("EditArticleAction", "ManageContent", FormMethod.Post))
 {
 
-    <input type="hidden" name="ArticleNumber" value="@Model.ArticleNumber">
+    @Html.HiddenFor(model => model.ArticleNumber)
 
     <div class="form-group">
-        <label for="articleTitle">Title</label>
-       
-        <textarea class="form-control" id="ArticleName" name="ArticleName" required>@Model.ArticleName</textarea>
-
+        @Html.LabelFor(model => model.ArticleName)
+        @Html.TextBoxFor(model => model.ArticleName, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
-        <label for="articleAuthor">Author</label>
-        <textarea class="form-control" id="articleAuthor" name="AuthorName" required>@Model.AuthorName</textarea>
+        @Html.LabelFor(model => model.AuthorName)
+        @Html.TextBoxFor(model => model.AuthorName, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
-        <label for="articleCategory">Category</label>
-        <textarea class="form-control" id="Category" name="Category" required>@Model.Category</textarea>
+        @Html.LabelFor(model => model.Category)
+        @Html.TextBoxFor(model => model.Category, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
-        <label for="articleContent">Content</label>
-        <textarea class="form-control" id="articleContent" name="TextOfArticle" rows="5" required>@Model.TextOfArticle</textarea>
+        @Html.LabelFor(model => model.TextOfArticle)
+        @Html.TextAreaFor(model => model.TextOfArticle, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="ArticleImage">Article Image</label>
+        <input type="file" id="ArticleImage" name="ArticleImage" />
     </div>
 
     <button type="submit" class="btn btn-primary">Save changes</button>

@@ -27,6 +27,8 @@ namespace WebApplication.Models
 
         public string TextOfArticle { get; set; }
 
+        public string ImagePath { get; set; }
+
 
         public ArticleDataModel()
         {
@@ -48,6 +50,7 @@ namespace WebApplication.Models
             articleDTO.ArticleName = this.ArticleName;
             articleDTO.TextOfArticle = this.TextOfArticle;
             articleDTO.Category = this.Category;
+            articleDTO.ImagePath = this.ImagePath;
 
             return articleDTO;
         }
@@ -61,6 +64,7 @@ namespace WebApplication.Models
             articleDataModel.ArticleName = articleDTO.ArticleName;
             articleDataModel.TextOfArticle = articleDTO.TextOfArticle;
             articleDataModel.Category = articleDTO.Category;
+            articleDataModel.ImagePath = articleDTO.ImagePath;
 
             return articleDataModel;
         }

@@ -29,5 +29,8 @@ namespace WebApplication.Domain.Entities.Admin
         [Required]
         public string TextOfArticle { get; set; }
 
+        [Required]
+        public string ImagePath { get; set; }
+
     }
 }
