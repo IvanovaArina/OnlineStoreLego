@@ -12,6 +12,7 @@ using WebApplication.Domain.Entities.User;
 using WebApplication.Models;
 using AutoMapper;
 using System.Web.Security;
+using WebApplication.BL.Core;
 
 namespace WebApplication.Controllers
 {
@@ -35,14 +36,14 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogIn(UserData userModel)
+        public ActionResult LogIn(UserDataModel userModel)
         {
             var adress = base.Request.UserHostAddress;
-            var ulData = new ULoginData
+            var ulData = new UserDTO
             {
                 Email = userModel.Email,
-                UserIp = adress,
-                UserName = userModel.FullName,
+                //UserIp = adress,
+                Username = userModel.Username,
                 Password = userModel.Password,
 
             };
@@ -90,39 +91,15 @@ namespace WebApplication.Controllers
 
 
         }
-        public ActionResult SignIn()
+
+        //SignUp
+        //use?
+        public ActionResult SignUp()
         {
-            return View(new UserSignIn());
+            return View (new UserDataModel());
         }
 
-        [HttpPost]
-        public ActionResult SignIn(UserSignIn userModel)
-        {
-            var adress = base.Request.UserHostAddress;
-            var udata = new USignInData()
-            {
-                
-                ConfirmPassword = userModel.ConfirmPassword,
-                
-                
-                Password = userModel.Password,
-                Email = userModel.Email,
-                Level = userModel.Level,
-                UserIp = adress,
-                FullName = userModel.FullName
-            };
 
-            var userSI = Mapper.Map<USignInData>(udata);
-            BaseResponces resp = _session.RegisterUserActionFlow(userSI);
-
-            if (!resp.Status)
-            {
-                ModelState.AddModelError("", resp.StatusMessage);
-                return View(userModel);
-            }
-
-            return RedirectToAction("LogIn", "Login");
-        }
 
         public ActionResult LogOut()
         {
@@ -130,11 +107,6 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //public ActionResult UAccountHome()
-        //{
-        //    return View();
-
-        //}
 
         public ActionResult UAccountHome()
         {
@@ -147,5 +119,73 @@ namespace WebApplication.Controllers
             return View();
 
         }
+
+
+        [HttpPost]
+        public ActionResult SignUpUser(UserDataModel userModel)
+        {
+            BaseResponces resp = SignUp(userModel);
+            if (!resp.Status)
+            {
+                ModelState.AddModelError("", resp.StatusMessage);
+                return View("SignUp", userModel);
+            }
+
+
+            return RedirectToAction("LogIn", "Login");
+        }
+
+        [HttpPost]
+        public ActionResult SignUpAdmin(UserDataModel userModel)
+        {
+            BaseResponces resp = SignUp(userModel);
+            if (!resp.Status)
+            {
+                ModelState.AddModelError("", resp.StatusMessage);
+                return View("AddUser", "ManageUsers", userModel);
+            }
+
+
+            return RedirectToAction("ManageUsers", "ManageUsers", userModel);
+        }
+
+
+
+
+
+        private BaseResponces SignUp(UserDataModel userModel)
+        {
+            var address = base.Request.UserHostAddress;
+
+            URole role = new URole();
+
+            if (userModel.KeyCredential == "cisco1234")
+            {
+                role = URole.Admin;
+            }
+            else
+            {
+                role = URole.User;
+            }
+
+            var udata = new UserDTO()
+            {
+
+                ConfirmPassword = userModel.ConfirmPassword,
+
+                Password = userModel.Password,
+                Email = userModel.Email,
+                Role = role,
+                //UserIp = adress,
+                Username = userModel.Username,
+
+                //Wishlist = new WishlistEntity()
+            };
+
+            //BaseResponces resp = _session.RegisterUserActionFlow(udata);
+            return _session.RegisterUserActionFlow(udata);
+
+        }
+
     }
 }

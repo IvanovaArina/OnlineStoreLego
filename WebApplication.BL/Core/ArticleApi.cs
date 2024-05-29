@@ -15,14 +15,25 @@ namespace WebApplication.BL.Core
 {
     public class ArticleApi
     {
+        public int getArticleIdByNumber(int number)
+        {
+            int articleId = 0;
 
+            using (var db = new NewArticleContext())
+            {
+                var article = db.Articles.FirstOrDefault(x => x.ArticleNumber == number);
+                articleId = article.ArticleId;
+            }
 
-        public ArticleDTO getArticleDTObyNumber(int number)
+            return articleId;
+        }
+
+        public ArticleDTO getArticleDTObyId(int id)
         {
             ArticleDTO local = null;
             using (var db = new NewArticleContext())
             {
-                var dbArticle = db.Articles.FirstOrDefault(x => x.ArticleNumber == number);
+                var dbArticle = db.Articles.FirstOrDefault(x => x.ArticleId == id);
                 if (dbArticle != null)
                 {
                     local = new ArticleDTO
@@ -58,23 +69,27 @@ namespace WebApplication.BL.Core
 
         //}
 
-        public List<ArticleDTO> getArticlesFromDatabase(int articlesCount)
+        public List<ArticleDTO> getArticlesFromDatabase()
         {
             List<ArticleDTO> listOfArticleDTO = new List<ArticleDTO>();
 
-            for (int i = 0; i < articlesCount; i++)
+            List <int> articleIds = new List<int>();
+
+            using (var db = new NewArticleContext())
             {
+                articleIds = db.Articles.Select(w => w.ArticleId).ToList();
+            }
 
-                listOfArticleDTO.Add(getArticleDTObyNumber(i));
-
+            foreach (var i in articleIds)
+            {
+                listOfArticleDTO.Add(getArticleDTObyId(i));
             }
 
             return listOfArticleDTO;
-
         }
 
 
-        public bool checkIfArticleNumberExistsByNumber(int number)
+        public bool checkIfArticleNumberExists(int number)
         {
             using (var db = new NewArticleContext())
             {
@@ -123,7 +138,7 @@ namespace WebApplication.BL.Core
 
         public BaseResponces addArticleToDb(ArticleDTO articleDTO)
         {
-            if (checkIfArticleNumberExistsByNumber(articleDTO.ArticleNumber))
+            if (checkIfArticleNumberExists(articleDTO.ArticleNumber))
             {
                 return new BaseResponces { Status = false, StatusMessage = "This Article Number already exists" };
             }
@@ -195,7 +210,7 @@ namespace WebApplication.BL.Core
 
         public void editArticleInDb(ArticleDTO articleDTO)
         {
-            if (!checkIfArticleNumberExistsByNumber(articleDTO.ArticleNumber))
+            if (!checkIfArticleNumberExists(articleDTO.ArticleNumber))
             {
                 addArticleToDb(articleDTO);
             }

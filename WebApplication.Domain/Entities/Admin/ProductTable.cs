@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication.Domain.Entities.User;
 
 namespace WebApplication.Domain.Entities.Admin
 {
@@ -41,6 +42,24 @@ namespace WebApplication.Domain.Entities.Admin
 
 
         public string ProductDetail { get; set; }
+
+
+
+        // Внешний ключ
+        public int WishlistId { get; set; }
+
+        // Навигационное свойство
+        [ForeignKey("WishlistId")]
+        public virtual WishlistTable wishlist { get; set; }
+
+
+        // Внешний ключ
+        public int CartId { get; set; }
+
+        // Навигационное свойство
+        [ForeignKey("CartId")]
+        public virtual CartTable cart { get; set; }
+
 
     }
 }

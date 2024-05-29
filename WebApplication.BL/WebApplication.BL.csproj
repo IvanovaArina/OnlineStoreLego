@@ -96,19 +96,17 @@
     <Compile Include="Core\ArticleDTO.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Core\UserDTO.cs" />
+    <Compile Include="DBModel\CartContext.cs" />
     <Compile Include="DBModel\ProductContext.cs" />
     <Compile Include="DBModel\ReviewContext.cs" />
     <Compile Include="DBModel\NewArticleContext.cs" />
     <Compile Include="DBModel\SessionContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
+    <Compile Include="DBModel\WishlistContext.cs" />
     <Compile Include="Interfaces\ISession.cs" />
-    <Compile Include="Migrations\202405272039512_AddImagePathToArticle.cs" />
-    <Compile Include="Migrations\202405272039512_AddImagePathToArticle.Designer.cs">
-      <DependentUpon>202405272039512_AddImagePathToArticle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405291151046_AddImageP.cs" />
-    <Compile Include="Migrations\202405291151046_AddImageP.Designer.cs">
-      <DependentUpon>202405291151046_AddImageP.cs</DependentUpon>
+    <Compile Include="Migrations\202405281417343_listOfProducts29.cs" />
+    <Compile Include="Migrations\202405281417343_listOfProducts29.Designer.cs">
+      <DependentUpon>202405281417343_listOfProducts29.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,11 +130,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202405272039512_AddImagePathToArticle.resx">
-      <DependentUpon>202405272039512_AddImagePathToArticle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405291151046_AddImageP.resx">
-      <DependentUpon>202405291151046_AddImageP.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202405281417343_listOfProducts29.resx">
+      <DependentUpon>202405281417343_listOfProducts29.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

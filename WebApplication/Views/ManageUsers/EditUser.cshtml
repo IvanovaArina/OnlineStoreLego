@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "ManageUsers";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@model WebApplication.Models.UserDataModel
+
+<h3>Edit User id = @Model.UserId </h3>
+
+
+@using (Html.BeginForm("EditUserAction", "ManageUsers", FormMethod.Post))
+{
+
+    <input type="hidden" name="UserId" value="@Model.UserId">
+
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <textarea class="form-control" id="username" name="Username" required>@Model.Username</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <textarea type="text" class="form-control" id="Email" name="Email" required>@Model.Email</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Password">Password</label>
+        <textarea type="text" class="form-control" id="Password" name="Password" required>@Model.Password</textarea>
+    </div>
+
+    @*<div class="form-group">
+        <label for="ConfirmPassword">Confirm Password</label>
+        <textarea type="text" class="form-control" id="ConfirmPassword" name="ConfirmPassword" required>@Model.ConfirmPassword</textarea>
+    </div>*@
+
+    @*<div class="form-group">
+        <label for="KeyCredential">Key Credential</label>
+        <textarea type="text" class="form-control" id="KeyCredential" name="KeyCredential">@Model.KeyCredential</textarea>
+    </div>*@
+
+
+    <button type="submit" class="btn btn-primary">Save changes</button>
+
+}

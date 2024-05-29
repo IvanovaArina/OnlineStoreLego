@@ -82,9 +82,10 @@ namespace WebApplication.Controllers
         {
             ArticleApi articleApi = new ArticleApi();
 
-            if (articleApi.checkIfArticleNumberExistsByNumber(articleDataModel.ArticleNumber))
+            if (articleApi.checkIfArticleNumberExists (articleDataModel.ArticleNumber))
             {
-                ArticleDTO articleDTO = articleApi.getArticleDTObyNumber(articleDataModel.ArticleNumber);
+                int articleId = articleApi.getArticleIdByNumber (articleDataModel.ArticleNumber);
+                ArticleDTO articleDTO = articleApi.getArticleDTObyId(articleId);
                
 
                 return View(articleDataModel.moveDataFromDTOToModel(articleDTO));
