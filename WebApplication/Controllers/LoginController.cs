@@ -91,15 +91,71 @@ namespace WebApplication.Controllers
 
 
         }
-        public ActionResult SignIn()
+
+        //SignUp
+        //use?
+        public ActionResult SignUp()
         {
-            return View(new UserDataModel());
+            return View (new UserDataModel());
+        }
+
+
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        public ActionResult UAccountHome()
+        {
+            return View();
+
+        }
+
+        public ActionResult AdminAccountHome()
+        {
+            return View();
+
+        }
+
+
+        [HttpPost]
+        public ActionResult SignUpUser(UserDataModel userModel)
+        {
+            BaseResponces resp = SignUp(userModel);
+            if (!resp.Status)
+            {
+                ModelState.AddModelError("", resp.StatusMessage);
+                return View("SignUp", userModel);
+            }
+
+
+            return RedirectToAction("LogIn", "Login");
         }
 
         [HttpPost]
-        public ActionResult SignIn(UserDataModel userModel)
+        public ActionResult SignUpAdmin(UserDataModel userModel)
         {
-            var adress = base.Request.UserHostAddress;
+            BaseResponces resp = SignUp(userModel);
+            if (!resp.Status)
+            {
+                ModelState.AddModelError("", resp.StatusMessage);
+                return View("AddUser", "ManageUsers", userModel);
+            }
+
+
+            return RedirectToAction("ManageUsers", "ManageUsers", userModel);
+        }
+
+
+
+
+
+        private BaseResponces SignUp(UserDataModel userModel)
+        {
+            var address = base.Request.UserHostAddress;
 
             URole role = new URole();
 
@@ -126,35 +182,10 @@ namespace WebApplication.Controllers
                 //Wishlist = new WishlistEntity()
             };
 
-
-            BaseResponces resp = _session.RegisterUserActionFlow(udata);
-
-            if (!resp.Status)
-            {
-                ModelState.AddModelError("", resp.StatusMessage);
-                return View(userModel);
-            }
-
-            return RedirectToAction("LogIn", "Login");
-        }
-
-        public ActionResult LogOut()
-        {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
-        }
-
-
-        public ActionResult UAccountHome()
-        {
-            return View();
+            //BaseResponces resp = _session.RegisterUserActionFlow(udata);
+            return _session.RegisterUserActionFlow(udata);
 
         }
 
-        public ActionResult AdminAccountHome()
-        {
-            return View();
-
-        }
     }
 }

@@ -93,7 +93,6 @@
     <Compile Include="Entities\User\CartTable.cs" />
     <Compile Include="Entities\User\Session.cs" />
     <Compile Include="Entities\User\UDbTable.cs" />
-    <Compile Include="Entities\User\USignInData.cs" />
     <Compile Include="Entities\User\WishlistTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -246,6 +246,7 @@
     <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ManageContentController.cs" />
+    <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -337,7 +338,7 @@
     <Content Include="Views\Home\Wishlist.cshtml" />
     <Content Include="Views\Home\Checkout.cshtml" />
     <Content Include="Views\Home\ProductDetail.cshtml" />
-    <Content Include="Views\Login\SignIn.cshtml" />
+    <Content Include="Views\Login\SignUp.cshtml" />
     <Content Include="Views\Home\LogOut.cshtml" />
     <Content Include="Views\Shared\ULayout.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
