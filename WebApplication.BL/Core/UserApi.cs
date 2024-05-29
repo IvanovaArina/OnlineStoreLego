@@ -453,8 +453,8 @@ namespace WebApplication.BL.Core
 
             var user = createNewUserWithHash(userDTO);
             var userDb = Mapper.Map<UDbTable>(user); // Используем AutoMapper для преобразования
-            userDb.Wishlist.User = userDb;
-            userDb.Cart.User = userDb;
+            //userDb.Wishlist.User = userDb;
+            //userDb.Cart.User = userDb;
 
             return addUserToDb(userDb);
         }
