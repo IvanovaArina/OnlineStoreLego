@@ -28,7 +28,7 @@ namespace WebApplication.Controllers
         }
         public ActionResult ManageReview(ReviewModel reviewModel)
         {
-            return View(reviewModel);
+            return RedirectToAction("Index", "Review");
         }
 
         [HttpGet]
