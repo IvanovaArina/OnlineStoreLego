@@ -108,6 +108,14 @@
     <Compile Include="Migrations\202405281417343_listOfProducts29.Designer.cs">
       <DependentUpon>202405281417343_listOfProducts29.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405291933247_aaa.cs" />
+    <Compile Include="Migrations\202405291933247_aaa.Designer.cs">
+      <DependentUpon>202405291933247_aaa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405291939334_UDbTable.cs" />
+    <Compile Include="Migrations\202405291939334_UDbTable.Designer.cs">
+      <DependentUpon>202405291939334_UDbTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionBL.cs" />
@@ -132,6 +140,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202405281417343_listOfProducts29.resx">
       <DependentUpon>202405281417343_listOfProducts29.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405291933247_aaa.resx">
+      <DependentUpon>202405291933247_aaa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405291939334_UDbTable.resx">
+      <DependentUpon>202405291939334_UDbTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

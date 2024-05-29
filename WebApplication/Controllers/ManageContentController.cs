@@ -141,7 +141,7 @@ namespace WebApplication.Controllers
                     else
                     {
                         // Если новое изображение не загружено, сохраняем путь к текущему изображению
-                        ArticleDTO currentArticleDTO = articleApi.getArticleDTObyNumber(articleDataModel.ArticleNumber);
+                        ArticleDTO currentArticleDTO = articleApi.getArticleDTObyId(articleDataModel.ArticleNumber);
                         if (currentArticleDTO != null)
                         {
                             articleDataModel.ImagePath = currentArticleDTO.ImagePath;
