@@ -24,7 +24,7 @@ namespace WebApplication.Controllers
 
         public ActionResult ManageProducts(ProductModel productModel)
         {
-            return View(productModel);
+            return RedirectToAction("Index", "ManageProduct"); ;
         }
         public ActionResult ManageReview(ReviewModel reviewModel)
         {
@@ -46,5 +46,7 @@ namespace WebApplication.Controllers
         {
             return View();
         }
+
+
     }
 }

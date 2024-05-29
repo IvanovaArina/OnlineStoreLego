@@ -38,7 +38,7 @@ namespace WebApplication.Domain.Entities.Admin
         public int Quantity { get; set; }
 
         [Required]
-        public bool isActive { get; set; }
+        public bool IsActive { get; set; }
 
 
         public string ProductDetail { get; set; }
