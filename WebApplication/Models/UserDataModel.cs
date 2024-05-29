@@ -10,7 +10,7 @@ namespace WebApplication.Models
 {
     public class UserDataModel
     {
-        public UserApi userApi;
+        //public UserApi userApi;
 
         public int UserId { get; set; }
         public string Username { get; set; }
@@ -24,13 +24,16 @@ namespace WebApplication.Models
 
         public WishlistTable Wishlist { get; set; }
 
+        public CartTable Cart { get; set; }
+
 
         public UserDataModel() {
-            userApi = new UserApi();
+            //userApi = new UserApi();
         }
 
         public List<UserDTO> dataForTable()
         {
+            var userApi = new UserApi();
             return userApi.getUsersFromDatabase();
         }
 
@@ -46,21 +49,31 @@ namespace WebApplication.Models
                 KeyCredential = this.KeyCredential,
                 Role = this.Role,
                 //UserIp = this.UserIp,
-                Wishlist = this.Wishlist
+                Wishlist = this.Wishlist,
+                Cart = this.Cart
             };
 
             return userDTO;
         }
 
-        //public UserDataModel moveDataFromDTOToModel()
-        //{
-        //    UserDTO userDTO = new UserDTO
-        //    {
+        public UserDataModel moveDataFromDTOToModel(UserDTO userDTO)
+        {
+            UserDataModel userModel = new UserDataModel
+            {
+                UserId = userDTO.UserId,
+                Username = userDTO.Username,
+                Email = userDTO.Email,
+                Password = userDTO.Password,
+                ConfirmPassword = userDTO.ConfirmPassword,
+                KeyCredential = userDTO.KeyCredential,
+                Role = userDTO.Role,
+                //UserIp = userDTO.UserIp,
+                Wishlist = userDTO.Wishlist,
+                Cart = userDTO.Cart
+            };
 
-        //    }
-
-        //    return userDTO;
-        //}
+            return userModel;
+        }
 
     }
 }

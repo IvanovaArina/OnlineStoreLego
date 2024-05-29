@@ -52,14 +52,39 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult EditUser(UserDataModel userDataModel)
         {
-            return View(userDataModel);
+            UserApi userApi = new UserApi();
+
+            if (userApi.checkIfUserIdExists(userDataModel.UserId))
+            {
+                UserDTO userDTO = userApi.getUserDTObyId(userDataModel.UserId);
+                return View(userDataModel.moveDataFromDTOToModel(userDTO));
+            }
+            else
+            {
+                return RedirectToAction("AddUser", "ManageUsers", userDataModel);
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult EditUserAction(UserDataModel userDataModel)
+        {
+            UserDTO userDTO = userDataModel.moveDataFromModelToDTO();
+            UserApi userApi = new UserApi();
+
+            userApi.editUserInDb (userDTO);
+
+            return View("ManageUsers", userDataModel);
         }
 
 
         [HttpPost]
         public ActionResult DeleteUser(UserDataModel userDataModel)
         {
-            return View(userDataModel);
+            UserApi userApi = new UserApi();
+            userApi.deleteUser(userDataModel.UserId);
+
+            return View("ManageUsers", userDataModel);
         }
 
 
@@ -76,19 +101,7 @@ namespace WebApplication.Controllers
 
         }
 
-        [HttpPost]
-        public ActionResult EditUserAction(UserDataModel userDataModel)
-        {
-
-            //ArticleDTO articleDTO = articleDataModel.moveDataFromModelToDTO();
-            //ArticleApi articleApi = new ArticleApi();
-
-            ////обработать Base Answer
-            //articleApi.editArticleInDb(articleDTO);
-
-
-            return View("ManageUsers", userDataModel);
-        }
+       
 
 
 

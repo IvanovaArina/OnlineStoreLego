@@ -196,9 +196,26 @@ namespace WebApplication.BL.Core
         {
             using (var db = new UserContext())
             {
-                var dbArticle = db.Users.FirstOrDefault(x => x.Email == email);
+                var dbUser = db.Users.FirstOrDefault(x => x.Email == email);
 
-                if (dbArticle != null)
+                if (dbUser != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool checkIfUserIdExists (int id)
+        {
+            using (var db = new UserContext())
+            {
+                var dbUser = db.Users.FirstOrDefault(x => x.UserId == id);
+
+                if (dbUser != null)
                 {
                     return true;
                 }
@@ -356,6 +373,8 @@ namespace WebApplication.BL.Core
                 Cart = createCartTable()
 
             };
+
+
         
 
             return user;
@@ -434,6 +453,8 @@ namespace WebApplication.BL.Core
 
             var user = createNewUserWithHash(userDTO);
             var userDb = Mapper.Map<UDbTable>(user); // Используем AutoMapper для преобразования
+            userDb.Wishlist.User = userDb;
+            userDb.Cart.User = userDb;
 
             return addUserToDb(userDb);
         }
@@ -487,7 +508,60 @@ namespace WebApplication.BL.Core
         }
 
 
+        public void editUserInDb (UserDTO userDTO)
+        {
+            using (var context = new UserContext())
+            {
+                 //var userDb = Mapper.Map<UDbTable>(userDTO);
 
+
+                // Находим продукт по его идентификатору (ID)
+                var userDb = context.Users.FirstOrDefault(p => p.UserId == userDTO.UserId);
+
+                if (userDb != null)
+                {
+
+
+                    // Меняем свойства продукта, которые могли поменяться
+                    userDb.Username = userDTO.Username;
+                    userDb.Email = userDTO.Email;
+                    userDb.Password = HashPassword(userDTO.Password);
+                    userDb.ConfirmPassword = userDb.Password;
+
+
+
+                    //Role = userDTO.Role,
+                    ////UserIp = userDTO.UserIp,
+                    //Wishlist = userDTO.Wishlist,
+                    //Cart = userDTO.Cart
+
+
+
+                    // Сохраняем изменения в базе данных
+                    context.SaveChanges();
+                }
+
+            }
+        }
+
+
+        public void deleteUser(int id)
+        {
+            using (var context = new UserContext())
+            {
+                // Найти продукт по его идентификатору 
+                var articleDb = context.Users.FirstOrDefault(p => p.UserId == id);
+
+                if (articleDb != null)
+                {
+                    // Удаляем продукт из контекста данных
+                    context.Users.Remove(articleDb);
+
+                    // Сохраняем изменения в базе данных
+                    context.SaveChanges();
+                }
+            }
+        }
 
     }
 }
