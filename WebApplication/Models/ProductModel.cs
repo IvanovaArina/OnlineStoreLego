@@ -45,7 +45,7 @@ namespace WebApplication.Models
         public ProductModel()
         {
             productApi = new ProductApi();
-            countProducts = 100;
+            //countProducts = 100;
         }
 
         public List<ProductDTO> dataForTable()

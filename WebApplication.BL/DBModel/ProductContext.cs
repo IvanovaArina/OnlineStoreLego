@@ -8,7 +8,7 @@ using WebApplication.Domain.Entities.Admin;
 
 namespace WebApplication.BL.DBModel
 {
-    internal class ProductContext: DbContext
+    public class ProductContext: DbContext
     {
         public ProductContext() : base("WebApp")
         { }

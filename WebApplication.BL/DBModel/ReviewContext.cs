@@ -8,7 +8,7 @@ using WebApplication.Domain.Entities.Admin;
 
 namespace WebApplication.BL.DBModel
 {
-    internal class ReviewContext : DbContext
+    public class ReviewContext : DbContext
     {
         public ReviewContext() : base("WebApp")
         { }

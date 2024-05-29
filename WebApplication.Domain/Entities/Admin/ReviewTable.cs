@@ -25,17 +25,17 @@ namespace WebApplication.Domain.Entities.Admin
         [Required]
         public string Text { get; set; }
 
-        // Foreign Key for User
-        public int UserId { get; set; }
+        //// Foreign Key for User
+        //public int UserId { get; set; }
 
-        [ForeignKey("UserId")]
-        public UDbTable User { get; set; }
+        //[ForeignKey("UserId")]
+        //public UDbTable User { get; set; }
 
-        // Foreign Key for Product
-        public int ProductId { get; set; }
+        //// Foreign Key for Product
+        //public int ProductId { get; set; }
 
-        [ForeignKey("ProductId")]
-        public ProductTable Product { get; set; }
+        //[ForeignKey("ProductId")]
+        //public ProductTable Product { get; set; }
 
 
     }

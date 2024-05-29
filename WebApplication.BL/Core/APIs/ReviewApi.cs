@@ -28,8 +28,8 @@ namespace WebApplication.BL.Core
                         Approved = dbProduct.Approved,
                         Rating = dbProduct.Rating,
                         Text = dbProduct.Text,
-                        User = dbProduct.User,
-                        Product = dbProduct.Product,
+                        //User = dbProduct.User,
+                        //Product = dbProduct.Product,
 
                     };
                 }
@@ -49,9 +49,9 @@ namespace WebApplication.BL.Core
                                     .Select(x => new ReviewDTO
                                     {
                                         ReviewId = x.ReviewId,
-                                        Product = x.Product,
+                                        //Product = x.Product,
                                         Approved = x.Approved,
-                                        User = x.User,
+                                        //User = x.User,
                                         Rating = x.Rating,
                                         Text = x.Text
                                     })
@@ -73,9 +73,9 @@ namespace WebApplication.BL.Core
                                     .Select(x => new ReviewDTO
                                     {
                                         ReviewId = x.ReviewId,
-                                        Product = x.Product,
+                                        //Product = x.Product,
                                         Approved = x.Approved,
-                                        User = x.User,
+                                        //User = x.User,
                                         Rating = x.Rating,
                                         Text = x.Text
                                     })
@@ -88,7 +88,6 @@ namespace WebApplication.BL.Core
         public List<ReviewDTO> getAllReviewsFromDatabase()
         {
             List<ReviewDTO> listOfReviewDTO = new List<ReviewDTO>();
-
 
             List<int> reviewIds = new List<int>();
 

@@ -100,25 +100,25 @@
                 });
             });
 
-            $('.edit-btn').on('click', function () {
-                // Edit button functionality
-                alert('Edit button clicked');
-            });
+            //$('.edit-btn').on('click', function () {
+            //    // Edit button functionality
+            //    alert('Edit button clicked');
+            //});
 
-            $('.delete-btn').on('click', function () {
-                // Delete button functionality
-                if (confirm('Are you sure you want to delete this product?')) {
-                    $(this).closest('tr').remove();
-                }
-            });
+            //$('.delete-btn').on('click', function () {
+            //    // Delete button functionality
+            //    if (confirm('Are you sure you want to delete this product?')) {
+            //        $(this).closest('tr').remove();
+            //    }
+            //});
 
-            $('.active-checkbox').on('change', function () {
-                // Active checkbox functionality
-                var isActive = $(this).is(':checked');
-                var productName = $(this).closest('tr').find('td:eq(1)').text();
-                alert('Product ' + productName + ' is now ' + (isActive ? 'active' : 'inactive'));
-                // Here you can add an AJAX call to update the product status in the database
-            });
+            //$('.active-checkbox').on('change', function () {
+            //    // Active checkbox functionality
+            //    var isActive = $(this).is(':checked');
+            //    var productName = $(this).closest('tr').find('td:eq(1)').text();
+            //    alert('Product ' + productName + ' is now ' + (isActive ? 'active' : 'inactive'));
+            //    // Here you can add an AJAX call to update the product status in the database
+            //});
 
             $('#addProductBtn').on('click', function () {
                 // Redirect to CreateProduct page
