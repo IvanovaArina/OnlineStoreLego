@@ -55,20 +55,6 @@ namespace WebApplication.BL.Core
         }
 
 
-        /*  public Tuple<int, string, string, string> getDataFromDatabase()
-          {
-
-          }*/
-
-
-        //public Tuple<int, string, string, string> fromArticleDTOtoTuple(ArticleDTO articleDTO)
-        //{
-        //    Tuple<int, string, string, string> tuple = new Tuple<int, string, string, string>();
-
-        //    tuple.Create()
-
-        //}
-
         public List<ArticleDTO> getArticlesFromDatabase()
         {
             List<ArticleDTO> listOfArticleDTO = new List<ArticleDTO>();
@@ -182,31 +168,6 @@ namespace WebApplication.BL.Core
                 return false;
             }
         }
-
-        //private void editItemInDb(ArticleDTO articleDTO)
-        //{
-        //    using (var context = new NewArticleContext())
-        //    {
-        //        // Находим продукт по его идентификатору (ID)
-        //        var articleDb = context.Articles.FirstOrDefault(p => p.ArticleNumber == articleDTO.ArticleNumber);
-
-        //        if (articleDb != null)
-        //        {
-        //            // Меняем свойства продукта
-        //            articleDb.ArticleNumber = articleDTO.ArticleNumber;
-        //            articleDb.ArticleName = articleDTO.ArticleName;
-        //            articleDb.Category = articleDTO.Category;
-        //            articleDb.AuthorName = articleDTO.AuthorName;
-        //            articleDb.TextOfArticle = articleDTO.TextOfArticle;
-        //            articleDb.ImagePath = articleDTO.ImagePath;
-
-
-        //            // Сохраняем изменения в базе данных
-        //            context.SaveChanges();
-        //        }
-
-        //    }
-        //}
 
         public void editArticleInDb(ArticleDTO articleDTO)
         {
