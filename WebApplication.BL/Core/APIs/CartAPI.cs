@@ -45,8 +45,9 @@ namespace WebApplication.BL.Core.APIs
                 Category = "Category",
                 SellCategory = "SellCategory",
                 Quantity = 500,
-                IsActive = true
-            };
+                IsActive = true,
+                ImagePath = "ImagePath"
+                };
 
             var prod2 = new ProductTable
             {
@@ -57,7 +58,8 @@ namespace WebApplication.BL.Core.APIs
                 Category = "Category2",
                 SellCategory = "SellCategory2",
                 Quantity = 5002,
-                IsActive = false
+                IsActive = false,
+                ImagePath = "ImagePath"
             };
 
             Cart = new CartTable

@@ -47,7 +47,8 @@ namespace WebApplication.BL.Core
                         Category = "Category",
                         SellCategory = "SellCategory",
                         Quantity = 500,
-                        IsActive = true
+                        IsActive = true,
+                        ImagePath = "ImagePath"
                         },
                         new ProductTable { ProductNumber = 2,
                         ProductName = "ProductName2",
@@ -56,7 +57,8 @@ namespace WebApplication.BL.Core
                         Category = "Category2",
                         SellCategory = "SellCategory2",
                         Quantity = 5002,
-                        IsActive = false
+                        IsActive = false,
+                        ImagePath = "ImagePath"
                         },
                    }
                 };
