@@ -3,10 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Admin Panel Toy Store</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        /* Стили для панели навигации */
+        .navbar {
+            background-color: #333;
+            padding: 10px;
+        }
+
+        /* Стили для кнопок навигации */
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Стили для ссылок меню */
+        .menu-link {
+            color: black;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            /* Стили при наведении курсора на ссылку */
+            .menu-link:hover {
+                background-color: #555;
+                color: white;
+            }
+
         body {
             display: flex;
             min-height: 100vh;
@@ -119,13 +147,7 @@
         <div class="navbar">
             <div class="nav-buttons">
                 @Html.ActionLink("Home", "HomeAdmin2", "HomeAdmin", new { area = "" }, new { @class = "menu-link" })
-                <div class="user-dropdown">
-                    <img src="https://via.placeholder.com/40" alt="Admin" class="rounded-circle">
-                    <div class="user-dropdown-content">
-                        @Html.ActionLink("Account settings", "Settings", "Account", new { @class = "dropdown-item" })
-                        @Html.ActionLink("Log out", "LogOut", "Login", new { area = "" }, new { @class = "menu-link" })
-                    </div>
-                </div>
+                @Html.ActionLink("Log out", "LogOut", "Login", new { area = "" }, new { @class = "menu-link" })
             </div>
         </div>
         <div class="container-fluid">

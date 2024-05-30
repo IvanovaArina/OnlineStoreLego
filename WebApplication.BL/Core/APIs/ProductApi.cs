@@ -151,7 +151,7 @@ namespace WebApplication.BL.Core
                     productDb.Category = productDTO.Category;
                     productDb.SellCategory = productDTO.SellCategory;
                     productDb.Quantity = productDTO.Quantity;
-                    productDb.ProductDetail = productDb.ProductDetail;
+                    productDb.ProductDetail = productDTO.ProductDetail;
                     productDb.IsActive = productDTO.IsActive;
 
                     // Сохраняем изменения в базе данных
