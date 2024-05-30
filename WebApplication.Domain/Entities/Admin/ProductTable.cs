@@ -43,7 +43,8 @@ namespace WebApplication.Domain.Entities.Admin
 
         public string ProductDetail { get; set; }
 
-
+        [Required]
+        public string ImagePath { get; set; }
 
         //// Внешний ключ
         //public int WishlistId { get; set; }

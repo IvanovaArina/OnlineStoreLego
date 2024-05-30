@@ -45,7 +45,8 @@ namespace WebApplication.BL.Core
                         SellCategory = dbProduct.SellCategory,
                         Quantity = dbProduct.Quantity,
                         ProductDetail = dbProduct.ProductDetail,
-                        IsActive = dbProduct.IsActive
+                        IsActive = dbProduct.IsActive,
+                        ImagePath = dbProduct.ImagePath
                     };
                 }
             }
@@ -134,7 +135,7 @@ namespace WebApplication.BL.Core
 
         }
 
-        private void editItemInDb(ProductDTO productDTO)
+        public bool editItemInDb(ProductDTO productDTO)
         {
             using (var context = new ProductContext())
             {
@@ -153,10 +154,13 @@ namespace WebApplication.BL.Core
                     productDb.Quantity = productDTO.Quantity;
                     productDb.ProductDetail = productDb.ProductDetail;
                     productDb.IsActive = productDTO.IsActive;
+                    productDb.ImagePath = productDTO.ImagePath;
 
                     // Сохраняем изменения в базе данных
                     context.SaveChanges();
+                    return true; // Обновление прошло успешно
                 }
+                return false; // Продукт не найден
 
             }
         }

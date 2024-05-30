@@ -1,73 +1,83 @@
-﻿
+﻿@model WebApplication.Models.ProductModel
+
 @{
-    ViewBag.Title = "EditProduct";
+    ViewBag.Title = "Edit Product";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
+<h2>Edit Product</h2>
 
-@{
-    ViewBag.Title = "EditProductView";
-    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
-}
-
-@model WebApplication.Models.ProductModel
-
-<h3>Edit Product # @Model.ProductNumber</h3>
-
-
-@using (Html.BeginForm("EditProductAction", "ManageProduct", FormMethod.Post))
+@using (Html.BeginForm("EditProductAction", "ManageProduct", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
-    <input type="hidden" name="ProductNumber" value="@Model.ProductNumber">
+    @Html.HiddenFor(model => model.ProductNumber)
+    @Html.HiddenFor(model => model.ImagePath) <!-- Скрытое поле для текущего изображения -->
 
     <div class="form-group">
-        <label for="ProductName">Name</label>
-
-        <textarea class="form-control" id="ProductName" name="ProductName" required>@Model.ProductName</textarea>
-
+        @Html.LabelFor(model => model.ProductName)
+        @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
-        <label for="Price">Price</label>
-        <textarea class="form-control" id="Price" name="Price" required>@Model.Price</textarea>
+        @Html.LabelFor(model => model.Category)
+        @Html.TextBoxFor(model => model.Category, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
-        <label for="CategoryByAge">Category By Age</label>
-        <textarea class="form-control" id="CategoryByAge" name="CategoryByAge" required>@Model.CategoryByAge</textarea>
+        @Html.LabelFor(model => model.Price)
+        @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
-        <label for="Category">Category</label>
-        <textarea class="form-control" id="Category" name="Category" required>@Model.Category</textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="SellCategory">Sell Category</label>
-        <textarea class="form-control" id="SellCategory" name="SellCategory" required>@Model.SellCategory</textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="Quantity">Quantity</label>
-        <textarea class="form-control" id="Quantity" name="Quantity" rows="5" required>@Model.Quantity</textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="Quantity">ProductDetail</label>
-        <textarea class="form-control" id="ProductDetail" name="ProductDetail" rows="5" required>@Model.ProductDetail</textarea>
-    </div>
-
-    <div class="form-group">
+        <label>Product Image</label>
         <div class="form-check">
-            <input type="checkbox" class="form-check-input active-checkbox" id="IsActive" name="IsActive" @(Model.IsActive ? "checked" : "")>
-            <label class="form-check-label" for="IsActive">Active</label>
+            <input class="form-check-input" type="radio" name="ImageOption" id="currentImage" value="current" checked />
+            <label class="form-check-label" for="currentImage">Keep current image</label>
+        </div>
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <div id="currentImageContainer" class="mb-3">
+                <img src="@Url.Content(Model.ImagePath)" alt="Product Image" style="max-width: 200px; height: auto;" />
+            </div>
+        }
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="ImageOption" id="newImage" value="new" />
+            <label class="form-check-label" for="newImage">Upload new image</label>
+        </div>
+        <div id="newImageContainer" class="form-group d-none">
+            <input type="file" id="ProductImage" name="ProductImage" class="form-control-file" />
         </div>
     </div>
 
-
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsActive)
+        @Html.CheckBoxFor(model => model.IsActive)
+    </div>
 
     <button type="submit" class="btn btn-primary">Save changes</button>
+    @Html.ActionLink("Cancel", "ManageProduct", null, new { @class = "btn btn-secondary ml-2" })
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 }
 
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentImageRadio = document.getElementById('currentImage');
+            var newImageRadio = document.getElementById('newImage');
+            var newImageContainer = document.getElementById('newImageContainer');
 
+            currentImageRadio.addEventListener('change', function () {
+                if (currentImageRadio.checked) {
+                    newImageContainer.classList.add('d-none');
+                }
+            });
 
+            newImageRadio.addEventListener('change', function () {
+                if (newImageRadio.checked) {
+                    newImageContainer.classList.remove('d-none');
+                }
+            });
+        });
+    </script>
+}

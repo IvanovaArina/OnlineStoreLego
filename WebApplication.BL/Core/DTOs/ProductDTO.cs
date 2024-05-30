@@ -29,6 +29,7 @@ namespace WebApplication.BL.Core
 
         public string ProductDetail { get; set; }
         public bool IsActive { get; set; }
+        public string ImagePath { get; set; }
 
 
 
