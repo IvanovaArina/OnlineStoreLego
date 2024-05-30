@@ -88,9 +88,11 @@
   <ItemGroup>
     <Compile Include="AutoMapperProfile.cs" />
     <Compile Include="BusinessLogic.cs" />
-    <Compile Include="Core\APIs\CartAPI.cs" />
+    <Compile Include="Core\APIs\CartApi.cs" />
+    <Compile Include="Core\APIs\OrderApi.cs" />
     <Compile Include="Core\APIs\ProductApi.cs" />
     <Compile Include="Core\DTOs\CartDTO.cs" />
+    <Compile Include="Core\DTOs\OrderDTO.cs" />
     <Compile Include="Core\DTOs\ProductDTO.cs" />
     <Compile Include="Core\APIs\ReviewApi.cs" />
     <Compile Include="Core\DTOs\ReviewDTO.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Core\APIs\WishlistApi.cs" />
     <Compile Include="Core\DTOs\WishlistDTO.cs" />
     <Compile Include="DBModel\CartContext.cs" />
+    <Compile Include="DBModel\OrderContext.cs" />
     <Compile Include="DBModel\ProductContext.cs" />
     <Compile Include="DBModel\ReviewContext.cs" />
     <Compile Include="DBModel\NewArticleContext.cs" />
@@ -115,10 +118,6 @@
     <Compile Include="Migrations\202405291933247_aaa.cs" />
     <Compile Include="Migrations\202405291933247_aaa.Designer.cs">
       <DependentUpon>202405291933247_aaa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405291939334_UDbTable.cs" />
-    <Compile Include="Migrations\202405291939334_UDbTable.Designer.cs">
-      <DependentUpon>202405291939334_UDbTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,9 +146,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405291933247_aaa.resx">
       <DependentUpon>202405291933247_aaa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405291939334_UDbTable.resx">
-      <DependentUpon>202405291939334_UDbTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

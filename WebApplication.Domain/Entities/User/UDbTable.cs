@@ -52,7 +52,20 @@ namespace WebApplication.Domain.Entities.User
         [ForeignKey("CartId")]
         public CartTable Cart { get; set; }
 
+        //// Внешний ключ
+        //public List<int> OrderIds { get; set; }
 
+        //// Внешний ключ
+        //public int OrderId { get; set; }
+
+        //// Навигационное свойство
+        //[ForeignKey("OrderId")]
+        //public OrderTable Order { get; set; }
+
+
+
+        // Список заказов (если один пользователь может иметь несколько заказов)
+        public virtual ICollection<OrderTable> Orders { get; set; }
 
     }
 }
