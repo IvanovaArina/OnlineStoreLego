@@ -35,7 +35,7 @@
             </thead>
             <tbody id="reviewTable">
                 @{
-                    var pendingReviewTable = Model.reviewForTable();
+                    var pendingReviewTable = Model.pendingReviewForTable();
 
                     foreach (var item in pendingReviewTable)
                     {
@@ -81,7 +81,7 @@
             <tbody id="deleteReviewTable">
                 @{
 
-                    var approvedReviewTable = Model.reviewForTable();
+                    var approvedReviewTable = Model.approvedReviewForTable();
 
                     foreach (var item in approvedReviewTable)
                     {
@@ -112,9 +112,7 @@
             </tbody>
         </table>
 
-        <div class="text-left">
-            <button class="btn btn-danger btn-lg" id="addReviewBtn">Add Review</button>
-        </div>
+       
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

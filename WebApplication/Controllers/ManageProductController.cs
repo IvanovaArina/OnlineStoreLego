@@ -238,5 +238,10 @@ namespace WebApplication.Controllers
         {
             return RedirectToAction("ViewOrders", "Admin");
         }
+
+        public ActionResult ManageContent()
+        {
+            return RedirectToAction("ManageContent", "ManageContent");
+        }
     }
 }

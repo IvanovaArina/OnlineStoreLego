@@ -21,7 +21,8 @@ using System.Security.Cryptography;
 using WebApplication.Domain.Entities.Admin;
 using ProductTable = WebApplication.Domain.Entities.Admin.ProductTable;
 using System.Web.UI.WebControls.WebParts;
-//using WebApplication.BL.Migrations;
+using WebApplication.BL.Migrations;
+using WebApplication.BL.Core.APIs;
 
 namespace WebApplication.BL.Core
 {
@@ -132,20 +133,6 @@ namespace WebApplication.BL.Core
             return role;
         }
 
-        //public URole defineRoleByKeyCredential(string KeyCredential)
-        //{
-        //    URole role = new URole();
-        //    if (KeyCredential == "cisco1234")
-        //    {
-        //        role = URole.Admin;
-        //    }
-        //    else
-        //    {
-        //        role = URole.User;
-        //    }
-
-        //    return role;
-        //}
 
         public List<UserDTO> getUsersFromDatabase()
         {
@@ -226,33 +213,6 @@ namespace WebApplication.BL.Core
             }
         }
 
-        //private void saveChanges(UDbTable userDb)
-        //{
-        //    using (var db = new UserContext())
-        //    {
-        //        db.Users.Add(userDb);
-        //        try
-        //        {
-        //            // Попытка сохранить изменения в базе данных
-        //            db.SaveChanges();
-        //        }
-        //        catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-        //        {
-        //            foreach (var validationErrors in dbEx.EntityValidationErrors)
-        //            {
-        //                foreach (var validationError in validationErrors.ValidationErrors)
-        //                {
-        //                    Trace.TraceInformation("Property: {0} Error: {1}",
-        //                                            validationError.PropertyName,
-        //                                            validationError.ErrorMessage);
-        //                }
-        //            }
-        //            // Здесь можно выбросить более общее исключение или обработать ошибку
-        //            throw; // Перебрасывает исключение дальше
-        //        }
-        //    }
-        //}
-
         public BaseResponces addUserToDb(UDbTable userDb)
         {
             using (var db = new UserContext())
@@ -282,81 +242,19 @@ namespace WebApplication.BL.Core
             return new BaseResponces { Status = true };
         }
 
-        public CartTable createCartTable()
-        {
-            var prod1 = new ProductTable
-            {
-                ProductNumber = 33,
-                ProductName = "ProductName",
-                Price = 20,
-                CategoryByAge = "CategoryByAge",
-                Category = "Category",
-                SellCategory = "SellCategory",
-                Quantity = 500,
-                IsActive = true
-            };
+       
 
-            var prod2 = new ProductTable
-            {
-                ProductNumber = 44,
-                ProductName = "ProductName2",
-                Price = 202,
-                CategoryByAge = "CategoryByAge2",
-                Category = "Category2",
-                SellCategory = "SellCategory2",
-                Quantity = 5002,
-                IsActive = false
-            };
+       
 
-            CartTable Cart = new CartTable
-            {
-                testCart = 55,
-
-                Products = new Dictionary<ProductTable, int>
-                    {
-                        { prod1 , 35 },
-                        {prod2 , 85 },
-                }
-            };
-
-            return Cart;
-        }
-
-        public WishlistTable createWishlistTable()
-        {
-            WishlistTable Wishlist = new WishlistTable
-            {
-                test = 2,
-                //wishlistEntity = new List<int>()
-                Products = new List<ProductTable>
-                    {
-                        new ProductTable { ProductNumber = 1,
-                        ProductName = "ProductName",
-                        Price = 20,
-                        CategoryByAge = "CategoryByAge",
-                        Category = "Category",
-                        SellCategory = "SellCategory",
-                        Quantity = 500,
-                        IsActive = true
-                        },
-                        new ProductTable { ProductNumber = 2,
-                        ProductName = "ProductName2",
-                        Price = 202,
-                        CategoryByAge = "CategoryByAge2",
-                        Category = "Category2",
-                        SellCategory = "SellCategory2",
-                        Quantity = 5002,
-                        IsActive = false
-                        },
-
-                    }
-            };
-            return Wishlist;
-        }
+       
 
         public UserDTO createNewUserWithHash(UserDTO userDTO)
         {
             string hashedPassword = HashPassword(userDTO.Password);
+
+            var wishlistApi = new WishlistApi();
+            var cartApi = new CartApi();
+            //var orderApi = new OrderApi();
 
             var user = new UserDTO
             {
@@ -368,29 +266,16 @@ namespace WebApplication.BL.Core
                 KeyCredential = userDTO.KeyCredential,
                 Role = userDTO.Role,
 
-                Wishlist = createWishlistTable(),
-
-                Cart = createCartTable()
+                Wishlist = wishlistApi.createWishlistTable(),
+                Cart = cartApi.createCartTable(),
+                //Order = orderApi.createOrderTable()
 
             };
-
-
-
 
             return user;
         }
 
 
-        //----------------------
-
-
-        //public bool UsersExist()
-        //{
-        //    using (var db = new UserContext())
-        //    {
-        //        return db.Users.Any();
-        //    }
-        //}
 
         internal BaseResponces CheckUserCredential(UserDTO userDTO)
         {
@@ -456,10 +341,13 @@ namespace WebApplication.BL.Core
             //userDb.Wishlist.User = userDb;
             //userDb.Cart.User = userDb;
 
-            return addUserToDb(userDb);
+            addUserToDb(userDb);
+            OrderApi api = new OrderApi();
+            api.createOrderTable(userDb.UserId);
+
+            return new BaseResponces { Status = true, StatusMessage = "ok" };
+
         }
-
-
 
 
 
@@ -544,40 +432,7 @@ namespace WebApplication.BL.Core
             }
         }
 
-        public void deleteWishlist(int wishlistId)
-        {
-            using (var context = new WishlistContext())
-            {
-                var wishlistDb = context.Wishlists.FirstOrDefault(p => p.wishlistId == wishlistId);
-
-                if (wishlistDb != null)
-                {
-                    context.Wishlists.Remove(wishlistDb);
-
-                    // Сохраняем изменения в базе данных
-                    context.SaveChanges();
-                }
-            }
-        }
-
-        public void deleteCart(int cartId)
-        {
-            using (var context = new CartContext())
-            {
-                var cartDb = context.Carts.FirstOrDefault(p => p.cartId == cartId);
-
-                if (cartDb != null)
-                {
-                    context.Carts.Remove(cartDb);
-
-                    // Сохраняем изменения в базе данных
-                    context.SaveChanges();
-                }
-            }
-        }
-
-
-
+      
         public void deleteUser(int id)
         {
             using (var context = new UserContext())
@@ -590,15 +445,16 @@ namespace WebApplication.BL.Core
                     int wishlistId = userDb.WishlistId;
                     int cartId = userDb.CartId;
 
-
                     // Удаляем продукт из контекста данных
                     context.Users.Remove(userDb);
 
                     // Сохраняем изменения в базе данных
                     context.SaveChanges();
 
-                    deleteWishlist(wishlistId);
-                    deleteCart(cartId);
+                    var wishlistApi = new WishlistApi();
+                    wishlistApi.deleteWishlist(wishlistId);
+                    var cartApi = new CartApi();
+                    cartApi.deleteCart(cartId);
 
                     
                 }

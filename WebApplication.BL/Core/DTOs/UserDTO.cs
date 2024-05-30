@@ -22,6 +22,7 @@ namespace WebApplication.BL.Core
         public WishlistTable Wishlist { get; set; }
 
         public CartTable Cart { get; set; }
+        public OrderTable Order { get; set; }
 
 
 
