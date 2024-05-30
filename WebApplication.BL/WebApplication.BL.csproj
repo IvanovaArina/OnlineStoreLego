@@ -108,14 +108,6 @@
     <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="DBModel\WishlistContext.cs" />
     <Compile Include="Interfaces\ISession.cs" />
-    <Compile Include="Migrations\202405281417343_listOfProducts29.cs" />
-    <Compile Include="Migrations\202405281417343_listOfProducts29.Designer.cs">
-      <DependentUpon>202405281417343_listOfProducts29.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405292314481_User.cs" />
-    <Compile Include="Migrations\202405292314481_User.Designer.cs">
-      <DependentUpon>202405292314481_User.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionBL.cs" />
@@ -136,14 +128,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202405281417343_listOfProducts29.resx">
-      <DependentUpon>202405281417343_listOfProducts29.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405292314481_User.resx">
-      <DependentUpon>202405292314481_User.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
