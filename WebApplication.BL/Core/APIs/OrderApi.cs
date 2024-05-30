@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,42 +19,42 @@ namespace WebApplication.BL.Core.APIs
             {
 
                 var prod1 = new ProductTable
-            {
-                ProductNumber = 33,
-                ProductName = "33",
-                Price = 200,
-                CategoryByAge = "CategoryByAge",
-                Category = "Category",
-                SellCategory = "SellCategory",
-                Quantity = 50,
-                IsActive = true
-            };
+                {
+                    ProductNumber = 33,
+                    ProductName = "33",
+                    Price = 200,
+                    CategoryByAge = "CategoryByAge",
+                    Category = "Category",
+                    SellCategory = "SellCategory",
+                    Quantity = 50,
+                    IsActive = true
+                };
 
-            var prod2 = new ProductTable
-            {
-                ProductNumber = 66,
-                ProductName = "66",
-                Price = 66,
-                CategoryByAge = "CategoryByAge2",
-                Category = "Category2",
-                SellCategory = "SellCategory2",
-                Quantity = 5002,
-                IsActive = false
-            };
+                var prod2 = new ProductTable
+                {
+                    ProductNumber = 66,
+                    ProductName = "66",
+                    Price = 66,
+                    CategoryByAge = "CategoryByAge2",
+                    Category = "Category2",
+                    SellCategory = "SellCategory2",
+                    Quantity = 5002,
+                    IsActive = false
+                };
 
-            Order = new OrderTable
-            {
-                testOrder = 88,
+                Order = new OrderTable
+                {
+                    testOrder = 88,
 
-                Products = new Dictionary<ProductTable, int>
+                    Products = new Dictionary<ProductTable, int>
                     {
                         { prod1 , 90 },
                         {prod2 , 89 },
                 },
 
-                UserId = id
-            };
-                
+                    UserId = id
+                };
+
 
                 context.Orders.Add(Order);
                 context.SaveChanges();
@@ -77,7 +77,7 @@ namespace WebApplication.BL.Core.APIs
 
         //    return new BaseResponces { Status = false, StatusMessage = "Didn't add" };
         //    return new BaseResponces { Status = true, StatusMessage = "added" };
-        
+
         //}
 
 
