@@ -41,6 +41,7 @@ namespace WebApplication.Models
         public string ProductDetail { get; set; }
 
         public bool IsActive { get; set; }
+        public string ImagePath { get; set; }
 
         public ProductModel()
         {
@@ -66,6 +67,7 @@ namespace WebApplication.Models
             productDTO.Quantity = this.Quantity;
             productDTO.ProductDetail = this.ProductDetail;
             productDTO.IsActive = this.IsActive;
+            productDTO.ImagePath = this.ImagePath;
 
             return productDTO;
         }
@@ -83,6 +85,7 @@ namespace WebApplication.Models
             productDataModel.Quantity = productDTO.Quantity;
             productDataModel.ProductDetail = productDTO.ProductDetail;
             productDataModel.IsActive = productDTO.IsActive;
+            productDataModel.ImagePath = productDTO.ImagePath;
 
             return productDataModel;
         }

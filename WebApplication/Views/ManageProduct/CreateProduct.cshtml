@@ -70,6 +70,12 @@
         <label class="form-check-label" for="isActive">Is Active</label>
     </div>
 
+    <div class="form-group">
+        <label for="articleImage">Image</label>
+        <input type="file" class="form-control-file" id="ProductImage" name="ProductImage">
+        @Html.ValidationMessage("ProductImage", "", new { @class = "text-danger" })
+    </div>
+
     <button type="submit" class="btn btn-primary">Save</button>
     <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index", "Products")'">Cancel</button>
 }

@@ -28,6 +28,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Image</th>
                     <th>Category</th>
                     <th>Price</th>
                     <th>Active</th>
@@ -43,14 +44,24 @@
                     {
                         if (item != null)
                         {
-                            <tr>
-                                <td>@item.ProductNumber</td>
-                                <td>@item.ProductName</td>
-                                <td>@item.Category</td>
-                                <td>@item.Price</td>
-                                <td><input type="checkbox" class="active-checkbox" @(item.IsActive ? "checked" : "") disabled></td>
+                                <tr>
+                                    <td>@item.ProductNumber</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                                        {
+                                            <img src="@Url.Content(item.ImagePath)" alt="Product Image" style="max-width: 100px; height: auto;" />
+                                        }
+                                        else
+                                        {
+                                            <span>No image</span>
+                                        }
+                                    </td> <!-- Колонка изображения -->
+                                    <td>@item.ProductName</td>
+                                    <td>@item.Category</td>
+                                    <td>@item.Price</td>
+                                    <td><input type="checkbox" class="active-checkbox" @(item.IsActive ? "checked" : "")></td>
 
-                            </tr>
+                                </tr>
                         }
 
                     }
