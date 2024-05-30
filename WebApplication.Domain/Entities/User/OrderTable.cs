@@ -17,11 +17,11 @@ namespace WebApplication.Domain.Entities.User
 
         public int testOrder { get; set; }
 
-        //// Внешний ключ на пользователя
-        //public int UserId { get; set; }
+        // Внешний ключ на пользователя
+        public int UserId { get; set; }
 
-        //[ForeignKey("UserId")]
-        //public virtual UDbTable User { get; set; }
+        [ForeignKey("UserId")]
+        public virtual UDbTable User { get; set; }
 
 
         // Навигационное свойство

@@ -12,7 +12,7 @@ namespace WebApplication.BL.Core.APIs
 {
     public class OrderApi
     {
-        public OrderTable createOrderTable()
+        public OrderTable createOrderTable(int id)
         {
             OrderTable Order = null;
             using (var context = new OrderContext())
@@ -50,8 +50,11 @@ namespace WebApplication.BL.Core.APIs
                     {
                         { prod1 , 90 },
                         {prod2 , 89 },
-                }
+                },
+
+                UserId = id
             };
+                
 
                 context.Orders.Add(Order);
                 context.SaveChanges();

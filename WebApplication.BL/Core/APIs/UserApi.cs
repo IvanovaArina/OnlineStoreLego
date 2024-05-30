@@ -254,7 +254,7 @@ namespace WebApplication.BL.Core
 
             var wishlistApi = new WishlistApi();
             var cartApi = new CartApi();
-            var orderApi = new OrderApi();
+            //var orderApi = new OrderApi();
 
             var user = new UserDTO
             {
@@ -268,7 +268,7 @@ namespace WebApplication.BL.Core
 
                 Wishlist = wishlistApi.createWishlistTable(),
                 Cart = cartApi.createCartTable(),
-                Order = orderApi.createOrderTable()
+                //Order = orderApi.createOrderTable()
 
             };
 
@@ -341,12 +341,13 @@ namespace WebApplication.BL.Core
             //userDb.Wishlist.User = userDb;
             //userDb.Cart.User = userDb;
 
+            addUserToDb(userDb);
+            OrderApi api = new OrderApi();
+            api.createOrderTable(userDb.UserId);
 
+            return new BaseResponces { Status = true, StatusMessage = "ok" };
 
-            return addUserToDb(userDb);
         }
-
-
 
 
 
