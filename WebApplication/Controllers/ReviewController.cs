@@ -55,6 +55,11 @@ namespace WebApplication.Controllers
             return RedirectToAction("ManageReview", "Admin", reviewModel);
         }
 
+        public ActionResult ManageContent(ReviewModel reviewModel)
+        {
+            return RedirectToAction("ManageContent", "ManageContent", reviewModel);
+        }
+
         public ActionResult ViewOrders()
         {
             return RedirectToAction("ViewOrders", "Admin");

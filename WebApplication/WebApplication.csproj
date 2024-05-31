@@ -374,7 +374,6 @@
     <Content Include="Views\HomeUser\ProductDetail.cshtml" />
     <Content Include="Views\ManageUsers\AddUser.cshtml" />
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
-    <Content Include="Views\ManageUsers\DeleteUser.cshtml" />
     <Content Include="Views\ManageProduct\Index.cshtml" />
     <Content Include="Views\ManageProduct\EditProduct.cshtml" />
     <Content Include="Views\ManageProduct\CreateProduct.cshtml" />

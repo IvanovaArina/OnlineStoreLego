@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/LayoutUsers.cshtml";
 }
 
+@model WebApplication.Models.UserDataModel
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,25 +17,30 @@
 <body>
     <div class="container mt-5">
         <h2 class="mb-4">Edit User Information</h2>
-        <form>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter your name">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your email">
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="text" class="form-control" id="phone" placeholder="Enter your phone number">
-            </div>
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="Enter your address">
-            </div>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-        </form>
+
+        @using (Html.BeginForm("EditUserAction", "Users", FormMethod.Post))
+        {
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <textarea type="text" class="form-control" id="name" name="Username" placeholder="Enter your name">@*@Model.Username*@</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <textarea type="email" class="form-control" id="email" placeholder="Enter your email">@*@Model.Email*@</textarea>
+                </div>
+                @*<div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <textarea type="text" class="form-control" id="phone" placeholder="Enter your phone number">@Model.</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="Enter your address"></textarea>
+                </div>*@
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+
+        }
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
