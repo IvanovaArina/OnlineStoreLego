@@ -22,7 +22,7 @@ namespace WebApplication.Controllers
             return RedirectToAction("ManageUsers", "ManageUsers");
         }
 
-        public ActionResult ManageProducts(ProductModel productModel)
+        public ActionResult ManageProduct(ProductModel productModel)
         {
             return RedirectToAction("Index", "ManageProduct"); ;
         }
@@ -42,10 +42,10 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public ActionResult CreateProduct()
-        {
-            return View();
-        }
+        //public ActionResult CreateProduct()
+        //{
+        //    return View();
+        //}
 
 
     }

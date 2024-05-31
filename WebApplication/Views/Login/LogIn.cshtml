@@ -36,7 +36,7 @@
             <nav class="navbar navbar-expand-lg p-0">
                 <div class="collapse navbar-collapse" id="mynavbar">
                     <div class="left-nav">
-                        <a href="@Url.Action("Index", "Home")" class="navbar-brand m-0 p-0"><img alt src="~/assets/media/logo.png"></a>
+                        <a href="@Url.Action("Home", "Login")" class="navbar-brand m-0 p-0"><img alt src="~/assets/media/logo.png"></a>
                         <ul class="navbar-nav m-0">
                             <li class="has-children">
 
@@ -44,7 +44,7 @@
                             </li>
                             <li class="menu-item">
 
-                                @Html.ActionLink("Home", "Index", "Home", new { @class = "menu-link" })
+                                @Html.ActionLink("Home", "Home", "Login", new { @class = "menu-link" })
                             </li>
 
 
@@ -53,7 +53,7 @@
 
                             <li class="menu-item">
 
-                                @Html.ActionLink("About us", "About", "Home", new { @class = "menu-link" })
+                                @Html.ActionLink("About us", "About", "Login", new { @class = "menu-link" })
                             </li>
                         </ul>
                     </div>
@@ -61,19 +61,19 @@
                     <div class="right-nav">
                         <ul class="navbar-nav m-0">
                             <li class="has-children">
-                                @Html.ActionLink("Shop", "ShopListing", "Home", new { @class = "menu-link" })
+                                @Html.ActionLink("Shop", "ShopListing", "Login", new { @class = "menu-link" })
 
                             </li>
                             <li class="has-children">
                                 <a href="javascript:void(0);">Pages</a>
                                 <ul class="submenu">
-                                    <li>@Html.ActionLink("Blog", "Blog", "Home", new { @class = "menu-link" })</li>
-                                    <li>@Html.ActionLink("Blog-detail", "BlogDetail", "Home", new { @class = "menu-link" })></li>
+                                    <li>@Html.ActionLink("Blog", "Blog", "Login", new { @class = "menu-link" })</li>
+                                   
                                     <li><a href="product-detail.html">Product Detail</a></li>
-                                    <li>@Html.ActionLink("Cart", "Cart", "Home", new { @class = "menu-link" })</li>
+                                    <li>@Html.ActionLink("Cart", "Cart", "Login", new { @class = "menu-link" })</li>
                                     <li><a href="checkout.html">Checkout</a></li>
-                                    <li>@Html.ActionLink("Wishlist", "Wishlist", "Home", new { @class = "menu-link" })</li>
-                                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { @class = "menu-link" })</li>
+                                    <li>@Html.ActionLink("Wishlist", "Wishlist", "Login", new { @class = "menu-link" })</li>
+                                    <li>@Html.ActionLink("Contact", "Contact", "Login", new { @class = "menu-link" })</li>
                                 </ul>
                             </li>
                         </ul>
@@ -142,69 +142,7 @@
             </nav>
         </div>
     </header>
-    <!-- Header Area end -->
-    <!--<div class="account-pages mt-5 mb-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6 col-xl-5 mt-5" >
-                    <div class="card" style="max-width: 400px; border-radius: 20px; margin-top: 20px;">
-                        <div class="card-body p-4" style="background-color: white; border-radius: 10px;">
-
-
-
-                                <div class="text-center w-75 m-auto style="border-radius: 10px;"">
-                                    <a href="index.html">
-
-                                    </a>
-                                    <p class="text-muted mb-4 mt-3"style="font-size: 20px;" >Enter your email address and password to access admin panel.</p>
-                                </div>
-
-                                <form action="#">
-
-                                    <div class="form-group mb-3">
-
-                                        <input class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email">
-                                    </div>
-
-                                    <div class="form-group mb-3">
-
-                                        <input class="form-control" type="password" required="" id="password" placeholder="Enter your password">
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked>
-                                            <label class="custom-control-label text-muted" for="checkbox-signin">Remember me</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group mb-0 text-center">
-                                        <button class="btn btn-primary btn-block" type="submit"> Log In </button>
-                                    </div>
-
-                                </form>
-
-                                <div class="text-center">
-                                    <h5 class="mt-3 text-muted">Sign in with</h5>
-                                    <ul class="social-list list-inline mt-3 mb-0">
-                                        <li class="list-inline-item">
-                                            <a href="javascript: void(0);" class="social-list-item border-primary text-primary"><i class="fab fa-facebook"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript: void(0);" class="social-list-item border-danger text-danger"><i class="fab fa-google"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript: void(0);" class="social-list-item border-info text-info"><i class="fab fa-twitter"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript: void(0);" class="social-list-item border-secondary text-secondary"><i class="fab fa-instagram"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>-->
-    <!-- end card-body -->
-    <!--</div>-->
+  
     <!-- end card -->
     <div class="account-pages mt-5 mb-5">
         <div class="container">
@@ -248,9 +186,9 @@
                                 }
 
                                 <!-- Submit Button -->
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Log In</button>
-                                </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Log In</button>
+                        </div>
                             }
 
                             <!-- Другие элементы формы -->
