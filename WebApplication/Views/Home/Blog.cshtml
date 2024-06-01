@@ -73,6 +73,118 @@
                             }
                         </div>
                     </div>
+                    <div class="tab-pane" id="week">
+                        <div class="row">
+                            @if (Model != null && Model.Any(a => a.Category == "This Week"))
+                            {
+                                foreach (var article in Model.Where(a => a.Category == "This Week"))
+                                {
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="blog-card mb-32">
+                                            <img src="@article.ImagePath" class="w-100" alt="">
+                                            <div class="content">
+                                                <h4 class="color-black h-27 mb-16">@article.ArticleName</h4>
+                                                <div class="name-btn">
+                                                    <div class="name">
+                                                        <p class="medium-black">@article.AuthorName</p>
+                                                    </div>
+                                                    <a href="@Url.Action("BlogDetail", "Home", new { articleId = article.ArticleId })" class="light-btn primary">Read More <i class="far fa-angle-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No articles found in this category.</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="month">
+                        <div class="row">
+                            @if (Model != null && Model.Any(a => a.Category == "This Month"))
+                            {
+                                foreach (var article in Model.Where(a => a.Category == "This Month"))
+                                {
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="blog-card mb-32">
+                                            <img src="@article.ImagePath" class="w-100" alt="">
+                                            <div class="content">
+                                                <h4 class="color-black h-27 mb-16">@article.ArticleName</h4>
+                                                <div class="name-btn">
+                                                    <div class="name">
+                                                        <p class="medium-black">@article.AuthorName</p>
+                                                    </div>
+                                                    <a href="@Url.Action("BlogDetail", "Home", new { articleId = article.ArticleId })" class="light-btn primary">Read More <i class="far fa-angle-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No articles found in this category.</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="half-year">
+                        <div class="row">
+                            @if (Model != null && Model.Any(a => a.Category == "Last 6 Months"))
+                            {
+                                foreach (var article in Model.Where(a => a.Category == "Last 6 Months"))
+                                {
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="blog-card mb-32">
+                                            <img src="@article.ImagePath" class="w-100" alt="">
+                                            <div class="content">
+                                                <h4 class="color-black h-27 mb-16">@article.ArticleName</h4>
+                                                <div class="name-btn">
+                                                    <div class="name">
+                                                        <p class="medium-black">@article.AuthorName</p>
+                                                    </div>
+                                                    <a href="@Url.Action("BlogDetail", "Home", new { articleId = article.ArticleId })" class="light-btn primary">Read More <i class="far fa-angle-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No articles found in this category.</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="year">
+                        <div class="row">
+                            @if (Model != null && Model.Any(a => a.Category == "Last Year"))
+                            {
+                                foreach (var article in Model.Where(a => a.Category == "Last Year"))
+                                {
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="blog-card mb-32">
+                                            <img src="@article.ImagePath" class="w-100" alt="">
+                                            <div class="content">
+                                                <h4 class="color-black h-27 mb-16">@article.ArticleName</h4>
+                                                <div class="name-btn">
+                                                    <div class="name">
+                                                        <p class="medium-black">@article.AuthorName</p>
+                                                    </div>
+                                                    <a href="@Url.Action("BlogDetail", "Home", new { articleId = article.ArticleId })" class="light-btn primary">Read More <i class="far fa-angle-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No articles found in this category.</p>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
 

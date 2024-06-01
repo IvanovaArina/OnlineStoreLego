@@ -163,7 +163,7 @@ namespace WebApplication.Controllers
             }
             else
             {
-                return RedirectToAction("CreateProduct", "Index", productModel);
+                return RedirectToAction("CreateProduct", "ManageProduct", productModel);
             }
 
         }
@@ -179,96 +179,105 @@ namespace WebApplication.Controllers
         //    return View("Index", productModel);
 
         //}
-
         [HttpPost]
         public ActionResult EditProductAction(ProductModel productModel, HttpPostedFileBase ProductImage, string ImageOption)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
+                // Логирование всех ошибок валидации
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in errors)
                 {
-                    var productApi = new ProductApi();
+                    System.Diagnostics.Debug.WriteLine(error.ErrorMessage);
+                }
 
-                    if (ImageOption == "new" && ProductImage != null && ProductImage.ContentLength > 0)
+                // Опционально, добавление ошибок в модель и передача их во View
+                ViewBag.Errors = errors;
+
+                return View("EditProduct", productModel);
+            }
+
+            try
+            {
+                var productApi = new ProductApi();
+
+                if (ImageOption == "new" && ProductImage != null && ProductImage.ContentLength > 0)
+                {
+                    // Проверка типа файла
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                    var extension = Path.GetExtension(ProductImage.FileName).ToLower();
+                    if (!allowedExtensions.Contains(extension))
                     {
-                        // Проверка типа файла
-                        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-                        var extension = Path.GetExtension(ProductImage.FileName).ToLower();
-                        if (!allowedExtensions.Contains(extension))
-                        {
-                            ModelState.AddModelError("ProductImage", "Недопустимый формат файла. Разрешены только .jpg, .jpeg, .png и .gif.");
-                            return View("EditProduct", productModel);
-                        }
-
-                        // Генерация уникального имени файла
-                        var fileName = Path.GetFileNameWithoutExtension(ProductImage.FileName);
-                        fileName = fileName + "_" + Guid.NewGuid() + extension;
-                        var uploadPath = Server.MapPath("~/Uploads/");
-
-                        // Создание директории, если она не существует
-                        if (!Directory.Exists(uploadPath))
-                        {
-                            Directory.CreateDirectory(uploadPath);
-                        }
-
-                        var path = Path.Combine(uploadPath, fileName);
-
-                        // Сохранение файла
-                        ProductImage.SaveAs(path);
-
-                        // Сохранение пути к изображению в модели
-                        productModel.ImagePath = "/Uploads/" + fileName;
-                    }
-                    else if (ImageOption == "current")
-                    {
-                        // Сохранение текущего изображения
-                        ProductDTO currentProductDTO = productApi.getProductDTObyId(productModel.ProductNumber);
-                        if (currentProductDTO != null)
-                        {
-                            productModel.ImagePath = currentProductDTO.ImagePath;
-                        }
-                    }
-
-                    // Перемещение данных из модели в DTO
-                    ProductDTO productDTO = productModel.MoveDataFromModelToDTO();
-
-                    // Логирование перед вызовом API
-                    Console.WriteLine($"Calling editProductInDb with: {productDTO.ProductNumber}, {productDTO.ProductName}, {productDTO.Category}, {productDTO.Price}, {productDTO.ImagePath}");
-
-                    // Обработка запроса к API для сохранения данных в БД
-                    var updateResult = productApi.editItemInDb(productDTO);
-
-                    // Проверка результата обновления
-                    if (updateResult)
-                    {
-                        Console.WriteLine("Product updated successfully in the database.");
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Не удалось обновить продукт. Проверьте данные и попробуйте еще раз.");
+                        ModelState.AddModelError("ProductImage", "Недопустимый формат файла. Разрешены только .jpg, .jpeg, .png и .gif.");
                         return View("EditProduct", productModel);
                     }
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-                {
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+
+                    // Генерация уникального имени файла
+                    var fileName = Path.GetFileNameWithoutExtension(ProductImage.FileName);
+                    fileName = fileName + "_" + Guid.NewGuid() + extension;
+                    var uploadPath = Server.MapPath("~/Uploads/");
+
+                    // Создание директории, если она не существует
+                    if (!Directory.Exists(uploadPath))
                     {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            ModelState.AddModelError(validationError.PropertyName, validationError.ErrorMessage);
-                        }
+                        Directory.CreateDirectory(uploadPath);
                     }
-                    return View("EditProduct", productModel);
+
+                    var path = Path.Combine(uploadPath, fileName);
+
+                    // Сохранение файла
+                    ProductImage.SaveAs(path);
+
+                    // Сохранение пути к изображению в модели
+                    productModel.ImagePath = "/Uploads/" + fileName;
                 }
-                catch (Exception ex)
+                else if (ImageOption == "current")
                 {
-                    ModelState.AddModelError("", "Произошла ошибка при загрузке изображения: " + ex.Message);
+                    // Сохранение текущего изображения
+                    ProductDTO currentProductDTO = productApi.getProductDTObyId(productModel.ProductNumber);
+                    if (currentProductDTO != null)
+                    {
+                        productModel.ImagePath = currentProductDTO.ImagePath;
+                    }
+                }
+
+                // Перемещение данных из модели в DTO
+                ProductDTO productDTO = productModel.MoveDataFromModelToDTO();
+
+                // Логирование перед вызовом API
+                Console.WriteLine($"Calling editProductInDb with: {productDTO.ProductNumber}, {productDTO.ProductName}, {productDTO.Category}, {productDTO.Price}, {productDTO.ImagePath}");
+
+                // Обработка запроса к API для сохранения данных в БД
+                var updateResult = productApi.editItemInDb(productDTO);
+
+                // Проверка результата обновления
+                if (updateResult)
+                {
+                    Console.WriteLine("Продукт успешно обновлен в базе данных.");
+                    return RedirectToAction("Index", "ManageProduct");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Не удалось обновить продукт. Проверьте данные и попробуйте еще раз.");
                     return View("EditProduct", productModel);
                 }
             }
-
-            return View("EditProduct", productModel);
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        ModelState.AddModelError(validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+                return View("EditProduct", productModel);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Произошла ошибка при загрузке изображения: " + ex.Message);
+                return View("EditProduct", productModel);
+            }
         }
 
         [HttpPost]
