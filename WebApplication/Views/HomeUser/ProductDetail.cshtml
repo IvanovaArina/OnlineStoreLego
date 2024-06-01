@@ -3,7 +3,7 @@
     ViewBag.Title = "ProductDetail";
     Layout = "~/Views/Shared/ULayout.cshtml";
 }
-
+@model WebApplication.Models.ProductModel
 <!-- Hero Banner start -->
 <div class="page-title-banner">
     <div class="container">
@@ -31,26 +31,25 @@
                 <div class="row">
                     <div class="col-xl-7 col-lg-6">
                         <div class="image-block mb-lg-0 mb-32">
-                            <img src="~/assets/media/product/p-26.png" alt="">
+                            <img src="@Model.ImagePath" alt="">
                         </div>
                     </div>
                     <div class="col-xl-5 col-lg-6">
                         <div class="content">
                             <div class="title">
                                 <div class="name-price mb-8">
-                                    <h2 class="h-47 bold light-black">Buzz Lightyear</h2>
-                                    <h3 class="h-47 bold light-black">– $32</h3>
+                                    <h2 class="h-47 bold light-black">@Model.ProductName</h2>
+                                    <h3 class="h-47 bold light-black">– $@Model.Price</h3>
                                 </div>
-                                <p class="light-black">Join the adventure with Buzz Lightyear, the iconic space <br> ranger from the beloved Toy Story franchise. With his <br> sleek design, advanced features, and boundless bravery, <br> Buzz Lightyear is ready to take kids to infinity and beyond!</p>
                             </div>
                             <div class="tag">
                                 <div class="category mb-16">
                                     <h5 class="h-27 light-black">Category:</h5>
-                                    <h6 class="light-black">Toy Sets</h6>
+                                    <h6 class="light-black">@Model.Category</h6>
                                 </div>
                                 <div class="category">
                                     <h5 class="h-27 light-black">SKU:</h5>
-                                    <h6 class="light-black">12 323 43</h6>
+                                    <h6 class="light-black">@Model.ProductId</h6>
                                 </div>
                             </div>
                             <div class="quantity quantity-wrap">
@@ -107,27 +106,7 @@
             </div>
             <div class="detail">
                 <p class="light-black mb-24">
-                    Join Buzz Lightyear on an out-of-this-world adventure! This Buzz Lightyear action figure brings the beloved character to life with incredible detail and interactive features. Kids can imagine themselves as space rangers, exploring distant planets and battling evil forces alongside Buzz. With his voice command, laser action, and posable joints, Buzz Lightyear provides endless fun and imaginative play for Toy Story fans of all ages.
-                </p>
-
-                <h4 class="light-black h-27 bold mb-24">
-                    Key Features:
-                </h4>
-                <p class="light-black mb-24">
-                    <b>Space Ranger Gear:</b> Buzz Lightyear comes equipped with his signature space ranger suit, complete with a helmet, jetpack, and wrist communicator. Kids can imagine themselves soaring through space and defending the galaxy from evil.
-                </p>
-
-                <p class="light-black mb-24">
-                    <b>Interactive Voice Command:</b> Activate Buzz Lightyear's voice command feature by pressing the button on his chest. He responds with a variety of phrases and sound effects, bringing the character to life and adding to the immersive play experience.
-                </p>
-                <p class="light-black mb-24">
-                    <b>Light-up Laser Action:</b> Press the button on Buzz's arm to activate his light-up laser and sound effects. Kids can aim, shoot, and take on any intergalactic threats that come their way.
-                </p>
-                <p class="light-black mb-24">
-                    <b>Poseable Joints:</b> Buzz Lightyear is fully poseable, allowing for dynamic and action-packed play. With his articulated limbs, kids can create their own exciting poses and reenact their favorite scenes from the movies.
-                </p>
-                <p class="light-black">
-                    <b>Authentic Movie Detailing:</b> From his vibrant colors to the intricate details on his suit, Buzz Lightyear captures the essence of the character from the Toy Story films. It's like having your very own Buzz Lightyear right at home!
+                    @Model.ProductDetail
                 </p>
             </div>
             <div class="reviews ">

@@ -34,7 +34,7 @@
             <tbody id="reviewTable">
                 @{
                     int countPendingReviews = 100;
-                    var pendingReviewTable = Model.dataForTable(countPendingReviews);
+                    var pendingReviewTable = Model.pendingReviewForTable();
                     int kol = 0;
                     foreach (var item in pendingReviewTable)
                     {
@@ -42,9 +42,9 @@
                         {
                             <tr>
 
-                                <td>@item.ReviewNumber</td>
-                                <td>@item.UserID</td>
-                                <td>@item.ProductID</td>
+                                <td>@item.ReviewId</td>
+                                <td>@item.User</td>
+                                <td>@item.Product</td>
                                 <td>@item.Text</td>
                                 <td>@item.Rating</td>
                                 <td>
@@ -79,8 +79,8 @@
             </thead>
             <tbody id="deleteReviewTable">
                 @{
-                    int countApprovedReviews = 100;
-                    var approvedReviewTable = Model.dataForTable(countApprovedReviews);
+                    
+                    var approvedReviewTable = Model.approvedReviewForTable();
                     kol = 0;
                     foreach (var item in approvedReviewTable)
                     {
@@ -88,9 +88,9 @@
                         {
                             <tr>
 
-                                <td>@item.ReviewNumber</td>
-                                <td>@item.UserID</td>
-                                <td>@item.ProductID</td>
+                                <td>@item.ReviewId</td>
+                                <td>@item.User</td>
+                                <td>@item.Product</td>
                                 <td>@item.Text</td>
                                 <td>@item.Rating</td>
                                 <td>

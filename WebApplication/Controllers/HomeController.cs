@@ -15,6 +15,7 @@ using System.Web.UI.WebControls;
 
 using System.Threading.Tasks;
 using WebApplication.Domain.Entities.Enums;
+using WebApplication.BL.Core;
 
 namespace OnlineStoreLego.Web.Controllers
 {
@@ -22,9 +23,30 @@ namespace OnlineStoreLego.Web.Controllers
     {
 
         private NewArticleContext db = new NewArticleContext();
-        public ActionResult Index()
+        private readonly ProductContext productContext = new ProductContext();
+        private List<ArticleDTO> GetSomeArticles(int count)
         {
-            return View();
+            return db.Articles
+                 .OrderBy(a => a.ArticleId)
+                .Take(count)
+                .Select(a => new ArticleDTO
+                {
+                    ArticleId = a.ArticleId,
+                    ArticleNumber = a.ArticleNumber,
+                    ArticleName = a.ArticleName,
+                    Category = a.Category,
+                    AuthorName = a.AuthorName,
+                    TextOfArticle = a.TextOfArticle,
+                    ImagePath = a.ImagePath
+                    // Другие свойства по необходимости
+                })
+                .ToList();
+        }
+        public ActionResult Index(ProductModel productModel)
+        {
+            var articles = GetSomeArticles(3);
+            ViewBag.Articles = articles;
+            return View(productModel);
 
         }
         public ActionResult About()
@@ -39,9 +61,9 @@ namespace OnlineStoreLego.Web.Controllers
             return View();
 
         }
-        public ActionResult ShopListing()
+        public ActionResult ShopListing(ProductModel productModel)
         {
-            return View();
+            return View(productModel);
 
         }
 
@@ -112,11 +134,34 @@ namespace OnlineStoreLego.Web.Controllers
             return View();
         }
 
-        public ActionResult ProductDetail()
+        public ActionResult ProductDetail(int? productId)
         {
-            return View();
+            if (!productId.HasValue)
+            {
+                return HttpNotFound("Product id is missing.");
+            }
+
+            var product = productContext.Products.FirstOrDefault(a => a.ProductId == productId.Value);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            var productModel = new ProductModel
+            {
+                ProductId = product.ProductId,
+                ProductName = product.ProductName,
+                Price = product.Price,
+                SellCategory = product.SellCategory,
+                CategoryByAge = product.CategoryByAge,
+                Category = product.Category,
+                ProductDetail = product.ProductDetail,
+                ImagePath = product.ImagePath
+            };
+
+            return View(productModel);
         }
 
-       
+
     }
 }

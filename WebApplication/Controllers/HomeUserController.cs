@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.BL.Core;
 using WebApplication.BL.DBModel;
 using WebApplication.Models;
 
@@ -10,9 +11,31 @@ namespace WebApplication.Controllers
 {
     public class HomeUserController : Controller
     {
-        public ActionResult HomeUsers()
+        private readonly NewArticleContext db = new NewArticleContext();
+        private readonly ProductContext productContext = new ProductContext();
+        private List<ArticleDTO> GetSomeArticles(int count)
         {
-            return View();
+            return db.Articles
+                 .OrderBy(a => a.ArticleId)
+                .Take(count)
+                .Select(a => new ArticleDTO
+                {
+                    ArticleId = a.ArticleId,
+                    ArticleNumber = a.ArticleNumber,
+                    ArticleName = a.ArticleName,
+                    Category = a.Category,
+                    AuthorName = a.AuthorName,
+                    TextOfArticle = a.TextOfArticle,
+                    ImagePath = a.ImagePath
+                    // Другие свойства по необходимости
+                })
+                .ToList();
+        }
+        public ActionResult HomeUsers(ProductModel productModel)
+        {
+            var articles = GetSomeArticles(3);
+            ViewBag.Articles = articles;
+            return View(productModel);
 
         }
         public ActionResult About()
@@ -27,13 +50,12 @@ namespace WebApplication.Controllers
             return View();
 
         }
-        public ActionResult ShopListing()
+        public ActionResult ShopListing(ProductModel productModel)
         {
-            return View();
+            return View(productModel);
 
         }
 
-        private NewArticleContext db = new NewArticleContext();
         public ActionResult Blog(int page = 1, int pageSize = 6)
         {
             var articles = db.Articles.OrderByDescending(a => a.ArticleNumber).ToList();
@@ -100,14 +122,37 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public ActionResult ProductDetail()
+        public ActionResult ProductDetail(int? productId)
         {
-            return View();
+            if (!productId.HasValue)
+            {
+                return HttpNotFound("Product id is missing.");
+            }
+
+            var product = productContext.Products.FirstOrDefault(a => a.ProductId == productId.Value);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            var productModel = new ProductModel
+            {
+                ProductId = product.ProductId,
+                ProductName = product.ProductName,
+                Price = product.Price,
+                SellCategory = product.SellCategory,
+                CategoryByAge = product.CategoryByAge,
+                Category = product.Category,
+                ProductDetail = product.ProductDetail,
+                ImagePath = product.ImagePath
+            };
+
+            return View(productModel);
         }
 
-       
 
-       
+
+
 
     }
 }

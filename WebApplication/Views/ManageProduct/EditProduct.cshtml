@@ -44,7 +44,7 @@
         <label for="sellCategory">Sell Category</label>
         @Html.DropDownListFor(model => model.SellCategory, new SelectList(new[] {
             new { Value = "On Sales", Text = "On Sales" },
-            new { Value = "Top Sales", Text = "Top Sales" },
+            new { Value = "Top Sellers", Text = "Top Sellers" },
             new { Value = "Boys", Text = "Boys" },
             new { Value = "Girls", Text = "Girls" }
         }, "Value", "Text"), new { @class = "form-control", id = "sellCategory", required = "required" })
