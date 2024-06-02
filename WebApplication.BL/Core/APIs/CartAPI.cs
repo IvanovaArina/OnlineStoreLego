@@ -34,48 +34,45 @@ namespace WebApplication.BL.Core.APIs
         public CartTable createCartTable()
         {
             CartTable Cart = null;
-            //using (var context = new CartContext())
-            //{
-                var prod1 = new ProductTable
+            using (var context = new CartContext())
             {
-                ProductNumber = 33,
-                ProductName = "ProductName",
-                Price = 20,
-                CategoryByAge = "CategoryByAge",
-                Category = "Category",
-                SellCategory = "SellCategory",
-                Quantity = 500,
-                IsActive = true,
-                ImagePath = "ImagePath"
-                };
 
-            var prod2 = new ProductTable
-            {
-                ProductNumber = 44,
-                ProductName = "ProductName2",
-                Price = 202,
-                CategoryByAge = "CategoryByAge2",
-                Category = "Category2",
-                SellCategory = "SellCategory2",
-                Quantity = 5002,
-                IsActive = false,
-                ImagePath = "ImagePath"
-            };
+                //    var prod1 = new ProductTable
+                //{
+                //    ProductNumber = 33,
+                //    ProductName = "ProductName",
+                //    Price = 20,
+                //    CategoryByAge = "CategoryByAge",
+                //    Category = "Category",
+                //    SellCategory = "SellCategory",
+                //    Quantity = 500,
+                //    IsActive = true,
+                //    ImagePath = "ImagePath"
+                //    };
+
+                //var prod2 = new ProductTable
+                //{
+                //    ProductNumber = 44,
+                //    ProductName = "ProductName2",
+                //    Price = 202,
+                //    CategoryByAge = "CategoryByAge2",
+                //    Category = "Category2",
+                //    SellCategory = "SellCategory2",
+                //    Quantity = 5002,
+                //    IsActive = false,
+                //    ImagePath = "ImagePath"
+                //};
 
             Cart = new CartTable
             {
                 testCart = 55,
 
-                Products = new Dictionary<ProductTable, int>
-                    {
-                        { prod1 , 35 },
-                        {prod2 , 85 },
-                }
+                Products = new Dictionary<int, int> ()
             };
 
-        //    context.Carts.Add(Cart);
-        //    context.SaveChanges();
-        //}
+            context.Carts.Add(Cart);
+            context.SaveChanges();
+            }
 
             return Cart;
         }

@@ -17,15 +17,9 @@ namespace WebApplication.Domain.Entities.User
 
         public int testOrder { get; set; }
 
-        // Внешний ключ на пользователя
         public int UserId { get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual UDbTable User { get; set; }
-
-
-        // Навигационное свойство
-        public Dictionary<ProductTable, int> Products { get; set; }
+        public Dictionary<int, int> Products { get; set; }
 
 
     }

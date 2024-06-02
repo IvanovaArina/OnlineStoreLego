@@ -10,7 +10,7 @@ namespace WebApplication.Models
     public class ProductModel
     {
         public ProductApi productApi;
-        public int countProducts;
+        //public int countProducts;
 
 
         public int ProductId { get; set; }

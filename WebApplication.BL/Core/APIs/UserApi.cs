@@ -23,6 +23,7 @@ using ProductTable = WebApplication.Domain.Entities.Admin.ProductTable;
 using System.Web.UI.WebControls.WebParts;
 using WebApplication.BL.Migrations;
 using WebApplication.BL.Core.APIs;
+using Newtonsoft.Json;
 
 namespace WebApplication.BL.Core
 {
@@ -171,7 +172,7 @@ namespace WebApplication.BL.Core
                 userWishlistTable = db.Wishlists.FirstOrDefault(w => w.wishlistId == userDb.WishlistId);
             }
 
-            List<ProductTable> productTables = userWishlistTable.Products;
+            List<int> productTables = userWishlistTable.Products;
 
             if (productTables != null)
             {
@@ -288,7 +289,24 @@ namespace WebApplication.BL.Core
 
        
 
-       
+       public bool CheckIfThereAreUsers()
+        {
+            List<int> usersIds = new List<int>();
+
+            using (var db = new UserContext())
+            {
+                usersIds = db.Users.Select(w => w.UserId).ToList();
+            }
+
+            if (usersIds.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
        
 
@@ -310,8 +328,8 @@ namespace WebApplication.BL.Core
                 KeyCredential = userDTO.KeyCredential,
                 Role = userDTO.Role,
 
-                //Wishlist = wishlistApi.createWishlistTable(),
-                //Cart = cartApi.createCartTable(),
+                WishlistId = (wishlistApi.createWishlistTable()).wishlistId,
+                CartId = (cartApi.createCartTable()).cartId,
 
                 //Order = orderApi.createOrderTable()
 
@@ -319,6 +337,7 @@ namespace WebApplication.BL.Core
 
             return user;
         }
+
 
 
 
@@ -365,7 +384,30 @@ namespace WebApplication.BL.Core
         }
 
 
+        public void CreateFirstUser()
+        {
 
+            ProductTable productTable = new ProductTable()
+            {
+                ProductNumber = 111,
+                ProductName = "ProductName",
+                Price = 0,
+                CategoryByAge = "CategoryByAge",
+                Category = "Category",
+                SellCategory = "SellCategory",
+                Quantity = 500,
+                IsActive = false,
+                ProductDetail = "ProductDetail",
+                ImagePath = "ImagePath"
+            };
+
+            using (var db = new ProductContext())
+            {
+                db.Products.Add(productTable);
+                db.SaveChanges();
+            }
+
+        }
 
 
         public BaseResponces RegisterNewUserAccount(UserDTO userDTO)
@@ -378,6 +420,11 @@ namespace WebApplication.BL.Core
             if (checkIfEmailExists(userDTO.Email))
             {
                 return new BaseResponces { Status = false, StatusMessage = "This UserName already registered" };
+            }
+
+            if (CheckIfThereAreUsers())
+            {
+                CreateFirstUser();
             }
 
             var user = createNewUserWithHash(userDTO);

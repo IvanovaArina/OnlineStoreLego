@@ -18,13 +18,13 @@ namespace WebApplication.Controllers
         //    return View("Wishlist");
         //}
 
-        public ActionResult AddToWishlist(int productId, int userId)
-        {
-            wishlistApi.AddToWishlistInDb(productId, userId);
-            UserDataModel userDataModel = new UserDataModel();
-            UserApi userApi = new UserApi();
-            userDataModel = userDataModel.moveDataFromDTOToModel(userApi.getUserDTObyId(userId));
-            return RedirectToAction("Wishlist", "HomeUser", userDataModel);
-        }
+        //public ActionResult AddToWishlist(int productId, int userId)
+        //{
+        //    wishlistApi.AddToWishlistInDb(productId, userId);
+        //    UserDataModel userDataModel = new UserDataModel();
+        //    UserApi userApi = new UserApi();
+        //    userDataModel = userDataModel.moveDataFromDTOToModel(userApi.getUserDTObyId(userId));
+        //    return RedirectToAction("Wishlist", "HomeUser", userDataModel);
+        //}
     }
 }

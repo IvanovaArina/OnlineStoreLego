@@ -17,9 +17,7 @@ namespace WebApplication.Domain.Entities.User
 
         public int testCart { get; set; }
 
-
-        // Навигационное свойство
-        public Dictionary <ProductTable, int> Products { get; set; }
+        public Dictionary <int, int> Products { get; set; }
 
 
     }

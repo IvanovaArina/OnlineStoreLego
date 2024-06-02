@@ -17,9 +17,7 @@ namespace WebApplication.Domain.Entities.User
 
         public int test { get; set; }
 
-
-        // Навигационное свойство
-        public List <ProductTable> Products { get; set; }
+        public List <int> Products { get; set; }
 
     }
 }

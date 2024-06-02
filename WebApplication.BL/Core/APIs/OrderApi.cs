@@ -18,41 +18,37 @@ namespace WebApplication.BL.Core.APIs
             using (var context = new OrderContext())
             {
 
-                var prod1 = new ProductTable
-                {
-                    ProductNumber = 33,
-                    ProductName = "33",
-                    Price = 200,
-                    CategoryByAge = "CategoryByAge",
-                    Category = "Category",
-                    SellCategory = "SellCategory",
-                    Quantity = 50,
-                    IsActive = true,
-                    ImagePath = "ImagePath"
-                };
+                //var prod1 = new ProductTable
+                //{
+                //    ProductNumber = 33,
+                //    ProductName = "33",
+                //    Price = 200,
+                //    CategoryByAge = "CategoryByAge",
+                //    Category = "Category",
+                //    SellCategory = "SellCategory",
+                //    Quantity = 50,
+                //    IsActive = true,
+                //    ImagePath = "ImagePath"
+                //};
 
-                var prod2 = new ProductTable
-                {
-                    ProductNumber = 66,
-                    ProductName = "66",
-                    Price = 66,
-                    CategoryByAge = "CategoryByAge2",
-                    Category = "Category2",
-                    SellCategory = "SellCategory2",
-                    Quantity = 5002,
-                    IsActive = false,
-                    ImagePath = "ImagePath"
-                };
+                //var prod2 = new ProductTable
+                //{
+                //    ProductNumber = 66,
+                //    ProductName = "66",
+                //    Price = 66,
+                //    CategoryByAge = "CategoryByAge2",
+                //    Category = "Category2",
+                //    SellCategory = "SellCategory2",
+                //    Quantity = 5002,
+                //    IsActive = false,
+                //    ImagePath = "ImagePath"
+                //};
 
                 Order = new OrderTable
                 {
                     testOrder = 88,
 
-                    Products = new Dictionary<ProductTable, int>
-                    {
-                        { prod1 , 90 },
-                        {prod2 , 89 },
-                },
+                    Products = new Dictionary<int, int>(),
 
                     UserId = id
                 };
