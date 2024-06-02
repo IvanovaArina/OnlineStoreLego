@@ -38,9 +38,9 @@ namespace WebApplication.Controllers
             return View(userDataModel);
 
         }
-        public ActionResult About()
+        public ActionResult About(UserDataModel userDataModel)
         {
-            return View();
+            return View(userDataModel);
 
         }
 
@@ -50,9 +50,9 @@ namespace WebApplication.Controllers
             return View();
 
         }
-        public ActionResult ShopListing(ProductModel productModel)
+        public ActionResult ShopListing(UserDataModel userDataModel)
         {
-            return View(productModel);
+            return View(userDataModel);
 
         }
 
@@ -109,19 +109,6 @@ namespace WebApplication.Controllers
             return View(articleDataModel);
         }
 
-        public ActionResult Cart()
-        {
-            return View();
-        }
-        public ActionResult Wishlist(UserDataModel userDataModel)
-        {
-            return View(userDataModel);
-        }
-        public ActionResult Checkout()
-        {
-            return View();
-        }
-
         public ActionResult ProductDetail(int? productId)
         {
             if (!productId.HasValue)
@@ -151,7 +138,18 @@ namespace WebApplication.Controllers
         }
 
 
-
+        public ActionResult Cart(UserDataModel userDataModel)
+        {
+            return View();
+        }
+        public ActionResult Wishlist(UserDataModel userDataModel)
+        {
+            return View(userDataModel);
+        }
+        public ActionResult Checkout(UserDataModel userDataModel)
+        {
+            return View();
+        }
 
 
     }

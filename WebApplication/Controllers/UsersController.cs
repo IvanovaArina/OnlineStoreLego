@@ -27,12 +27,12 @@ namespace WebApplication.Controllers
             return View(userDataModel);
         }
 
-        public ActionResult EditInfo()
+        public ActionResult EditInfo(UserDataModel userDataModel)
         {
             return View();
         }
 
-        public ActionResult ViewOrdersU()
+        public ActionResult ViewOrdersU(UserDataModel userDataModel)
         {
             return View();
         }

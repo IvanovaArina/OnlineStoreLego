@@ -49,9 +49,9 @@ namespace OnlineStoreLego.Web.Controllers
             return View(productModel);
 
         }
-        public ActionResult About()
+        public ActionResult About(UserDataModel userDataModel)
         {
-            return View();
+            return View(userDataModel);
 
         }
 
@@ -61,9 +61,9 @@ namespace OnlineStoreLego.Web.Controllers
             return View();
 
         }
-        public ActionResult ShopListing(ProductModel productModel)
+        public ActionResult ShopListing(UserDataModel userDataModel)
         {
-            return View(productModel);
+            return View(userDataModel);
 
         }
 
@@ -121,17 +121,17 @@ namespace OnlineStoreLego.Web.Controllers
             return View(articleDataModel);
         }
 
-        public ActionResult Cart()
+        public ActionResult Cart(UserDataModel userDataModel)
         {
-            return View();
+            return View(userDataModel);
         }
-        public ActionResult Wishlist()
+        public ActionResult Wishlist(UserDataModel userDataModel)
         {
-            return View();
+            return View(userDataModel);
         }
-        public ActionResult Checkout()
+        public ActionResult Checkout(UserDataModel userDataModel)
         {
-            return View();
+            return View(userDataModel);
         }
 
         public ActionResult ProductDetail(int? productId)

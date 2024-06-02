@@ -47,7 +47,7 @@
                             </li>
                             <li class="menu-item">
 
-                                @Html.ActionLink("Home", "HomeUsers", "HomeUser", new { @class = "menu-link" })
+                                @Html.ActionLink("Home", "HomeUsers", "HomeUser", new { userDataModel = Model }, new { @class = "menu-link" })
                             </li>
 
 
@@ -56,7 +56,7 @@
 
                             <li class="menu-item">
 
-                                @Html.ActionLink("About us", "About", "HomeUser", new { @class = "menu-link" })
+                                @Html.ActionLink("About us", "About", "HomeUser", new { userDataModel = Model }, new { @class = "menu-link" })
                             </li>
                         </ul>
                     </div>
@@ -73,7 +73,7 @@
                     <div class="right-nav">
                         <ul class="navbar-nav m-0">
                             <li class="menu-item">
-                                @Html.ActionLink("AccountUser", "UserAccount", "Users", new { area = "", id = Model.UserId }, new { @class = "menu-link" })
+                                @Html.ActionLink("AccountUser", "UserAccount", "Users", new { area = ""@*, id = Model.UserId*@ }, new { @class = "menu-link" })
                             </li>
                             <li class="menu-item">
                                 @Html.ActionLink("Logout", "LogOut", "Login", new { area = "" }, new { @class = "menu-link" })

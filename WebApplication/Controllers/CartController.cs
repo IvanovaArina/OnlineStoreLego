@@ -16,7 +16,7 @@ namespace WebApplication.Controllers
         //}
 
         //[HttpPost]
-        public ActionResult AddToCart (int productId)
+        public ActionResult AddToCart (int productId, int userId)
         {
             return View();
         }

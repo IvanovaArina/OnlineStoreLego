@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication.BL.Core.DTOs;
 using WebApplication.BL.DBModel;
 using WebApplication.Domain.Entities.Admin;
 using WebApplication.Domain.Entities.User;
@@ -72,14 +73,82 @@ namespace WebApplication.BL.Core
             using (var db = new WishlistContext())
             {
                 wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
-            }
 
-            if (wishlistDb.Products == null)
-            {
-                return false;
+
+                if (wishlistDb.Products == null)
+                {
+                    return false;
+                }
             }
 
             return true;
         }
+
+        public WishlistTable addFirstProductToWishlist(int wishlistId, ProductTable productDb)
+        {
+            WishlistTable wishlistDb = null;
+            using (var db = new WishlistContext())
+            {
+                wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId==wishlistId);
+
+                wishlistDb.Products = new List<ProductTable> {productDb};
+
+                db.SaveChanges();
+            }
+            return wishlistDb;
+
+        }
+
+        public WishlistTable addProductToWishlist(int wishlistId, ProductTable productDb)
+        {
+            WishlistTable wishlistDb = null;
+            using (var db = new WishlistContext())
+            {
+                wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
+
+                //productDb.Count--
+
+                wishlistDb.Products.Add(productDb);
+
+                db.SaveChanges();
+            }
+            return wishlistDb;
+
+        }
+
+        public void AddToWishlistInDb(int productId, int userId)
+        {
+            
+
+            ProductTable productDb = null;
+            using (var db = new ProductContext())
+            {
+                productDb = db.Products.FirstOrDefault(m => m.ProductId == productId);
+            }
+
+            UDbTable userDb = null;
+            using (var db = new UserContext())
+            {
+                userDb = db.Users.FirstOrDefault(m => m.UserId == userId);
+
+                if (!CkeckIfWihlistContainItems(userDb.WishlistId))
+                {
+                    userDb.Wishlist = addFirstProductToWishlist(userDb.WishlistId, productDb);
+                    userDb.WishlistId = userDb.Wishlist.wishlistId;
+                }
+                else
+                {
+                    userDb.Wishlist = addProductToWishlist(userDb.WishlistId, productDb);
+                    userDb.WishlistId = userDb.Wishlist.wishlistId;
+                }
+
+                db.SaveChanges();
+
+                
+            }
+
+        }
+
+
     }
 }

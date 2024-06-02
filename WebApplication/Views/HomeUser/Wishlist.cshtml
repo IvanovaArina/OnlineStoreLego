@@ -97,8 +97,12 @@
 
 
             @{
+
+                
+
                 if (Model.CkeckIfWihlistContainItems(Model.WishlistId))
                 {
+
                     Html.Partial("_wishlist", Model);
                 }
                 else
@@ -112,7 +116,7 @@
 
 
             <div>
-                <a href="@Url.Action("ShopListing", "HomeAdmin")" class="cus-btn primary">Continue Shopping</a>
+                <a href="@Url.Action("ShopListing", "HomeUser", new { userDataModel = Model })" class="cus-btn primary">Continue Shopping</a>
             </div>
 
         </div>
