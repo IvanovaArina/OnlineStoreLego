@@ -1,9 +1,9 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Blog";
     Layout = "~/Views/Shared/ULayout.cshtml";
 }
 
+@model List<WebApplication.Models.ArticleDataModel>
 <!-- Hero Banner start -->
 <div class="page-title-banner">
     <div class="container">
@@ -47,496 +47,153 @@
                         </li>
                     </ul>
                 </div>
-                <form class="card-body tab-content">
+                <div class="card-body tab-content">
                     <div class="tab-pane active" id="all">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-1.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Gifts of Joy: Perfect Presents for Kids</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-1.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var article in Model)
+                                {
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="blog-card mb-32">
+                                            <img src="@article.ImagePath" class="w-100" alt="">
+                                            <div class="content">
+                                                <h4 class="color-black h-27 mb-16">@article.ArticleName</h4>
+                                                <div class="name-btn">
+                                                    <div class="name">
+                                                        <p class="medium-black">@article.AuthorName</p>
+                                                    </div>
+                                                    <a href="@Url.Action("BlogDetail", "HomeUser", new { articleId = article.ArticleId })" class="light-btn primary">Read More <i class="far fa-angle-right"></i></a>
+                                                </div>
                                             </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-2.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Toyland Treasures: Discover the Fun!</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-2.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-3.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-4.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-5.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-6.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                }
+                            }
                         </div>
                     </div>
-                    <div class="tab-pane " id="week">
+                    <div class="tab-pane" id="week">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-6.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
+                            @if (Model != null && Model.Any(a => a.Category == "This Week"))
+                            {
+                                foreach (var article in Model.Where(a => a.Category == "This Week"))
+                                {
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="blog-card mb-32">
+                                            <img src="@article.ImagePath" class="w-100" alt="">
+                                            <div class="content">
+                                                <h4 class="color-black h-27 mb-16">@article.ArticleName</h4>
+                                                <div class="name-btn">
+                                                    <div class="name">
+                                                        <p class="medium-black">@article.AuthorName</p>
+                                                    </div>
+                                                    <a href="@Url.Action("BlogDetail", "HomeUser", new { articleId = article.ArticleId })" class="light-btn primary">Read More <i class="far fa-angle-right"></i></a>
+                                                </div>
                                             </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-1.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Gifts of Joy: Perfect Presents for Kids</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-1.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-2.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Toyland Treasures: Discover the Fun!</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-2.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-3.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-4.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-5.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No articles found in this category.</p>
+                            }
                         </div>
                     </div>
-                    <div class="tab-pane " id="month">
+                    <div class="tab-pane" id="month">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-1.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Gifts of Joy: Perfect Presents for Kids</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-1.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
+                            @if (Model != null && Model.Any(a => a.Category == "This Month"))
+                            {
+                                foreach (var article in Model.Where(a => a.Category == "This Month"))
+                                {
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="blog-card mb-32">
+                                            <img src="@article.ImagePath" class="w-100" alt="">
+                                            <div class="content">
+                                                <h4 class="color-black h-27 mb-16">@article.ArticleName</h4>
+                                                <div class="name-btn">
+                                                    <div class="name">
+                                                        <p class="medium-black">@article.AuthorName</p>
+                                                    </div>
+                                                    <a href="@Url.Action("BlogDetail", "HomeUser", new { articleId = article.ArticleId })" class="light-btn primary">Read More <i class="far fa-angle-right"></i></a>
+                                                </div>
                                             </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-2.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Toyland Treasures: Discover the Fun!</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-2.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-3.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-4.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-5.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-6.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No articles found in this category.</p>
+                            }
                         </div>
                     </div>
-                    <div class="tab-pane " id="half-year">
+                    <div class="tab-pane" id="half-year">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-3.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
+                            @if (Model != null && Model.Any(a => a.Category == "Last 6 Months"))
+                            {
+                                foreach (var article in Model.Where(a => a.Category == "Last 6 Months"))
+                                {
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="blog-card mb-32">
+                                            <img src="@article.ImagePath" class="w-100" alt="">
+                                            <div class="content">
+                                                <h4 class="color-black h-27 mb-16">@article.ArticleName</h4>
+                                                <div class="name-btn">
+                                                    <div class="name">
+                                                        <p class="medium-black">@article.AuthorName</p>
+                                                    </div>
+                                                    <a href="@Url.Action("BlogDetail", "HomeUser", new { articleId = article.ArticleId })" class="light-btn primary">Read More <i class="far fa-angle-right"></i></a>
+                                                </div>
                                             </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-1.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Gifts of Joy: Perfect Presents for Kids</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-1.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-2.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Toyland Treasures: Discover the Fun!</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-2.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-4.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-5.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-6.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No articles found in this category.</p>
+                            }
                         </div>
                     </div>
-                    <div class="tab-pane " id="year">
+                    <div class="tab-pane" id="year">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-5.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
+                            @if (Model != null && Model.Any(a => a.Category == "Last Year"))
+                            {
+                                foreach (var article in Model.Where(a => a.Category == "Last Year"))
+                                {
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="blog-card mb-32">
+                                            <img src="@article.ImagePath" class="w-100" alt="">
+                                            <div class="content">
+                                                <h4 class="color-black h-27 mb-16">@article.ArticleName</h4>
+                                                <div class="name-btn">
+                                                    <div class="name">
+                                                        <p class="medium-black">@article.AuthorName</p>
+                                                    </div>
+                                                    <a href="@Url.Action("BlogDetail", "HomeUser", new { articleId = article.ArticleId })" class="light-btn primary">Read More <i class="far fa-angle-right"></i></a>
+                                                </div>
                                             </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-1.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Gifts of Joy: Perfect Presents for Kids</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-1.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-2.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Toyland Treasures: Discover the Fun!</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-2.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-3.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-4.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="blog-card mb-32">
-                                    <img src="~/assets/media/blog/img-6.png" class="w-100" alt="">
-                                    <div class="content">
-                                        <h4 class="color-black h-27 mb-16">Tiny Tots, Big Fun: Toys for Little Ones</h4>
-                                        <div class="name-btn">
-                                            <div class="name">
-                                                <img src="~/assets/media/author/img-3.png" alt="">
-                                                <p class="medium-black">Author’s name</p>
-                                            </div>
-                                            <a href="./blog.html" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No articles found in this category.</p>
+                            }
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
 
             <ul class="pagination">
-                <li>
-                    <a href="./blog.html"><i class="fas fa-chevron-left"></i></a>
-                </li>
-                <li>
-                    <a href="./blog.html" class="active">1</a>
-                </li>
-                <li>
-                    <a href="./blog.html">2</a>
-                </li>
-                <li>
-                    <a href="./blog.html">3</a>
-                </li>
-                <li>
-                    <a href="./blog.html"><i class="fas fa-chevron-right"></i></a>
-                </li>
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Blog", new { page = i })">@i</a>
+                    </li>
+                }
             </ul>
         </div>
     </section>

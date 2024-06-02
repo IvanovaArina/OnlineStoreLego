@@ -46,9 +46,9 @@ namespace WebApplication.Controllers
             return RedirectToAction("ManageUsers", "Admin");
         }
 
-        public ActionResult ManageProducts(ProductModel productModel)
+        public ActionResult ManageProduct(ProductModel productModel)
         {
-            return RedirectToAction("ManageProducts", "Admin", productModel);
+            return RedirectToAction("ManageProduct", "Admin", productModel);
         }
         public ActionResult ManageReview(ReviewModel reviewModel)
         {
@@ -63,6 +63,11 @@ namespace WebApplication.Controllers
         public ActionResult ViewOrders()
         {
             return RedirectToAction("ViewOrders", "Admin");
+        }
+
+        public ActionResult ManageContent()
+        {
+            return RedirectToAction("ManageContent", "ManageContent");
         }
 
     }

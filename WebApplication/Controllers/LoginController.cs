@@ -114,6 +114,51 @@ namespace WebApplication.Controllers
 
         }
 
+        public ActionResult Home()
+        {
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        public ActionResult About()
+        {
+            return RedirectToAction("About", "Home");
+
+        }
+
+
+      
+        public ActionResult ShopListing()
+        {
+            return RedirectToAction("ShopListing", "Home");
+
+        }
+
+
+        public ActionResult Blog()
+        {
+            return RedirectToAction("Blog", "Home");
+        }
+
+        public ActionResult Contact()
+        {
+            return RedirectToAction("Contact", "Home");
+        }
+
+
+        public ActionResult Cart()
+        {
+            return RedirectToAction("Cart", "Home");
+        }
+        public ActionResult Wishlist()
+        {
+            return RedirectToAction("Wishlist", "Home");
+        }
+       
+
+       
+
+
         public ActionResult AdminAccountHome()
         {
             return View();

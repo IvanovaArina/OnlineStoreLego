@@ -237,6 +237,7 @@
     <Compile Include="AutoMapperProfile.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeUserController.cs" />
@@ -247,6 +248,7 @@
     <Compile Include="Controllers\ManageContentController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WishlistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -378,6 +380,8 @@
     <Content Include="Views\ManageProduct\EditProduct.cshtml" />
     <Content Include="Views\ManageProduct\CreateProduct.cshtml" />
     <Content Include="Views\Review\Index.cshtml" />
+    <Content Include="Views\Cart\AddToCart.cshtml" />
+    <Content Include="Views\Wishlist\AddToWishlist.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -37,7 +37,7 @@
             <nav class="navbar navbar-expand-lg p-0">
                 <div class="collapse navbar-collapse" id="mynavbar">
                     <div class="left-nav">
-                        <a href="@Url.Action("Index", "Home")" class="navbar-brand m-0 p-0"><img alt src="~/assets/media/logo.png"></a>
+                        <a href="@Url.Action("Home", "Login")" class="navbar-brand m-0 p-0"><img alt src="~/assets/media/logo.png"></a>
                         <ul class="navbar-nav m-0">
                             <li class="has-children">
 
@@ -45,13 +45,13 @@
                             </li>
                             <li class="menu-item">
 
-                                @Html.ActionLink("Home", "Index", "Home", new { @class = "menu-link" })
+                                @Html.ActionLink("Home", "Home", "Login", new { @class = "menu-link" })
                             </li>
 
 
                             <li class="menu-item">
 
-                                @Html.ActionLink("About us", "About", "Home", new { @class = "menu-link" })
+                                @Html.ActionLink("About us", "About", "Login", new { @class = "menu-link" })
                             </li>
                         </ul>
                     </div>
@@ -59,19 +59,19 @@
                     <div class="right-nav">
                         <ul class="navbar-nav m-0">
                             <li class="has-children">
-                                @Html.ActionLink("Shop", "ShopListing", "Home", new { @class = "menu-link" })
+                                @Html.ActionLink("Shop", "ShopListing", "Login", new { @class = "menu-link" })
 
                             </li>
                             <li class="has-children">
                                 <a href="javascript:void(0);">Pages</a>
                                 <ul class="submenu">
-                                    <li>@Html.ActionLink("Blog", "Blog", "Home", new { @class = "menu-link" })</li>
-                                    <li>@Html.ActionLink("Blog-detail", "BlogDetail", "Home", new { @class = "menu-link" })></li>
+                                    <li>@Html.ActionLink("Blog", "Blog", "Login", new { @class = "menu-link" })</li>
+                                    
                                     <li><a href="product-detail.html">Product Detail</a></li>
-                                    <li>@Html.ActionLink("Cart", "Cart", "Home", new { @class = "menu-link" })</li>
+                                    <li>@Html.ActionLink("Cart", "Cart", "Login", new { @class = "menu-link" })</li>
                                     <li><a href="checkout.html">Checkout</a></li>
-                                    <li>@Html.ActionLink("Wishlist", "Wishlist", "Home", new { @class = "menu-link" })</li>
-                                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { @class = "menu-link" })</li>
+                                    <li>@Html.ActionLink("Wishlist", "Wishlist", "Login", new { @class = "menu-link" })</li>
+                                    <li>@Html.ActionLink("Contact", "Contact", "Login", new { @class = "menu-link" })</li>
                                 </ul>
                             </li>
                         </ul>

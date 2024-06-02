@@ -74,6 +74,51 @@ namespace WebApplication.BL.Core
 
             return listOfProductDTO;
 
+
+        }
+
+        public List<ProductDTO> getProductsByCategoryFromDatabase(string category)
+        {
+            List<ProductDTO> listOfProductDTO = new List<ProductDTO>();
+
+            List<int> productIds = new List<int>();
+
+            using (var db = new ProductContext())
+            {
+                productIds = db.Products
+                                .Where(p => p.Category == category)
+                                .Select(w => w.ProductId)
+                                .ToList();
+            }
+
+            foreach (var i in productIds)
+            {
+                listOfProductDTO.Add(getProductDTObyId(i));
+            }
+
+            return listOfProductDTO;
+        }
+
+        public List<ProductDTO> getProductsBySellCategoryFromDatabase(string sellCategory)
+        {
+            List<ProductDTO> listOfProductDTO = new List<ProductDTO>();
+
+            List<int> productIds = new List<int>();
+
+            using (var db = new ProductContext())
+            {
+                productIds = db.Products
+                                .Where(p => p.SellCategory == sellCategory)
+                                .Select(w => w.ProductId)
+                                .ToList();
+            }
+
+            foreach (var i in productIds)
+            {
+                listOfProductDTO.Add(getProductDTObyId(i));
+            }
+
+            return listOfProductDTO;
         }
 
         public bool checkIfProductNumberExists(int number)

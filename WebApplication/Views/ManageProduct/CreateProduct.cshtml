@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "CreateProduct";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
@@ -8,76 +7,74 @@
 
 <h2>Create Product</h2>
 
-@using (Html.BeginForm("CreateProductAction", "ManageProduct", FormMethod.Post))
+@using (Html.BeginForm("CreateProductAction", "ManageProduct", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="form-group">
         <label for="productNumber">Number</label>
-        <textarea class="form-control" id="productNumber" name="ProductNumber" rows="5" required>@Model.ProductNumber</textarea>
+        @Html.TextAreaFor(model => model.ProductNumber, new { @class = "form-control", id = "productNumber", rows = 5, required = "required" })
     </div>
 
     <div class="form-group">
         <label for="productName">Name</label>
-        <input type="text" class="form-control" id="productName" name="ProductName" required>
+        @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control", id = "productName", required = "required" })
     </div>
 
     <div class="form-group">
         <label for="price">Price</label>
-        <input type="number" class="form-control" id="price" name="Price" required>
+        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", id = "price", type = "number", required = "required" })
     </div>
 
     <div class="form-group">
         <label for="categoryByAge">Age Category</label>
-        <select class="form-control" id="categoryByAge" name="CategoryByAge" required>
-            <option value="0-3">0-3</option>
-            <option value="3-10">3-10</option>
-            <option value="10-16">10-16</option>
-            <option value="16-21">16-21</option>
-        </select>
+        @Html.DropDownListFor(model => model.CategoryByAge, new SelectList(new[] {
+            new { Value = "0-3", Text = "0-3" },
+            new { Value = "3-10", Text = "3-10" },
+            new { Value = "10-16", Text = "10-16" },
+            new { Value = "16-21", Text = "16-21" }
+        }, "Value", "Text"), new { @class = "form-control", id = "categoryByAge", required = "required" })
     </div>
 
     <div class="form-group">
         <label for="category">Category</label>
-        <select class="form-control" id="category" name="Category" required>
-            <option value="Toy Sets">Toy Sets</option>
-            <option value="Plush Toy">Plush Toy</option>
-            <option value="Lego Bricks">Lego Bricks</option>
-            <option value="Remote Control">Remote Control</option>
-        </select>
+        @Html.DropDownListFor(model => model.Category, new SelectList(new[] {
+            new { Value = "Toy Sets", Text = "Toy Sets" },
+            new { Value = "Plush Toy", Text = "Plush Toy" },
+            new { Value = "Lego Bricks", Text = "Lego Bricks" },
+            new { Value = "Remote Control", Text = "Remote Control" }
+        }, "Value", "Text"), new { @class = "form-control", id = "category", required = "required" })
     </div>
 
     <div class="form-group">
         <label for="sellCategory">Sell Category</label>
-        <select class="form-control" id="sellCategory" name="SellCategory" required>
-            <option value="On Sales">On Sales</option>
-            <option value="Top Sales">Top Sales</option>
-            <option value="Boys">Boys</option>
-            <option value="Girls">Girls</option>
-        </select>
+        @Html.DropDownListFor(model => model.SellCategory, new SelectList(new[] {
+            new { Value = "On Sales", Text = "On Sales" },
+            new { Value = "Top Sellers", Text = "Top Sellers" },
+            new { Value = "Boys", Text = "Boys" },
+            new { Value = "Girls", Text = "Girls" }
+        }, "Value", "Text"), new { @class = "form-control", id = "sellCategory", required = "required" })
     </div>
 
     <div class="form-group">
         <label for="quantity">Quantity</label>
-        <input type="number" class="form-control" id="quantity" name="Quantity" required>
+        @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control", id = "quantity", type = "number", required = "required" })
     </div>
 
     <div class="form-group">
         <label for="productDetail">Product Detail</label>
-        <textarea class="form-control" id="productDetail" name="ProductDetail" rows="5">@Model.ProductDetail</textarea>
+        @Html.TextAreaFor(model => model.ProductDetail, new { @class = "form-control", id = "productDetail", rows = 5 })
     </div>
 
     <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="isActive" name="IsActive" value="true" />
+        @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input", id = "isActive" })
         <label class="form-check-label" for="isActive">Is Active</label>
     </div>
 
     <div class="form-group">
         <label for="articleImage">Image</label>
         <input type="file" class="form-control-file" id="ProductImage" name="ProductImage">
-        @Html.ValidationMessage("ProductImage", "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary">Save changes</button>
     <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index", "ManageProduct")'">Cancel</button>
 }
-
-

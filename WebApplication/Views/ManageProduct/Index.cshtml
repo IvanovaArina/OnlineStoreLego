@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "ManageProducts";
+    ViewBag.Title = "ManageProduct";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 @model WebApplication.Models.ProductModel
@@ -138,7 +138,7 @@
                 // Redirect to CreateProduct page
                 window.location.href = '@Url.Action("CreateProduct", "ManageProduct")';
             });
-        });
+        }); 
 
                 
                 
