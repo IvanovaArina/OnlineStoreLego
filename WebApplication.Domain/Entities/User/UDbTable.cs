@@ -65,7 +65,7 @@ namespace WebApplication.Domain.Entities.User
 
 
         // Список заказов (если один пользователь может иметь несколько заказов)
-        public virtual ICollection<OrderTable> Orders { get; set; }
+        public ICollection<OrderTable> Orders { get; set; }
 
     }
 }

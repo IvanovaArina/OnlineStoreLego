@@ -104,7 +104,7 @@ namespace WebApplication.BL.Core
                         Email = dbUser.Email,
                         Password = dbUser.Password,
                         Role = dbUser.Role,
-                        Wishlist = dbUser.Wishlist
+                        //Wishlist = dbUser.WishlistId
                         // Map other properties as necessary
                     };
                 }
@@ -173,15 +173,17 @@ namespace WebApplication.BL.Core
 
             List<ProductTable> productTables = userWishlistTable.Products;
 
-
-            foreach (var i in productTables)
+            if (productTables != null)
             {
-
-                listOfProductsDTO.Add(Mapper.Map<ProductDTO>(i));
-
+                foreach (var i in productTables)
+                {
+                    listOfProductsDTO.Add(Mapper.Map<ProductDTO>(i));
+                }
             }
             return listOfProductsDTO;
         }
+
+
 
         public UserDTO getUserDTObyId(int id)
         {
@@ -198,10 +200,9 @@ namespace WebApplication.BL.Core
                         Email = dbUser.Email,
                         Password = dbUser.Password,
                         ConfirmPassword = dbUser.ConfirmPassword,
-                        //KeyCredential
                         Role = defineRole(dbUser),
-                        //UserIp = dbUser.UserIp,
-                        //Wishlist 
+                        WishlistId = dbUser.WishlistId,
+                        CartId = dbUser.CartId
                     };
                 }
             }
@@ -222,6 +223,20 @@ namespace WebApplication.BL.Core
                 {
                     return false;
                 }
+            }
+        }
+
+        public UDbTable findUserByEmail(string email)
+        {
+            using (var db = new UserContext())
+            {
+                var dbUser = db.Users.FirstOrDefault(x => x.Email == email);
+
+                if (dbUser != null)
+                {
+                    return dbUser;
+                }
+                return null;
             }
         }
 
@@ -295,8 +310,9 @@ namespace WebApplication.BL.Core
                 KeyCredential = userDTO.KeyCredential,
                 Role = userDTO.Role,
 
-                Wishlist = wishlistApi.createWishlistTable(),
-                Cart = cartApi.createCartTable(),
+                //Wishlist = wishlistApi.createWishlistTable(),
+                //Cart = cartApi.createCartTable(),
+
                 //Order = orderApi.createOrderTable()
 
             };
@@ -324,8 +340,7 @@ namespace WebApplication.BL.Core
                             UserId = dbUser.UserId,
                             Email = dbUser.Email,
                             Password = dbUser.Password,
-                            Role = dbUser.Role,
-                            Wishlist = dbUser.Wishlist
+                            Role = dbUser.Role
                         };
                     }
                     else

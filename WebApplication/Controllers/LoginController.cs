@@ -34,6 +34,11 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        public ActionResult SignUp()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogIn(UserDataModel userModel)
@@ -42,10 +47,7 @@ namespace WebApplication.Controllers
             var ulData = new UserDTO
             {
                 Email = userModel.Email,
-                //UserIp = adress,
-                Username = userModel.Username,
-                Password = userModel.Password,
-
+                Password = userModel.Password
             };
 
             BaseResponces resp = _session.ValidateUserCredentialAction(ulData);
@@ -54,6 +56,11 @@ namespace WebApplication.Controllers
             {
                 HttpCookie cookie = _session.GenCookie(ulData.Email);
                 ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+                UserApi userApi = new UserApi();
+                UDbTable userDb = userApi.findUserByEmail(ulData.Email);
+
+                var r = userApi.getUserDTObyId(userDb.UserId);
+                userModel = userModel.moveDataFromDTOToModel(r);
 
                 // Роль пользователя уже определена в объекте resp, полученном от _session.ValidateUserCredentialAction
                 switch (resp.Role)

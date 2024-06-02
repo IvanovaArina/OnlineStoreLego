@@ -22,9 +22,9 @@ namespace WebApplication.Models
         public URole Role { get; set; }
         //public string UserIp { get; set; }
 
-        public WishlistTable Wishlist { get; set; }
+        public int WishlistId { get; set; }
 
-        public CartTable Cart { get; set; }
+        public int CartId { get; set; }
 
 
         public UserDataModel() {
@@ -41,6 +41,12 @@ namespace WebApplication.Models
         {
             var userApi = new UserApi();
             return userApi.getWishlistFromDatabase(userId);
+        }
+
+        public bool CkeckIfWihlistContainItems(int wishlistId)
+        {
+            var wishlistApi = new WishlistApi();
+            return wishlistApi.CkeckIfWihlistContainItems(wishlistId);
         }
 
         public ProductModel getDefaultProductModel()
@@ -60,9 +66,8 @@ namespace WebApplication.Models
                 ConfirmPassword = this.ConfirmPassword,
                 KeyCredential = this.KeyCredential,
                 Role = this.Role,
-                //UserIp = this.UserIp,
-                Wishlist = this.Wishlist,
-                Cart = this.Cart
+                WishlistId = this.WishlistId,
+                CartId = this.CartId
             };
 
             return userDTO;
@@ -79,9 +84,8 @@ namespace WebApplication.Models
                 ConfirmPassword = userDTO.ConfirmPassword,
                 KeyCredential = userDTO.KeyCredential,
                 Role = userDTO.Role,
-                //UserIp = userDTO.UserIp,
-                Wishlist = userDTO.Wishlist,
-                Cart = userDTO.Cart
+                WishlistId = userDTO.WishlistId,
+                CartId = userDTO.CartId
             };
 
             return userModel;

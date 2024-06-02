@@ -19,10 +19,9 @@ namespace WebApplication.BL.Core
         public URole Role { get; set; }
         //public string UserIp { get; set;}
 
-        public WishlistTable Wishlist { get; set; }
+        public int WishlistId { get; set; }
 
-        public CartTable Cart { get; set; }
-        public OrderTable Order { get; set; }
+        public int CartId { get; set; }
 
 
 

@@ -63,11 +63,23 @@ namespace WebApplication.BL.Core
                    }
                 };
 
-            //    context.Wishlists.Add(Wishlist);
-            //    context.SaveChanges();
-            //}
-
             return Wishlist;
+        }
+
+        public bool CkeckIfWihlistContainItems(int wishlistId)
+        {
+            WishlistTable wishlistDb = null;
+            using (var db = new WishlistContext())
+            {
+                wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
+            }
+
+            if (wishlistDb.Products == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
