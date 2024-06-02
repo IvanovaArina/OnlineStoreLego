@@ -1,5 +1,7 @@
 ﻿@using System.Web.Optimization
 
+@model WebApplication.Models.UserDataModel
+
 <!DOCTYPE html>
 
 <html>
@@ -71,7 +73,7 @@
                     <div class="right-nav">
                         <ul class="navbar-nav m-0">
                             <li class="menu-item">
-                                @Html.ActionLink("AccountUser", "UserAccount", "Users", new { area = "" }, new { @class = "menu-link" })
+                                @Html.ActionLink("AccountUser", "UserAccount", "Users", new { area = "", id = Model.UserId }, new { @class = "menu-link" })
                             </li>
                             <li class="menu-item">
                                 @Html.ActionLink("Logout", "LogOut", "Login", new { area = "" }, new { @class = "menu-link" })
@@ -201,10 +203,10 @@
                     </div>
                     <div class="newsletter">
                         @*<h3 class="mb-24">Subscribe to our Newsletter</h3>
-                        <form action="./index-2.html" class="">
-                            <input type="email" id="email" placeholder="Email" class="form-control mb-16" required>
-                            <button type="submit" class="cus-btn primary w-100">Subscribe</button>
-                        </form>*@
+                            <form action="./index-2.html" class="">
+                                <input type="email" id="email" placeholder="Email" class="form-control mb-16" required>
+                                <button type="submit" class="cus-btn primary w-100">Subscribe</button>
+                            </form>*@
                         <ul class="unstyled social-icons">
                             <li><a href="./index-2.html"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="./index-2.html"><i class="fab fa-twitter"></i></a></li>
@@ -228,28 +230,28 @@
                         </ul>
                     </div>
                     @*<div class="menu">
-                        <h3 class="color-white mb-8">Important Links</h3>
-                        <ul class="link unstyled">
-                            <li class="">
-                                <a href="./index.html">– Home</a>
-                            </li>
-                            <li class="">
-                                <a href="./cart.html">– Cart</a>
-                            </li>
-                            <li class="">
-                                <a href="./shop-listing-1.html">– Shop</a>
-                            </li>
-                            <li class="">
-                                <a href="./checkout.html">– Checkout</a>
-                            </li>
-                            <li class="">
-                                <a href="./about.html">– About</a>
-                            </li>
-                            <li class="">
-                                <a href="./product-detail-2.html">– Product Detail</a>
-                            </li>
-                        </ul>
-                    </div>*@
+                            <h3 class="color-white mb-8">Important Links</h3>
+                            <ul class="link unstyled">
+                                <li class="">
+                                    <a href="./index.html">– Home</a>
+                                </li>
+                                <li class="">
+                                    <a href="./cart.html">– Cart</a>
+                                </li>
+                                <li class="">
+                                    <a href="./shop-listing-1.html">– Shop</a>
+                                </li>
+                                <li class="">
+                                    <a href="./checkout.html">– Checkout</a>
+                                </li>
+                                <li class="">
+                                    <a href="./about.html">– About</a>
+                                </li>
+                                <li class="">
+                                    <a href="./product-detail-2.html">– Product Detail</a>
+                                </li>
+                            </ul>
+                        </div>*@
                 </div>
             </div>
             <p class="color-white text-center">©2024 Cricket Pulse All Rights Reserved.</p>

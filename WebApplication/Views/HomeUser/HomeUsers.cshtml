@@ -4,7 +4,8 @@
     Layout = "~/Views/Shared/ULayout.cshtml";
 }
 
-@model WebApplication.Models.ProductModel
+@model WebApplication.Models.UserDataModel
+
 <!-- Hero Banner start -->
 <div class="hero-banner-2">
     <div class="container">
@@ -52,7 +53,7 @@
             <div class="product">
                 <div class="row mb-16">
                     @{
-                        var productTable = Model.dataForTable();
+                        var productTable = Model.getDefaultProductModel().dataForTable();
 
                         foreach (var product in productTable)
                         {

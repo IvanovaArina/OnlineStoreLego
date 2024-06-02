@@ -31,11 +31,11 @@ namespace WebApplication.Controllers
                 })
                 .ToList();
         }
-        public ActionResult HomeUsers(ProductModel productModel)
+        public ActionResult HomeUsers(UserDataModel userDataModel)
         {
             var articles = GetSomeArticles(3);
             ViewBag.Articles = articles;
-            return View(productModel);
+            return View(userDataModel);
 
         }
         public ActionResult About()
@@ -113,9 +113,9 @@ namespace WebApplication.Controllers
         {
             return View();
         }
-        public ActionResult Wishlist()
+        public ActionResult Wishlist(UserDataModel userDataModel)
         {
-            return View();
+            return View(userDataModel);
         }
         public ActionResult Checkout()
         {

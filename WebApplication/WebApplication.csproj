@@ -258,6 +258,7 @@
     <Compile Include="Models\UserDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ItemsListViewModel.cs" />
+    <Compile Include="ViewModels\ProductAndUserModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

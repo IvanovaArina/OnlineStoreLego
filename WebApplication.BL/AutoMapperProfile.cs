@@ -31,7 +31,6 @@ namespace WebApplication.BL
             CreateMap<UDbTable, UserDTO>().ReverseMap();
 
             CreateMap<ArticleTable, ArticleDTO>().ReverseMap();
-            //CreateMap<ArticleTable, ArticleDTO>().ReverseMap();
             CreateMap<ProductTable, ProductDTO>().ReverseMap();
             CreateMap<ReviewTable, ReviewDTO>().ReverseMap();
 

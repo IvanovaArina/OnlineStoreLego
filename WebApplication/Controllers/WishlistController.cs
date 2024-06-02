@@ -9,9 +9,9 @@ namespace WebApplication.Controllers
     public class WishlistController : Controller
     {
         // GET: Wishlist
-        public ActionResult Index()
+        public ActionResult Wishlist()
         {
-            return View();
+            return View("Wishlist");
         }
 
         public ActionResult AddToWishlist()

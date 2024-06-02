@@ -152,6 +152,35 @@ namespace WebApplication.BL.Core
 
             }
             return listOfUserDTO;
+        }       
+        
+        public List<ProductDTO> getWishlistFromDatabase(int userId)
+        {
+            List<ProductDTO> listOfProductsDTO = new List<ProductDTO>();
+
+            UDbTable userDb = null;
+
+            using (var db = new UserContext())
+            {
+                userDb = db.Users.FirstOrDefault(w => w.UserId == userId);
+            }
+
+            WishlistTable userWishlistTable = null;
+            using (var db = new WishlistContext())
+            {
+                userWishlistTable = db.Wishlists.FirstOrDefault(w => w.wishlistId == userDb.WishlistId);
+            }
+
+            List<ProductTable> productTables = userWishlistTable.Products;
+
+
+            foreach (var i in productTables)
+            {
+
+                listOfProductsDTO.Add(Mapper.Map<ProductDTO>(i));
+
+            }
+            return listOfProductsDTO;
         }
 
         public UserDTO getUserDTObyId(int id)

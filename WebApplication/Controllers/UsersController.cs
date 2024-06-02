@@ -18,21 +18,13 @@ namespace WebApplication.Controllers
         }
 
         // GET: Users
-        public ActionResult UserAccount()
+        public ActionResult UserAccount(UserDataModel userDataModel)
         {
-            // Получите данные текущего пользователя
-            var currentUserId = 1; // Пример. Здесь нужно указать идентификатор текущего пользователя
-            var userDTO = _userApi.getUserDTObyId(currentUserId);
+            //var userDTO = _userApi.getUserDTObyId(userDataModel.UserId);
 
-            // Создайте экземпляр модели и заполните её данными
-            var model = new UserDataModel
-            {
-                Username = userDTO.Username
-                // Заполните другие свойства, если необходимо
-            };
+            //var model = userDataModel.moveDataFromDTOToModel(userDTO);
 
-            // Передайте модель в представление
-            return View(model);
+            return View(userDataModel);
         }
 
         public ActionResult EditInfo()

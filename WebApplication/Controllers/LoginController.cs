@@ -60,10 +60,10 @@ namespace WebApplication.Controllers
                 {
                     case URole.Admin:
                         // Если пользователь - админ, перенаправляем на страницу админа
-                        return RedirectToAction("AdminAccount", "Admin");
+                        return RedirectToAction("AdminAccount", "Admin", userModel);
                     case URole.User:
                         // Если пользователь не админ, перенаправляем на обычную страницу пользователя
-                        return RedirectToAction("HomeUsers", "HomeUser");
+                        return RedirectToAction("Wishlist", "HomeUser", userModel);
                     default:
                         // Если роль пользователя неопределенная или не ожидаемая, обработайте это соответствующим образом
                         ViewBag.ErrorMessage = "Your role is not recognized by the system.";
@@ -85,21 +85,12 @@ namespace WebApplication.Controllers
                 {
                     ViewBag.ErrorMessage = "Invalid login attempt";
                 }
-                //return View(userModel);
-                return View();
+                return View(userModel);
+                //never happen
             }
 
 
         }
-
-        //SignUp
-        //use?
-        public ActionResult SignUp()
-        {
-            return View (new UserDataModel());
-        }
-
-
 
         public ActionResult LogOut()
         {

@@ -35,7 +35,19 @@ namespace WebApplication.Models
         {
             var userApi = new UserApi();
             return userApi.getUsersFromDatabase();
+        } 
+        
+        public List<ProductDTO> dataForTableWishlist(int userId)
+        {
+            var userApi = new UserApi();
+            return userApi.getWishlistFromDatabase(userId);
         }
+
+        public ProductModel getDefaultProductModel()
+        {
+           return new ProductModel(); 
+        }    
+
 
         public UserDTO moveDataFromModelToDTO()
         {
