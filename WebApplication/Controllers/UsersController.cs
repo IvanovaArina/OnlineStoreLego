@@ -25,6 +25,13 @@ namespace WebApplication.Controllers
             //var model = userDataModel.moveDataFromDTOToModel(userDTO);
 
             return View(userDataModel);
+        } 
+        
+        public ActionResult UserAccountWithString(string userDataModel)
+        {
+            var model = Newtonsoft.Json.JsonConvert.DeserializeObject<UserDataModel>(userDataModel);
+
+            return View("UserAccount", model);
         }
 
         public ActionResult EditInfo(UserDataModel userDataModel)
