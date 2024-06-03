@@ -216,7 +216,6 @@ namespace WebApplication.Controllers
             {
 
                 ConfirmPassword = userModel.ConfirmPassword,
-
                 Password = userModel.Password,
                 Email = userModel.Email,
                 Role = role,

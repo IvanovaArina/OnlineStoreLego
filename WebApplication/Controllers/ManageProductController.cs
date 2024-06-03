@@ -5,12 +5,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication.BL.Core;
+using WebApplication.BL.DBModel;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
     public class ManageProductController : Controller
     {
+        private ProductContext db1 = new ProductContext();//gbf
         // GET: ManageProduct
         [HttpGet]
         public ActionResult Index(ProductModel productModel)

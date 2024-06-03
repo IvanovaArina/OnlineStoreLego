@@ -384,30 +384,30 @@ namespace WebApplication.BL.Core
         }
 
 
-        public void CreateFirstUser()
-        {
+        //public void CreateFirstUser()
+        //{
 
-            ProductTable productTable = new ProductTable()
-            {
-                ProductNumber = 111,
-                ProductName = "ProductName",
-                Price = 0,
-                CategoryByAge = "CategoryByAge",
-                Category = "Category",
-                SellCategory = "SellCategory",
-                Quantity = 500,
-                IsActive = false,
-                ProductDetail = "ProductDetail",
-                ImagePath = "ImagePath"
-            };
+        //    ProductTable productTable = new ProductTable()
+        //    {
+        //        ProductNumber = 111,
+        //        ProductName = "ProductName",
+        //        Price = 0,
+        //        CategoryByAge = "CategoryByAge",
+        //        Category = "Category",
+        //        SellCategory = "SellCategory",
+        //        Quantity = 500,
+        //        IsActive = false,
+        //        ProductDetail = "ProductDetail",
+        //        ImagePath = "ImagePath"
+        //    };
 
-            using (var db = new ProductContext())
-            {
-                db.Products.Add(productTable);
-                db.SaveChanges();
-            }
+        //    using (var db = new ProductContext())
+        //    {
+        //        db.Products.Add(productTable);
+        //        db.SaveChanges();
+        //    }
 
-        }
+        //}
 
 
         public BaseResponces RegisterNewUserAccount(UserDTO userDTO)
@@ -422,10 +422,10 @@ namespace WebApplication.BL.Core
                 return new BaseResponces { Status = false, StatusMessage = "This UserName already registered" };
             }
 
-            if (CheckIfThereAreUsers())
-            {
-                CreateFirstUser();
-            }
+            //if (CheckIfThereAreUsers())
+            //{
+            //    CreateFirstUser();
+            //}
 
             var user = createNewUserWithHash(userDTO);
             var userDb = Mapper.Map<UDbTable>(user); // Используем AutoMapper для преобразования

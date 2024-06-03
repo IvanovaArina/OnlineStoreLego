@@ -14,5 +14,12 @@ namespace WebApplication.BL.DBModel
         { }
 
         public virtual DbSet<ProductTable> Products { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // Укажите строку подключения к базе данных
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=Blogging;Trusted_Connection=True;");
+        }
+
     }
 }

@@ -246,5 +246,25 @@ namespace WebApplication.BL.Core
             }
 
         }
+
+        public ProductTable getDefaultProductTable()
+        {
+            using (var dbContext = new ProductContext())
+            {
+                return new ProductTable
+                {
+                    ProductNumber = 1,
+                    ProductName = "DefaultProductName",
+                    Price = 20,
+                    CategoryByAge = "DefaultCategoryByAge",
+                    Category = "DefaultCategory",
+                    SellCategory = "DefaultSellCategory",
+                    Quantity = 500,
+                    IsActive = true,
+                    ImagePath = "DefaultImagePath"
+                };
+            }
+        }
+
     }
 }

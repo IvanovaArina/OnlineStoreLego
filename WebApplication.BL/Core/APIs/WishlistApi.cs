@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,37 +31,16 @@ namespace WebApplication.BL.Core
         }
 
 
-        public WishlistTable createWishlistTable()
+        public WishlistTable createWishlistTableEmpty()
         {
             WishlistTable Wishlist = null;
+
             using (var context = new WishlistContext())
             {
+                
                 Wishlist = new WishlistTable
                 {
                     test = 2,
-                    //wishlistEntity = new List<int>()
-                    //Products = new List<ProductTable>
-                    //{
-                    //    new ProductTable { ProductNumber = 1,
-                    //    ProductName = "ProductName",
-                    //    Price = 20,
-                    //    CategoryByAge = "CategoryByAge",
-                    //    Category = "Category",
-                    //    SellCategory = "SellCategory",
-                    //    Quantity = 500,
-                    //    IsActive = true,
-                    //    ImagePath = "ImagePath"
-                    //    },
-                    //    new ProductTable { ProductNumber = 2,
-                    //    ProductName = "ProductName2",
-                    //    Price = 202,
-                    //    CategoryByAge = "CategoryByAge2",
-                    //    Category = "Category2",
-                    //    SellCategory = "SellCategory2",
-                    //    Quantity = 5002,
-                    //    IsActive = false,
-                    //    ImagePath = "ImagePath"
-                    //    },
                     Products = new List<int>()
                 };
 
@@ -68,8 +48,65 @@ namespace WebApplication.BL.Core
                 context.SaveChanges();
 
             }
-        return Wishlist;
+          return Wishlist;
         }
+
+        public bool checkIfProductNumberExists(int number)
+        {
+            try
+            {
+                using (var db = new ProductContext())
+                {
+                    var dbProduct = db.Products.FirstOrDefault(x => x.ProductNumber == number);
+
+                    if (dbProduct != null)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                using (var context = new ProductContext())
+                {
+                    context.Database.EnsureCreated();
+                }
+            }
+        }
+
+        public WishlistTable createWishlistTable()
+        {
+            ProductApi productApi = new ProductApi();
+            var product = productApi.getDefaultProductTable();
+
+            if (!checkIfProductNumberExists(product.ProductNumber))
+            {
+                using (var context = new ProductContext())
+                {
+                    context.Products.Add(product);
+                    context.SaveChanges();
+                }
+            }
+
+           
+
+            ProductDTO productDTO = Mapper.Map<ProductDTO>(product);
+
+            WishlistTable wishlistTable = createWishlistTableEmpty();
+
+            using (var context = new WishlistContext())
+            {
+                wishlistTable.Products.Add (productDTO.ProductId);
+                context.Wishlists.Add (wishlistTable);
+                context.SaveChanges();
+            }
+
+            return wishlistTable;
+            }
 
         public bool CkeckIfWihlistContainItems(int wishlistId)
         {
