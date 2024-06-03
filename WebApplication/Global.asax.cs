@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +12,7 @@ using AutoMapper;
 using WebApplication.App_Start;
 using WebApplication.BL;
 using WebApplication.BL.Core;
+using WebApplication.BL.DBModel;
 
 namespace WebApplication
 {
@@ -18,6 +20,8 @@ namespace WebApplication
     {
         void Application_Start(object sender, EventArgs e)
         {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<ProductContext>());
+
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);

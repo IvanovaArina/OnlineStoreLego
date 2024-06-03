@@ -9,7 +9,8 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+
         }
 
         protected override void Seed(WebApplication.BL.DBModel.ProductContext context)

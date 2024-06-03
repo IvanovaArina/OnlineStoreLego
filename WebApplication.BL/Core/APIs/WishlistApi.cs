@@ -51,62 +51,61 @@ namespace WebApplication.BL.Core
           return Wishlist;
         }
 
-        public bool checkIfProductNumberExists(int number)
+        public bool checkIfProductNumberExists(ProductContext db, int number) // Принимает ProductContext как параметр
         {
-            try
-            {
-                using (var db = new ProductContext())
-                {
-                    var dbProduct = db.Products.FirstOrDefault(x => x.ProductNumber == number);
-
-                    if (dbProduct != null)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                using (var context = new ProductContext())
-                {
-                    context.Database.EnsureCreated();
-                }
-            }
+            var dbProduct = db.Products.FirstOrDefault(x => x.ProductNumber == number);
+            return (dbProduct != null);
         }
 
-        public WishlistTable createWishlistTable()
+        //public bool checkIfProductNumberExists(int number)
+        //{
+        //    using (var db = new ProductContext())
+        //        {
+        //            var dbProduct = db.Products.FirstOrDefault(x => x.ProductNumber == number);
+
+        //            if (dbProduct != null)
+        //            {
+        //                return true;
+        //            }
+        //            else
+        //            {
+        //                return false;
+        //            }
+        //        }
+        //}
+
+        public ProductDTO createProduct()
         {
             ProductApi productApi = new ProductApi();
             var product = productApi.getDefaultProductTable();
 
-            if (!checkIfProductNumberExists(product.ProductNumber))
+            using (var db = new ProductContext())
             {
-                using (var context = new ProductContext())
+                if (!checkIfProductNumberExists(db, product.ProductNumber))
                 {
-                    context.Products.Add(product);
-                    context.SaveChanges();
+                    db.Products.Add(product);
+                    db.SaveChanges();
                 }
             }
 
-           
-
             ProductDTO productDTO = Mapper.Map<ProductDTO>(product);
+            return productDTO;
+        }
 
+        public WishlistTable createWishlistTable()
+        {
+            ProductDTO productDTO = createProduct();
             WishlistTable wishlistTable = createWishlistTableEmpty();
 
             using (var context = new WishlistContext())
             {
-                wishlistTable.Products.Add (productDTO.ProductId);
-                context.Wishlists.Add (wishlistTable);
+                wishlistTable.Products.Add(productDTO.ProductId);
+                context.Wishlists.Add(wishlistTable);
                 context.SaveChanges();
             }
 
             return wishlistTable;
-            }
+        }
 
         public bool CkeckIfWihlistContainItems(int wishlistId)
         {
