@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WebApplication.BL.Core;
 using WebApplication.BL.DBModel;
 using WebApplication.Models;
+using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
@@ -57,8 +58,8 @@ namespace WebApplication.Controllers
 
         public ActionResult ShopListingWithString(string userDataModel)
         {
-
-            return View(userDataModel);
+            var model = Newtonsoft.Json.JsonConvert.DeserializeObject<UserDataModel>(userDataModel);
+            return View("ShopListing", model);
         }
 
         public ActionResult Blog(int page = 1, int pageSize = 6)

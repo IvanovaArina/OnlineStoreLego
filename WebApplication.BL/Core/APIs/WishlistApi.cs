@@ -132,13 +132,20 @@ namespace WebApplication.BL.Core
             {
                 wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
 
-                wishlistDb.Products = new List<int>();
-                wishlistDb.Products.Add(productDb.ProductId);
+                wishlistDb.Products = new List<int>() { productDb.ProductId };
+                //wishlistDb.Products.Add(productDb.ProductId);
 
                 db.SaveChanges();
             }
 
-            ProductTable productTable = null;
+            using (var db = new WishlistContext())
+            {
+                wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
+            }
+
+
+
+                ProductTable productTable = null;
             using (var db = new ProductContext())
             {
                 productTable = db.Products.FirstOrDefault(m => m.ProductId == productDb.ProductId);
