@@ -44,8 +44,8 @@ namespace WebApplication.BL.Core
                     Products = new List<int>()
                 };
 
-                context.Wishlists.Add(Wishlist);
-                context.SaveChanges();
+                //context.Wishlists.Add(Wishlist);
+                //context.SaveChanges();
 
             }
           return Wishlist;
