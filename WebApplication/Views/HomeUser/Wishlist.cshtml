@@ -98,7 +98,7 @@
 
             @{
 
-                
+
 
                 if (Model.CkeckIfWihlistContainItems(Model.WishlistId))
                 {
@@ -114,9 +114,12 @@
 
 
 
+            @{
+                var jsonModel = Newtonsoft.Json.JsonConvert.SerializeObject(Model);
+            }
 
             <div>
-                <a href="@Url.Action("ShopListing", "HomeUser", new { userDataModel = Model })" class="cus-btn primary">Continue Shopping</a>
+                <a href="@Url.Action("ShopListingWithString", "HomeUser", new { userDataModel = jsonModel })" class="cus-btn primary">Continue Shopping</a>
             </div>
 
         </div>

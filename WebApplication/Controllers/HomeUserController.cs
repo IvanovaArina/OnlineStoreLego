@@ -53,7 +53,12 @@ namespace WebApplication.Controllers
         public ActionResult ShopListing(UserDataModel userDataModel)
         {
             return View(userDataModel);
+        }
 
+        public ActionResult ShopListingWithString(string userDataModel)
+        {
+
+            return View(userDataModel);
         }
 
         public ActionResult Blog(int page = 1, int pageSize = 6)
