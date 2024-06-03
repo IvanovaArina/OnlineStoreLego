@@ -125,7 +125,7 @@ namespace WebApplication.BL.Core
         }
 
         //void
-        public WishlistTable addFirstProductToWishlist(int wishlistId, ProductTable productDb)
+        public void addFirstProductToWishlist(int wishlistId, ProductTable productDb)
         {
             WishlistTable wishlistDb = null;
             using (var db = new WishlistContext())
@@ -147,12 +147,12 @@ namespace WebApplication.BL.Core
                 db.SaveChanges();
             }
 
-            return wishlistDb;
+            //return wishlistDb;
 
         }
 
         //void
-        public WishlistTable addProductToWishlist(int wishlistId, ProductTable productDb)
+        public void addProductToWishlist(int wishlistId, ProductTable productDb)
         {
             WishlistTable wishlistDb = null;
             using (var db = new WishlistContext())
@@ -165,7 +165,7 @@ namespace WebApplication.BL.Core
 
                 db.SaveChanges();
             }
-            return wishlistDb;
+            //return wishlistDb;
 
         }
 
@@ -190,7 +190,7 @@ namespace WebApplication.BL.Core
                 {
                     addProductToWishlist(userDb.WishlistId, productDb);
                 }
-
+                //-
                 db.SaveChanges();
 
 
