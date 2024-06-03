@@ -20,7 +20,7 @@ namespace WebApplication
     {
         void Application_Start(object sender, EventArgs e)
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<ProductContext>());
+            //Database.SetInitializer(new CreateDatabaseIfNotExists<ProductContext>());
 
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
