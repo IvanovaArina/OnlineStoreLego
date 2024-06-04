@@ -31,30 +31,48 @@ namespace WebApplication.BL.Core
         }
 
 
-        public WishlistTable createWishlistTableEmpty()
-        {
-            WishlistTable Wishlist = null;
+        //public WishlistTable createWishlistTableEmpty()
+        //{
+        //    WishlistTable Wishlist = null;
 
-            using (var context = new WishlistContext())
-            {
+        //    using (var context = new WishlistContext())
+        //    {
+        //        if (!checkIfWishlistExists(context, 0))
+        //        {
+        //            context.Wishlists.Add(Wishlist = new WishlistTable
+        //            {
+        //                test = 2,
+        //                Products = new List<ProductTable>()
+        //            });
+        //            //context.SaveChanges();
+        //        }
+        //        else
+        //        {
+        //            context.Wishlists.Add(Wishlist = new WishlistTable
+        //            {
+        //                test = 3,
+        //                Products = new List<ProductTable>()
+        //            });
+        //            //context.SaveChanges();
+        //        }
 
-                Wishlist = new WishlistTable
-                {
-                    test = 2,
-                    Products = new List<int>()
-                };
+        //        //context.Wishlists.Add(Wishlist);
+        //        context.SaveChanges();
 
-                //context.Wishlists.Add(Wishlist);
-                //context.SaveChanges();
+        //    }
+        //    return Wishlist;
+        //}
 
-            }
-            return Wishlist;
-        }
-
-        public bool checkIfProductNumberExists(ProductContext db, int number) // Принимает ProductContext как параметр
+        public bool checkIfProductNumberExists(ProductContext db, int number) 
         {
             var dbProduct = db.Products.FirstOrDefault(x => x.ProductNumber == number);
             return (dbProduct != null);
+        }
+
+        public bool checkIfWishlistTestExists(WishlistContext db, int test)
+        {
+            var dbWishlist = db.Wishlists.FirstOrDefault(x => x.test == test);
+            return (dbWishlist != null);
         }
 
         //public bool checkIfProductNumberExists(int number)
@@ -92,14 +110,53 @@ namespace WebApplication.BL.Core
             return productDTO;
         }
 
+        public WishlistTable getDefaultWishlistTable()
+        {
+            return new WishlistTable()
+            {
+                test = 1,
+                Products = new List<ProductTable>()
+            };
+        }
+
+        public WishlistDTO createWishlist()
+        {
+            WishlistApi wishlistApi = new WishlistApi();
+            var wishlist = wishlistApi.getDefaultWishlistTable();
+
+            using (var db = new WishlistContext())
+            {
+                if (!checkIfWishlistTestExists(db, wishlist.test))
+                {
+                    db.Wishlists.Add(wishlist);
+                    db.SaveChanges();
+                }
+            }
+
+            WishlistDTO wishlistDTO = Mapper.Map<WishlistDTO>(wishlist);
+            return wishlistDTO;
+        }
+
+        public ProductTable findProductInDbById(int id)
+        {
+            ProductTable productTable = null;
+            using (var context = new ProductContext()) {
+                productTable = context.Products.FirstOrDefault(m => m.ProductId == id);
+            }
+            return productTable;
+        }
+
         public WishlistTable createWishlistTable()
         {
             ProductDTO productDTO = createProduct();
-            WishlistTable wishlistTable = createWishlistTableEmpty();
+            WishlistDTO wishlistDTO = createWishlist();
+
+            WishlistTable wishlistTable = Mapper.Map<WishlistTable>(wishlistDTO);
 
             using (var context = new WishlistContext())
             {
-                wishlistTable.Products.Add(productDTO.ProductId);
+                var t = findProductInDbById(productDTO.ProductId);
+                wishlistTable.Products.Add(t);
                 context.Wishlists.Add(wishlistTable);
                 context.SaveChanges();
             }
@@ -132,7 +189,7 @@ namespace WebApplication.BL.Core
             {
                 wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
 
-                wishlistDb.Products = new List<int>() { productDb.ProductId };
+                wishlistDb.Products = new List<ProductTable>() { productDb};
                 //wishlistDb.Products.Add(productDb.ProductId);
 
                 db.SaveChanges();
@@ -168,7 +225,7 @@ namespace WebApplication.BL.Core
 
                 //productDb.Count--
 
-                wishlistDb.Products.Add(productDb.ProductId);
+                wishlistDb.Products.Add(productDb);
 
                 db.SaveChanges();
             }
@@ -199,6 +256,8 @@ namespace WebApplication.BL.Core
                 }
                 //-
                 db.SaveChanges();
+
+
 
 
             }

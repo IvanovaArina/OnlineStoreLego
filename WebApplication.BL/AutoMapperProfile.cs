@@ -10,6 +10,7 @@ using AutoMapper;
 using WebApplication.Domain.Entities.Enums;
 using System.Security.AccessControl;
 using WebApplication.Domain.Entities.Admin;
+using WebApplication.BL.Core.DTOs;
 
 namespace WebApplication.BL
 {
@@ -33,6 +34,8 @@ namespace WebApplication.BL
             CreateMap<ArticleTable, ArticleDTO>().ReverseMap();
             CreateMap<ProductTable, ProductDTO>().ReverseMap();
             CreateMap<ReviewTable, ReviewDTO>().ReverseMap();
+
+            CreateMap<WishlistTable, WishlistDTO>().ReverseMap();
 
 
 

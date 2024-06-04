@@ -20,10 +20,6 @@ namespace WebApplication.Controllers
         // GET: Users
         public ActionResult UserAccount(UserDataModel userDataModel)
         {
-            //var userDTO = _userApi.getUserDTObyId(userDataModel.UserId);
-
-            //var model = userDataModel.moveDataFromDTOToModel(userDTO);
-
             return View(userDataModel);
         } 
         
