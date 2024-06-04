@@ -100,13 +100,14 @@ namespace WebApplication.BL.Core
 
             using (var db = new ProductContext())
             {
-                if (!checkIfProductNumberExists(db, product.ProductNumber))
-                {
-                    db.Products.Add(product);
-                    db.SaveChanges();
-                }
-                    var t = db.Products.FirstOrDefault(m => m.ProductNumber == product.ProductNumber);
-                    productDTO.ProductId = t.ProductId;
+                checkIfProductNumberExists(db, product.ProductNumber);
+                    //if (!checkIfProductNumberExists(db, product.ProductNumber))
+                //{
+                //    db.Products.Add(product);
+                //    db.SaveChanges();
+                //}
+                    //var t = db.Products.FirstOrDefault(m => m.ProductNumber == product.ProductNumber);
+                    //productDTO.ProductId = t.ProductId;
                 
 
                 
@@ -166,13 +167,12 @@ namespace WebApplication.BL.Core
 
             WishlistTable wishlistTable = Mapper.Map<WishlistTable>(wishlistDTO);
 
-            using (var context = new WishlistContext())
-            {
-                var t = findProductInDbById(productDTO.ProductId);
-                wishlistTable.Products.Add(t);
-                //context.Wishlists.Add(wishlistTable);
-                context.SaveChanges();
-            }
+            //using (var context = new WishlistContext())
+            //{
+            //    var t = findProductInDbById(productDTO.ProductId);
+            //    wishlistTable.Products.Add(t);
+            //    context.SaveChanges();
+            //}
 
             return wishlistTable;
         }
