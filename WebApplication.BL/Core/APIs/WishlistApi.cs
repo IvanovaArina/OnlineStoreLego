@@ -96,6 +96,7 @@ namespace WebApplication.BL.Core
         {
             ProductApi productApi = new ProductApi();
             var product = productApi.getDefaultProductTable();
+            ProductDTO productDTO = Mapper.Map<ProductDTO>(product);
 
             using (var db = new ProductContext())
             {
@@ -104,9 +105,15 @@ namespace WebApplication.BL.Core
                     db.Products.Add(product);
                     db.SaveChanges();
                 }
+                    var t = db.Products.FirstOrDefault(m => m.ProductNumber == product.ProductNumber);
+                    productDTO.ProductId = t.ProductId;
+                
+
+                
             }
 
-            ProductDTO productDTO = Mapper.Map<ProductDTO>(product);
+            
+              
             return productDTO;
         }
 
@@ -157,7 +164,7 @@ namespace WebApplication.BL.Core
             {
                 var t = findProductInDbById(productDTO.ProductId);
                 wishlistTable.Products.Add(t);
-                context.Wishlists.Add(wishlistTable);
+                //context.Wishlists.Add(wishlistTable);
                 context.SaveChanges();
             }
 
