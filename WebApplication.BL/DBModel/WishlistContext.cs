@@ -12,14 +12,14 @@ namespace WebApplication.BL.DBModel
         public virtual DbSet<WishlistTable> Wishlists { get; set; }
         //public virtual DbSet<ProductTable> Products { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ProductTable>()
-                .HasOptional(p => p.Wishlist)
-                .WithMany(w => w.Products)
-                .HasForeignKey(p => p.WishlistId);
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<ProductTable>()
+        //        .HasOptional(p => p.Wishlist)
+        //        .WithMany(w => w.Products)
+        //        .HasForeignKey(p => p.WishlistId);
 
-            base.OnModelCreating(modelBuilder);
-        }
+        //    base.OnModelCreating(modelBuilder);
+        //}
     }
 }

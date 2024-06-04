@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -123,7 +124,7 @@ namespace WebApplication.BL.Core
             return new WishlistTable()
             {
                 test = 1,
-                Products = new List<ProductTable>()
+                Products = new List<int>()
             };
         }
 
@@ -240,16 +241,31 @@ namespace WebApplication.BL.Core
         //    DecrementCountOfProduct(productDb.ProductId);
         //}
 
+        public void saveProduct()
+        {
+            using (var db = new ProductContext())
+            {
+
+            }
+        }
+
         public void addProductToWishlist(int wishlistId, ProductTable productDb)
         {
             WishlistTable wishlistDb = null;
             using (var db = new WishlistContext())
             {
-                wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
+                using (var db1 = new ProductContext())
+                {
+                    wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
 
-                wishlistDb.Products.Add(productDb);
+                    //db1.Products.Add(productDb);
+                    wishlistDb.Products.Add(productDb.ProductId);
 
-                db.SaveChanges();
+                    db.Entry(wishlistDb).State = EntityState.Modified;
+
+                    db1.SaveChanges();
+                    db.SaveChanges();
+                }
             }
 
             using (var db = new WishlistContext())
