@@ -31,39 +31,7 @@ namespace WebApplication.BL.Core
                 }
             }
         }
-
-
-        //public WishlistTable createWishlistTableEmpty()
-        //{
-        //    WishlistTable Wishlist = null;
-
-        //    using (var context = new WishlistContext())
-        //    {
-        //        if (!checkIfWishlistExists(context, 0))
-        //        {
-        //            context.Wishlists.Add(Wishlist = new WishlistTable
-        //            {
-        //                test = 2,
-        //                Products = new List<ProductTable>()
-        //            });
-        //            //context.SaveChanges();
-        //        }
-        //        else
-        //        {
-        //            context.Wishlists.Add(Wishlist = new WishlistTable
-        //            {
-        //                test = 3,
-        //                Products = new List<ProductTable>()
-        //            });
-        //            //context.SaveChanges();
-        //        }
-
-        //        //context.Wishlists.Add(Wishlist);
-        //        context.SaveChanges();
-
-        //    }
-        //    return Wishlist;
-        //}
+ 
 
         public bool checkIfProductNumberExists(ProductContext db, int number) 
         {
@@ -125,7 +93,7 @@ namespace WebApplication.BL.Core
             return new WishlistTable()
             {
                 test = 1,
-                Products = new MyIntIds()
+                Products = new List<MyInt>()
             };
         }
 
@@ -187,7 +155,7 @@ namespace WebApplication.BL.Core
                 wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
 
 
-                if (wishlistDb.Products.IntIds.Count == 0)
+                if (wishlistDb.Products.Count == 0)
                 {
                     return false;
                 }
@@ -255,14 +223,22 @@ namespace WebApplication.BL.Core
             WishlistTable wishlistDb = null;
             using (var db = new WishlistContext())
             {
-                using (var db1 = new ProductContext())
+                using (var db1 = new MyIntContext())
                 {
                     wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
 
-                    //db1.Products.Add(productDb);
-                    wishlistDb.Products.addToListIds(productDb.ProductId);
+                    MyInt myInt = new MyInt()
+                    {
+                        Wishlist = wishlistDb
+                    };
 
-                    db.Entry(wishlistDb).State = EntityState.Modified;
+                    db1.MyInts.Add(myInt);
+                    db1.SaveChanges();
+
+                    //db1.Products.Add(productDb);
+                    wishlistDb.Products.Add(myInt);
+
+                    //db.Entry(wishlistDb).State = EntityState.Modified;
 
                     db1.SaveChanges();
                     db.SaveChanges();

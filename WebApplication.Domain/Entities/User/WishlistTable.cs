@@ -14,6 +14,6 @@ namespace WebApplication.Domain.Entities.User
 
         public int test { get; set; }
 
-        public MyIntIds Products { get; set; }
+        public List<MyInt> Products { get; set; } = new List<MyInt>();
     }
 }

@@ -173,11 +173,11 @@ namespace WebApplication.BL.Core
                 userWishlistTable = db.Wishlists.FirstOrDefault(w => w.wishlistId == userDb.WishlistId);
             }
 
-            MyIntIds productTables = userWishlistTable.Products;
+            List<MyInt> productTables = userWishlistTable.Products;
 
             if (productTables != null)
             {
-                foreach (var i in productTables.IntIds)
+                foreach (var i in productTables)
                 {
                     listOfProductsDTO.Add(Mapper.Map<ProductDTO>(i));
                 }
