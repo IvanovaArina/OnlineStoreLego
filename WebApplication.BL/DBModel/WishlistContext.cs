@@ -10,7 +10,7 @@ namespace WebApplication.BL.DBModel
         { }
 
         public virtual DbSet<WishlistTable> Wishlists { get; set; }
-        public virtual DbSet<ProductTable> Products { get; set; }
+        //public virtual DbSet<ProductTable> Products { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

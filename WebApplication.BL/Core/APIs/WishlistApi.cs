@@ -185,7 +185,7 @@ namespace WebApplication.BL.Core
                 wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
 
 
-                if (wishlistDb.Products == null)
+                if (wishlistDb.Products.Count == 0)
                 {
                     return false;
                 }
@@ -194,41 +194,52 @@ namespace WebApplication.BL.Core
             return true;
         }
 
-        //void
-        public void addFirstProductToWishlist(int wishlistId, ProductTable productDb)
+        public void DecrementCountOfProduct(int ProductId)
         {
-            WishlistTable wishlistDb = null;
-            using (var db = new WishlistContext())
-            {
-                wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
-
-                wishlistDb.Products = new List<ProductTable>() { productDb};
-                //wishlistDb.Products.Add(productDb.ProductId);
-
-                db.SaveChanges();
-            }
-
-            using (var db = new WishlistContext())
-            {
-                wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
-            }
-
-
-
-                ProductTable productTable = null;
+            ProductTable productTable = null;
             using (var db = new ProductContext())
             {
-                productTable = db.Products.FirstOrDefault(m => m.ProductId == productDb.ProductId);
+                productTable = db.Products.FirstOrDefault(m => m.ProductId == ProductId);
 
                 productTable.Quantity--;
                 db.SaveChanges();
             }
-
-            //return wishlistDb;
-
         }
 
-        //void
+        //public void addProductToWishlist(int wishlistId, ProductTable productDb)
+        //{
+        //    WishlistTable wishlistDb = null;
+        //    using (var db = new WishlistContext())
+        //    {
+        //        wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
+
+        //        List<ProductTable> products = new List<ProductTable>();
+        //        products = wishlistDb.Products;
+        //        products.Add(productDb);
+
+        //        WishlistTable newWishlistTable = new WishlistTable()
+        //        {
+        //            wishlistId = wishlistId,
+        //            test = wishlistDb.test,
+        //            Products = products,
+        //        };
+
+        //        //wishlistDb = newWishlistTable;
+
+        //        db.Wishlists.Remove(wishlistDb);
+        //        db.Wishlists.Add(newWishlistTable);
+
+        //        db.SaveChanges();
+        //    }
+
+        //    using (var db = new WishlistContext())
+        //    {
+        //        wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
+        //    }
+
+        //    DecrementCountOfProduct(productDb.ProductId);
+        //}
+
         public void addProductToWishlist(int wishlistId, ProductTable productDb)
         {
             WishlistTable wishlistDb = null;
@@ -236,15 +247,19 @@ namespace WebApplication.BL.Core
             {
                 wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
 
-                //productDb.Count--
-
                 wishlistDb.Products.Add(productDb);
 
                 db.SaveChanges();
             }
-            //return wishlistDb;
 
+            using (var db = new WishlistContext())
+            {
+                wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
+            }
+
+            DecrementCountOfProduct(productDb.ProductId);
         }
+
 
         public void AddToWishlistInDb(int productId, int userId)
         {
@@ -259,14 +274,19 @@ namespace WebApplication.BL.Core
             {
                 userDb = db.Users.FirstOrDefault(m => m.UserId == userId);
 
-                if (!CkeckIfWihlistContainItems(userDb.WishlistId))
-                {
-                    addFirstProductToWishlist(userDb.WishlistId, productDb);
-                }
-                else
-                {
-                    addProductToWishlist(userDb.WishlistId, productDb);
-                }
+                //--if
+                //if (!CkeckIfWihlistContainItems(userDb.WishlistId))
+                //{
+                //    addFirstProductToWishlist(userDb.WishlistId, productDb);
+                //}
+                //else
+                //{
+                //    addProductToWishlist(userDb.WishlistId, productDb);
+                //}
+
+                //-
+                //CkeckIfWihlistContainItems(userDb.WishlistId);
+                addProductToWishlist(userDb.WishlistId, productDb);
                 //-
                 db.SaveChanges();
 

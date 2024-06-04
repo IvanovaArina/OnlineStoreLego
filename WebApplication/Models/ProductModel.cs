@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using WebApplication.BL.Core;
+using WebApplication.Domain.Entities.User;
 
 namespace WebApplication.Models
 {
@@ -42,6 +44,11 @@ namespace WebApplication.Models
 
         public bool IsActive { get; set; }
         public string ImagePath { get; set; }
+
+        public int? WishlistId { get; set; }
+
+        public virtual WishlistTable Wishlist { get; set; }
+
 
         public ProductModel()
         {
