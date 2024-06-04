@@ -89,6 +89,7 @@
     <Compile Include="Entities\Admin\ReviewTable.cs" />
     <Compile Include="Entities\Admin\ArticleTable.cs" />
     <Compile Include="Entities\Enums\URole.cs" />
+    <Compile Include="Entities\MyIntIds.cs" />
     <Compile Include="Entities\Responces\BaseResponces.cs" />
     <Compile Include="Entities\User\CartTable.cs" />
     <Compile Include="Entities\User\OrderTable.cs" />

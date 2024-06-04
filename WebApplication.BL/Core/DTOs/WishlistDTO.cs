@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Domain.Entities.Admin;
+using WebApplication.Domain.Entities;
 
 namespace WebApplication.BL.Core.DTOs
 {
@@ -15,7 +16,7 @@ namespace WebApplication.BL.Core.DTOs
 
         public int test { get; set; }
 
-        public virtual List<ProductTable> Products { get; set; }
+        public MyIntIds Products { get; set; }
 
     }
 }

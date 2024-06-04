@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApplication.BL.Core.DTOs;
 using WebApplication.BL.DBModel;
+using WebApplication.Domain.Entities;
 using WebApplication.Domain.Entities.Admin;
 using WebApplication.Domain.Entities.User;
 
@@ -124,7 +125,7 @@ namespace WebApplication.BL.Core
             return new WishlistTable()
             {
                 test = 1,
-                Products = new List<int>()
+                Products = new MyIntIds()
             };
         }
 
@@ -186,7 +187,7 @@ namespace WebApplication.BL.Core
                 wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
 
 
-                if (wishlistDb.Products.Count == 0)
+                if (wishlistDb.Products.IntIds.Count == 0)
                 {
                     return false;
                 }
@@ -259,7 +260,7 @@ namespace WebApplication.BL.Core
                     wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
 
                     //db1.Products.Add(productDb);
-                    wishlistDb.Products.Add(productDb.ProductId);
+                    wishlistDb.Products.addToListIds(productDb.ProductId);
 
                     db.Entry(wishlistDb).State = EntityState.Modified;
 

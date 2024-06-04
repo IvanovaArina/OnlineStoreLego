@@ -24,6 +24,7 @@ using System.Web.UI.WebControls.WebParts;
 using WebApplication.BL.Migrations;
 using WebApplication.BL.Core.APIs;
 using Newtonsoft.Json;
+using WebApplication.Domain.Entities;
 
 namespace WebApplication.BL.Core
 {
@@ -172,11 +173,11 @@ namespace WebApplication.BL.Core
                 userWishlistTable = db.Wishlists.FirstOrDefault(w => w.wishlistId == userDb.WishlistId);
             }
 
-            List<int> productTables = userWishlistTable.Products;
+            MyIntIds productTables = userWishlistTable.Products;
 
             if (productTables != null)
             {
-                foreach (var i in productTables)
+                foreach (var i in productTables.IntIds)
                 {
                     listOfProductsDTO.Add(Mapper.Map<ProductDTO>(i));
                 }
