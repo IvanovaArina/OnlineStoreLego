@@ -133,11 +133,17 @@ namespace WebApplication.BL.Core
 
             using (var db = new WishlistContext())
             {
-                if (!checkIfWishlistTestExists(db, wishlist.test))
-                {
+                //if (!checkIfWishlistTestExists(db, wishlist.test))
+                //{
+                //    db.Wishlists.Add(wishlist);
+                //    db.SaveChanges();
+                //} 
+
+                checkIfWishlistTestExists(db, wishlist.test);
+                
                     db.Wishlists.Add(wishlist);
                     db.SaveChanges();
-                }
+                
             }
 
             WishlistDTO wishlistDTO = Mapper.Map<WishlistDTO>(wishlist);
