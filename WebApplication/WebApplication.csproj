@@ -376,7 +376,7 @@
     <Content Include="Views\HomeUser\ShopListing.cshtml" />
     <Content Include="Views\HomeUser\Blog.cshtml" />
     <Content Include="Views\HomeUser\BlogDetail.cshtml" />
-    <Content Include="Views\HomeUser\Cart.cshtml" />
+    <Content Include="Views\HomeAdmin\Cart.cshtml" />
     <Content Include="Views\HomeUser\Wishlist.cshtml" />
     <Content Include="Views\HomeUser\Checkout.cshtml" />
     <Content Include="Views\HomeUser\ProductDetail.cshtml" />
@@ -388,6 +388,7 @@
     <Content Include="Views\Review\Index.cshtml" />
     <Content Include="Views\Cart\AddToCart.cshtml" />
     <Content Include="Views\Wishlist\AddToWishlist.cshtml" />
+    <Content Include="Views\HomeUser\Cart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

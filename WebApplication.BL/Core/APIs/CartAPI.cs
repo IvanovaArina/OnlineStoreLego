@@ -44,72 +44,77 @@ namespace WebApplication.BL.Core.APIs
             return Cart;
         }
 
-        //_______________________________wishlist
-        //public bool CkeckIfWihlistContainItems(int wishlistId)
-        //{
-        //    using (var db = new WishlistContext())
-        //    {
-        //        List<MyInt> ints = db.MyInts.Where(m => m.WishlistId == wishlistId).ToList();
 
-        //        if (ints.Count == 0)
-        //        {
-        //            return false;
-        //        }
-        //    }
+        public bool CkeckIfCartContainItems(int cartId)
+        {
+            using (var db = new CartContext())
+            {
+                List<MyIntCart> ints = db.MyIntsCart.Where(m => m.CartId == cartId).ToList();
 
-        //    return true;
-        //}
+                if (ints.Count == 0)
+                {
+                    return false;
+                }
+            }
 
-        //public void DecrementCountOfProduct(int ProductId)
-        //{
-        //    ProductTable productTable = null;
-        //    using (var db = new ProductContext())
-        //    {
-        //        productTable = db.Products.FirstOrDefault(m => m.ProductId == ProductId);
+            return true;
+        }
 
-        //        productTable.Quantity--;
-        //        db.SaveChanges();
-        //    }
-        //}
+        public void DecrementCountOfProduct(int ProductId)
+        {
+            ProductTable productTable = null;
+            using (var db = new ProductContext())
+            {
+                productTable = db.Products.FirstOrDefault(m => m.ProductId == ProductId);
+
+                productTable.Quantity--;
+                db.SaveChanges();
+            }
+        }
 
         public bool checkIfMyIntCartsContainsProductIdAndCartId(int cartId, int productId)
         {
-            //using (var db = new WishlistContext())
-            //{
-            //    var myInt = db.MyInts.Where(m => m.ProductId == productId & m.WishlistId == wishlistId).FirstOrDefault();
-            //    if (myInt != null)
-            //    {
-            //        return true;
-            //    }
-            //    return false;
-            //}
-            return true;
+            using (var db = new CartContext())
+            {
+                var myIntCart = db.MyIntsCart.Where(m => m.ProductId == productId & m.CartId == cartId).FirstOrDefault();
+                return (myIntCart != null);
+                
+            }
+        }
+        
+        public int getCountInCart(int cartId, int productId)
+        {
+            using (var db = new CartContext())
+            {
+                var myIntCart = db.MyIntsCart.Where(m => m.ProductId == productId & m.CartId == cartId).FirstOrDefault();
+                return myIntCart.Count;
+                
+            }
         }
 
         public void addProductToCart(int cartId, ProductTable productDb)
         {
-            //WishlistTable wishlistDb = null;
-            //using (var db = new WishlistContext())
-            //{
-            //    wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
+            CartTable cartDb = null;
+            using (var db = new CartContext())
+            {
+                cartDb = db.Carts.FirstOrDefault(m => m.cartId == cartId);
 
-            //    MyInt myInt = new MyInt()
-            //    {
-            //        ProductId = productDb.ProductId,
-            //        Wishlist = wishlistDb
-            //    };
+                MyIntCart myIntCart = new MyIntCart()
+                {
+                    ProductId = productDb.ProductId,
+                    Cart = cartDb
+                };
 
-            //    wishlistDb.MyInts.Add(myInt);
+                cartDb.MyIntsCart.Add(myIntCart);
 
-            //    db.Entry(wishlistDb).State = EntityState.Modified;
+                db.Entry(cartDb).State = EntityState.Modified;
 
+                db.MyIntsCart.Add(myIntCart);
+                db.SaveChanges();
 
-            //    db.MyInts.Add(myInt);
-            //    db.SaveChanges();
+            }
 
-            //}
-
-            //DecrementCountOfProduct(productDb.ProductId);
+            DecrementCountOfProduct(productDb.ProductId);
         }
 
 
@@ -133,6 +138,36 @@ namespace WebApplication.BL.Core.APIs
 
                 db.SaveChanges();
             }
+        }
+
+       
+            public List<ProductDTO> getCartFromDatabase(int userId)
+        {
+            List<ProductDTO> listOfProductsDTO = new List<ProductDTO>();
+
+            UDbTable userDb = null;
+
+            using (var db = new UserContext())
+            {
+                userDb = db.Users.FirstOrDefault(w => w.UserId == userId);
+            }
+
+            List<MyIntCart> userCartTable = null;
+            using (var db = new CartContext())
+            {
+                userCartTable = db.MyIntsCart.Where(w => w.CartId == userDb.CartId).ToList();
+            }
+
+            ProductApi productApi = new ProductApi();
+
+            if (userCartTable != null)
+            {
+                foreach (var i in userCartTable)
+                {
+                    listOfProductsDTO.Add(productApi.getProductDTObyId(i.ProductId));
+                }
+            }
+            return listOfProductsDTO;
         }
     }
 }

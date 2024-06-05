@@ -4,12 +4,7 @@
     Layout = "~/Views/Shared/ULayout.cshtml";
 }
 
-@using WebApplication.Models
-@{
-    UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
-}
-
-@*@model WebApplication.Models.UserDataModel*@
+@model WebApplication.Models.UserDataModel
 
 <!-- Hero Banner start -->
 <div class="page-title-banner">
@@ -48,7 +43,7 @@
                                 <div class="product st-2">
                                     @{
                                         
-                                        var productTable = model.dataForTableWishlist(Model.UserId);
+                                        var productTable = Model.dataForTableWishlist(Model.UserId);
 
                                         foreach (var product in productTable)
                                         {

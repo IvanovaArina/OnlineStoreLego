@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebApplication.BL.Core;
+using WebApplication.BL.Core.APIs;
 using WebApplication.Domain.Entities.Enums;
 using WebApplication.Domain.Entities.User;
 
@@ -41,12 +42,30 @@ namespace WebApplication.Models
         {
             var wishlistApi = new WishlistApi();
             return wishlistApi.getWishlistFromDatabase(userId);
+        }  
+        
+        public List<ProductDTO> dataForTableCart(int userId)
+        {
+            var cartApi = new CartApi();
+            return cartApi.getCartFromDatabase(userId);
+        } 
+        
+        public int getCountInCart(int cartId, int productId)
+        {
+            var cartApi = new CartApi();
+            return cartApi.getCountInCart(cartId, productId);
         }
 
         public bool CkeckIfWihlistContainItems(int wishlistId)
         {
             var wishlistApi = new WishlistApi();
             return wishlistApi.CkeckIfWihlistContainItems(wishlistId);
+        }
+
+        public bool CkeckIfCartContainItems(int cartId)
+        {
+            var cartApi = new CartApi();
+            return cartApi.CkeckIfCartContainItems(cartId);
         }
 
         public ProductModel getDefaultProductModel()

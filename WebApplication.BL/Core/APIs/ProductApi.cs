@@ -124,33 +124,10 @@ namespace WebApplication.BL.Core
         {
             using (var db = new ProductContext())
             {
-                //var dbProduct = db.Products.FirstOrDefault(m=>m.ProductNumber == number);
-                var product = new ProductTable
-                {
-                    ProductNumber = 1,
-                    ProductName = "DefaultProductName",
-                    Price = 20,
-                    CategoryByAge = "DefaultCategoryByAge",
-                    Category = "DefaultCategory",
-                    SellCategory = "DefaultSellCategory",
-                    Quantity = 500,
-                    IsActive = true,
-                    ImagePath = "DefaultImagePath"
-                };
+                var dbProduct = db.Products.FirstOrDefault(m => m.ProductNumber == number);
 
-                db.Products.Add(product);
-                db.SaveChanges();
-
-                //if (dbProduct != null)
-                //{
-                //    return true;
-                //}
-                //else
-                //{
-                //    return false;
-                //}
-
-                return true;
+                return (dbProduct != null);
+                
             }
         }
 

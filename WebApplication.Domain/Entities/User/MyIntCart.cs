@@ -15,6 +15,7 @@ namespace WebApplication.Domain.Entities.User
         public int MyIntCartId { get; set; }
 
         public int ProductId { get; set; }
+        public int Count { get; set; }
 
         // Внешний ключ для связи с CartTable
         public int? CartId { get; set; }
