@@ -17,8 +17,7 @@ namespace WebApplication.Domain.Entities.User
 
         public int testCart { get; set; }
 
-        public Dictionary <int, int> Products { get; set; }
-
+        public List<MyIntCart> MyIntsCart { get; set; } = new List<MyIntCart>();
 
     }
 }

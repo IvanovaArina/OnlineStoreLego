@@ -57,11 +57,11 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
-        public ActionResult ShopListingWithString(string userDataModel)
-        {
-            var model = Newtonsoft.Json.JsonConvert.DeserializeObject<UserDataModel>(userDataModel);
-            return View("ShopListing", model);
-        }
+        //public ActionResult ShopListingWithString(string userDataModel)
+        //{
+        //    var model = Newtonsoft.Json.JsonConvert.DeserializeObject<UserDataModel>(userDataModel);
+        //    return View("ShopListing", model);
+        //}
 
         public ActionResult Blog(int page = 1, int pageSize = 6)
         {
@@ -145,16 +145,42 @@ namespace WebApplication.Controllers
         }
 
 
-        public ActionResult Cart(UserDataModel userDataModel)
+        public ActionResult Cart()
         {
-            return View();
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            return View(model);
         }
-        public ActionResult Wishlist(UserDataModel userDataModel)
+        public ActionResult Wishlist()
         {
-            return View(userDataModel);
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            return View(model);
         }
         public ActionResult Checkout(UserDataModel userDataModel)
         {
+            return View();
+        }
+
+        public ActionResult UserAccount()
+        {
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            return View(model);
+        }
+
+        public ActionResult EditInfo()
+        {
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            return View(model);
+        }
+
+        public ActionResult ViewOrdersU(UserDataModel userDataModel)
+        {
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            return View(model);
+        }
+
+        public ActionResult LogOutU()
+        {
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
             return View();
         }
 

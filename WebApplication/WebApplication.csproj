@@ -229,6 +229,11 @@
     <Content Include="assets\media\services\online-support.png" />
     <Content Include="assets\media\vs.png" />
     <Content Include="Global.asax" />
+    <None Include="Scripts\jquery-1.8.0.intellisense.js" />
+    <Content Include="Scripts\jquery-1.8.0.js" />
+    <Content Include="Scripts\jquery-1.8.0.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -350,9 +355,9 @@
     <Content Include="Views\ManageContent\ManageContent.cshtml" />
     <Content Include="Views\Admin\ViewOrders.cshtml" />
     <Content Include="Views\Shared\LayoutUsers.cshtml" />
-    <Content Include="Views\Users\UserAccount.cshtml" />
-    <Content Include="Views\Users\ViewOrdersU.cshtml" />
-    <Content Include="Views\Users\EditInfo.cshtml" />
+    <Content Include="Views\HomeUser\UserAccount.cshtml" />
+    <Content Include="Views\HomeUser\ViewOrdersU.cshtml" />
+    <Content Include="Views\HomeUser\EditInfo.cshtml" />
     <Content Include="Views\Shared\ALayout.cshtml" />
     <Content Include="Views\Admin\CreateProduct.cshtml" />
     <Content Include="Views\ManageContent\EditArticle.cshtml" />
@@ -383,7 +388,6 @@
     <Content Include="Views\Review\Index.cshtml" />
     <Content Include="Views\Cart\AddToCart.cshtml" />
     <Content Include="Views\Wishlist\AddToWishlist.cshtml" />
-    <Content Include="Views\HomeUser\_wishlist.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

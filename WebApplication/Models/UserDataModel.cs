@@ -39,8 +39,8 @@ namespace WebApplication.Models
         
         public List<ProductDTO> dataForTableWishlist(int userId)
         {
-            var userApi = new UserApi();
-            return userApi.getWishlistFromDatabase(userId);
+            var wishlistApi = new WishlistApi();
+            return wishlistApi.getWishlistFromDatabase(userId);
         }
 
         public bool CkeckIfWihlistContainItems(int wishlistId)

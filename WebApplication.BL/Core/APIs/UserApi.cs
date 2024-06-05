@@ -158,35 +158,7 @@ namespace WebApplication.BL.Core
         
 
 
-        public List<ProductDTO> getWishlistFromDatabase(int userId)
-        {
-            List<ProductDTO> listOfProductsDTO = new List<ProductDTO>();
-
-            UDbTable userDb = null;
-
-            using (var db = new UserContext())
-            {
-                userDb = db.Users.FirstOrDefault(w => w.UserId == userId);
-            }
-
-            List <MyInt> userWishlistTable = null;
-            using (var db = new WishlistContext())
-            {
-                userWishlistTable = db.MyInts.Where(w => w.WishlistId == userDb.WishlistId).ToList();
-            }
-
-            ProductApi productApi = new ProductApi();
-          
-
-           if (userWishlistTable != null)
-            {
-                foreach (var i in userWishlistTable)
-                {
-                    listOfProductsDTO.Add(productApi.getProductDTObyId(i.ProductId));
-                }
-            }
-            return listOfProductsDTO;
-        }
+       
 
 
 
@@ -293,24 +265,24 @@ namespace WebApplication.BL.Core
 
        
 
-       public bool CheckIfThereAreUsers()
-        {
-            List<int> usersIds = new List<int>();
+       //public bool CheckIfThereAreUsers()
+       // {
+       //     List<int> usersIds = new List<int>();
 
-            using (var db = new UserContext())
-            {
-                usersIds = db.Users.Select(w => w.UserId).ToList();
-            }
+       //     using (var db = new UserContext())
+       //     {
+       //         usersIds = db.Users.Select(w => w.UserId).ToList();
+       //     }
 
-            if (usersIds.Count == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+       //     if (usersIds.Count == 0)
+       //     {
+       //         return false;
+       //     }
+       //     else
+       //     {
+       //         return true;
+       //     }
+       // }
 
        
 
@@ -387,33 +359,6 @@ namespace WebApplication.BL.Core
             return new BaseResponces { Status = false, StatusMessage = "No user with this credential types" };
         }
 
-
-        //public void CreateFirstUser()
-        //{
-
-        //    ProductTable productTable = new ProductTable()
-        //    {
-        //        ProductNumber = 111,
-        //        ProductName = "ProductName",
-        //        Price = 0,
-        //        CategoryByAge = "CategoryByAge",
-        //        Category = "Category",
-        //        SellCategory = "SellCategory",
-        //        Quantity = 500,
-        //        IsActive = false,
-        //        ProductDetail = "ProductDetail",
-        //        ImagePath = "ImagePath"
-        //    };
-
-        //    using (var db = new ProductContext())
-        //    {
-        //        db.Products.Add(productTable);
-        //        db.SaveChanges();
-        //    }
-
-        //}
-
-
         public BaseResponces RegisterNewUserAccount(UserDTO userDTO)
         {
             if (userDTO.Password != userDTO.ConfirmPassword)
@@ -426,13 +371,9 @@ namespace WebApplication.BL.Core
                 return new BaseResponces { Status = false, StatusMessage = "This UserName already registered" };
             }
 
-            //if (CheckIfThereAreUsers())
-            //{
-            //    CreateFirstUser();
-            //}
 
             var user = createNewUserWithHash(userDTO);
-            var userDb = Mapper.Map<UDbTable>(user); // Используем AutoMapper для преобразования
+            var userDb = Mapper.Map<UDbTable>(user); 
             //userDb.Wishlist.User = userDb;
             //userDb.Cart.User = userDb;
 

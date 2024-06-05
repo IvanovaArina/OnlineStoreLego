@@ -266,5 +266,15 @@ namespace WebApplication.BL.Core
             }
         }
 
+        public ProductTable findProductInDbById(int id)
+        {
+            ProductTable productTable = null;
+            using (var context = new ProductContext())
+            {
+                productTable = context.Products.FirstOrDefault(m => m.ProductId == id);
+            }
+            return productTable;
+        }
+
     }
 }

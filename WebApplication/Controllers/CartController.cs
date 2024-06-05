@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.BL.Core;
+using WebApplication.BL.Core.APIs;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
     public class CartController : Controller
     {
-        //// GET: Cart
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        public ActionResult AddToCart (int productId, int userId)
+        public ActionResult AddToCart(int productId, int userId)
         {
-            return View();
+            CartApi cartApi = new CartApi();
+            cartApi.AddToCartInDb(productId, userId);
+            return RedirectToAction("ShopListing", "HomeUser");
         }
 
     }

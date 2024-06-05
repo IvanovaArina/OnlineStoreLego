@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/LayoutUsers.cshtml";
 }
 
+@model WebApplication.Models.UserDataModel
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,7 +125,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    
+
                 </div>
             </div>
         </div>
@@ -186,16 +188,16 @@
                 var itemsHtml = '';
                 $.each(order.Items, function (index, item) {
                     itemsHtml += `
-                            <li class="media">
-                                <img src="${item.Image}" class="mr-3" alt="${item.Name}" style="width: 64px;">
-                                <div class="media-body">
-                                    <h6 class="mt-0 mb-1">${item.Name}</h6>
-                                    ${item.Description}<br>
-                                    <strong>${item.Price}</strong><br>
-                                    Size: ${item.Size}<br>
-                                    Color: ${item.Color}
-                                </div>
-                            </li>`;
+                                <li class="media">
+                                    <img src="${item.Image}" class="mr-3" alt="${item.Name}" style="width: 64px;">
+                                    <div class="media-body">
+                                        <h6 class="mt-0 mb-1">${item.Name}</h6>
+                                        ${item.Description}<br>
+                                        <strong>${item.Price}</strong><br>
+                                        Size: ${item.Size}<br>
+                                        Color: ${item.Color}
+                                    </div>
+                                </li>`;
                 });
                 $('#orderItems').html(itemsHtml);
 
