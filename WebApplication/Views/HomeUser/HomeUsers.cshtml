@@ -53,7 +53,8 @@
             <div class="product">
                 <div class="row mb-16">
                     @{
-                        var productTable = Model.getDefaultProductModel().dataForTable();
+                        var prod1 = new WebApplication.Models.ProductModel();
+                        var productTable = prod1.dataForTable();
 
                         foreach (var product in productTable)
                         {
