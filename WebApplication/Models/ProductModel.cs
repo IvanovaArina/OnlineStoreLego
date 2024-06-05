@@ -45,9 +45,9 @@ namespace WebApplication.Models
         public bool IsActive { get; set; }
         public string ImagePath { get; set; }
 
-        public int? WishlistId { get; set; }
+        //public int? WishlistId { get; set; }
 
-        public virtual WishlistTable Wishlist { get; set; }
+        //public virtual WishlistTable Wishlist { get; set; }
 
 
         public ProductModel()

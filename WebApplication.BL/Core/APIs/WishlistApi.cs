@@ -38,14 +38,6 @@ namespace WebApplication.BL.Core
         //    return (dbProduct != null);
         //}
 
-        public bool checkIfProductNumberExists(int number)
-        {
-            using (var context = new ProductContext())
-            {
-                var dbProduct = context.Products.FirstOrDefault(x => x.ProductNumber == number);
-                return (dbProduct != null);
-            }
-        }
 
         public bool checkIfWishlistTestExists(WishlistContext db, int test)
         {
@@ -53,16 +45,16 @@ namespace WebApplication.BL.Core
             return (dbWishlist != null);
         }
 
-        public ProductDTO createProduct()
-        {
-            ProductApi productApi = new ProductApi();
-            var product = productApi.getDefaultProductTable();
-            ProductDTO productDTO = Mapper.Map<ProductDTO>(product);
+        //public ProductDTO createProduct()
+        //{
+        //    ProductApi productApi = new ProductApi();
+        //    var product = productApi.getDefaultProductTable();
+        //    ProductDTO productDTO = Mapper.Map<ProductDTO>(product);
 
-            checkIfProductNumberExists(product.ProductNumber);
-            
-            return productDTO;
-        }
+        //    checkIfProductNumberExists(product.ProductNumber);
+
+        //    return productDTO;
+        //}
 
         public WishlistTable getDefaultWishlistTable()
         {
@@ -95,7 +87,8 @@ namespace WebApplication.BL.Core
 
         public WishlistTable createWishlistTable()
         {
-            ProductDTO productDTO = createProduct();
+            //ProductDTO productDTO = createProduct();
+          
             WishlistDTO wishlistDTO = createWishlist();
 
             WishlistTable wishlistTable = Mapper.Map<WishlistTable>(wishlistDTO);

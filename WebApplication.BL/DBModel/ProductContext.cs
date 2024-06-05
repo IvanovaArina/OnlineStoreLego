@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Domain.Entities.Admin;
+using WebApplication.Domain.Entities.User;
 
 namespace WebApplication.BL.DBModel
 {
@@ -15,7 +16,9 @@ namespace WebApplication.BL.DBModel
 
         public virtual DbSet<ProductTable> Products { get; set; }
 
-       
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+        }
 
     }
 }

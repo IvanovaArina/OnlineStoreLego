@@ -39,12 +39,5 @@ namespace WebApplication.Domain.Entities.Admin
 
         [Required]
         public string ImagePath { get; set; }
-
-        //// Внешний ключ для связи с WishlistTable
-        //public int? WishlistId { get; set; }
-
-        //// Навигационное свойство для связи с WishlistTable
-        //[ForeignKey("WishlistId")]
-        //public virtual WishlistTable Wishlist { get; set; }
     }
 }

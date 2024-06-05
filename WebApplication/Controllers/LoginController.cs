@@ -20,7 +20,7 @@ namespace WebApplication.Controllers
     {
 
         private UserContext db = new UserContext();//gbf
-        private ProductContext db1 = new ProductContext();//gbf
+        //private ProductContext db1 = new ProductContext();//gbf
         private readonly ISession _session;
 
 

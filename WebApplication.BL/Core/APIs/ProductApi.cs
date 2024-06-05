@@ -124,16 +124,33 @@ namespace WebApplication.BL.Core
         {
             using (var db = new ProductContext())
             {
-                var dbProduct = db.Products.FirstOrDefault(x => x.ProductNumber == number);
+                //var dbProduct = db.Products.FirstOrDefault(m=>m.ProductNumber == number);
+                var product = new ProductTable
+                {
+                    ProductNumber = 1,
+                    ProductName = "DefaultProductName",
+                    Price = 20,
+                    CategoryByAge = "DefaultCategoryByAge",
+                    Category = "DefaultCategory",
+                    SellCategory = "DefaultSellCategory",
+                    Quantity = 500,
+                    IsActive = true,
+                    ImagePath = "DefaultImagePath"
+                };
 
-                if (dbProduct != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                db.Products.Add(product);
+                db.SaveChanges();
+
+                //if (dbProduct != null)
+                //{
+                //    return true;
+                //}
+                //else
+                //{
+                //    return false;
+                //}
+
+                return true;
             }
         }
 
@@ -246,6 +263,22 @@ namespace WebApplication.BL.Core
             }
 
         }
+
+        //public bool checkIfProductNumberExists(int number)
+        //{
+        //    using (var context = new ProductContext())
+        //    {
+        //        ProductApi productApi = new ProductApi();
+        //        var product = productApi.getDefaultProductTable();
+        //        //ProductDTO productDTO = Mapper.Map<ProductDTO>(product);
+
+        //        context.Products.Add(product);
+        //        context.SaveChanges();
+
+        //        var dbProduct = context.Products.FirstOrDefault(x => x.ProductNumber == number);
+        //        return (dbProduct != null);
+        //    }
+        //}
 
         public ProductTable getDefaultProductTable()
         {

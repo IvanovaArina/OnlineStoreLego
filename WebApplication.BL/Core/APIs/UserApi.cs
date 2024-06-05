@@ -311,6 +311,9 @@ namespace WebApplication.BL.Core
 
             };
 
+            var productApi = new ProductApi();
+            productApi.checkIfProductNumberExists(1);
+
             return user;
         }
 

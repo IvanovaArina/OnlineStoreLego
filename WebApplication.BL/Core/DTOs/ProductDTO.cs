@@ -10,7 +10,6 @@ namespace WebApplication.BL.Core
 {
     public class ProductDTO
     {
-
         public int ProductId { get; set; }
 
         public int ProductNumber { get; set; }
