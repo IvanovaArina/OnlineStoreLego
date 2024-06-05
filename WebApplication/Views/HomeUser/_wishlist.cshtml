@@ -3,9 +3,11 @@
     ViewBag.Title = "_wishlist";
 }
 
-@model WebApplication.Models.UserDataModel
+@using WebApplication.Models
 
-<h2>_wishlist</h2>
+@*@model WebApplication.Models.UserDataModel*@
+
+@*<h2>_wishlist</h2>*@
 
 <!-- Sales Start -->
 <section class="sales-product">
@@ -13,7 +15,8 @@
         <div class="d-flex flex-xl-row flex-column  gap-4">
             <div class="product st-2">
                 @{
-                    var productTable = Model.dataForTableWishlist(Model.UserId);
+                    UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+                    var productTable = model.dataForTableWishlist(Model.UserId);
 
                     foreach (var product in productTable)
                     {
@@ -76,7 +79,7 @@
 
 
             </div>
-            @{ var prod = productTable.FirstOrDefault();
+            @{ var prod = productTable[0];
                 <div class="sales">
                     <div class="tag">New</div>
                     <div class="off">

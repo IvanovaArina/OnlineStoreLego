@@ -21,13 +21,18 @@ namespace WebApplication.Controllers
         public ActionResult UserAccount(UserDataModel userDataModel)
         {
             return View(userDataModel);
-        } 
-        
-        public ActionResult UserAccountWithString(string userDataModel)
-        {
-            var model = Newtonsoft.Json.JsonConvert.DeserializeObject<UserDataModel>(userDataModel);
+        }
 
-            return View("UserAccount", model);
+        //public ActionResult UserAccountWithString(string userDataModel)
+        //{
+        //    var model = Newtonsoft.Json.JsonConvert.DeserializeObject<UserDataModel>(userDataModel);
+
+        //    return View("UserAccount", model);
+        //}
+
+        public ActionResult UserAccount()
+        {
+            return View();
         }
 
         public ActionResult EditInfo(UserDataModel userDataModel)

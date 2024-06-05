@@ -240,11 +240,6 @@ namespace WebApplication.BL.Core
 
             }
 
-            using (var db = new WishlistContext())
-            {
-                wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
-            }
-
             DecrementCountOfProduct(productDb.ProductId);
         }
 

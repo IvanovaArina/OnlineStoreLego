@@ -156,6 +156,8 @@ namespace WebApplication.BL.Core
             return listOfUserDTO;
         }       
         
+
+
         public List<ProductDTO> getWishlistFromDatabase(int userId)
         {
             List<ProductDTO> listOfProductsDTO = new List<ProductDTO>();
@@ -167,19 +169,20 @@ namespace WebApplication.BL.Core
                 userDb = db.Users.FirstOrDefault(w => w.UserId == userId);
             }
 
-            WishlistTable userWishlistTable = null;
+            List <MyInt> userWishlistTable = null;
             using (var db = new WishlistContext())
             {
-                userWishlistTable = db.Wishlists.FirstOrDefault(w => w.wishlistId == userDb.WishlistId);
+                userWishlistTable = db.MyInts.Where(w => w.WishlistId == userDb.WishlistId).ToList();
             }
 
-            List<MyInt> productTables = userWishlistTable.MyInts;
+            ProductApi productApi = new ProductApi();
+          
 
-            if (productTables != null)
+           if (userWishlistTable != null)
             {
-                foreach (var i in productTables)
+                foreach (var i in userWishlistTable)
                 {
-                    listOfProductsDTO.Add(Mapper.Map<ProductDTO>(i));
+                    listOfProductsDTO.Add(productApi.getProductDTObyId(i.ProductId));
                 }
             }
             return listOfProductsDTO;
