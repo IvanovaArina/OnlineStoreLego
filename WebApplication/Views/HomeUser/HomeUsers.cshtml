@@ -6,6 +6,14 @@
 
 @model WebApplication.Models.UserDataModel
 
+@{
+    var jsonModel = Newtonsoft.Json.JsonConvert.SerializeObject(Model);
+}
+
+@*<div>
+    <a href="@Url.Action("ShopListingWithString", "HomeUser", new { userDataModel = jsonModel })" class="cus-btn primary">Continue Shopping</a>
+</div>*@
+
 <!-- Hero Banner start -->
 <div class="hero-banner-2">
     <div class="container">
