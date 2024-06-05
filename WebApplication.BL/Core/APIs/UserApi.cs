@@ -21,7 +21,7 @@ using System.Security.Cryptography;
 using WebApplication.Domain.Entities.Admin;
 using ProductTable = WebApplication.Domain.Entities.Admin.ProductTable;
 using System.Web.UI.WebControls.WebParts;
-using WebApplication.BL.Migrations;
+
 using WebApplication.BL.Core.APIs;
 using Newtonsoft.Json;
 using WebApplication.Domain.Entities;
