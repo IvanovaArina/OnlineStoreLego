@@ -51,9 +51,10 @@ namespace WebApplication.Controllers
             return View();
 
         }
-        public ActionResult ShopListing(UserDataModel userDataModel)
+        public ActionResult ShopListing()
         {
-            return View(userDataModel);
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            return View(model);
         }
 
         public ActionResult ShopListingWithString(string userDataModel)

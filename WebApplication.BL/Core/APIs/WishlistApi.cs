@@ -93,7 +93,7 @@ namespace WebApplication.BL.Core
             return new WishlistTable()
             {
                 test = 1,
-                Products = new List<MyInt>()
+                MyInts = new List<MyInt>()
             };
         }
 
@@ -149,13 +149,11 @@ namespace WebApplication.BL.Core
 
         public bool CkeckIfWihlistContainItems(int wishlistId)
         {
-            WishlistTable wishlistDb = null;
             using (var db = new WishlistContext())
             {
-                wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
+                List <MyInt> ints = db.MyInts.Where (m=> m.WishlistId == wishlistId).ToList();
 
-
-                if (wishlistDb.Products.Count == 0)
+                if (ints.Count == 0)
                 {
                     return false;
                 }
@@ -223,25 +221,23 @@ namespace WebApplication.BL.Core
             WishlistTable wishlistDb = null;
             using (var db = new WishlistContext())
             {
-                //using (var db1 = new MyIntContext())
-                //{
                     wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
 
                     MyInt myInt = new MyInt()
                     {
                         ProductId = productDb.ProductId,
-                        WishlistId = wishlistDb.wishlistId
+                        //WishlistId = wishlistDb.wishlistId
+                        Wishlist = wishlistDb 
                     };
 
-                //db1.MyInts.Add(myInt);
-                //db1.SaveChanges();
-
-                wishlistDb.Products.Add(myInt);
+                    wishlistDb.MyInts.Add(myInt);
 
                     db.Entry(wishlistDb).State = EntityState.Modified;
+                                
 
-                    db.SaveChanges();
-                //}
+                db.MyInts.Add(myInt);
+                db.SaveChanges();
+
             }
 
             using (var db = new WishlistContext())

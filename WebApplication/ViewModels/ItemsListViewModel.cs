@@ -7,5 +7,6 @@ namespace WebApplication.ViewModels
 {
     public class ItemsListViewModel
     {
+
     }
 }

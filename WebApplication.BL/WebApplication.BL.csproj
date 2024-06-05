@@ -103,7 +103,6 @@
     <Compile Include="Core\APIs\WishlistApi.cs" />
     <Compile Include="Core\DTOs\WishlistDTO.cs" />
     <Compile Include="DBModel\CartContext.cs" />
-    <Compile Include="DBModel\MyIntContext.cs" />
     <Compile Include="DBModel\OrderContext.cs" />
     <Compile Include="DBModel\ProductContext.cs" />
     <Compile Include="DBModel\ReviewContext.cs" />

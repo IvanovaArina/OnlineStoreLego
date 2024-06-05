@@ -17,7 +17,7 @@ namespace WebApplication.BL.Core.DTOs
 
         public int test { get; set; }
 
-        public List<MyInt> Products { get; set; }
+        public List<MyInt> MyInts { get; set; }
 
     }
 }

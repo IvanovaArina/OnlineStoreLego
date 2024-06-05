@@ -173,7 +173,7 @@ namespace WebApplication.BL.Core
                 userWishlistTable = db.Wishlists.FirstOrDefault(w => w.wishlistId == userDb.WishlistId);
             }
 
-            List<MyInt> productTables = userWishlistTable.Products;
+            List<MyInt> productTables = userWishlistTable.MyInts;
 
             if (productTables != null)
             {

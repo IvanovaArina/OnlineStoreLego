@@ -11,13 +11,13 @@ namespace WebApplication.BL.DBModel
         { }
 
         public virtual DbSet<WishlistTable> Wishlists { get; set; }
-        public virtual DbSet<MyInt> Products { get; set; }
+        public virtual DbSet<MyInt> MyInts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MyInt>()
                 .HasOptional(p => p.Wishlist)
-                .WithMany(w => w.Products)
+                .WithMany(w => w.MyInts)
                 .HasForeignKey(p => p.WishlistId);
 
             base.OnModelCreating(modelBuilder);
