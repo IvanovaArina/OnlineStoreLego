@@ -18,9 +18,9 @@ namespace WebApplication.Controllers
         }
 
         // GET: Users
-        public ActionResult UserAccount(UserDataModel userDataModel)
+        public ActionResult UserAccount()
         {
-            return View(userDataModel);
+            return View();
         }
 
         //public ActionResult UserAccountWithString(string userDataModel)
@@ -29,11 +29,6 @@ namespace WebApplication.Controllers
 
         //    return View("UserAccount", model);
         //}
-
-        public ActionResult UserAccount()
-        {
-            return View();
-        }
 
         public ActionResult EditInfo(UserDataModel userDataModel)
         {
