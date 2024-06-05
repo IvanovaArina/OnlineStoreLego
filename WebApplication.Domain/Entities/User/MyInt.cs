@@ -13,6 +13,8 @@ namespace WebApplication.Domain.Entities.User
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MyIntId { get; set; }
+        
+        public int ProductId { get; set; }
 
         // Внешний ключ для связи с WishlistTable
         public int? WishlistId { get; set; }

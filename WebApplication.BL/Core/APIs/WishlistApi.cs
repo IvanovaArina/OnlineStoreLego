@@ -223,26 +223,25 @@ namespace WebApplication.BL.Core
             WishlistTable wishlistDb = null;
             using (var db = new WishlistContext())
             {
-                using (var db1 = new MyIntContext())
-                {
+                //using (var db1 = new MyIntContext())
+                //{
                     wishlistDb = db.Wishlists.FirstOrDefault(m => m.wishlistId == wishlistId);
 
                     MyInt myInt = new MyInt()
                     {
-                        Wishlist = wishlistDb
+                        ProductId = productDb.ProductId,
+                        WishlistId = wishlistDb.wishlistId
                     };
 
-                    db1.MyInts.Add(myInt);
-                    db1.SaveChanges();
+                //db1.MyInts.Add(myInt);
+                //db1.SaveChanges();
 
-                    //db1.Products.Add(productDb);
-                    wishlistDb.Products.Add(myInt);
+                wishlistDb.Products.Add(myInt);
 
-                    //db.Entry(wishlistDb).State = EntityState.Modified;
+                    db.Entry(wishlistDb).State = EntityState.Modified;
 
-                    db1.SaveChanges();
                     db.SaveChanges();
-                }
+                //}
             }
 
             using (var db = new WishlistContext())
