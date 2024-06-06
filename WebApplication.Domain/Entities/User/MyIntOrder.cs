@@ -17,12 +17,12 @@ namespace WebApplication.Domain.Entities.User
         public int ProductId { get; set; }
         public int Count { get; set; }
 
-        // Внешний ключ для связи с CartTable
-        public int? CartId { get; set; }
+        // Внешний ключ для связи с OrderTable
+        public int? OrderId { get; set; }
 
-        // Навигационное свойство для связи с CartTable
-        [ForeignKey("CartId")]
-        public virtual CartTable Cart { get; set; }
+        // Навигационное свойство для связи с OrderTable
+        [ForeignKey("OrderId")]
+        public virtual OrderTable Order { get; set; }
 
     }
 }

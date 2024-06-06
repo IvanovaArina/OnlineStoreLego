@@ -209,5 +209,32 @@ namespace WebApplication.BL.Core.APIs
             }
             return listOfProductsDTO;
         }
+
+        public double AmountOfCart(int cartId)
+        {
+            double sum = 0;
+            using (var db = new CartContext())
+            {
+                var myIntsCart = db.MyIntsCart.Where(m => m.CartId == cartId).ToList();
+                Dictionary<int,int> idsProductsAndCountFromCart = new Dictionary<int, int>();
+
+                foreach (var i in myIntsCart)
+                {
+                    idsProductsAndCountFromCart.Add(i.ProductId, i.Count);
+                }
+
+                var productApi= new ProductApi();
+                foreach (var i in idsProductsAndCountFromCart)
+                {
+                    int count = idsProductsAndCountFromCart[i.Key];
+                    sum += ((productApi.getProductDTObyId(i.Key)).Price)*count;
+                }
+
+            }
+
+
+            return sum;
+        }
+
     }
 }

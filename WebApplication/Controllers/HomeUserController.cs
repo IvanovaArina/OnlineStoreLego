@@ -58,11 +58,6 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
-        //public ActionResult ShopListingWithString(string userDataModel)
-        //{
-        //    var model = Newtonsoft.Json.JsonConvert.DeserializeObject<UserDataModel>(userDataModel);
-        //    return View("ShopListing", model);
-        //}
 
         public ActionResult Blog(int page = 1, int pageSize = 6)
         {

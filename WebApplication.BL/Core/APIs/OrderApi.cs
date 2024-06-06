@@ -17,38 +17,9 @@ namespace WebApplication.BL.Core.APIs
             OrderTable Order = null;
             using (var context = new OrderContext())
             {
-
-                //var prod1 = new ProductTable
-                //{
-                //    ProductNumber = 33,
-                //    ProductName = "33",
-                //    Price = 200,
-                //    CategoryByAge = "CategoryByAge",
-                //    Category = "Category",
-                //    SellCategory = "SellCategory",
-                //    Quantity = 50,
-                //    IsActive = true,
-                //    ImagePath = "ImagePath"
-                //};
-
-                //var prod2 = new ProductTable
-                //{
-                //    ProductNumber = 66,
-                //    ProductName = "66",
-                //    Price = 66,
-                //    CategoryByAge = "CategoryByAge2",
-                //    Category = "Category2",
-                //    SellCategory = "SellCategory2",
-                //    Quantity = 5002,
-                //    IsActive = false,
-                //    ImagePath = "ImagePath"
-                //};
-
                 Order = new OrderTable
                 {
                     testOrder = 88,
-
-                    Products = new Dictionary<int, int>(),
 
                     UserId = id
                 };
@@ -62,21 +33,14 @@ namespace WebApplication.BL.Core.APIs
         }
 
 
-        //public BaseResponces addUserToOrderTable (string email)
-        //{
+        public void AddOrderInDb()
+        {
 
-        //    UDbTable dbUser = null;
-        //    using (var db = new UserContext())
-        //    {
-        //        dbUser = db.Users.FirstOrDefault(x => x.Email == email);
-        //    }
+        }
+        public void CleanCart()
+        {
 
-
-
-        //    return new BaseResponces { Status = false, StatusMessage = "Didn't add" };
-        //    return new BaseResponces { Status = true, StatusMessage = "added" };
-
-        //}
+        }
 
 
 

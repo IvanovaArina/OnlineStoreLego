@@ -18,10 +18,12 @@ namespace WebApplication.Domain.Entities.User
         public int testOrder { get; set; }
 
         public int UserId { get; set; }
-
-        public Dictionary<int, int> Products { get; set; }
-
-
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Country { get; set; }
+        public string ShippingAddress { get; set; }
 
         public List<MyIntOrder> MyIntsOrder { get; set; } = new List<MyIntOrder>();
 
