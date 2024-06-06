@@ -18,5 +18,15 @@ namespace WebApplication.Controllers
             return RedirectToAction("ShopListing", "HomeUser");
         }
 
+        [HttpPost]
+        public void IncreaseCartCount(int productId, int userId)
+        {
+        }
+
+        [HttpPost]
+        public void DecreaseCartCount(int productId, int userId)
+        {
+        }
+
     }
 }

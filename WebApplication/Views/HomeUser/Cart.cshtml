@@ -68,8 +68,23 @@
                                                         </div>
                                                         <div class="btn-block">
 
+                                                            @{
+                                                                var countCart = Model.getCountInCart(Model.CartId, product.ProductId);
+                                                            }
 
-                                                            <a href="@Url.Action("ProductDetail", "HomeAdmin", new { productId = product.ProductId })" class="list-btn">
+                                                            @using (Html.BeginForm("IncreaseCartCount", "Cart", FormMethod.Post))
+                                                            {
+
+                                                                <input type="text" id="countCart" value="@countCart" readonly>
+                                                                <button type="submit" id="increase" name="UserId" value="@Model.UserId">Increase</button>
+                                                            }
+
+                                                            @using (Html.BeginForm("DecreaseCartCount", "Cart", FormMethod.Post))
+                                                            {
+                                                                <button type="submit" id="decrease" name="UserId" value="@Model.UserId">Decrease</button>
+                                                            }
+
+                                                            <a href="@Url.Action("ProductDetail", "HomeUser", new { productId = product.ProductId })" class="list-btn">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                                     <g clip-path="url(#clip0_1109_1878)">
                                                                         <path d="M31.8026 15.4416C31.517 15.123 24.6467 7.62939 16.0415 7.62939C7.43641 7.62939 0.56616 15.123 0.280473 15.4416C-0.0381523 15.7977 -0.0381523 16.3361 0.280473 16.6922C0.56616 17.0108 7.43653 24.5044 16.0415 24.5044C24.6465 24.5044 31.5169 17.0108 31.8026 16.6922C32.1212 16.3361 32.1212 15.7977 31.8026 15.4416ZM16.0415 22.6294C12.4233 22.6294 9.47904 19.6851 9.47904 16.0669C9.47904 12.4487 12.4233 9.50439 16.0415 9.50439C19.6597 9.50439 22.604 12.4487 22.604 16.0669C22.604 19.6851 19.6597 22.6294 16.0415 22.6294Z" fill="#2C2D2F" />
