@@ -96,6 +96,16 @@ namespace WebApplication.BL.Core
             return wishlistTable;
         }
 
+        public void DeleteProductFromWishlist(int productId, int wishlistId)
+        {
+            using (var db = new WishlistContext())
+            {
+                var myInt = db.MyInts.Where(m => m.ProductId == productId & m.WishlistId == wishlistId).FirstOrDefault();
+                db.MyInts.Remove(myInt);
+                db.SaveChanges();
+            }
+        }
+
         public bool CkeckIfWihlistContainItems(int wishlistId)
         {
             using (var db = new WishlistContext())

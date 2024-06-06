@@ -90,7 +90,46 @@ namespace WebApplication.BL.Core.APIs
                 return myIntCart.Count;
                 
             }
+        }     
+        
+        public int IncreaseCartCount(int productId, int cartId)
+        {
+            using (var db = new CartContext())
+            {
+                var myIntCart = db.MyIntsCart.Where(m => m.ProductId == productId & m.CartId == cartId).FirstOrDefault();
+                myIntCart.Count++;
+
+                db.SaveChanges();
+                return myIntCart.Count;
+                
+            }
+        }   
+        
+        public int DecreaseCartCount(int productId, int cartId)
+        {
+            using (var db = new CartContext())
+            {
+                var myIntCart = db.MyIntsCart.Where(m => m.ProductId == productId & m.CartId == cartId).FirstOrDefault();
+                if (myIntCart.Count != 0)
+                {
+                    myIntCart.Count--;
+                }
+                db.SaveChanges();
+                return myIntCart.Count;
+                
+            }
+        }  
+        
+        public void DeleteProductFromCart(int productId, int cartId)
+        {
+           using (var db = new CartContext())
+            {
+                var myIntCart = db.MyIntsCart.Where(m => m.ProductId == productId & m.CartId == cartId).FirstOrDefault();
+                db.MyIntsCart.Remove(myIntCart);
+                db.SaveChanges();
+            }
         }
+
 
         public void addProductToCart(int cartId, ProductTable productDb)
         {
@@ -102,7 +141,8 @@ namespace WebApplication.BL.Core.APIs
                 MyIntCart myIntCart = new MyIntCart()
                 {
                     ProductId = productDb.ProductId,
-                    Cart = cartDb
+                    Cart = cartDb,
+                    Count = 1
                 };
 
                 cartDb.MyIntsCart.Add(myIntCart);

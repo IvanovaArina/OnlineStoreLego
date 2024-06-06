@@ -19,13 +19,27 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public void IncreaseCartCount(int productId, int userId)
+        public ActionResult IncreaseCartCount(int productId, int cartId)
         {
+            CartApi cartApi=new CartApi();  
+            cartApi.IncreaseCartCount (productId, cartId);
+            return RedirectToAction("Cart", "HomeUser");
         }
 
         [HttpPost]
-        public void DecreaseCartCount(int productId, int userId)
+        public ActionResult DecreaseCartCount(int productId, int cartId)
         {
+            CartApi cartApi = new CartApi();
+            cartApi.DecreaseCartCount(productId, cartId);
+            return RedirectToAction("Cart", "HomeUser");
+        }     
+        
+        public ActionResult DeleteProductFromCart(int productId)
+        {
+            CartApi cartApi = new CartApi();
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            cartApi.DeleteProductFromCart(productId, model.CartId);
+            return RedirectToAction("Cart", "HomeUser");
         }
 
     }
