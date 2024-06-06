@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication.BL.Core;
+using WebApplication.BL.Core.APIs;
 using WebApplication.BL.DBModel;
 using WebApplication.Models;
 using WebApplication.ViewModels;
@@ -116,18 +117,18 @@ namespace WebApplication.Controllers
             return View(articleDataModel);
         }
 
-        public ActionResult ProductDetail(int? productId)
+        public ActionResult ProductDetail(int productId)
         {
-            if (!productId.HasValue)
-            {
-                return HttpNotFound("Product id is missing.");
-            }
+            //if (!productId.HasValue)
+            //{
+            //    return HttpNotFound("Product id is missing.");
+            //}
 
-            var product = productContext.Products.FirstOrDefault(a => a.ProductId == productId.Value);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
+            var product = productContext.Products.FirstOrDefault(a => a.ProductId == productId);
+            //if (product == null)
+            //{
+            //    return HttpNotFound();
+            //}
 
             var productModel = new ProductModel
             {
@@ -144,6 +145,14 @@ namespace WebApplication.Controllers
             return View(productModel);
         }
 
+
+        public ActionResult AddToCart(int productId)
+        {
+            CartApi cartApi = new CartApi();
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            cartApi.AddToCartInDb(productId, model.UserId);
+            return RedirectToAction("ProductDetail", "HomeUser", productId);
+        }
 
         public ActionResult Cart()
         {

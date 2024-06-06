@@ -94,7 +94,7 @@
 
                 </div>
                 <div class="d-flex justify-content-center">
-                    <a href="@Url.Action("ShopListing", "HomeUsers")" class="cus-btn primary">Discover More </a>
+                    <a href="@Url.Action("ShopListing", "HomeUser")" class="cus-btn primary">Discover More </a>
                 </div>
             </div>
         </div>
@@ -105,19 +105,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-sm-6 mb-24 mb-lg-0">
-                    <a href=@Url.Action("ShopListing", "HomeUsers") class="cards w-100">
+                    <a href=@Url.Action("ShopListing", "HomeUser") class="cards w-100">
                         <img src="~/assets/media/cards/card-1.png" class="w-100" alt="">
                         <h3 class="h-47 bold color-white">LEGO BRICKS</h3>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6 mb-24 mb-lg-0">
-                    <a href=@Url.Action("ShopListing", "HomeUsers") class="cards w-100">
+                    <a href=@Url.Action("ShopListing", "HomeUser") class="cards w-100">
                         <img src="~/assets/media/cards/card-2.png" class="w-100" alt="">
                         <h3 class="h-47 bold color-white">TOY CARS</h3>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6 offset-lg-0 offset-sm-3">
-                    <a href=@Url.Action("ShopListing", "HomeUsers") class="cards w-100">
+                    <a href=@Url.Action("ShopListing", "HomeUser") class="cards w-100">
                         <img src="~/assets/media/cards/card-3.png" class="w-100" alt="">
                         <h3 class="h-47 bold color-white">FLUFFY TOYS</h3>
                     </a>
@@ -168,7 +168,7 @@
                                                     <path d="M9.37781 5.71966C9.37781 5.17031 9.37781 4.62096 9.37781 4.07161C9.36906 3.98896 9.37784 3.90539 9.40359 3.82637C9.42935 3.74734 9.47148 3.67467 9.52725 3.61304C9.58302 3.55141 9.65118 3.50224 9.72725 3.46874C9.80332 3.43523 9.8856 3.41814 9.96872 3.4186C10.0521 3.41378 10.1355 3.42702 10.2133 3.45738C10.2911 3.48774 10.3615 3.53452 10.4195 3.59454C10.4776 3.65456 10.522 3.72642 10.5498 3.80517C10.5775 3.88393 10.588 3.96773 10.5804 4.05089C10.5804 4.99411 10.5804 5.93732 10.5804 6.88055C10.564 7.35696 10.6417 7.83193 10.809 8.27833C10.9762 8.72472 11.2298 9.13381 11.5552 9.48224C11.8805 9.83066 12.2714 10.1116 12.7054 10.309C13.1393 10.5064 13.6079 10.6164 14.0844 10.6327C14.5609 10.6491 15.036 10.5714 15.4824 10.4042C15.9289 10.237 16.3381 9.98346 16.6866 9.65814C17.0351 9.33282 17.316 8.94206 17.5135 8.50816C17.7109 8.07427 17.821 7.60574 17.8373 7.12933C17.8373 6.09282 17.8373 5.1185 17.8373 4.12345C17.8222 3.99038 17.849 3.85589 17.9141 3.73881C17.9791 3.62173 18.0791 3.52791 18.2001 3.47044C18.2851 3.42551 18.3799 3.40236 18.476 3.4031C18.5721 3.40384 18.6666 3.42845 18.7509 3.47468C18.8351 3.52092 18.9066 3.58735 18.9588 3.66802C19.0111 3.74869 19.0425 3.84106 19.0502 3.93686C19.17 5.38558 19.1178 6.84339 18.8947 8.27985C18.6178 9.3614 17.9739 10.3133 17.073 10.973C16.1721 11.6326 15.0701 11.9591 13.9552 11.8967C12.8403 11.8343 11.7817 11.3869 10.9601 10.6308C10.1385 9.87472 9.60485 8.85695 9.45037 7.75125C9.35707 7.07751 9.38818 5.71966 9.37781 5.71966Z" stroke="#2C2D2F" stroke-width="0.5" />
                                                 </svg>
                                             </a>
-                                            <a href="@Url.Action("ProductDetail", "HomeUsers", new { productId = product.ProductId })" class="list-btn">
+                                            <a href="@Url.Action("ProductDetail", "HomeUser", new { productId = product.ProductId })" class="list-btn">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                     <g clip-path="url(#clip0_1109_1878)">
                                                         <path d="M31.8026 15.4416C31.517 15.123 24.6467 7.62939 16.0415 7.62939C7.43641 7.62939 0.56616 15.123 0.280473 15.4416C-0.0381523 15.7977 -0.0381523 16.3361 0.280473 16.6922C0.56616 17.0108 7.43653 24.5044 16.0415 24.5044C24.6465 24.5044 31.5169 17.0108 31.8026 16.6922C32.1212 16.3361 32.1212 15.7977 31.8026 15.4416ZM16.0415 22.6294C12.4233 22.6294 9.47904 19.6851 9.47904 16.0669C9.47904 12.4487 12.4233 9.50439 16.0415 9.50439C19.6597 9.50439 22.604 12.4487 22.604 16.0669C22.604 19.6851 19.6597 22.6294 16.0415 22.6294Z" fill="#2C2D2F" />
@@ -204,7 +204,7 @@
                                 </div>
                             </div>
                             <h1 class="h-61 bold light-black mb-32">@prod.ProductName</h1>
-                            <a href="@Url.Action("ProductDetail", "HomeUsers", new { productId = prod.ProductId })" class="cus-btn sec">Purchase Now</a>
+                            <a href="@Url.Action("ProductDetail", "HomeUser", new { productId = prod.ProductId })" class="cus-btn sec">Purchase Now</a>
                         </div>
                         <div class="product-img">
                             <img src="@prod.ImagePath" alt="">
@@ -290,7 +290,7 @@
                                             <div class="name">
                                                 <p class="medium-black">@article.AuthorName</p>
                                             </div>
-                                            <a href="@Url.Action("BlogDetail", "HomeUsers", new { articleId = article.ArticleId })" class="light-btn primary" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
+                                            <a href="@Url.Action("BlogDetail", "HomeUser", new { articleId = article.ArticleId })" class="light-btn primary" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
                                         </div>
                                     </div>
                                 </div>

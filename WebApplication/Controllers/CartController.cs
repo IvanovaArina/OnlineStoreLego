@@ -11,10 +11,11 @@ namespace WebApplication.Controllers
 {
     public class CartController : Controller
     {
-        public ActionResult AddToCart(int productId, int userId)
+        public ActionResult AddToCart(int productId)
         {
             CartApi cartApi = new CartApi();
-            cartApi.AddToCartInDb(productId, userId);
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            cartApi.AddToCartInDb(productId, model.UserId);
             return RedirectToAction("ShopListing", "HomeUser");
         }
 

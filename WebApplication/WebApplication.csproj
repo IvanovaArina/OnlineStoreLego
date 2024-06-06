@@ -251,6 +251,7 @@
     <Compile Include="Controllers\ManageProductController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\ManageContentController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WishlistController.cs" />
@@ -399,6 +400,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebApplication.BL\WebApplication.BL.csproj">

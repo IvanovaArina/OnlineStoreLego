@@ -19,6 +19,14 @@ namespace WebApplication.Controllers
             return RedirectToAction("ShopListing", "HomeUser");
         }
 
+        public ActionResult AddToCart(int productId)
+        {
+            CartApi cartApi = new CartApi();
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            cartApi.AddToCartInDb(productId, model.UserId);
+            return RedirectToAction("Wishlist", "HomeUser");
+        }
+
         public ActionResult DeleteProductFromWishlist(int productId)
         {
             WishlistApi wishlistApi = new WishlistApi();
