@@ -93,6 +93,7 @@
     <Compile Include="Entities\User\CartTable.cs" />
     <Compile Include="Entities\User\MyInt.cs" />
     <Compile Include="Entities\User\MyIntCart.cs" />
+    <Compile Include="Entities\User\MyIntOrder.cs" />
     <Compile Include="Entities\User\OrderTable.cs" />
     <Compile Include="Entities\User\Session.cs" />
     <Compile Include="Entities\User\UDbTable.cs" />

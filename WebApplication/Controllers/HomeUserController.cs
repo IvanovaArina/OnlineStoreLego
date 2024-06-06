@@ -164,9 +164,13 @@ namespace WebApplication.Controllers
             UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
             return View(model);
         }
-        public ActionResult Checkout(UserDataModel userDataModel)
+        public ActionResult Checkout()
         {
-            return View();
+            OrderModel model = new OrderModel()
+            {
+                UserId = ((UserDataModel)System.Web.HttpContext.Current.Session["userModel"]).UserId
+            };
+            return View(model);
         }
 
         public ActionResult UserAccount()

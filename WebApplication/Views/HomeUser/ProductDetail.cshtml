@@ -63,7 +63,7 @@
 
                             <div class="btn-block">
                                 <a href="@Url.Action("AddToCart", "HomeUser", new { productId = @Model.ProductId })" class="cus-btn primary"> Add to Cart</a>
-                                <a href="./shop-listing-1.html" class="cus-btn light st-2"> Purchase Now</a>
+                                <a href="@Url.Action("Checkout", "HomeUser")" class="cus-btn light st-2"> Purchase Now</a>
                             </div>
 
 

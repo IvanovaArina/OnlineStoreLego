@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/ULayout.cshtml";
 }
 
-@model WebApplication.Models.UserDataModel
+@model WebApplication.Models.OrderModel
 
 <!-- Hero Banner start -->
 <div class="page-title-banner">
@@ -30,7 +30,8 @@
     <section class="checkout p-96">
         <div class="container">
             <div class="shipping p-96 pt-0">
-                <h2 class="h-47 bold color-white mb-48">Shipping Detail</h2>
+                
+
                 <form action="./checkout.html">
                     <div class="row">
                         <div class="col-lg-6">
@@ -49,54 +50,13 @@
                             <input type="text" id="country" placeholder="Country" class="form-control mb-16" required>
                         </div>
                         <div class="col-lg-6">
-                            <input type="text" id="state" placeholder="State" class="form-control mb-16" required>
+                            <input type="text" id="adress" placeholder="Shipping address" class="form-control mb-16" required>
                         </div>
-                        <div class="col-lg-6">
-                            <input type="text" id="adress" placeholder="House no and street name" class="form-control mb-16" required>
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="text" id="suit" placeholder="Apartment , suit, (optional)" class="form-control mb-48" required>
-                        </div>
-                        <div class="col-12">
-                            <div class="checkBox">
-                                <input type="checkbox" id="shipping">
-                                <label for="shipping">Billing address same as shipping address?</label>
-                            </div>
-                        </div>
+          
                     </div>
                 </form>
             </div>
-            <div class="billing">
-                <h2 class="h-47 bold color-white mb-48">Billing Detail</h2>
-                <form action="./checkout.html">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <input type="text" id="f-name" placeholder="First Name" class="form-control mb-16" required>
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="text" id="l-email" placeholder="Last Name" class="form-control mb-16" required>
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="email" id="email-2" placeholder="Email" class="form-control mb-16" required>
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="tel" id="num" placeholder="Phone Number" class="form-control mb-16" required>
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="text" id="country-2" placeholder="Country" class="form-control mb-16" required>
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="text" id="state-2" placeholder="State" class="form-control mb-16" required>
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="text" id="adress-2" placeholder="House no and street name" class="form-control mb-16 mb-lg-0" required>
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="text" id="suit-2" placeholder="Apartment , suit, (optional)" class="form-control mb-0" required>
-                        </div>
-                    </div>
-                </form>
-            </div>
+
             <div class="cart p-96 pb-0">
                 <h2 class="h-47 bold color-white mb-48">Cart Items</h2>
                 <div class="row">
@@ -246,7 +206,7 @@
                                             <h4 class="h-36 bold light-black">$259.90</h4>
                                         </li>
                                     </ul>
-                                    <a href="checkout.html" class="cus-btn primary w-100">To Checkout</a>
+                                    <a href="checkout.html" class="cus-btn primary w-100">Finish Checkout</a>
                                 </div>
                             </div>
                         </div>

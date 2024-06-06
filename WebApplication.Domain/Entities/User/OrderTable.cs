@@ -22,5 +22,9 @@ namespace WebApplication.Domain.Entities.User
         public Dictionary<int, int> Products { get; set; }
 
 
+
+        public List<MyIntOrder> MyIntsOrder { get; set; } = new List<MyIntOrder>();
+
+
     }
 }
