@@ -40,9 +40,9 @@ namespace WebApplication.Controllers
             return View(userDataModel);
 
         }
-        public ActionResult About(UserDataModel userDataModel)
+        public ActionResult About()
         {
-            return View(userDataModel);
+            return View();
 
         }
 
