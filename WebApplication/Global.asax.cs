@@ -33,13 +33,7 @@ namespace WebApplication
                 cfg.AddProfile<BL.AutoMapperProfile>();
             });
 
-            //TODO: Добавить проверку на наличие пользователей в бд и создавать админа только если нет ниодного пользователя в бд
-            // Здесь вызываем метод для создания учетной записи администратора
-            var userApi = new UserApi();
-            //if (!userApi.UsersExist())
-            //{
-            //    userApi.CreateAdminAccount();
-            //}
+            
         }
             
     }

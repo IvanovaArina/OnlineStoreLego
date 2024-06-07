@@ -163,7 +163,7 @@ namespace WebApplication.Controllers
         {
             OrderModel model = new OrderModel()
             {
-                UserId = ((UserDataModel)System.Web.HttpContext.Current.Session["userModel"]).UserId
+                //UserId = ((UserDataModel)System.Web.HttpContext.Current.Session["userModel"]).UserId
             };
             return View(model);
         }

@@ -22,6 +22,7 @@ namespace WebApplication.BL.Core
         public int WishlistId { get; set; }
 
         public int CartId { get; set; }
+        public int OrderId { get; set; }
 
 
 

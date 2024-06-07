@@ -1,8 +1,11 @@
-﻿﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication.BL.Core.DTOs;
 using WebApplication.BL.DBModel;
 using WebApplication.Domain.Entities.Admin;
 using WebApplication.Domain.Entities.Responces;
@@ -12,34 +15,147 @@ namespace WebApplication.BL.Core.APIs
 {
     public class OrderApi
     {
-        public OrderTable createOrderTable(int id)
+        public OrderTable getDefaultOrderTable()
         {
-            OrderTable Order = null;
-            using (var context = new OrderContext())
+            return new OrderTable()
             {
-                Order = new OrderTable
-                {
-                    testOrder = 88,
+                testOrder = 1,
+            };
+        }
 
-                    UserId = id
-                };
+        public bool checkIfOrderTestExists(OrderContext db, int testOrder)
+        {
+            var dbOrder = db.Orders.FirstOrDefault(x => x.testOrder == testOrder);
+            return (dbOrder != null);
+        }
 
+        public OrderDTO createOrder()
+        {
+            OrderApi orderApi = new OrderApi();
+            var order = orderApi.getDefaultOrderTable();
 
-                context.Orders.Add(Order);
-                context.SaveChanges();
+            using (var db = new OrderContext())
+            {
+                checkIfOrderTestExists(db, order.testOrder);
+
+                db.Orders.Add(order);
+                db.SaveChanges();
+
             }
 
-            return Order;
+            var orderDTO = Mapper.Map<OrderDTO>(order);
+            return orderDTO;
+        }
+
+        public OrderTable createOrderTable()
+        {
+            OrderDTO orderDTO = createOrder();
+
+            OrderTable orderTable = Mapper.Map<OrderTable>(orderDTO);
+
+            return orderTable;
+        }
+
+        //public int saveOrderTable(OrderTable orderTable)
+        //{
+        //    using(var db = new OrderContext())
+        //    {
+        //        db.Orders.Add(orderTable);
+        //        db.SaveChanges();
+        //    }
+
+        //    return orderTable.orderId;
+        //}
+
+        public int getValidOrderNumber(int userId)
+        {
+            int orderNumber = 0;
+
+            using(var db = new OrderContext())
+            {
+                var allOrdersThisUser = db.Orders.Where(m => m.userId == userId).ToList();
+           
+                foreach (var order in allOrdersThisUser)
+                {
+                    if (orderNumber < order.orderNumber)
+                    {
+                        orderNumber = order.orderNumber;
+                    }
+                }
+                        
+            }
+
+            return orderNumber;
+        }
+
+        public void SaveOrderDetails(OrderDTO orderDTO, int orderId, int userId)
+        {
+            var orderApi = new OrderApi();
+            using(var db = new OrderContext())
+            {
+                var orderDb = db.Orders.FirstOrDefault(m=>m.orderId == orderId);
+                orderDb.testOrder = orderDTO.testOrder;
+                orderDb.FirstName = orderDTO.FirstName;
+                orderDb.LastName = orderDTO.LastName;
+                orderDb.Email = orderDTO.Email;
+                orderDb.PhoneNumber = orderDTO.PhoneNumber;
+                orderDb.Country = orderDTO.Country;
+                orderDb.ShippingAddress = orderDTO.ShippingAddress;
+                orderDb.MyIntsOrder = orderDTO.MyIntsOrder;
+                orderDb.orderNumber = (orderApi.getValidOrderNumber(userId))+1;
+                orderDb.userId = orderDTO.userId;
+
+                db.SaveChanges();
+            }
         }
 
 
-        public void AddOrderInDb()
+        public int AddOrderInDb(int cartId)
         {
+            int orderId = (createOrderTable()).orderId;
+            using (var orderContext = new OrderContext())
+            {
+                using (var cartContext = new CartContext())
+                {
+                    var listOfMyIntsCart = cartContext.MyIntsCart.Where(m => m.CartId == cartId).ToList();
 
+                    var listOfMyIntsOrder = new List<MyIntOrder>();
+
+                    foreach (var item in listOfMyIntsCart)
+                    {
+                        var order = orderContext.Orders.FirstOrDefault(m => m.orderId == orderId);
+                        MyIntOrder myIntOrder = new MyIntOrder()
+                        {
+                            ProductId = item.ProductId,
+                            Count = item.Count,
+                            Order = order,
+                            OrderId = orderId
+                        };
+
+                        orderContext.MyIntsOrder.Add(myIntOrder);
+                        orderContext.SaveChanges();
+
+                    }
+
+                    CleanCart(listOfMyIntsCart);
+                 }
+            }
+
+            return orderId;
         }
-        public void CleanCart()
-        {
 
+
+        public void CleanCart(List<MyIntCart> listOfMyIntsCart)
+        {
+            using (var cartContext = new CartContext())
+            {
+                foreach (var item in listOfMyIntsCart)
+                {
+                    var myIntCart = cartContext.MyIntsCart.FirstOrDefault(m => m.ProductId == item.ProductId & m.CartId == item.CartId);
+                    cartContext.MyIntsCart.Remove(myIntCart);
+                    cartContext.SaveChanges();
+                }
+            }
         }
 
 

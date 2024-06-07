@@ -16,5 +16,17 @@ namespace WebApplication.BL.DBModel
 
         public virtual DbSet<OrderTable> Orders { get; set; }
 
+        public virtual DbSet<MyIntOrder> MyIntsOrder { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MyIntOrder>()
+                .HasOptional(p => p.Order)
+                .WithMany(w => w.MyIntsOrder)
+                .HasForeignKey(p => p.OrderId);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

@@ -26,6 +26,7 @@ namespace WebApplication.Models
         public int WishlistId { get; set; }
 
         public int CartId { get; set; }
+        public int OrderId { get; set; }
 
 
         public UserDataModel() {

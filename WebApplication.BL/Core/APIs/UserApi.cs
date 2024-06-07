@@ -262,28 +262,6 @@ namespace WebApplication.BL.Core
 
             return new BaseResponces { Status = true };
         }
-
-       
-
-       //public bool CheckIfThereAreUsers()
-       // {
-       //     List<int> usersIds = new List<int>();
-
-       //     using (var db = new UserContext())
-       //     {
-       //         usersIds = db.Users.Select(w => w.UserId).ToList();
-       //     }
-
-       //     if (usersIds.Count == 0)
-       //     {
-       //         return false;
-       //     }
-       //     else
-       //     {
-       //         return true;
-       //     }
-       // }
-
        
 
         public UserDTO createNewUserWithHash(UserDTO userDTO)
@@ -292,7 +270,7 @@ namespace WebApplication.BL.Core
 
             var wishlistApi = new WishlistApi();
             var cartApi = new CartApi();
-            //var orderApi = new OrderApi();
+            var orderApi = new OrderApi();
 
             var user = new UserDTO
             {
@@ -305,9 +283,7 @@ namespace WebApplication.BL.Core
                 Role = userDTO.Role,
 
                 WishlistId = (wishlistApi.createWishlistTable()).wishlistId,
-                CartId = (cartApi.createCartTable()).cartId,
-
-                //Order = orderApi.createOrderTable()
+                CartId = (cartApi.createCartTable()).cartId
 
             };
 
@@ -376,13 +352,13 @@ namespace WebApplication.BL.Core
 
 
             var user = createNewUserWithHash(userDTO);
-            var userDb = Mapper.Map<UDbTable>(user); 
+            var userDb = Mapper.Map<UDbTable>(user);
             //userDb.Wishlist.User = userDb;
             //userDb.Cart.User = userDb;
 
             addUserToDb(userDb);
-            OrderApi api = new OrderApi();
-            api.createOrderTable(userDb.UserId);
+            //OrderApi api = new OrderApi();
+            //api.createOrderTable();
 
             return new BaseResponces { Status = true, StatusMessage = "ok" };
 
