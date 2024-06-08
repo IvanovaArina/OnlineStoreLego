@@ -61,9 +61,9 @@ namespace OnlineStoreLego.Web.Controllers
             return View();
 
         }
-        public ActionResult ShopListing(UserDataModel userDataModel)
+        public ActionResult ShopListing(ProductModel productModel)
         {
-            return View(userDataModel);
+            return View(productModel);
 
         }
 

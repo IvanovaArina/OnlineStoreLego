@@ -174,11 +174,22 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
+        
         public ActionResult EditInfo()
         {
             UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
             return View(model);
         }
+        [HttpPost]
+        public ActionResult  EditInfoAction(UserDataModel userDataModel)
+        {
+            //UserDataModel userDataModel = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            UserDTO userDTO = userDataModel.moveDataFromModelToDTO();
+            UserApi userApi = new UserApi();
+            userApi.editUserInDb(userDTO);
+            return RedirectToAction("LogIn", "Login");
+        }
+
 
         public ActionResult ViewOrdersU(UserDataModel userDataModel)
         {

@@ -431,15 +431,6 @@ namespace WebApplication.BL.Core
                     userDb.Password = HashPassword(userDTO.Password);
                     userDb.ConfirmPassword = userDb.Password;
 
-
-
-                    //Role = userDTO.Role,
-                    ////UserIp = userDTO.UserIp,
-                    //Wishlist = userDTO.Wishlist,
-                    //Cart = userDTO.Cart
-
-
-
                     // Сохраняем изменения в базе данных
                     context.SaveChanges();
                 }

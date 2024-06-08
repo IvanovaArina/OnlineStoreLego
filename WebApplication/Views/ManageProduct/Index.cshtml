@@ -11,10 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Product Management</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     
 
 </head>
 <body>
+    
 
     <div class="container mt-5">
         <h2 class="mb-4">Product Management</h2>
@@ -44,24 +46,26 @@
                     {
                         if (item != null)
                         {
-                                <tr>
-                                    <td>@item.ProductNumber</td>
-                                    <td>
-                                        @if (!string.IsNullOrEmpty(item.ImagePath))
-                                        {
-                                            <img src="@Url.Content(item.ImagePath)" alt="Product Image" style="max-width: 100px; height: auto;" />
-                                        }
-                                        else
-                                        {
-                                            <span>No image</span>
-                                        }
-                                    </td> <!-- Колонка изображения -->
-                                    <td>@item.ProductName</td>
-                                    <td>@item.Category</td>
-                                    <td>@item.Price</td>
-                                    <td><input type="checkbox" class="active-checkbox" @(item.IsActive ? "checked" : "")></td>
+                            <tr>
+                                <td>@item.ProductNumber</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.ImagePath))
+                                    {
+                                        <img src="@Url.Content(item.ImagePath)" alt="Product Image" style="max-width: 100px; height: auto;" />
+                                    }
+                                    else
+                                    {
+                                        <span>No image</span>
+                                    }
+                                </td> <!-- Колонка изображения -->
+                                <td>@item.ProductName</td>
+                                <td>@item.Category</td>
+                                <td>@item.Price</td>
+                                <td>
+                                    <input type="checkbox" class="active-checkbox" @(item.IsActive ? "checked" : "") disabled>
+                                </td>
 
-                                </tr>
+                            </tr>
                         }
 
                     }
@@ -94,14 +98,6 @@
                     }
                 </div>
 
-
-                @*</tbody>
-            </table>
-            <div class="text-left">
-                <button class="btn btn-danger btn-lg" id="addProductBtn">Add Product</button>
-            </div>
-        </div>*@
-
                 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
                 @Html.Raw("<script src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js\"></script>")
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -114,33 +110,14 @@
                 });
             });
 
-            //$('.edit-btn').on('click', function () {
-            //    // Edit button functionality
-            //    alert('Edit button clicked');
-            //});
-
-            //$('.delete-btn').on('click', function () {
-            //    // Delete button functionality
-            //    if (confirm('Are you sure you want to delete this product?')) {
-            //        $(this).closest('tr').remove();
-            //    }
-            //});
-
-            //$('.active-checkbox').on('change', function () {
-            //    // Active checkbox functionality
-            //    var isActive = $(this).is(':checked');
-            //    var productName = $(this).closest('tr').find('td:eq(1)').text();
-            //    alert('Product ' + productName + ' is now ' + (isActive ? 'active' : 'inactive'));
-            //    // Here you can add an AJAX call to update the product status in the database
-            //});
 
             $('#addProductBtn').on('click', function () {
                 // Redirect to CreateProduct page
                 window.location.href = '@Url.Action("CreateProduct", "ManageProduct")';
             });
-        }); 
+        });
 
-                
-                
+
+
 </body>
 </html>

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "EditInfo";
     Layout = "~/Views/Shared/LayoutUsers.cshtml";
 }
@@ -11,35 +10,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Information</title>
+    <title>Edit User Information</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="mb-4">Edit User Information</h2>
 
-        @using (Html.BeginForm("EditUserAction", "Users", FormMethod.Post))
+        @using (Html.BeginForm("EditInfoAction", "HomeUser", FormMethod.Post))
         {
-            <form>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <textarea type="text" class="form-control" id="name" name="Username" placeholder="Enter your name">@*@Model.Username*@</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <textarea type="email" class="form-control" id="email" placeholder="Enter your email">@*@Model.Email*@</textarea>
-                </div>
-                @*<div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <textarea type="text" class="form-control" id="phone" placeholder="Enter your phone number">@Model.</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="Enter your address"></textarea>
-                </div>*@
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-            </form>
 
+            <h3>Your id = @Model.UserId </h3>
+            <input type="hidden" name="UserId" value="@Model.UserId">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <textarea class="form-control" id="username" name="Username" required>@Model.Username</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <textarea type="text" class="form-control" id="Email" name="Email" required>@Model.Email</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="password" class="form-control" id="Password" name="Password" value="@Model.Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
         }
     </div>
 
