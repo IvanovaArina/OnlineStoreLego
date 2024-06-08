@@ -9,7 +9,6 @@ using WebApplication.BL.DBModel;
 using WebApplication.Domain.Entities.User;
 using WebApplication.Models;
 using WebApplication.ViewModels;
-using WebApplication.Extensions;
 using WebApplication.BL;
 using System.Security.Claims;
 
