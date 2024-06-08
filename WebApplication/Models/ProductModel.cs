@@ -48,7 +48,7 @@ namespace WebApplication.Models
         //public int? WishlistId { get; set; }
 
         //public virtual WishlistTable Wishlist { get; set; }
-
+        public List<ReviewDTO> Reviews { get; set; }
 
         public ProductModel()
         {

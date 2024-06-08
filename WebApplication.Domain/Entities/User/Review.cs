@@ -6,21 +6,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Domain.Entities.Admin;
-using WebApplication.Domain.Entities.User;
 
-namespace WebApplication.BL.Core
+namespace WebApplication.Domain.Entities.User
 {
-    public class ReviewDTO
+    public class Review
     {
+        [Key]
         public int ReviewId { get; set; }
+
+        [ForeignKey("Product")]
         public int ProductId { get; set; }
-        public int UserId { get; set; }
+        public virtual ProductTable Product { get; set; }
+
+        //[ForeignKey("User")]
+        //public int UserId { get; set; }
+        //public virtual UDbTable User { get; set; }
+
+        public string UserName { get; set; }
+
+        [Range(1, 5)]
         public int Rating { get; set; }
+
         public string Text { get; set; }
+
         public bool Approved { get; set; }
-        //public UserDTO User { get; set; }  
-        public string UserName { get; set; } // Добавляем поле для имени пользователя
-        public DateTime CreatedAt { get; set; }
-        public string ProductName { get; set; }
+
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
+
 }

@@ -286,5 +286,26 @@ namespace WebApplication.BL.Core
             return productTable;
         }
 
+        public ProductDTO GetProductById(int productId)
+        {
+            using (var db = new ReviewContext())
+            {
+                var product = db.Products
+                                .Where(p => p.ProductId == productId)
+                                .Select(p => new ProductDTO
+                                {
+                                    ProductId = p.ProductId,
+                                    ProductName = p.ProductName,
+                                    Price = p.Price,
+                                    Category = p.Category,
+                                    ProductDetail = p.ProductDetail,
+                                    ImagePath = p.ImagePath
+                                })
+                                .FirstOrDefault();
+
+                return product;
+            }
+        }
+
     }
 }

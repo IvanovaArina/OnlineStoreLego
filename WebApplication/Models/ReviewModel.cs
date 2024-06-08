@@ -29,17 +29,15 @@ namespace WebApplication.Models
             reviewApi = new ReviewApi();
 
         }
-
-        public List<ReviewDTO> approvedReviewForTable()
-        {
-            return reviewApi.getApprovedReviewsFromDatabase();
-        }
-
-        public List<ReviewDTO> pendingReviewForTable()
+        public List<ReviewDTO> GetPendingReviews()
         {
             return reviewApi.getPendingReviewsFromDatabase();
         }
 
+        public List<ReviewDTO> GetApprovedReviews()
+        {
+            return reviewApi.getApprovedReviewsFromDatabase();
+        }
         public List<ReviewDTO> reviewForTable()
         {
             return reviewApi.getAllReviewsFromDatabase();
