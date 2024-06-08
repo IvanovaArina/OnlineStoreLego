@@ -11,30 +11,43 @@ namespace WebApplication.Controllers
     public class ReviewController : Controller
     {
         // GET: Review
+        //[HttpGet]
+        //public ActionResult Index(ReviewModel reviewModel)
+        //{
+        //    return View(reviewModel);
+        //}
+
+        private readonly ReviewApi _reviewApi = new ReviewApi();
+
         [HttpGet]
-        public ActionResult Index(ReviewModel reviewModel)
+        public ActionResult Index()
         {
+            var reviewModel = new ReviewModel();
+            ViewBag.PendingReviews = reviewModel.GetPendingReviews();
+            ViewBag.ApprovedReviews = reviewModel.GetApprovedReviews();
             return View(reviewModel);
         }
 
         [HttpPost]
-        public ActionResult DeleteReview(ReviewModel reviewModel)
+        public ActionResult AcceptReview(int reviewId)
         {
-            ReviewApi reviewApi = new ReviewApi();
-            reviewApi.deleteReview(reviewModel.ReviewId);
-
-            return View("Index", reviewModel);
+            _reviewApi.AcceptReview(reviewId);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult AcceptReview(ReviewModel reviewModel)
+        public ActionResult DenyReview(int reviewId)
         {
-            ReviewApi reviewApi = new ReviewApi();
-            reviewApi.changeStatusOnApproved(reviewModel.ReviewId);
-            return View("Index", reviewModel);
+            _reviewApi.DenyReview(reviewId);
+            return RedirectToAction("Index");
         }
 
-
+        [HttpPost]
+        public ActionResult DeleteReview(int reviewId)
+        {
+            _reviewApi.deleteReview(reviewId);
+            return RedirectToAction("Index");
+        }
 
         public ActionResult AdminAccount()
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WebApplication.BL.Core;
 using WebApplication.BL.Core.APIs;
+using WebApplication.BL.DBModel;
 using WebApplication.Domain.Entities.Enums;
 using WebApplication.Domain.Entities.User;
 
@@ -110,6 +111,34 @@ namespace WebApplication.Models
 
             return userModel;
         }
+
+        public UserDTO GetCurrentUser(int userId)
+        {
+            using (var db = new ReviewContext())
+            {
+                Console.WriteLine($"Looking for user with UserId: {userId}");
+                var user = db.Users.FirstOrDefault(u => u.UserId == userId);
+                if (user != null)
+                {
+                    Console.WriteLine($"User found: {user.Username} with ID: {user.UserId}");
+                    return new UserDTO
+                    {
+                        UserId = user.UserId,
+                        Username = user.Username,
+                        Email = user.Email,
+                        Role = user.Role,
+                        WishlistId = user.WishlistId,
+                        CartId = user.CartId
+                    };
+                }
+                else
+                {
+                    Console.WriteLine($"User not found in database for UserId: {userId}");
+                }
+            }
+            return null;
+        }
+
 
     }
 }

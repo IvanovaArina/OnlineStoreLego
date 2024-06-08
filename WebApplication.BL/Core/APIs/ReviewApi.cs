@@ -1,124 +1,169 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WebApplication.Domain.Entities.User;
 using WebApplication.BL.DBModel;
-using Microsoft.Ajax.Utilities;
-using System.Diagnostics;
-using WebApplication.Domain.Entities.Admin;
 
 namespace WebApplication.BL.Core
 {
     public class ReviewApi
     {
+        public List<ReviewDTO> GetReviewsByProductId(int productId)
+        {
+            using (var db = new ReviewContext())
+            {
+                return db.Reviews
+                    .Where(x => x.ProductId == productId)
+                    .Select(x => new ReviewDTO
+                    {
+                        ReviewId = x.ReviewId,
+                        ProductId = x.ProductId,
+                        UserName = x.UserName,
+                        Rating = x.Rating,
+                        Text = x.Text,
+                        Approved = x.Approved,
+                        CreatedAt = x.CreatedAt,
+                        ProductName = x.Product.ProductName // Assuming you have a navigation property for Product
+                    })
+                    .ToList();
+            }
+        }
+
+        public void AddReview(ReviewDTO reviewDto)
+        {
+            using (var db = new ReviewContext())
+            {
+                try
+                {
+                    var review = new Review
+                    {
+                        ProductId = reviewDto.ProductId,
+                        UserName = reviewDto.UserName, // Обновляем для использования нового поля
+                      
+                        Rating = reviewDto.Rating,
+                        Text = reviewDto.Text,
+                        Approved = false // Отзывы требуют одобрения
+                    };
+                    db.Reviews.Add(review);
+                    db.SaveChanges();
+                    Console.WriteLine("Review added successfully");
+                }
+                catch (Exception ex)
+                {
+                    // Логирование ошибки
+                    Console.WriteLine("Error occurred while adding review: " + ex.Message);
+                    throw;
+                }
+            }
+        }
+
+
         public ReviewDTO getReviewDTObyId(int number)
         {
             ReviewDTO local = null;
             using (var db = new ReviewContext())
             {
-                var dbProduct = db.Reviews.FirstOrDefault(x => x.ReviewId == number);
-                if (dbProduct != null)
+                var dbReview = db.Reviews.FirstOrDefault(x => x.ReviewId == number);
+                if (dbReview != null)
                 {
                     local = new ReviewDTO
                     {
-                        ReviewId = dbProduct.ReviewId,
-                        Approved = dbProduct.Approved,
-                        Rating = dbProduct.Rating,
-                        Text = dbProduct.Text,
-                        //User = dbProduct.User,
-                        //Product = dbProduct.Product,
-
+                        ReviewId = dbReview.ReviewId,
+                        Approved = dbReview.Approved,
+                        Rating = dbReview.Rating,
+                        Text = dbReview.Text,
+                        ProductId = dbReview.ProductId,
+                        //UserId = dbReview.UserId
                     };
                 }
             }
 
             return local;
         }
+        public List<ReviewDTO> getPendingReviewsFromDatabase()
+        {
+            using (var db = new ReviewContext())
+            {
+                return db.Reviews
+                    .Where(x => !x.Approved)
+                    .Select(x => new ReviewDTO
+                    {
+                        ReviewId = x.ReviewId,
+                        ProductId = x.ProductId,
+                        UserName = x.UserName,
+                        Rating = x.Rating,
+                        Text = x.Text,
+                        Approved = x.Approved,
+                        CreatedAt = x.CreatedAt,
+                        ProductName = x.Product.ProductName // Assuming you have a navigation property for Product
+                    })
+                    .ToList();
+            }
+        }
 
         public List<ReviewDTO> getApprovedReviewsFromDatabase()
         {
-            List<ReviewDTO> listOfReviewDTO = new List<ReviewDTO>();
-
             using (var db = new ReviewContext())
             {
-                listOfReviewDTO = db.Reviews
-                                    .Where(x => x.Approved)  // Фильтруем только одобренные отзывы
-                                    .Select(x => new ReviewDTO
-                                    {
-                                        ReviewId = x.ReviewId,
-                                        //Product = x.Product,
-                                        Approved = x.Approved,
-                                        //User = x.User,
-                                        Rating = x.Rating,
-                                        Text = x.Text
-                                    })
-                                    .ToList();
+                return db.Reviews
+                    .Where(x => x.Approved)
+                    .Select(x => new ReviewDTO
+                    {
+                        ReviewId = x.ReviewId,
+                        ProductId = x.ProductId,
+                        UserName = x.UserName,
+                        Rating = x.Rating,
+                        Text = x.Text,
+                        Approved = x.Approved,
+                        CreatedAt = x.CreatedAt,
+                        ProductName = x.Product.ProductName // Assuming you have a navigation property for Product
+                    })
+                    .ToList();
             }
-
-            return listOfReviewDTO;
-        }
-
-
-        public List<ReviewDTO> getPendingReviewsFromDatabase()
-        {
-            List<ReviewDTO> listOfReviewDTO = new List<ReviewDTO>();
-
-            using (var db = new ReviewContext())
-            {
-                listOfReviewDTO = db.Reviews
-                                    .Where(x => !x.Approved)  // Фильтруем только одобренные отзывы
-                                    .Select(x => new ReviewDTO
-                                    {
-                                        ReviewId = x.ReviewId,
-                                        //Product = x.Product,
-                                        Approved = x.Approved,
-                                        //User = x.User,
-                                        Rating = x.Rating,
-                                        Text = x.Text
-                                    })
-                                    .ToList();
-            }
-
-            return listOfReviewDTO;
         }
 
         public List<ReviewDTO> getAllReviewsFromDatabase()
         {
-            List<ReviewDTO> listOfReviewDTO = new List<ReviewDTO>();
-
-            List<int> reviewIds = new List<int>();
-
             using (var db = new ReviewContext())
             {
-                reviewIds = db.Reviews.Select(w => w.ReviewId).ToList();
+                return db.Reviews
+                    .Select(x => new ReviewDTO
+                    {
+                        ReviewId = x.ReviewId,
+                        ProductId = x.ProductId,
+                        Approved = x.Approved,
+                        //UserId = x.UserId,
+                        Rating = x.Rating,
+                        Text = x.Text
+                    })
+                    .ToList();
             }
-
-            foreach (var i in reviewIds)
-            {
-
-                listOfReviewDTO.Add(getReviewDTObyId(i));
-
-            }
-
-            return listOfReviewDTO;
         }
 
-        public bool checkIfReviewIdExists(int id)
+        public void AcceptReview(int reviewId)
         {
-            using (var db = new ReviewContext())
+            using (var context = new ReviewContext())
             {
-                var dbReview = db.Reviews.FirstOrDefault(x => x.ReviewId == id);
-
-                if (dbReview != null)
+                var reviewDb = context.Reviews.FirstOrDefault(p => p.ReviewId == reviewId);
+                if (reviewDb != null)
                 {
-                    return true;
+                    reviewDb.Approved = true;
+                    context.SaveChanges();
                 }
-                else
+            }
+        }
+
+
+
+        public void DenyReview(int reviewId)
+        {
+            using (var context = new ReviewContext())
+            {
+                var reviewDb = context.Reviews.FirstOrDefault(p => p.ReviewId == reviewId);
+                if (reviewDb != null)
                 {
-                    return false;
+                    context.Reviews.Remove(reviewDb);
+                    context.SaveChanges();
                 }
             }
         }
@@ -127,22 +172,23 @@ namespace WebApplication.BL.Core
         {
             using (var context = new ReviewContext())
             {
-
-
-                // Найти продукт по его идентификатору 
                 var reviewDb = context.Reviews.FirstOrDefault(p => p.ReviewId == id);
-
                 if (reviewDb != null)
                 {
-                    // Удаляем продукт из контекста данных
                     context.Reviews.Remove(reviewDb);
-
-                    // Сохраняем изменения в базе данных
                     context.SaveChanges();
                 }
             }
-
         }
+        public bool checkIfReviewIdExists(int id)
+        {
+            using (var db = new ReviewContext())
+            {
+                return db.Reviews.Any(x => x.ReviewId == id);
+            }
+        }
+
+       
 
         public void changeStatusOnApproved(int id)
         {
@@ -152,12 +198,10 @@ namespace WebApplication.BL.Core
                 if (reviewDb != null)
                 {
                     reviewDb.Approved = true;
-
                     context.SaveChanges();
                 }
             }
         }
-
     }
 }
-
+    

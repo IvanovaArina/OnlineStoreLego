@@ -95,6 +95,7 @@
     <Compile Include="Entities\User\MyIntCart.cs" />
     <Compile Include="Entities\User\MyIntOrder.cs" />
     <Compile Include="Entities\User\OrderTable.cs" />
+    <Compile Include="Entities\User\Review.cs" />
     <Compile Include="Entities\User\Session.cs" />
     <Compile Include="Entities\User\UDbTable.cs" />
     <Compile Include="Entities\User\WishlistTable.cs" />

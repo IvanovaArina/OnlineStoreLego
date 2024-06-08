@@ -36,6 +36,7 @@ namespace WebApplication.Domain.Entities.User
         public int WishlistId { get; set; }
 
         public int CartId { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
     }
 }

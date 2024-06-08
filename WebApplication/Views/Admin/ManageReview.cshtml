@@ -28,35 +28,32 @@
                     <th>Product</th>
                     <th>Review</th>
                     <th>Rating</th>
+                    <th>CreatedAt</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="reviewTable">
-                @{
-                    int countPendingReviews = 100;
-                    var pendingReviewTable = Model.pendingReviewForTable();
-                    int kol = 0;
-                    foreach (var item in pendingReviewTable)
-                    {
-                        if (item != null && !item.Approved)
-                        {
-                            <tr>
-
-                                <td>@item.ReviewId</td>
-                                <td>@item.User</td>
-                                <td>@item.Product</td>
-                                <td>@item.Text</td>
-                                <td>@item.Rating</td>
-                                <td>
-                                    <button class="btn btn-success btn-sm accept-btn">Accept</button>
-                                    <button class="btn btn-warning btn-sm deny-btn">Deny</button>
-                                </td>
-                            </tr>
-                        }
-                    }
+                @foreach (var item in ViewBag.PendingReviews)
+                {
+                    <tr>
+                        <td>@item.ReviewId</td>
+                        <td>@item.UserName</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.Text</td>
+                        <td>@item.Rating</td>
+                        <td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>
+                            <form method="post" action="@Url.Action("AcceptReview", "HomeAdmin")" style="display:inline;">
+                                <input type="hidden" name="reviewId" value="@item.ReviewId" />
+                                <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                            </form>
+                            <form method="post" action="@Url.Action("DenyReview", "HomeAdmin")" style="display:inline;">
+                                <input type="hidden" name="reviewId" value="@item.ReviewId" />
+                                <button type="submit" class="btn btn-warning btn-sm">Deny</button>
+                            </form>
+                        </td>
+                    </tr>
                 }
-                
-                <!-- Add more reviews here -->
             </tbody>
         </table>
 
@@ -74,40 +71,30 @@
                     <th>Product</th>
                     <th>Review</th>
                     <th>Rating</th>
+                    <th>CreatedAt</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="deleteReviewTable">
-                @{
-                    
-                    var approvedReviewTable = Model.approvedReviewForTable();
-                    kol = 0;
-                    foreach (var item in approvedReviewTable)
-                    {
-                        if (item != null && item.Approved)
-                        {
-                            <tr>
-
-                                <td>@item.ReviewId</td>
-                                <td>@item.User</td>
-                                <td>@item.Product</td>
-                                <td>@item.Text</td>
-                                <td>@item.Rating</td>
-                                <td>
-                                    <button class="btn btn-success btn-sm accept-btn">Accept</button>
-                                    <button class="btn btn-warning btn-sm deny-btn">Deny</button>
-                                </td>
-                            </tr>
-                        }
-                    }
+                @foreach (var item in ViewBag.ApprovedReviews)
+                {
+                    <tr>
+                        <td>@item.ReviewId</td>
+                        <td>@item.UserName</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.Text</td>
+                        <td>@item.Rating</td>
+                        <td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>
+                            <form method="post" action="@Url.Action("DeleteReview", "HomeAdmin")" style="display:inline;">
+                                <input type="hidden" name="reviewId" value="@item.ReviewId" />
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
                 }
-                <!-- Add more reviews here -->
             </tbody>
         </table>
-
-        <div class="text-left">
-            <button class="btn btn-danger btn-lg" id="addReviewBtn">Add Review</button>
-        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -127,31 +114,6 @@
                 $('#deleteReviewTable tr').filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
-            });
-
-            $('.accept-btn').on('click', function () {
-                // Accept button functionality
-                alert('Review accepted');
-                // Here you can add an AJAX call to update the review status in the database
-            });
-
-            $('.deny-btn').on('click', function () {
-                // Deny button functionality
-                alert('Review denied');
-                // Here you can add an AJAX call to update the review status in the database
-            });
-
-            $('.delete-btn').on('click', function () {
-                // Delete button functionality
-                if (confirm('Are you sure you want to delete this review?')) {
-                    $(this).closest('tr').remove();
-                }
-            });
-
-            $('#addReviewBtn').on('click', function () {
-                // Add review button functionality
-                alert('Add Review button clicked');
-                // Here you can add code to show a modal or redirect to a review creation page
             });
         });
     </script>

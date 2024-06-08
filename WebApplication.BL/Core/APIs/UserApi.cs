@@ -475,6 +475,13 @@ namespace WebApplication.BL.Core
                 }
             }
         }
+        public bool CheckUserExists(int userId)
+        {
+            using (var db = new ReviewContext())
+            {
+                return db.Users.Any(u => u.UserId == userId);
+            }
+        }
 
     }
 }

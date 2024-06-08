@@ -25,7 +25,13 @@
 
 <!-- Main Content Start -->
 <div class="page-content">
-
+    <!-- Display error message if exists -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
     <!-- Product Detail Start -->
     <section class="product-detail p-96">
         <div class="container">
@@ -115,88 +121,70 @@
                     @Model.ProductDetail
                 </p>
             </div>
-            <div class="reviews ">
+
+            <div class="reviews">
                 <div class="heading">
-                    <h2 class="text-start">Reviews (36)</h2>
+                    <h2 class="text-start">Reviews</h2>
                 </div>
                 <div class="row">
                     <div class="col-xl-7">
-                        <div class="reviews-block mb-xl-0 mb-32">
-                            <div class="author-stars mb-8">
-                                <div class="author">
-                                    <img src="~/assets/media/author/img-4.png" alt="">
-                                    <h5 class="h-21 light-black sec">Sarah Roberts</h5>
-                                </div>
-                                <div class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <p class="light-black mb-32">My son absolutely loves his Buzz Lightyear toy! The interactive voice command feature and light-up laser action make it so much fun for him to play with.</p>
-                            <div class="author-stars mb-8">
-                                <div class="author">
-                                    <img src="~/assets/media/author/img-5.png" alt="">
-                                    <h5 class="h-21 light-black sec">Mark Larson</h5>
-                                </div>
-                                <div class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <p class="light-black mb-32">As a longtime fan of Toy Story, I couldn't resist getting the Buzz Lightyear toy for myself. It's a fantastic collectible with great articulation and accurate movie detailing.</p>
-                            <div class="author-stars mb-8">
-                                <div class="author">
-                                    <img src="~/assets/media/author/img-6.png" alt="">
-                                    <h5 class="h-21 light-black sec">Michael Thompson</h5>
-                                </div>
-                                <div class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <p class="light-black mb-53">Buzz Lightyear has become my son's new favorite toy. He loves how Buzz talks and responds to his commands.</p>
-                            <div id="more" style="display: none;">
-                                <div class="author-stars mb-8">
-                                    <div class="author">
-                                        <img src="~/assets/media/author/img-6.png" alt="">
-                                        <h5 class="h-21 light-black sec">Michael Thompson</h5>
+                        @if (Model.Reviews != null && Model.Reviews.Any())
+                        {
+                            <div class="reviews-block mb-xl-0 mb-32">
+                                @foreach (var review in Model.Reviews)
+                                {
+                                    <div class="author-stars mb-8">
+                                        <div class="author">
+                                            <img src="~/assets/media/author/img-4.png" alt="">
+                                            <h5 class="h-21 light-black sec">@review.UserName</h5>
+                                        </div>
+                                        <div class="stars">
+                                            @for (int i = 0; i < review.Rating; i++)
+                                            {
+                                                <i class="fas fa-star"></i>
+                                            }
+                                            @for (int i = review.Rating; i < 5; i++)
+                                            {
+                                                <i class="far fa-star"></i>
+                                            }
+                                        </div>
                                     </div>
-                                    <div class="stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <p class="light-black mb-53">Buzz Lightyear has become my son's new favorite toy. He loves how Buzz talks and responds to his commands.</p>
+                                    <p class="light-black mb-32">@review.Text</p>
+                                }
                             </div>
-                            <button class="more">Load More Reviews <i class="far fa-chevron-down"></i></button>
-                        </div>
+
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                    {
+                                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                            <a class="page-link" href="@Url.Action("ProductDetail", new { productId = Model.ProductId, page = i })">@i</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </nav>
+                        }
+                        else
+                        {
+                            <p class="light-black mb-32">There are no reviews for this product yet.</p>
+                        }
                     </div>
                     <div class="col-xl-5">
                         <h3 class="h-47 bold color-white mb-32"> Add a Review</h3>
-                        <form action="./product-detail.html">
-                            <input type="text" id="name" placeholder="Name" class="form-control mb-32" required>
-                            <input type="email" id="email" placeholder="Email" class="form-control mb-32" required>
-                            <textarea name="review" class="form-control mb-32" placeholder="Your Review"></textarea>
-                            <button type="submit" class="cus-btn primary w-100">Subscribe</button>
+                        <form action="@Url.Action("AddReview", "HomeUser", new { productId = Model.ProductId })" method="post">
+                            <input type="hidden" name="ProductId" value="@Model.ProductId" />
+                            <input type="text" name="UserName" placeholder="Your Name" class="form-control mb-32" required /> <!-- Новое поле для имени -->
+                            <input type="email" name="Email" placeholder="Your Email" class="form-control mb-32" /> <!-- Новое поле для email -->
+                            <textarea name="Text" class="form-control mb-32" placeholder="Your Review" required></textarea>
+                            <div class="stars">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <input type="radio" id="star-@i" name="Rating" value="@i" required />
+                                    <label for="star-@i"><i class="fas fa-star"></i></label>
+                                }
+                            </div>
+                            <button type="submit" class="cus-btn primary w-100">Submit Review</button>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Product Detail End -->
-</div>
-
-<!-- Main Content End -->

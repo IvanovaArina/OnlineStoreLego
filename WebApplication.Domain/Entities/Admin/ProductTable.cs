@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WebApplication.Domain.Entities.User;
@@ -39,5 +40,6 @@ namespace WebApplication.Domain.Entities.Admin
 
         [Required]
         public string ImagePath { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }
