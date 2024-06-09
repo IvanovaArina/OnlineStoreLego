@@ -19,6 +19,15 @@ namespace WebApplication.Controllers
             return RedirectToAction("ShopListing", "HomeUser");
         }
 
+        public ActionResult AddToCartFromHome(int productId)
+        {
+            CartApi cartApi = new CartApi();
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
+            cartApi.AddToCartInDb(productId, model.UserId);
+            return RedirectToAction("HomeUsers", "HomeUser");
+        }
+
+
         [HttpPost]
         public ActionResult IncreaseCartCount(int productId, int cartId)
         {

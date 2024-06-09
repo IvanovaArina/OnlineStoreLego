@@ -33,11 +33,12 @@ namespace WebApplication.Controllers
                 })
                 .ToList();
         }
-        public ActionResult HomeUsers(UserDataModel userDataModel)
+        public ActionResult HomeUsers()
         {
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
             var articles = GetSomeArticles(3);
             ViewBag.Articles = articles;
-            return View(userDataModel);
+           return View(model);
 
         }
         public ActionResult About()
