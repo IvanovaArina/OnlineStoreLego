@@ -62,6 +62,7 @@ namespace WebApplication.Models
         }
         
 
+    
         public ProductDTO MoveDataFromModelToDTO()
         {
             ProductDTO productDTO = new ProductDTO();

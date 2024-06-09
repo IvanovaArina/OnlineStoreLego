@@ -32,14 +32,14 @@
                 <!-- Sales Start -->
                 <section class="sales-product">
                     <div class="container">
-                        <div class="d-flex flex-wrap justify-content-center">
+                        <div class="d-flex flex-column align-items-center">
                             @{
                                 var productTable = Model.dataForTableCart(Model.UserId);
                                 foreach (var product in productTable)
                                 {
                                     if (product != null && product.IsActive)
                                     {
-                                        <div class="product-card sec text-center mb-4 mx-3" style="max-width: 400px;">
+                                        <div class="product-card sec text-center mb-4" style="max-width: 400px;">
                                             <div class="img-block mb-3">
                                                 <img src="@product.ImagePath" alt="" class="img-fluid">
                                             </div>
@@ -86,12 +86,13 @@
             }
             else
             {
-                <h1 class="text-center">Cart is empty</h1>
+                <h1 class="text-center" style="font-size: 1.7em;">Cart is empty</h1>
             }
 
+
             <div class="text-center mt-4">
-                <a href="@Url.Action("ShopListing", "HomeUser")" class="cus-btn primary">Continue Shopping</a>
-                <a href="@Url.Action("Checkout", "HomeUser")" class="cus-btn primary">Go to Checkout</a>
+                <a href="@Url.Action("ShopListing", "HomeUser")" class="cus-btn primary d-inline-block mx-2">Continue Shopping</a>
+                <a href="@Url.Action("Checkout", "HomeUser")" class="cus-btn primary d-inline-block mx-2">Go to Checkout</a>
             </div>
 
         </div>

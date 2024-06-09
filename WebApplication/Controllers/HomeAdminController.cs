@@ -123,32 +123,35 @@ namespace WebApplication.Controllers
         //}
        
 
-        public ActionResult ProductDetail(int? productId)
+        private readonly ReviewApi _reviewApi = new ReviewApi();
+        private readonly ProductApi _productApi = new ProductApi();
+        private readonly UserApi _userApi = new UserApi();
+        private const int PageSize = 5; // Количество отзывов на одной странице
+
+        public ActionResult ProductDetail(int productId, int page = 1)
         {
-            if (!productId.HasValue)
-            {
-                return HttpNotFound("Product id is missing.");
-            }
+            var product = _productApi.GetProductById(productId);
+            var reviews = _reviewApi.GetReviewsByProductId(productId);
 
-            var product = productContext.Products.FirstOrDefault(a => a.ProductId == productId.Value);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
+            var totalReviews = reviews.Count;
+            var totalPages = (int)Math.Ceiling((double)totalReviews / PageSize);
+            var reviewsToShow = reviews.Skip((page - 1) * PageSize).Take(PageSize).ToList();
 
-            var productModel = new ProductModel
+            var model = new ProductModel
             {
                 ProductId = product.ProductId,
                 ProductName = product.ProductName,
                 Price = product.Price,
-                SellCategory = product.SellCategory,
-                CategoryByAge = product.CategoryByAge,
                 Category = product.Category,
                 ProductDetail = product.ProductDetail,
-                ImagePath = product.ImagePath
+                ImagePath = product.ImagePath,
+                Reviews = reviewsToShow
             };
 
-            return View(productModel);
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
+            return View(model);
         }
 
         public ActionResult ViewDetailsAboutOrder(int orderId)

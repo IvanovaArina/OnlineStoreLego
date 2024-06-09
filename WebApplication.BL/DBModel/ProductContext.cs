@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using WebApplication.Domain.Entities.Admin;
 using WebApplication.Domain.Entities.User;
 
+
+
 namespace WebApplication.BL.DBModel
 {
     public class ProductContext: DbContext
@@ -19,6 +21,8 @@ namespace WebApplication.BL.DBModel
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         }
+
+        
 
     }
 }
