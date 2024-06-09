@@ -13,8 +13,6 @@ namespace WebApplication.Models
 {
     public class UserDataModel
     {
-        //public UserApi userApi;
-
         public int UserId { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
@@ -23,7 +21,7 @@ namespace WebApplication.Models
         public string KeyCredential { get; set; }
 
         public URole Role { get; set; }
-        //public string UserIp { get; set; }
+        public bool isActive { get; set; }
 
         public int WishlistId { get; set; }
 
@@ -32,7 +30,6 @@ namespace WebApplication.Models
 
 
         public UserDataModel() {
-            //userApi = new UserApi();
         }
 
         public List<UserDTO> dataForTable()

@@ -32,6 +32,9 @@ namespace WebApplication.Domain.Entities.User
 
         [Required]
         public URole Role { get; set; }
+        
+        [Required]
+        public bool isActive { get; set; }
 
         public int WishlistId { get; set; }
 
