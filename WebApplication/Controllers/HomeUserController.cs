@@ -109,17 +109,8 @@ namespace WebApplication.Controllers
 
         public ActionResult ProductDetail(int productId)
         {
-            //if (!productId.HasValue)
-            //{
-            //    return HttpNotFound("Product id is missing.");
-            //}
 
             var product = productContext.Products.FirstOrDefault(a => a.ProductId == productId);
-            //if (product == null)
-            //{
-            //    return HttpNotFound();
-            //}
-
             var productModel = new ProductModel
             {
                 ProductId = product.ProductId,
@@ -178,7 +169,6 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult  EditInfoAction(UserDataModel userDataModel)
         {
-            //UserDataModel userDataModel = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
             UserDTO userDTO = userDataModel.moveDataFromModelToDTO();
             UserApi userApi = new UserApi();
             userApi.editUserInDb(userDTO);

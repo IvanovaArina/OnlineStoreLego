@@ -467,8 +467,6 @@
 </div>
 <!-- Ссылка на jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<!-- Ваш скрипт для фильтрации -->
 <script>
     $(document).ready(function () {
         $(".category-link").click(function (e) {
@@ -537,10 +535,29 @@
                 }
             });
         });
+
+        // Ваш JavaScript-код для фильтрации продуктов
+        $(document).ready(function () {
+            function getQueryParam(param) {
+                var urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+
+            var query = getQueryParam('query');
+            if (query) {
+                query = query.toLowerCase();
+                $(".product-card.sec").each(function () {
+                    var productName = $(this).find('.product-name h5').text().toLowerCase();
+
+                    if (productName.includes(query)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
     });
-
-    
-
 </script>
 
 

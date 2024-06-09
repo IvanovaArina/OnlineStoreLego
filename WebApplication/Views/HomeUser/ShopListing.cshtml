@@ -549,10 +549,29 @@
                 }
             });
         });
+
+        // Ваш JavaScript-код для фильтрации продуктов
+        $(document).ready(function () {
+            function getQueryParam(param) {
+                var urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+
+            var query = getQueryParam('query');
+            if (query) {
+                query = query.toLowerCase();
+                $(".product-card.sec").each(function () {
+                    var productName = $(this).find('.product-name h5').text().toLowerCase();
+
+                    if (productName.includes(query)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
     });
-
-
-
 </script>
 
 

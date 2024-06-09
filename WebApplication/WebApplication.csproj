@@ -144,6 +144,7 @@
     <Content Include="assets\css\vendor\starcb.css" />
     <Content Include="assets\js\app.js" />
     <Content Include="assets\js\app.min.js" />
+    <Content Include="assets\js\ScriptsForShopingList.js" />
     <Content Include="assets\js\vendor.min.js" />
     <Content Include="assets\js\vendor\aksVideoPlayer.js" />
     <Content Include="assets\js\vendor\bootstrap.min.js" />
@@ -336,7 +337,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\LogIn.cshtml" />
     <Content Include="Views\Home\ShopListing.cshtml" />
-    <Content Include="Views\Items\listOfItems.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
