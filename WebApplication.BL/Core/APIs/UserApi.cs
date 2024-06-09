@@ -192,14 +192,7 @@ namespace WebApplication.BL.Core
             {
                 var dbUser = db.Users.FirstOrDefault(x => x.Email == email);
 
-                if (dbUser != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return (dbUser != null);
             }
         }
 
@@ -278,12 +271,35 @@ namespace WebApplication.BL.Core
                 Email = userDTO.Email,
                 Password = hashedPassword,
                 ConfirmPassword = hashedPassword,
-                //UserIp = userDTO.UserIp,
                 KeyCredential = userDTO.KeyCredential,
                 Role = userDTO.Role,
-
+                isActive = true,
                 WishlistId = (wishlistApi.createWishlistTable()).wishlistId,
                 CartId = (cartApi.createCartTable()).cartId
+
+            };
+
+            var productApi = new ProductApi();
+            productApi.checkIfProductNumberExists(1);
+
+            return user;
+        }
+        
+        public UserDTO createNewAdminAccountWithHash(UserDTO userDTO)
+        {
+            string hashedPassword = HashPassword(userDTO.Password);
+
+            var user = new UserDTO
+            {
+                Username = userDTO.Username,
+                Email = userDTO.Email,
+                Password = hashedPassword,
+                ConfirmPassword = hashedPassword,
+                KeyCredential = userDTO.KeyCredential,
+                Role = userDTO.Role,
+                isActive = true,
+                WishlistId = 0,
+                CartId = 0
 
             };
 
@@ -350,15 +366,20 @@ namespace WebApplication.BL.Core
                 return new BaseResponces { Status = false, StatusMessage = "This UserName already registered" };
             }
 
+            UserDTO user = null;
+            if (userDTO.Role == URole.User)
+            {
+                user = createNewUserWithHash(userDTO);
+            }
+            else
+            {
+                user = createNewAdminAccountWithHash(userDTO);
+            }
 
-            var user = createNewUserWithHash(userDTO);
+            
             var userDb = Mapper.Map<UDbTable>(user);
-            //userDb.Wishlist.User = userDb;
-            //userDb.Cart.User = userDb;
-
             addUserToDb(userDb);
-            //OrderApi api = new OrderApi();
-            //api.createOrderTable();
+
 
             return new BaseResponces { Status = true, StatusMessage = "ok" };
 
@@ -415,16 +436,10 @@ namespace WebApplication.BL.Core
         {
             using (var context = new UserContext())
             {
-                //var userDb = Mapper.Map<UDbTable>(userDTO);
-
-
-                // Находим продукт по его идентификатору (ID)
                 var userDb = context.Users.FirstOrDefault(p => p.UserId == userDTO.UserId);
 
                 if (userDb != null)
                 {
-
-
                     // Меняем свойства продукта, которые могли поменяться
                     userDb.Username = userDTO.Username;
                     userDb.Email = userDTO.Email;
@@ -434,7 +449,6 @@ namespace WebApplication.BL.Core
                     // Сохраняем изменения в базе данных
                     context.SaveChanges();
                 }
-
             }
         }
 

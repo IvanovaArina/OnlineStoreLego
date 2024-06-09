@@ -32,11 +32,14 @@ namespace WebApplication.Domain.Entities.User
 
         [Required]
         public URole Role { get; set; }
+        
+        [Required]
+        public bool isActive { get; set; }
 
         public int WishlistId { get; set; }
 
         public int CartId { get; set; }
-        public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+        //public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
     }
 }

@@ -18,6 +18,7 @@ namespace WebApplication.BL.Core
 
         public URole Role { get; set; }
         //public string UserIp { get; set;}
+        public bool isActive { get; set; }
 
         public int WishlistId { get; set; }
 
