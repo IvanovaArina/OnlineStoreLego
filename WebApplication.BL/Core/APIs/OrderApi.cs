@@ -159,6 +159,25 @@ namespace WebApplication.BL.Core.APIs
             }
         }       
         
+        public List<OrderDTO> getdataOrderForTableForAdmin()
+        {
+            var listOfAllOrders = new List<OrderDTO>();
+            using (var orderContext = new OrderContext())
+            {
+                var orders = orderContext.Orders.Select(m=>m.orderId).ToList();
+
+                foreach (var order in orders)
+                {
+                    listOfAllOrders.Add(getOrderDTOById(order));
+                }
+
+            }
+
+            return listOfAllOrders;
+        } 
+
+
+        
         public List<OrderDTO> getOrdersFromDatabase(int userId)
         {
             var listOfOrders = new List<OrderDTO>();

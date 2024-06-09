@@ -242,10 +242,6 @@ namespace WebApplication.Controllers
             }
 
             return View(productsModelAndCountOrder);
-
-            //var orderDTO = orderApi.getOrderDTOById(orderId);
-            //OrderModel orderModel = new OrderModel();
-            //return View(orderModel.moveDataFromDTOToModel(orderDTO));
         }
 
         public ActionResult LogOutU()

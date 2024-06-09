@@ -393,6 +393,7 @@
     <Content Include="Views\Wishlist\AddToWishlist.cshtml" />
     <Content Include="Views\HomeUser\Cart.cshtml" />
     <Content Include="Views\HomeUser\ViewDetailsAboutOrder.cshtml" />
+    <Content Include="Views\HomeAdmin\ViewDetailsAboutOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

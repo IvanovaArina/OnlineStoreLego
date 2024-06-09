@@ -57,6 +57,12 @@ namespace WebApplication.Models
         {
             var orderApi = new OrderApi();
             return orderApi.getOrdersFromDatabase(userId);
+        }  
+        
+        public List<OrderDTO> dataOrderForTableForAdmin()
+        {
+            var orderApi = new OrderApi();
+            return orderApi.getdataOrderForTableForAdmin();
         } 
         
         public int getCountInCart(int cartId, int productId)

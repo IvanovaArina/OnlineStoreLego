@@ -73,7 +73,7 @@ namespace WebApplication.Controllers
                         return RedirectToAction("AdminAccount", "Admin", userModel);
                     case URole.User:
                         // Если пользователь не админ, перенаправляем на обычную страницу пользователя
-                        return RedirectToAction("ShopListing", "HomeUser");
+                        return RedirectToAction("HomeUsers", "HomeUser");
                     default:
                         // Если роль пользователя неопределенная или не ожидаемая, обработайте это соответствующим образом
                         ViewBag.ErrorMessage = "Your role is not recognized by the system.";

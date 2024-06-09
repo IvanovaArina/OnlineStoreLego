@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication.BL.Core;
+using WebApplication.BL.Core.APIs;
 using WebApplication.BL.DBModel;
 using WebApplication.Models;
 
@@ -116,10 +117,10 @@ namespace WebApplication.Controllers
 
 
 
-        public ActionResult Wishlist()
-        {
-            return View();
-        }
+        //public ActionResult Wishlist()
+        //{
+        //    return View();
+        //}
        
 
         public ActionResult ProductDetail(int? productId)
@@ -150,8 +151,21 @@ namespace WebApplication.Controllers
             return View(productModel);
         }
 
-        
+        public ActionResult ViewDetailsAboutOrder(int orderId)
+        {
+            var orderApi = new OrderApi();
+            var productsAndCountOrder = orderApi.getProductsFromOrder(orderId);
+            Dictionary<ProductModel, int> productsModelAndCountOrder = new Dictionary<ProductModel, int>();
+            var prodModel = new ProductModel();
 
-       
+            foreach (var item in productsAndCountOrder)
+            {
+                productsModelAndCountOrder.Add(prodModel.MoveDataFromDTOToModel(item.Key), item.Value);
+            }
+
+            return View(productsModelAndCountOrder);
+        }
+
+
     }
 }
