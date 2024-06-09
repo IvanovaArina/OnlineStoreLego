@@ -92,6 +92,7 @@
     <Compile Include="Core\APIs\OrderApi.cs" />
     <Compile Include="Core\APIs\ProductApi.cs" />
     <Compile Include="Core\DTOs\CartDTO.cs" />
+    <Compile Include="Core\DTOs\MyIntOrderDTO.cs" />
     <Compile Include="Core\DTOs\OrderDTO.cs" />
     <Compile Include="Core\DTOs\ProductDTO.cs" />
     <Compile Include="Core\APIs\ReviewApi.cs" />

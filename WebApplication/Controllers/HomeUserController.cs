@@ -11,6 +11,7 @@ using WebApplication.Models;
 using WebApplication.ViewModels;
 using WebApplication.BL;
 using System.Security.Claims;
+using WebApplication.BL.Core.DTOs;
 
 namespace WebApplication.Controllers
 {
@@ -171,99 +172,7 @@ namespace WebApplication.Controllers
             TempData["ErrorMessage"] = "Invalid review data.";
             return RedirectToAction("ProductDetail", new { productId = reviewDto.ProductId });
         }
-        //private int? GetCurrentUserId()
-        //{
-        //    // Используем идентификатор пользователя из аутентификации
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        // Предполагается, что идентификатор пользователя хранится в User.Identity.Name
-        //        // или в другом клайме. Необходимо настроить получение идентификатора пользователя.
-        //        // Например, если идентификатор хранится в клайме NameIdentifier:
-        //        var claimsIdentity = User.Identity as ClaimsIdentity;
-        //        var userIdClaim = claimsIdentity?.FindFirst(ClaimTypes.NameIdentifier);
-        //        if (userIdClaim != null)
-        //        {
-        //            return int.Parse(userIdClaim.Value);
-        //        }
-        //    }
-        //    return null; // Возвращаем null, если пользователь не авторизован
-        //}
-
-        //[HttpPost]
-        //public ActionResult AddReview(ReviewDTO reviewDto)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Получаем идентификатор текущего пользователя из аутентификации
-        //        int userId = User.Identity.GetUserId();
-        //        Console.WriteLine($"Current authenticated UserId: {userId}");
-
-        //        UserDataModel currentUserDataModel = new UserDataModel();
-        //        UserDTO currentUser = currentUserDataModel.GetCurrentUser(userId);
-
-        //        if (currentUser == null)
-        //        {
-        //            Console.WriteLine("User not found in database");
-        //            // Перенаправляем на страницу входа или на страницу с подробностями продукта
-        //            return RedirectToAction("Login", "Account");
-        //        }
-
-        //        reviewDto.UserId = currentUser.UserId;
-
-        //        try
-        //        {
-        //            _reviewApi.AddReview(reviewDto);
-        //            Console.WriteLine("Review added successfully");
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            // Логирование ошибки
-        //            Console.WriteLine("Error: " + ex.Message);
-        //            // Перенаправляем на страницу с подробностями продукта с сообщением об ошибке
-        //            TempData["ErrorMessage"] = "An error occurred while adding the review. Please try again.";
-        //            return RedirectToAction("ProductDetail", new { productId = reviewDto.ProductId });
-        //        }
-
-        //        return RedirectToAction("ProductDetail", new { productId = reviewDto.ProductId });
-        //    }
-        //    // Перенаправляем на страницу с подробностями продукта с сообщением об ошибке
-        //    TempData["ErrorMessage"] = "Invalid review data.";
-        //    return RedirectToAction("ProductDetail", new { productId = reviewDto.ProductId });
-        //}
-        //private int GetCurrentUserId()
-        //    {
-        //        // Проверяем, авторизован ли пользователь
-        //        if (User.Identity.IsAuthenticated)
-        //        {
-        //            // Предполагаем, что вы используете аутентификацию, где User.Identity.Name - это имя пользователя
-        //            // Вам нужно получить UserId из базы данных на основе имени пользователя
-
-        //            // Пример с использованием User.Identity.Name
-        //            string username = User.Identity.Name;
-
-        //            using (var db = new ReviewContext())
-        //            {
-        //                var user = db.Users.FirstOrDefault(u => u.Username == username);
-        //                if (user != null)
-        //                {
-        //                    return user.UserId;
-        //                }
-        //                else
-        //                {
-        //                    // Логируем, если пользователь не найден
-        //                    Console.WriteLine($"User not found in database: {username}");
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            // Логируем, если пользователь не аутентифицирован
-        //            Console.WriteLine("User is not authenticated");
-        //        }
-
-        //        // Если пользователь не авторизован или не найден в базе данных
-        //        return 0;
-        //    }
+        
         public ActionResult AddToCart(int productId)
         {
             CartApi cartApi = new CartApi();
@@ -318,6 +227,22 @@ namespace WebApplication.Controllers
         {
             UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
             return View(model);
+        }
+        
+        public ActionResult ViewDetailsAboutOrder (int orderId)
+        {
+            var orderApi = new OrderApi();
+            List<MyIntOrderDTO> myIntsOrder = orderApi.getProductsFromOrder(orderId);
+
+            var listOfModels = new List<MyIntOrderModel>();
+            var temp = new MyIntOrderModel();
+            foreach (var item in myIntsOrder)
+            {
+                listOfModels.Add(temp.moveDataFromDTOToModel(item));
+            }
+            // from dto to model
+            return View(listOfModels);
+            //return View(myIntsOrder);
         }
 
         public ActionResult LogOutU()

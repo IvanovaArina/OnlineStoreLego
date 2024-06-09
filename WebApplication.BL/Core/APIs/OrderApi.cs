@@ -156,9 +156,41 @@ namespace WebApplication.BL.Core.APIs
                     cartContext.SaveChanges();
                 }
             }
+        }       
+        
+        public List<OrderDTO> getOrdersFromDatabase(int userId)
+        {
+            var listOfOrders = new List<OrderDTO>();
+            using (var orderContext = new OrderContext())
+            {
+                var orders = orderContext.Orders.Where(m=>m.userId == userId).ToList();
+
+                foreach (var order in orders)
+                {
+                    listOfOrders.Add(Mapper.Map<OrderDTO>(order));
+                }
+
+            }
+
+            return listOfOrders;
         }
 
+        public List<MyIntOrderDTO> getProductsFromOrder(int orderId)
+        {
+            var listOfMyIntOrderDTO = new List<MyIntOrderDTO>();
+            using (var orderContext = new OrderContext())
+            {
+                var prodtsFromOrder = orderContext.MyIntsOrder.Where(m => m.OrderId == orderId).ToList();
 
+                foreach (var product in prodtsFromOrder)
+                {
+                    listOfMyIntOrderDTO.Add(Mapper.Map<MyIntOrderDTO>(product));
+                }
+
+            }
+
+            return listOfMyIntOrderDTO;
+        }
 
     }
 }

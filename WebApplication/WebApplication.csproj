@@ -258,6 +258,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MyIntOrderModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ReviewModel.cs" />
@@ -391,6 +392,7 @@
     <Content Include="Views\Cart\AddToCart.cshtml" />
     <Content Include="Views\Wishlist\AddToWishlist.cshtml" />
     <Content Include="Views\HomeUser\Cart.cshtml" />
+    <Content Include="Views\HomeUser\ViewDetailsAboutOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

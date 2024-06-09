@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WebApplication.BL.Core;
 using WebApplication.BL.Core.APIs;
+using WebApplication.BL.Core.DTOs;
 using WebApplication.BL.DBModel;
 using WebApplication.Domain.Entities.Enums;
 using WebApplication.Domain.Entities.User;
@@ -50,6 +51,12 @@ namespace WebApplication.Models
         {
             var cartApi = new CartApi();
             return cartApi.getCartFromDatabase(userId);
+        } 
+        
+        public List<OrderDTO> dataOrderForTable(int userId)
+        {
+            var orderApi = new OrderApi();
+            return orderApi.getOrdersFromDatabase(userId);
         } 
         
         public int getCountInCart(int cartId, int productId)
