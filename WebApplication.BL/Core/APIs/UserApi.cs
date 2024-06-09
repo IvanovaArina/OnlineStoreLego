@@ -192,14 +192,8 @@ namespace WebApplication.BL.Core
             {
                 var dbUser = db.Users.FirstOrDefault(x => x.Email == email);
 
-                if (dbUser != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return (dbUser != null);
+           
             }
         }
 
