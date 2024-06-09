@@ -319,5 +319,10 @@ namespace WebApplication.Controllers
         {
             return RedirectToAction("ManageContent", "ManageContent");
         }
+
+        public ActionResult ManageProduct(ProductModel productModel)
+        {
+            return RedirectToAction("Index", "ManageProduct"); ;
+        }
     }
 }

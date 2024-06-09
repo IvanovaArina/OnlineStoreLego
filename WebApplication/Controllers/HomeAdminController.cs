@@ -46,12 +46,6 @@ namespace WebApplication.Controllers
 
         }
 
-
-        public ActionResult Contact()
-        {
-            return View();
-
-        }
         
         public ActionResult ShopListing(ProductModel productModel)
         {

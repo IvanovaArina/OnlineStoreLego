@@ -42,11 +42,12 @@ namespace WebApplication.Controllers
                 })
                 .ToList();
         }
-        public ActionResult HomeUsers(UserDataModel userDataModel)
+        public ActionResult HomeUsers()
         {
+            UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
             var articles = GetSomeArticles(3);
             ViewBag.Articles = articles;
-            return View(userDataModel);
+           return View(model);
 
         }
         public ActionResult About()
@@ -55,12 +56,6 @@ namespace WebApplication.Controllers
 
         }
 
-
-        public ActionResult Contact()
-        {
-            return View();
-
-        }
         public ActionResult ShopListing()
         {
             UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
@@ -178,7 +173,7 @@ namespace WebApplication.Controllers
             CartApi cartApi = new CartApi();
             UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
             cartApi.AddToCartInDb(productId, model.UserId);
-            return RedirectToAction("ProductDetail", "HomeUser", productId);
+            return RedirectToAction("ProductDetail", "HomeUser", new { productId = productId });
         }
 
         public ActionResult Cart()
@@ -215,7 +210,6 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult  EditInfoAction(UserDataModel userDataModel)
         {
-            //UserDataModel userDataModel = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
             UserDTO userDTO = userDataModel.moveDataFromModelToDTO();
             UserApi userApi = new UserApi();
             userApi.editUserInDb(userDTO);
