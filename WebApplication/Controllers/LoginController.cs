@@ -201,8 +201,6 @@ namespace WebApplication.Controllers
 
         private BaseResponces SignUp(UserDataModel userModel)
         {
-            var address = base.Request.UserHostAddress;
-
             URole role = new URole();
 
             if (userModel.KeyCredential == "cisco1234")

@@ -192,14 +192,7 @@ namespace WebApplication.BL.Core
             {
                 var dbUser = db.Users.FirstOrDefault(x => x.Email == email);
 
-                if (dbUser != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return (dbUser != null) ;
             }
         }
 
@@ -342,7 +335,7 @@ namespace WebApplication.BL.Core
         {
             if (userDTO.Password != userDTO.ConfirmPassword)
             {
-                return new BaseResponces { Status = false, StatusMessage = "Пароль и подтверждение пароля не совпадают." };
+                return new BaseResponces { Status = false, StatusMessage = "Password and confirm password don't match" };
             }
 
             if (checkIfEmailExists(userDTO.Email))

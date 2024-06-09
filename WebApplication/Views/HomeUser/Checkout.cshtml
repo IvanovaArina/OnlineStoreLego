@@ -10,6 +10,28 @@
     UserDataModel modelUser = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
 }
 
+<style>
+    .payment-option {
+        cursor: pointer;
+        padding: 20px;
+        margin: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        text-align: center;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+
+        .payment-option:hover {
+            background-color: #f8f9fa;
+            border-color: #007bff;
+        }
+
+    .selected {
+        background-color: #e2e6ea;
+        border-color: #007bff;
+    }
+</style>
+
 <!-- Hero Banner start -->
 <div class="page-title-banner">
     <div class="container">
@@ -87,6 +109,35 @@
                     </div>
                     @*</form>*@
                 </div>
+
+                <div class="container">
+                    <h1 class="mt-5">Choose Your Payment Method</h1>
+                    <form asp-action="Index" method="post">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div id="bank-card" class="payment-option" onclick="selectPaymentMethod('Bank Card')">
+                                    <h3>Bank Card</h3>
+                                    <p>Pay with your credit or debit card</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="paypal" class="payment-option" onclick="selectPaymentMethod('PayPal')">
+                                    <h3>PayPal</h3>
+                                    <p>Pay easily using your PayPal account</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="payment-receipt" class="payment-option" onclick="selectPaymentMethod('Payment upon Receipt')">
+                                    <h3>Payment upon Receipt</h3>
+                                    <p>Pay when you receive the item</p>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="PaymentMethod" id="PaymentMethod" />
+                        @*<button type="submit" class="btn btn-primary mt-3">Submit</button>*@
+                    </form>
+                </div>
+
                 <div>
                     <button type="submit" class="cus-btn primary w-100">Finish Checkout</button>
                     @*<a href="@Url.Action("AddOrder", "Order", new { productId = product.ProductId })">Finish Checkout</a>*@
@@ -99,7 +150,13 @@
     </section>
     <!-- Blog Detail End -->
 </div>
-
+<script>
+    function selectPaymentMethod(method) {
+        $('.payment-option').removeClass('selected');
+        $('#PaymentMethod').val(method);
+        $('#' + method.replace(' ', '-').toLowerCase()).addClass('selected');
+    }
+</script>
 
 
 <!-- Main Content End -->

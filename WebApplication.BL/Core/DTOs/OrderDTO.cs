@@ -24,6 +24,7 @@ namespace WebApplication.BL.Core.DTOs
         public string PhoneNumber { get; set; }
         public string Country { get; set; }
         public string ShippingAddress { get; set; }
+        public string PaymentMethod { get; set; }
 
         public List<MyIntOrder> MyIntsOrder { get; set; } = new List<MyIntOrder>();
     }

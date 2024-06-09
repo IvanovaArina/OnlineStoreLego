@@ -185,6 +185,7 @@
 
                 </div>
                 @{ var prod = productTable.FirstOrDefault();
+                    if (prod != null) {
                     <div class="sales">
                         <div class="tag">New</div>
                         <div class="off">
@@ -202,7 +203,7 @@
                             <img src="@prod.ImagePath" alt="">
                         </div>
                     </div>
-                }
+                        } }
             </div>
         </div>
     </section>

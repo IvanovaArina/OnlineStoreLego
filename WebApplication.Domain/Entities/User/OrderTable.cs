@@ -17,8 +17,6 @@ namespace WebApplication.Domain.Entities.User
         public int userId { get; set; }
         public int orderNumber { get; set; }
 
-
-
         public int testOrder { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -26,6 +24,7 @@ namespace WebApplication.Domain.Entities.User
         public string PhoneNumber { get; set; }
         public string Country { get; set; }
         public string ShippingAddress { get; set; }
+        public string PaymentMethod { get; set; }
 
         public List<MyIntOrder> MyIntsOrder { get; set; } = new List<MyIntOrder>();
 
