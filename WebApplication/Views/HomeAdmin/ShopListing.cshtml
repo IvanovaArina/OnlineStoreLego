@@ -57,24 +57,16 @@
                             By Age
                         </h2>
                         <ul class="categorie unstyled">
-                            <ul class="categorie unstyled">
-                                <li><a href="#" class="category-link" data-category="0-3">0-3</a></li>
-                                <li><a href="#" class="category-link" data-category="3-10">3-10</a></li>
-                                <li><a href="#" class="category-link" data-category="10-16">10-16</a></li>
-                                <li><a href="#" class="category-link" data-category="16-21">16-21</a></li>
-                                <li><a href="#" class="category-link" data-category="All">All Toys</a></li>
-                           
+                            <li><a href="#" class="age-link" data-age="0-3">0-3</a></li>
+                            <li><a href="#" class="age-link" data-age="3-10">3-10</a></li>
+                            <li><a href="#" class="age-link" data-age="10-16">10-16</a></li>
+                            <li><a href="#" class="age-link" data-age="16-21">16-21</a></li>
+                            <li><a href="#" class="age-link" data-age="All">All Toys</a></li>
                         </ul>
 
                     </div>
-                    <div class="price mb-32">
-                        <h2 class="h-27 bold light-black mb-32">
-                            Price
-                        </h2>
-                        <div class="slider">
-                            <input type="text" class="price-slider">
-                        </div>
-                    </div>
+                    <input type="text" class="form-control" id="priceInput" placeholder="Price">
+                    <button class="cus-btn primary m-3" id="filterButton">Filter</button>
                 </div>
                 <div class="col-xl-8">
                     <div class="card mb-32">
@@ -131,9 +123,12 @@
                                                             <div class="tag">
                                                                 <h5 class="bold">@product.Category</h5>
                                                             </div>
+                                                            <div class="tog">
+                                                                <h5 class="bold">@product.CategoryByAge</h5>
+                                                            </div>
                                                         </div>
                                                         <div class="btn-block">
-                                                          
+
                                                             <a href="@Url.Action("ProductDetail", "HomeAdmin", new { productId = product.ProductId })" class="list-btn">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                                     <g clip-path="url(#clip0_1109_1878)">
@@ -185,9 +180,12 @@
                                                             <div class="tag">
                                                                 <h5 class="bold">@product.Category @product.CategoryByAge</h5>
                                                             </div>
+                                                            <div class="tog">
+                                                                <h5 class="bold">@product.CategoryByAge</h5>
+                                                            </div>
                                                         </div>
                                                         <div class="btn-block">
-                                                            
+
                                                             <a href="@Url.Action("ProductDetail", "HomeAdmin", new { productId = product.ProductId })" class="list-btn">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                                     <g clip-path="url(#clip0_1109_1878)">
@@ -236,12 +234,16 @@
                                                             <div class="product-name">
                                                                 <h5>Category:</h5>
                                                             </div>
+
                                                             <div class="tag">
                                                                 <h5 class="bold">@product.Category</h5>
                                                             </div>
+                                                            <div class="tog">
+                                                                <h5 class="bold">@product.CategoryByAge</h5>
+                                                            </div>
                                                         </div>
                                                         <div class="btn-block">
-                                                            
+
                                                             <a href="@Url.Action("ProductDetail", "HomeAdmin", new { productId = product.ProductId })" class="list-btn">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                                     <g clip-path="url(#clip0_1109_1878)">
@@ -293,9 +295,12 @@
                                                             <div class="tag">
                                                                 <h5 class="bold">@product.Category</h5>
                                                             </div>
+                                                            <div class="tog">
+                                                                <h5 class="bold">@product.CategoryByAge</h5>
+                                                            </div>
                                                         </div>
                                                         <div class="btn-block">
-                                                            
+
                                                             <a href="@Url.Action("ProductDetail", "HomeAdmin", new { productId = product.ProductId })" class="list-btn">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                                     <g clip-path="url(#clip0_1109_1878)">
@@ -349,9 +354,12 @@
                                                             <div class="tag">
                                                                 <h5 class="bold">@product.Category</h5>
                                                             </div>
+                                                            <div class="tog">
+                                                                <h5 class="bold">@product.CategoryByAge</h5>
+                                                            </div>
                                                         </div>
                                                         <div class="btn-block">
-                                                            
+
                                                             <a href="@Url.Action("ProductDetail", "HomeAdmin", new { productId = product.ProductId })" class="list-btn">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                                     <g clip-path="url(#clip0_1109_1878)">
@@ -378,7 +386,7 @@
                         </form>
                     </div>
 
-                  
+
                 </div>
             </div>
         </div>
@@ -408,15 +416,14 @@
 </div>
 <!-- Ссылка на jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <!-- Ваш скрипт для фильтрации -->
 <script>
-    $(document).ready(function() {
-        $(".category-link").click(function(e) {
+    $(document).ready(function () {
+        $(".category-link").click(function (e) {
             e.preventDefault();
             var category = $(this).data('category').toLowerCase();
 
-            $(".product-card.sec").each(function() {
+            $(".product-card.sec").each(function () {
                 var productCategory = $(this).find('.tag .bold').text().trim().toLowerCase();
                 if (category === 'all' || productCategory === category) {
                     $(this).show();
@@ -426,6 +433,62 @@
             });
         });
     });
+
+    $(".age-link").click(function (e) {
+        e.preventDefault();
+        var age = $(this).data('age').toLowerCase();
+
+        $(".product-card.sec").each(function () {
+            var productAge = $(this).find('.tog .bold').text().trim().toLowerCase();
+            if (age === 'all' || productAge === age) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+    $(document).ready(function () {
+        $('#filterButton').click(function () {
+            var inputPrice = $('#priceInput').val();
+
+            // Если поле ввода пустое, показываем все товары
+            if (inputPrice.trim() === "") {
+                $('.product-card.sec').show();
+                return;
+            }
+
+            var parsedInputPrice = parseFloat(inputPrice);
+
+            if (isNaN(parsedInputPrice)) {
+                alert("Please enter a valid number for price.");
+                return;
+            }
+
+            // Фильтрация товаров
+            $('.product-card.sec').each(function () {
+                var priceText = $(this).find('.product-price h5.bold').text();
+                var price = parseFloat(priceText.replace(/[^\d.-]/g, ''));
+
+                // Выводим отладочную информацию в консоль
+                console.log("Extracted price text: " + priceText);
+                console.log("Parsed price: " + price);
+
+                if (isNaN(price)) {
+                    console.error("Invalid price format: " + priceText);
+                    return true; // Пропускаем эту итерацию
+                }
+
+                if (price === parsedInputPrice) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+
+
+
 </script>
 
 

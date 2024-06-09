@@ -45,12 +45,6 @@ namespace WebApplication.Controllers
 
         }
 
-
-        public ActionResult Contact()
-        {
-            return View();
-
-        }
         
         public ActionResult ShopListing(ProductModel productModel)
         {
@@ -116,10 +110,10 @@ namespace WebApplication.Controllers
 
 
 
-        public ActionResult Wishlist()
-        {
-            return View();
-        }
+        //public ActionResult Wishlist()
+        //{
+        //    return View();
+        //}
        
 
         public ActionResult ProductDetail(int? productId)

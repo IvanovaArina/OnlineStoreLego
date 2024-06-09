@@ -46,12 +46,6 @@ namespace WebApplication.Controllers
 
         }
 
-
-        public ActionResult Contact()
-        {
-            return View();
-
-        }
         public ActionResult ShopListing()
         {
             UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
@@ -146,7 +140,7 @@ namespace WebApplication.Controllers
             CartApi cartApi = new CartApi();
             UserDataModel model = (UserDataModel)System.Web.HttpContext.Current.Session["userModel"];
             cartApi.AddToCartInDb(productId, model.UserId);
-            return RedirectToAction("ProductDetail", "HomeUser", productId);
+            return RedirectToAction("ProductDetail", "HomeUser", new { productId = productId });
         }
 
         public ActionResult Cart()
