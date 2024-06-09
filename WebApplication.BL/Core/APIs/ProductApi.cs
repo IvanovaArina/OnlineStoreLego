@@ -13,6 +13,8 @@ namespace WebApplication.BL.Core
 {
     public class ProductApi
     {
+
+
         public int getProductIdByNumber(int number)
         {
             int productId = 0;
@@ -304,6 +306,16 @@ namespace WebApplication.BL.Core
                                 .FirstOrDefault();
 
                 return product;
+            }
+        }
+
+        public List<ProductDTO> GetAllProducts()
+        {
+            using (var db = new ProductContext())
+            {
+                var products = db.Products.ToList();
+                var productDTOs = Mapper.Map<List<ProductDTO>>(products);
+                return productDTOs;
             }
         }
 

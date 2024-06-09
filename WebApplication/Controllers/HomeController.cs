@@ -16,6 +16,7 @@ using System.Web.UI.WebControls;
 using System.Threading.Tasks;
 using WebApplication.Domain.Entities.Enums;
 using WebApplication.BL.Core;
+using System.Drawing.Printing;
 
 namespace OnlineStoreLego.Web.Controllers
 {
@@ -61,12 +62,38 @@ namespace OnlineStoreLego.Web.Controllers
             return View();
 
         }
+
+        [HttpGet]
         public ActionResult ShopListing(ProductModel productModel)
         {
             return View(productModel);
 
         }
 
+
+        [HttpPost]
+        public ActionResult ShopListingSearch(string search)
+        {
+            var product = productContext.Products // Используем контекст базы данных для получения продукта
+                                        .Where(p => p.IsActive) // Фильтрация по активным продуктам
+                                        .Where(p => p.ProductName.Contains(search) || p.Category.Contains(search))
+                                        .Select(p => new ProductModel
+                                        {
+                                            ProductName = p.ProductName,
+                                            Category = p.Category,
+                                            Price = p.Price,
+                                            ImagePath = p.ImagePath
+                                            // Добавьте другие свойства, если необходимо
+                                        })
+                                        .FirstOrDefault(); // Предполагаем, что вернется только один продукт
+
+            if (product == null)
+            {
+                return HttpNotFound(); // Если продукт не найден, возвращаем соответствующий результат
+            }
+
+            return View("ShopListing", product);
+        }
 
         public ActionResult Blog(int page = 1, int pageSize = 6)
         {
@@ -134,33 +161,37 @@ namespace OnlineStoreLego.Web.Controllers
             return View(userDataModel);
         }
 
-        public ActionResult ProductDetail(int? productId)
+        private readonly ReviewApi _reviewApi = new ReviewApi();
+        private readonly ProductApi _productApi = new ProductApi();
+        private readonly UserApi _userApi = new UserApi();
+        private const int PageSize = 5; // Количество отзывов на одной странице
+
+        public ActionResult ProductDetail(int productId, int page = 1)
         {
-            if (!productId.HasValue)
-            {
-                return HttpNotFound("Product id is missing.");
-            }
+            var product = _productApi.GetProductById(productId);
+            var reviews = _reviewApi.GetReviewsByProductId(productId);
 
-            var product = productContext.Products.FirstOrDefault(a => a.ProductId == productId.Value);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
+            var totalReviews = reviews.Count;
+            var totalPages = (int)Math.Ceiling((double)totalReviews / PageSize);
+            var reviewsToShow = reviews.Skip((page - 1) * PageSize).Take(PageSize).ToList();
 
-            var productModel = new ProductModel
+            var model = new ProductModel
             {
                 ProductId = product.ProductId,
                 ProductName = product.ProductName,
                 Price = product.Price,
-                SellCategory = product.SellCategory,
-                CategoryByAge = product.CategoryByAge,
                 Category = product.Category,
                 ProductDetail = product.ProductDetail,
-                ImagePath = product.ImagePath
+                ImagePath = product.ImagePath,
+                Reviews = reviewsToShow
             };
 
-            return View(productModel);
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
+            return View(model);
         }
+
 
 
     }

@@ -37,7 +37,7 @@ namespace WebApplication.BL
             CreateMap<ReviewTable, ReviewDTO>().ReverseMap();
 
             CreateMap<WishlistTable, WishlistDTO>().ReverseMap();
-
+            CreateMap<ProductDTO, ProductTable>();
 
 
         }
