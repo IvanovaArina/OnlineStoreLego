@@ -154,7 +154,7 @@ namespace WebApplication.BL.Core.APIs
 
             }
 
-            DecrementCountOfProduct(productDb.ProductId);
+            //DecrementCountOfProduct(productDb.ProductId);
         }
 
 

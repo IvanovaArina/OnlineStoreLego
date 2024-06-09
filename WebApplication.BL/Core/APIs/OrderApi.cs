@@ -138,13 +138,32 @@ namespace WebApplication.BL.Core.APIs
 
                     }
 
+                    DecrementCountOfProduct(listOfMyIntsCart);
                     CleanCart(listOfMyIntsCart);
                  }
             }
-
             return orderId;
         }
 
+
+        public void DecrementCountOfProduct (List<MyIntCart> listOfMyIntsCart)
+        {            
+            ProductTable productTable = null;
+            using (var cartContext = new CartContext())
+            {
+                using (var db = new ProductContext())
+                {
+                    foreach (var item in listOfMyIntsCart)
+                    {
+                        var myIntCart = cartContext.MyIntsCart.FirstOrDefault(m => m.ProductId == item.ProductId & m.CartId == item.CartId);
+                   
+                        productTable = db.Products.FirstOrDefault(m => m.ProductId == myIntCart.ProductId);
+                        productTable.Quantity -= item.Count;
+                        db.SaveChanges();
+                    }
+                }
+            }
+        }
 
         public void CleanCart(List<MyIntCart> listOfMyIntsCart)
         {

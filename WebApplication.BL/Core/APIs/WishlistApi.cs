@@ -45,23 +45,12 @@ namespace WebApplication.BL.Core
             return (dbWishlist != null);
         }
 
-        //public ProductDTO createProduct()
-        //{
-        //    ProductApi productApi = new ProductApi();
-        //    var product = productApi.getDefaultProductTable();
-        //    ProductDTO productDTO = Mapper.Map<ProductDTO>(product);
-
-        //    checkIfProductNumberExists(product.ProductNumber);
-
-        //    return productDTO;
-        //}
 
         public WishlistTable getDefaultWishlistTable()
         {
             return new WishlistTable()
             {
-                test = 4,
-                //MyInts = new List<MyInt>()
+                test = 4
             };
         }
 
@@ -169,7 +158,7 @@ namespace WebApplication.BL.Core
 
             }
 
-            DecrementCountOfProduct(productDb.ProductId);
+            //DecrementCountOfProduct(productDb.ProductId);
         }
 
 
