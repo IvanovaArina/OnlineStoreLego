@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -175,22 +176,53 @@ namespace WebApplication.BL.Core.APIs
             return listOfOrders;
         }
 
-        public List<MyIntOrderDTO> getProductsFromOrder(int orderId)
+        public Dictionary<ProductDTO, int> getProductsFromMyIntOrder (Dictionary<MyIntOrderDTO, int> DictionaryOfMyIntOrderDTOAndCount)
         {
-            var listOfMyIntOrderDTO = new List<MyIntOrderDTO>();
+            var dictionaryProductsDTO = new Dictionary<ProductDTO, int>();
+            var dictionaryProductsIdsAndCount = new Dictionary<int, int>();
+            
+            foreach (var product in DictionaryOfMyIntOrderDTOAndCount)
+            {
+                dictionaryProductsIdsAndCount.Add(product.Key.ProductId, product.Value);
+            }
+
+            var productApi = new ProductApi();
+            foreach (var id in dictionaryProductsIdsAndCount)
+            {
+                dictionaryProductsDTO.Add(productApi.getProductDTObyId(id.Key), id.Value);
+            }
+
+            return dictionaryProductsDTO;
+        }
+        
+        public Dictionary<ProductDTO, int> getProductsFromOrder(int orderId)
+        {
+            var DictionaryOfMyIntOrderDTOAndCount = new Dictionary<MyIntOrderDTO, int>();
             using (var orderContext = new OrderContext())
             {
                 var prodtsFromOrder = orderContext.MyIntsOrder.Where(m => m.OrderId == orderId).ToList();
 
                 foreach (var product in prodtsFromOrder)
                 {
-                    listOfMyIntOrderDTO.Add(Mapper.Map<MyIntOrderDTO>(product));
+                    DictionaryOfMyIntOrderDTOAndCount.Add(Mapper.Map<MyIntOrderDTO>(product), product.Count);
                 }
 
             }
 
-            return listOfMyIntOrderDTO;
+            return getProductsFromMyIntOrder(DictionaryOfMyIntOrderDTOAndCount);
         }
 
-    }
+        public OrderDTO getOrderDTOById (int orderId)
+        {
+            OrderDTO orderDTO = null;
+            using(var orderContext = new OrderContext())
+            {
+                var orderDb = orderContext.Orders.FirstOrDefault(m=>m.orderId == orderId);
+                orderDTO = Mapper.Map<OrderDTO>(orderDb);
+            }
+            return orderDTO;
+        }
+
+
+        }
 }

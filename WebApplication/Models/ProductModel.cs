@@ -60,6 +60,7 @@ namespace WebApplication.Models
         {
             return productApi.getProductsFromDatabase();
         }
+        
 
         public ProductDTO MoveDataFromModelToDTO()
         {

@@ -232,17 +232,20 @@ namespace WebApplication.Controllers
         public ActionResult ViewDetailsAboutOrder (int orderId)
         {
             var orderApi = new OrderApi();
-            List<MyIntOrderDTO> myIntsOrder = orderApi.getProductsFromOrder(orderId);
+            var productsAndCountOrder = orderApi.getProductsFromOrder(orderId);
+            Dictionary<ProductModel, int> productsModelAndCountOrder = new Dictionary<ProductModel, int>();
+            var prodModel = new ProductModel();
 
-            var listOfModels = new List<MyIntOrderModel>();
-            var temp = new MyIntOrderModel();
-            foreach (var item in myIntsOrder)
+            foreach (var item in productsAndCountOrder)
             {
-                listOfModels.Add(temp.moveDataFromDTOToModel(item));
+                productsModelAndCountOrder.Add(prodModel.MoveDataFromDTOToModel(item.Key), item.Value);
             }
-            // from dto to model
-            return View(listOfModels);
-            //return View(myIntsOrder);
+
+            return View(productsModelAndCountOrder);
+
+            //var orderDTO = orderApi.getOrderDTOById(orderId);
+            //OrderModel orderModel = new OrderModel();
+            //return View(orderModel.moveDataFromDTOToModel(orderDTO));
         }
 
         public ActionResult LogOutU()

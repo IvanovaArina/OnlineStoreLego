@@ -3,62 +3,66 @@
     ViewBag.Title = "ViewDetailsAboutOrder";
     Layout = "~/Views/Shared/LayoutUsers.cshtml";
 }
+@using WebApplication.BL.Core
 
-@model List<WebApplication.Models.MyIntOrderModel>
+@model Dictionary <WebApplication.Models.ProductModel, int>
+@*@model Dictionary <WebApplication.Models.OrderModel, int>*@
+@*@model WebApplication.Models.OrderModel*@
 
-<div @*class="modal fade order-details" id="viewOrderModal" tabindex="-1" role="dialog" aria-labelledby="viewOrderModalLabel" aria-hidden="true"*@>
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="viewOrderModalLabel">Order Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="order-section">
-                    <div class="section-title">Order Details</div>
-                    <div class="section-content">
-                        <p><strong>Order No:</strong> <span id="orderNo"></span></p>
-                        <p><strong>Order Date:</strong> <span id="orderDate"></span></p>
-                    </div>
-                </div>
-                <div class="order-section">
-                    <div class="section-title">Delivery Address</div>
-                    <div class="section-content" id="deliveryAddress"></div>
-                </div>
-                <div class="order-section">
-                    <div class="section-title">Order Status</div>
-                    <div class="section-content">
-                        <p><strong>Status:</strong> <span id="orderStatus"></span></p>
-                        <p id="deliveryDate"></p>
-                    </div>
-                </div>
-                <div class="order-section">
-                    <div class="section-title">Items</div>
-                    <div class="section-content">
-                        <ul id="orderItems" class="list-unstyled"></ul>
-                    </div>
-                </div>
-                <div class="order-section">
-                    <div class="section-title">Payment Details</div>
-                    <div class="section-content">
-                        <p><strong>Payment Method:</strong> <span id="paymentMethod"></span></p>
-                    </div>
-                </div>
-                <div class="order-section">
-                    <div class="section-title">Order Total</div>
-                    <div class="section-content">
-                        <p><strong>Sub-Total:</strong> <span id="subTotal"></span></p>
-                        <p><strong>Delivery:</strong> <span id="deliveryCost"></span></p>
-                        <p><strong>Total:</strong> <span id="totalCost"></span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary">Close</button>
 
-            </div>
-        </div>
-    </div>
-</div>
+
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Active</th>
+
+        </tr>
+    </thead>
+    <tbody id="productTable">
+        @{
+            foreach (var item in Model)
+            {
+                if (item.Key != null)
+                {
+                    <tr>
+                        <td>@item.Key.ProductNumber</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.Key.ImagePath))
+                            {
+                                <img src="@Url.Content(item.Key.ImagePath)" alt="Product Image" style="max-width: 100px; height: auto;" />
+                            }
+                            else
+                            {
+                                <span>No image</span>
+                            }
+                        </td> <!-- Колонка изображения -->
+                        <td>@item.Key.ProductName</td>
+                        <td>@item.Key.Category</td>
+                        <td>@item.Key.Price</td>
+                        <td>
+                            <input type="checkbox" class="active-checkbox" @(item.Key.IsActive ? "checked" : "") disabled>
+                        </td>
+
+                    </tr>
+                }
+            }
+        }
+
+    </tbody>
+</table>
+
+@{ 
+    double totalPrice = 0;
+    foreach (var product in Model)
+    { 
+    totalPrice += product.Key.Price * product.Value;
+    }
+
+}
+
+<h1>Total price: @totalPrice </h1> 

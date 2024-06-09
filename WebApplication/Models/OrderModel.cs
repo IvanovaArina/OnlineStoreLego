@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebApplication.BL.Core;
+using WebApplication.BL.Core.APIs;
 using WebApplication.BL.Core.DTOs;
+using WebApplication.Domain.Entities.Admin;
 using WebApplication.Domain.Entities.User;
 
 namespace WebApplication.Models
@@ -23,6 +25,24 @@ namespace WebApplication.Models
         public string ShippingAddress { get; set; }
         public List<MyIntOrder> MyIntsOrder { get; set; } = new List<MyIntOrder>();
 
+        public OrderModel moveDataFromDTOToModel(OrderDTO orderDTO)
+        {
+            return new OrderModel
+            {
+                orderId = orderDTO.orderId,
+                userId = orderDTO.userId,
+                orderNumber = orderDTO.orderNumber,
+                testOrder = orderDTO.testOrder,
+                FirstName = orderDTO.FirstName,
+                LastName = orderDTO.LastName,
+                Email = orderDTO.Email,
+                PhoneNumber = orderDTO.PhoneNumber,
+                Country = orderDTO.Country,
+                ShippingAddress = orderDTO.ShippingAddress,
+                MyIntsOrder = orderDTO.MyIntsOrder
+            };
+
+        }
 
         public OrderDTO moveDataFromModelToDTO()
         {
@@ -42,5 +62,19 @@ namespace WebApplication.Models
             };
 
     }
+
+
+        public Dictionary<ProductDTO, int> dataForTableOrderProducts(int orderId)
+        {
+            var orderApi = new OrderApi();
+            return orderApi.getProductsFromOrder(orderId);
+        }
+
+        //List<int> count = Model.getCountsOfProducts(productTable);
+        //public List<int> getCountsOfProducts(List<Pro>)
+        //{
+        //    var orderApi = new OrderApi();
+        //    return orderApi.getProductsFromOrder(orderId);
+        //}
     }
 }

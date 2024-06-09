@@ -74,7 +74,8 @@ namespace WebApplication.BL.Core
 
             return listOfProductDTO;
 
-        }
+        } 
+       
 
         public List<ProductDTO> getProductsByCategoryFromDatabase(string category)
         {
