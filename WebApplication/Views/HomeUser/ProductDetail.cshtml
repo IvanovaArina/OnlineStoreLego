@@ -60,12 +60,7 @@
                                     <h6 class="light-black">@Model.ProductId</h6>
                                 </div>
                             </div>
-                            <div class="quantity quantity-wrap">
-                                <input class="decrement" type="button" value="-">
-                                <input type="text" name="quantity" value="2" maxlength="2" size="1" class="number">
-                                <input class="increment" type="button" value="+">
-                            </div>
-
+                           
 
                             <div class="btn-block">
                                 <a href="@Url.Action("AddToCart", "HomeUser", new { productId = @Model.ProductId })" class="cus-btn primary"> Add to Cart</a>

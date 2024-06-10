@@ -258,23 +258,26 @@
     </section>
     <!-- reviews Area End -->
     <!-- Blogs Area Start -->
-    @if (ViewBag.Articles != null)
-    {
-        int count2 = 0;
-        foreach (var article in ViewBag.Articles)
-        {
-            if (count2 == 4)
-            {
-                break;
-            }
-            if (article != null)
-            {
-                <section class="blog p-96">
-                    <div class="container">
-                        <div class="heading mb-48 text-center">
-                            <h2>Read Toy Stories</h2>
-                        </div>
-                        <div class="row">
+    <section class="blog p-96">
+        <div class="container">
+            <div class="heading mb-48 text-center">
+                <h2>Read Toy Stories</h2>
+            </div>
+            <div class="row">
+                @if (ViewBag.Articles != null)
+                {
+                    int count2 = 0;
+                    foreach (var article in ViewBag.Articles)
+                    {
+                        if (count2 == 4)
+                        {
+                            break;
+                        }
+                        if (article != null)
+                        {
+
+
+
                             <div class="col-lg-4 col-md-6">
                                 <div class="blog-card mb-24 mb-lg-0">
                                     <img src=@article.ImagePath class="w-100" alt="">
@@ -284,21 +287,25 @@
                                             <div class="name">
                                                 <p class="medium-black">@article.AuthorName</p>
                                             </div>
-                                            <a href="@Url.Action("BlogDetail", "Home", new { articleId = article.ArticleId })" class="light-btn primary" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
+                                            <a href="@Url.Action("BlogDetail", "Homes", new { articleId = article.ArticleId })" class="light-btn primary" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-                </section>
-            }
-            count2++;
-        }
+
+
+                        }
+                        count2++;
+                    }
 
 
 
+
+                }
+            </div>
+        </div>
+    </section>
 
     }
 

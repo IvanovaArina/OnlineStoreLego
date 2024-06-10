@@ -73,11 +73,7 @@
                                             </div>
 
 
-                                            @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
-                                            {
-                                                <input type="hidden" name="ProductId" value="@Model.ProductId">
-                                                <button type="submit" class="cus-btn primary">Add to Cart</button>
-                                            }
+                                            
 
 
                                         </div>
@@ -178,25 +174,27 @@
 
 
                 </div>
-               @*@{ var prod = productTable.FirstOrDefault();
-                   <div class="sales">
-                    <div class="tag">New</div>
-                    <div class="off">
-                        <div class="discount">
-                            <h2>10</h2>
-                            <div class="text">
-                                <h3 class="h-47 bold">%</h3>
-                                <h4 class="h-27 bold">OFF</h4>
+                @{ var prod = productTable.FirstOrDefault();
+                    if (prod != null)
+                    {
+                        <div class="sales">
+                            <div class="tag">New</div>
+                            <div class="off">
+                                <div class="discount">
+                                    <h2>10</h2>
+                                    <div class="text">
+                                        <h3 class="h-47 bold">%</h3>
+                                        <h4 class="h-27 bold">OFF</h4>
+                                    </div>
+                                </div>
+                                <h1 class="h-61 bold light-black mb-32">@prod.ProductName</h1>
+                                <a href="@Url.Action("ProductDetail", "HomeAdmin", new { productId = prod.ProductId })" class="cus-btn sec">Purchase Now</a>
+                            </div>
+                            <div class="product-img">
+                                <img src="@prod.ImagePath" alt="">
                             </div>
                         </div>
-                        <h1 class="h-61 bold light-black mb-32">@prod.ProductName</h1>
-                        <a href="@Url.Action("ProductDetail", "HomeAdmin", new { productId = prod.ProductId })" class="cus-btn sec">Purchase Now</a>
-                    </div>
-                    <div class="product-img">
-                        <img src="@prod.ImagePath" alt="">
-                    </div>
-                 </div>
-               }*@
+                    } }
             </div>
         </div>
     </section>
@@ -250,43 +248,54 @@
     </section>
     <!-- reviews Area End -->
     <!-- Blogs Area Start -->
-    @if (ViewBag.Articles != null){
-        int count2 = 0;
-        foreach (var article in ViewBag.Articles)
-        {
-            if (count2 == 4)
-            {
-            break;
-            }
-            if (article != null)
-            {
-            <section class="blog p-96">
-                <div class="container">
-                    <div class="heading mb-48 text-center">
-                        <h2>Read Toy Stories</h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="blog-card mb-24 mb-lg-0">
-                                <img src=@article.ImagePath class="w-100" alt="">
-                                <div class="content">
-                                    <h4 class="color-black h-27 mb-16">@article.ArticleName</h4>
-                                    <div class="name-btn">
-                                        <div class="name">
-                                            <p class="medium-black">@article.AuthorName</p>
+    <section class="blog p-96">
+        <div class="container">
+            <div class="heading mb-48 text-center">
+                <h2>Read Toy Stories</h2>
+            </div>
+            <div class="row">
+                @if (ViewBag.Articles != null)
+                {
+                    int count2 = 0;
+                    foreach (var article in ViewBag.Articles)
+                    {
+                        if (count2 == 4)
+                        {
+                            break;
+                        }
+                        if (article != null)
+                        {
+
+
+
+                            <div class="col-lg-4 col-md-6">
+                                <div class="blog-card mb-24 mb-lg-0">
+                                    <img src=@article.ImagePath class="w-100" alt="">
+                                    <div class="content">
+                                        <h4 class="color-black h-27 mb-16">@article.ArticleName</h4>
+                                        <div class="name-btn">
+                                            <div class="name">
+                                                <p class="medium-black">@article.AuthorName</p>
+                                            </div>
+                                            <a href="@Url.Action("BlogDetail", "HomeAdmin", new { articleId = article.ArticleId })" class="light-btn primary" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
                                         </div>
-                                        <a href="@Url.Action("BlogDetail", "HomeAdmin", new { articleId = article.ArticleId })" class="light-btn primary" class="light-btn primary">Button <i class="far fa-angle-right"></i></a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
-                </div>
-            </section>
-            }
-            count2++;
-        }
+
+
+                        }
+                        count2++;
+                    }
+
+
+
+
+                }
+            </div>
+        </div>
+    </section>
     
 
 

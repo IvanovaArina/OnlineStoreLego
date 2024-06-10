@@ -82,7 +82,7 @@
                                                     <h5 class="bold">– $@product.Price</h5>
                                                 </div>
                                             </div>
-                                            <a href="@Url.Action("AddToCart", "Cart", new { productId = product.ProductId, userId = @Model.UserId })" class="cus-btn primary">Add to Cart</a>
+                                            <a href="@Url.Action("AddToCartFromHome", "Cart", new { productId = product.ProductId, userId = @Model.UserId })" class="cus-btn primary">Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -193,25 +193,26 @@
 
                 </div>
                 @{ var prod = productTable.FirstOrDefault();
-                    if (prod != null) {
-                    <div class="sales">
-                        <div class="tag">New</div>
-                        <div class="off">
-                            <div class="discount">
-                                <h2>10</h2>
-                                <div class="text">
-                                    <h3 class="h-47 bold">%</h3>
-                                    <h4 class="h-27 bold">OFF</h4>
+                    if (prod != null)
+                    {
+                        <div class="sales">
+                            <div class="tag">New</div>
+                            <div class="off">
+                                <div class="discount">
+                                    <h2>10</h2>
+                                    <div class="text">
+                                        <h3 class="h-47 bold">%</h3>
+                                        <h4 class="h-27 bold">OFF</h4>
+                                    </div>
                                 </div>
+                                <h1 class="h-61 bold light-black mb-32">@prod.ProductName</h1>
+                                <a href="@Url.Action("ProductDetail", "HomeUser", new { productId = prod.ProductId })" class="cus-btn sec">Purchase Now</a>
                             </div>
-                            <h1 class="h-61 bold light-black mb-32">@prod.ProductName</h1>
-                            <a href="@Url.Action("ProductDetail", "HomeUser", new { productId = prod.ProductId })" class="cus-btn sec">Purchase Now</a>
+                            <div class="product-img">
+                                <img src="@prod.ImagePath" alt="">
+                            </div>
                         </div>
-                        <div class="product-img">
-                            <img src="@prod.ImagePath" alt="">
-                        </div>
-                    </div>
-                        } }
+                    } }
             </div>
         </div>
     </section>
@@ -265,23 +266,26 @@
     </section>
     <!-- reviews Area End -->
     <!-- Blogs Area Start -->
-    @if (ViewBag.Articles != null)
-    {
-        int count2 = 0;
-        foreach (var article in ViewBag.Articles)
-        {
-            if (count2 == 4)
-            {
-                break;
-            }
-            if (article != null)
-            {
-                <section class="blog p-96">
-                    <div class="container">
-                        <div class="heading mb-48 text-center">
-                            <h2>Read Toy Stories</h2>
-                        </div>
-                        <div class="row">
+    <section class="blog p-96">
+        <div class="container">
+            <div class="heading mb-48 text-center">
+                <h2>Read Toy Stories</h2>
+            </div>
+            <div class="row">
+                @if (ViewBag.Articles != null)
+                {
+                    int count2 = 0;
+                    foreach (var article in ViewBag.Articles)
+                    {
+                        if (count2 == 4)
+                        {
+                            break;
+                        }
+                        if (article != null)
+                        {
+
+
+
                             <div class="col-lg-4 col-md-6">
                                 <div class="blog-card mb-24 mb-lg-0">
                                     <img src=@article.ImagePath class="w-100" alt="">
@@ -297,17 +301,19 @@
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-                </section>
-            }
-            count2++;
-        }
+
+
+                        }
+                        count2++;
+                    }
 
 
 
 
-    }
+                }
+            </div>
+            </div>
+    </section>
 
     <!-- Blogs Area End -->
 
